@@ -81,7 +81,7 @@ Hybrid architecture: single-page scrolling main site with dedicated sub-pages.
 
 /certifications/[slug] — Certification detail with document viewer
 
-/404               — Custom 404 page (GitHub Pages serves this automatically)
+/404               — Custom 404 page (displays message + link back to home with aurora background; GitHub Pages serves this automatically)
 ```
 
 ### Navigation
@@ -463,8 +463,8 @@ Proffesional_Portfolio/
 - Build ContactSection (social links + download buttons)
 
 ### Phase 4: Animation Layer
-- Implement AuroraBackground (Canvas/WebGL)
-- Implement CustomCursor (spring physics, hover states)
+- Implement AuroraBackground (Canvas 2D)
+- Implement CustomCursor (spring physics, hover states; only hydrate on non-touch devices)
 - Add ScrollReveal animations to all sections
 - Add card hover glow and button press effects
 - Implement page transitions
