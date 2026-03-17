@@ -37,7 +37,7 @@ The design must prioritize clarity, credibility, and quick access to key informa
 | Framework | Next.js 15 (static export) | Component-based, excellent DX, `output: 'export'` for GitHub Pages |
 | Styling | Tailwind CSS 4 | Utility-first, dark theme tokens, responsive utilities |
 | Animations | Framer Motion | Declarative React animations, scroll triggers, layout animations |
-| Background FX | HTML Canvas / WebGL | Aurora wave effect, performant rendering |
+| Background FX | HTML Canvas (2D) | Aurora wave effect, performant, simpler than WebGL |
 | Content | JSON + MDX (build-time) | Structured data + rich text for research pages |
 | Language | TypeScript | Type-safe content models, better DX |
 | Deployment | GitHub Actions → GitHub Pages | Automated builds on push to main |
@@ -56,6 +56,8 @@ The design must prioritize clarity, credibility, and quick access to key informa
 **Typography**: Modern, professional sans-serif (Inter or similar). Self-hosted, `font-display: swap`.
 
 **Dark/Light mode**: Smooth toggle. Dark is default. User preference persisted in localStorage.
+
+**Responsive breakpoints**: Use Tailwind CSS default breakpoints (`sm: 640px`, `md: 768px`, `lg: 1024px`, `xl: 1280px`). Mobile-first approach.
 
 ---
 
@@ -78,6 +80,8 @@ Hybrid architecture: single-page scrolling main site with dedicated sub-pages.
 /research/[slug]    — Individual research detail (MDX rendered)
 
 /certifications/[slug] — Certification detail with document viewer
+
+/404               — Custom 404 page (GitHub Pages serves this automatically)
 ```
 
 ### Navigation
@@ -200,8 +204,13 @@ When a second language is added, content files gain locale suffixes:
 - `SectionHeading` — title + subtitle + gold divider
 - `ThemeToggle` — dark/light switch with smooth transition
 
+**Navigation Components** (`src/components/navigation/`) — nav-specific UI:
+- `NavLinks` — desktop navigation link list with active states
+- `MobileMenu` — slide-in hamburger menu panel
+- `ScrollSpy` — renders active section indicator in navbar (uses `useScrollSpy` hook for detection)
+
 **Motion Components** (`src/components/motion/`) — animation-only wrappers:
-- `AuroraBackground` — Canvas/WebGL aurora wave effect
+- `AuroraBackground` — Canvas aurora wave effect
 - `CustomCursor` — trailing ring + dot cursor (desktop only)
 - `ScrollReveal` — fade-up + stagger on viewport enter
 - `HoverGlow` — card hover gold glow effect
@@ -230,7 +239,7 @@ All content resolves at build time. Zero runtime API calls. Motion components hy
 
 ### Layer 1: Aurora Background
 
-A slow-drifting, luminous wave effect rendered via HTML Canvas or WebGL. Gold-tinted translucent shapes drift and morph behind all content.
+A slow-drifting, luminous wave effect rendered via HTML Canvas (2D context). Gold-tinted translucent shapes drift and morph behind all content.
 
 - Renders at device refresh rate, GPU-composited
 - Auto-pauses when tab is hidden (visibility API)
@@ -381,13 +390,13 @@ Proffesional_Portfolio/
 │   │   └── presentations/             # PPT/PPTX portfolio files
 │   ├── images/
 │   │   ├── profile/                   # Avatar, professional photos
-│   │   ├── projects/                  # Project screenshots
 │   │   └── backgrounds/               # Static fallback images
 │   └── icons/                         # Favicon, app icons
 ├── src/
 │   ├── app/
 │   │   ├── layout.tsx                 # Root layout
 │   │   ├── page.tsx                   # Home (single-page scroll)
+│   │   ├── not-found.tsx              # Custom 404 page
 │   │   ├── research/
 │   │   │   ├── page.tsx               # Research listing
 │   │   │   └── [slug]/page.tsx        # Research detail
