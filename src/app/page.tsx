@@ -1,12 +1,19 @@
-import { getProfile } from '@/data/content'
+import { HeroSection } from '@/components/sections/hero-section'
+import { ProfileSection } from '@/components/sections/profile-section'
+import { TimelineSection } from '@/components/sections/timeline-section'
+import { CertificationsSection } from '@/components/sections/certifications-section'
+import { SkillsSection } from '@/components/sections/skills-section'
+import { ContactSection } from '@/components/sections/contact-section'
 
 export default function Home() {
-  const profile = getProfile()
-
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center">
-      <h1 className="text-4xl font-bold text-gold-500">{profile.name}</h1>
-      <p className="mt-2 text-muted-foreground">{profile.title}</p>
-    </main>
+    <>
+      <HeroSection />
+      <ProfileSection />
+      <TimelineSection />
+      <CertificationsSection />
+      <SkillsSection />
+      <ContactSection />
+    </>
   )
 }
