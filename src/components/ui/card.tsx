@@ -1,4 +1,7 @@
+'use client'
+
 import { cn } from '@/utils/cn'
+import { HoverGlow } from '@/components/motion/hover-glow'
 
 interface CardProps {
   children: React.ReactNode
@@ -15,11 +18,17 @@ export function Card({ children, className, href }: CardProps) {
 
   if (href) {
     return (
-      <a href={href} className={cn(classes, 'block')}>
-        {children}
-      </a>
+      <HoverGlow>
+        <a href={href} className={cn(classes, 'block')}>
+          {children}
+        </a>
+      </HoverGlow>
     )
   }
 
-  return <div className={classes}>{children}</div>
+  return (
+    <HoverGlow>
+      <div className={classes}>{children}</div>
+    </HoverGlow>
+  )
 }

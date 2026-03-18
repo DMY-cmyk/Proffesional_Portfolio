@@ -1,6 +1,14 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import { ContactSection } from '@/components/sections/contact-section'
+
+vi.mock('framer-motion', () => ({
+  motion: {
+    div: ({ children, ...props }: any) => <div {...props}>{children}</div>,
+    button: ({ children, ...props }: any) => <button {...props}>{children}</button>,
+    a: ({ children, ...props }: any) => <a {...props}>{children}</a>,
+  },
+}))
 
 describe('ContactSection', () => {
   it('renders the Contact heading', () => {

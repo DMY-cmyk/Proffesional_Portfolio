@@ -5,6 +5,9 @@ import { getSiteConfig } from '@/data/content'
 import { ThemeProvider } from '@/hooks/use-theme'
 import { Navbar } from '@/components/layout/navbar'
 import { Footer } from '@/components/layout/footer'
+import { AuroraBackground } from '@/components/motion/aurora-background'
+import { CustomCursor } from '@/components/motion/custom-cursor'
+import { PageTransition } from '@/components/motion/page-transition'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -35,8 +38,12 @@ export default function RootLayout({
       </head>
       <body className="min-h-screen">
         <ThemeProvider>
+          <AuroraBackground />
+          <CustomCursor />
           <Navbar />
-          <main className="pt-16">{children}</main>
+          <PageTransition>
+            <main className="pt-16">{children}</main>
+          </PageTransition>
           <Footer />
         </ThemeProvider>
       </body>

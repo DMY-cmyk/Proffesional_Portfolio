@@ -1,6 +1,12 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import { SectionWrapper } from '@/components/layout/section-wrapper'
+
+vi.mock('framer-motion', () => ({
+  motion: {
+    div: ({ children, ...props }: any) => <div {...props}>{children}</div>,
+  },
+}))
 
 describe('SectionWrapper', () => {
   it('renders children within a section element with correct id', () => {

@@ -3,6 +3,13 @@ import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { Button } from '@/components/ui/button'
 
+vi.mock('framer-motion', () => ({
+  motion: {
+    button: ({ children, ...props }: any) => <button {...props}>{children}</button>,
+    a: ({ children, ...props }: any) => <a {...props}>{children}</a>,
+  },
+}))
+
 describe('Button', () => {
   it('renders as a button element by default', () => {
     render(<Button>Click me</Button>)

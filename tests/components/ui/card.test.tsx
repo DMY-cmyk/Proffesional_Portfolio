@@ -1,6 +1,12 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import { Card } from '@/components/ui/card'
+
+vi.mock('framer-motion', () => ({
+  motion: {
+    div: ({ children, ...props }: any) => <div {...props}>{children}</div>,
+  },
+}))
 
 describe('Card', () => {
   it('renders children', () => {
@@ -20,6 +26,7 @@ describe('Card', () => {
 
   it('applies custom className', () => {
     const { container } = render(<Card className="p-8"><p>Content</p></Card>)
-    expect(container.firstElementChild?.className).toContain('p-8')
+    const cardElement = container.querySelector('.p-8')
+    expect(cardElement).toBeInTheDocument()
   })
 })

@@ -1,4 +1,7 @@
+'use client'
+
 import { cn } from '@/utils/cn'
+import { motion } from 'framer-motion'
 
 interface ButtonProps {
   variant?: 'primary' | 'secondary' | 'ghost'
@@ -24,6 +27,9 @@ const sizeStyles = {
   lg: 'px-6 py-3 text-base',
 }
 
+const tapAnimation = { scale: 0.97 }
+const springTransition = { type: 'spring' as const, stiffness: 400, damping: 17 }
+
 export function Button({
   variant = 'primary',
   size = 'md',
@@ -45,19 +51,28 @@ export function Button({
 
   if (href) {
     return (
-      <a
+      <motion.a
         href={href}
         className={classes}
+        whileTap={tapAnimation}
+        transition={springTransition}
         {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
       >
         {children}
-      </a>
+      </motion.a>
     )
   }
 
   return (
-    <button className={classes} onClick={onClick} type={type} disabled={disabled}>
+    <motion.button
+      className={classes}
+      onClick={onClick}
+      type={type}
+      disabled={disabled}
+      whileTap={tapAnimation}
+      transition={springTransition}
+    >
       {children}
-    </button>
+    </motion.button>
   )
 }

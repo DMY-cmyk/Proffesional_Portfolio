@@ -5,6 +5,8 @@ import Home from '@/app/page'
 vi.mock('framer-motion', () => ({
   motion: {
     div: ({ children, ...props }: any) => <div {...props}>{children}</div>,
+    button: ({ children, ...props }: any) => <button {...props}>{children}</button>,
+    a: ({ children, ...props }: any) => <a {...props}>{children}</a>,
   },
   AnimatePresence: ({ children }: any) => <>{children}</>,
 }))
