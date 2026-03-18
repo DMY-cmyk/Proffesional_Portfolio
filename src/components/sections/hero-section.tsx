@@ -1,4 +1,5 @@
 import { getProfile } from '@/data/content'
+import { withBasePath } from '@/lib/base-path'
 
 export function HeroSection() {
   const profile = getProfile()
@@ -12,7 +13,7 @@ export function HeroSection() {
         <div className="mx-auto mb-6 h-32 w-32 overflow-hidden rounded-full border-2 border-gold-500 bg-muted">
           {profile.avatar && (
             <img
-              src={profile.avatar}
+              src={withBasePath(profile.avatar)}
               alt={profile.name}
               className="h-full w-full object-cover"
             />

@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { getCertifications } from '@/data/content'
 import { formatDate } from '@/utils/format-date'
+import { withBasePath } from '@/lib/base-path'
 
 interface PageProps {
   params: Promise<{ slug: string }>
@@ -64,7 +65,7 @@ export default async function CertificationDetailPage({ params }: PageProps) {
             View Certificate
           </Button>
           <a
-            href={cert.documentPath}
+            href={withBasePath(cert.documentPath)}
             download
             className="inline-flex items-center justify-center rounded-md border border-border text-foreground hover:bg-surface px-6 py-3 text-lg font-medium transition-colors"
           >
@@ -75,7 +76,7 @@ export default async function CertificationDetailPage({ params }: PageProps) {
         {/* Embedded PDF Viewer */}
         <div className="mt-8 border border-border rounded-lg overflow-hidden">
           <iframe
-            src={cert.documentPath}
+            src={withBasePath(cert.documentPath)}
             className="w-full h-[600px]"
             title={`${cert.name} certificate document`}
           />

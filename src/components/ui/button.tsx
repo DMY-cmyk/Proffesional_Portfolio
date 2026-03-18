@@ -1,6 +1,7 @@
 'use client'
 
 import { cn } from '@/utils/cn'
+import { withBasePath } from '@/lib/base-path'
 import { motion } from 'framer-motion'
 
 interface ButtonProps {
@@ -50,9 +51,10 @@ export function Button({
   )
 
   if (href) {
+    const resolvedHref = href.startsWith('/') ? withBasePath(href) : href
     return (
       <motion.a
-        href={href}
+        href={resolvedHref}
         className={classes}
         whileTap={tapAnimation}
         transition={springTransition}

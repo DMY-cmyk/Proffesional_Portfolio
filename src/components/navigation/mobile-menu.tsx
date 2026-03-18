@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { cn } from '@/utils/cn'
+import { withBasePath } from '@/lib/base-path'
 import type { NavItem } from '@/config/navigation'
 
 interface MobileMenuProps {
@@ -51,7 +52,7 @@ export function MobileMenu({ items, activeSection }: MobileMenuProps) {
                 {items.map((item) => (
                   <a
                     key={item.href}
-                    href={item.href}
+                    href={item.href.startsWith('#') ? item.href : withBasePath(item.href)}
                     onClick={() => setIsOpen(false)}
                     className={cn(
                       'text-lg font-medium transition-colors',

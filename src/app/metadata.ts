@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { getSiteConfig, getProfile } from '@/data/content'
+import { withBasePath } from '@/lib/base-path'
 
 const site = getSiteConfig()
 const profile = getProfile()
@@ -38,6 +39,6 @@ export const siteMetadata: Metadata = {
     follow: true,
   },
   icons: {
-    icon: '/icons/favicon.ico',
+    icon: withBasePath('/icons/favicon.ico'),
   },
 }

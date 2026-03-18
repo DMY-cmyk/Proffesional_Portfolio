@@ -1,4 +1,5 @@
 import { cn } from '@/utils/cn'
+import { withBasePath } from '@/lib/base-path'
 import type { NavItem } from '@/config/navigation'
 
 interface NavLinksProps {
@@ -12,7 +13,7 @@ export function NavLinks({ items, activeSection }: NavLinksProps) {
       {items.map((item) => (
         <a
           key={item.href}
-          href={item.href}
+          href={item.href.startsWith('#') ? item.href : withBasePath(item.href)}
           className={cn(
             'px-3 py-2 text-sm font-medium rounded-md transition-colors',
             'text-muted-foreground hover:text-foreground',
