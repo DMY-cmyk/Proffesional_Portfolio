@@ -1,0 +1,14 @@
+[
+  {
+    "category": "Technical Skills",
+    "items": ["Financial Reporting", "Tax Compliance", "Auditing", "Budgeting & Forecasting", "Financial Analysis"]
+  },
+  {
+    "category": "Tools & Software",
+    "items": ["Microsoft Excel", "SAP", "MYOB", "e-SPT", "SPSS"]
+  },
+  {
+    "category": "Soft Skills",
+    "items": ["Analytical Thinking", "Attention to Detail", "Team Collaboration", "Communication", "Time Management"]
+  }
+]

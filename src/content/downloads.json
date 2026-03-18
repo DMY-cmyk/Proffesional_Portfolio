@@ -1,0 +1,16 @@
+{
+  "items": [
+    {
+      "label": "Download CV (PDF)",
+      "filePath": "/files/cv/dzaki-cv.pdf",
+      "icon": "file-text",
+      "format": "PDF"
+    },
+    {
+      "label": "Download Presentation (PPTX)",
+      "filePath": "/files/presentations/dzaki-portfolio.pptx",
+      "icon": "presentation",
+      "format": "PPTX"
+    }
+  ]
+}
