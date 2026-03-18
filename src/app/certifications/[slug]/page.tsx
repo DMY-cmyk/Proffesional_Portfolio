@@ -40,44 +40,45 @@ export default async function CertificationDetailPage({ params }: PageProps) {
       <div className="mx-auto max-w-3xl">
         <Link
           href="/#certifications"
-          className="text-sm text-muted-foreground hover:text-gold-500 transition-colors mb-8 inline-block"
+          className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-gold-500 transition-colors mb-8"
         >
-          ← Back to Certifications
+          <span aria-hidden="true">←</span> Back to Certifications
         </Link>
 
         <h1 className="text-3xl md:text-4xl font-bold text-foreground mt-4">
           {cert.name}
         </h1>
 
-        <div className="mt-4 space-y-2">
-          <p className="text-muted-foreground">
-            <span className="font-medium text-foreground">Issued by:</span>{' '}
-            {cert.issuer}
-          </p>
-          <p className="text-muted-foreground">
-            <span className="font-medium text-foreground">Date:</span>{' '}
-            {formatDate(cert.date)}
-          </p>
+        <div className="mt-6 rounded-lg border border-border bg-card/80 backdrop-blur-sm p-6">
+          <div className="flex flex-wrap gap-x-8 gap-y-2 text-sm">
+            <p className="text-muted-foreground">
+              <span className="font-medium text-foreground">Issued by:</span>{' '}
+              {cert.issuer}
+            </p>
+            <p className="text-muted-foreground">
+              <span className="font-medium text-foreground">Date:</span>{' '}
+              <span className="text-gold-500">{formatDate(cert.date)}</span>
+            </p>
+          </div>
         </div>
 
-        <div className="mt-8 flex gap-4">
+        <div className="mt-6 flex gap-4">
           <Button href={cert.documentPath} variant="primary" size="lg" external>
             View Certificate
           </Button>
           <a
             href={withBasePath(cert.documentPath)}
             download
-            className="inline-flex items-center justify-center rounded-md border border-border text-foreground hover:bg-surface px-6 py-3 text-lg font-medium transition-colors"
+            className="inline-flex items-center justify-center rounded-md border border-border text-foreground hover:bg-surface hover:border-gold-500/50 px-6 py-3 text-lg font-medium transition-colors"
           >
             Download PDF
           </a>
         </div>
 
-        {/* Embedded PDF Viewer */}
         <div className="mt-8 border border-border rounded-lg overflow-hidden">
           <iframe
             src={withBasePath(cert.documentPath)}
-            className="w-full h-[600px]"
+            className="w-full h-[70vh] min-h-[400px]"
             title={`${cert.name} certificate document`}
           />
         </div>
