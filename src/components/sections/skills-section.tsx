@@ -4,6 +4,7 @@ import { Badge } from '@/components/ui/badge'
 import { Card } from '@/components/ui/card'
 import { getSkills, getAwards, getCourses } from '@/data/content'
 import { formatDate } from '@/utils/format-date'
+import { StaggerChildren } from '@/components/motion/stagger-children'
 
 export function SkillsSection() {
   const skills = getSkills()
@@ -14,7 +15,7 @@ export function SkillsSection() {
     <SectionWrapper id="skills">
       <SectionHeading title="Skills & Achievements" />
 
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mb-12">
+      <StaggerChildren className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mb-12">
         {skills.map((category) => (
           <Card key={category.category}>
             <h3 className="text-lg font-semibold text-foreground mb-4">
@@ -27,14 +28,14 @@ export function SkillsSection() {
             </div>
           </Card>
         ))}
-      </div>
+      </StaggerChildren>
 
       {awards.length > 0 && (
         <div className="mb-12">
           <h3 className="text-xl font-semibold text-foreground mb-4">
             Awards & Achievements
           </h3>
-          <div className="grid gap-4 md:grid-cols-2">
+          <StaggerChildren className="grid gap-4 md:grid-cols-2">
             {awards.map((award) => (
               <Card key={award.title}>
                 <h4 className="font-semibold text-foreground">{award.title}</h4>
@@ -49,7 +50,7 @@ export function SkillsSection() {
                 )}
               </Card>
             ))}
-          </div>
+          </StaggerChildren>
         </div>
       )}
 
@@ -58,7 +59,7 @@ export function SkillsSection() {
           <h3 className="text-xl font-semibold text-foreground mb-4">
             Courses & Training
           </h3>
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          <StaggerChildren className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {courses.map((course) => (
               <Card key={course.name}>
                 <h4 className="font-semibold text-foreground">{course.name}</h4>
@@ -68,7 +69,7 @@ export function SkillsSection() {
                 </p>
               </Card>
             ))}
-          </div>
+          </StaggerChildren>
         </div>
       )}
     </SectionWrapper>

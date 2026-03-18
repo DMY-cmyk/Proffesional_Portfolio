@@ -11,8 +11,9 @@ interface CardProps {
 
 export function Card({ children, className, href }: CardProps) {
   const classes = cn(
-    'rounded-lg border border-border bg-card p-6 transition-all duration-200',
+    'rounded-lg border border-border bg-card/80 backdrop-blur-sm p-6 transition-all duration-300',
     'hover:-translate-y-1 hover:border-gold-500/50 hover:shadow-lg hover:shadow-gold-500/5',
+    'hover:bg-card',
     className
   )
 

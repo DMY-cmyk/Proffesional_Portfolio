@@ -3,6 +3,7 @@ import { SectionHeading } from '@/components/ui/section-heading'
 import { Card } from '@/components/ui/card'
 import { getCertifications } from '@/data/content'
 import { formatDate } from '@/utils/format-date'
+import { StaggerChildren } from '@/components/motion/stagger-children'
 
 export function CertificationsSection() {
   const certifications = getCertifications()
@@ -10,7 +11,7 @@ export function CertificationsSection() {
   return (
     <SectionWrapper id="certifications">
       <SectionHeading title="Certifications" />
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <StaggerChildren className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {certifications.map((cert) => (
           <Card key={cert.slug} href={`/certifications/${cert.slug}`}>
             <h3 className="text-lg font-semibold text-foreground">
@@ -25,7 +26,7 @@ export function CertificationsSection() {
             )}
           </Card>
         ))}
-      </div>
+      </StaggerChildren>
     </SectionWrapper>
   )
 }

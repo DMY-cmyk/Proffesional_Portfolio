@@ -3,6 +3,7 @@ import { SectionHeading } from '@/components/ui/section-heading'
 import { TimelineItem } from '@/components/ui/timeline-item'
 import { getEducation, getExperience } from '@/data/content'
 import { formatDateRange } from '@/utils/format-date'
+import { StaggerChildren } from '@/components/motion/stagger-children'
 
 interface TimelineEntry {
   type: 'education' | 'experience'
@@ -40,21 +41,23 @@ export function TimelineSection() {
     <SectionWrapper id="experience">
       <SectionHeading title="Experience & Education" />
       <div className="max-w-3xl mx-auto">
-        {allItems.map((item, index) => (
-          <TimelineItem
-            key={`${item.type}-${item.startDate}`}
-            title={item.title}
-            subtitle={item.subtitle}
-            dateRange={formatDateRange(item.startDate, item.endDate)}
-            isLast={index === allItems.length - 1}
-          >
-            <ul className="list-disc list-inside space-y-1">
-              {item.bullets.map((bullet, i) => (
-                <li key={i}>{bullet}</li>
-              ))}
-            </ul>
-          </TimelineItem>
-        ))}
+        <StaggerChildren staggerDelay={0.12} direction="left">
+          {allItems.map((item, index) => (
+            <TimelineItem
+              key={`${item.type}-${item.startDate}`}
+              title={item.title}
+              subtitle={item.subtitle}
+              dateRange={formatDateRange(item.startDate, item.endDate)}
+              isLast={index === allItems.length - 1}
+            >
+              <ul className="list-disc list-inside space-y-1">
+                {item.bullets.map((bullet, i) => (
+                  <li key={i}>{bullet}</li>
+                ))}
+              </ul>
+            </TimelineItem>
+          ))}
+        </StaggerChildren>
       </div>
     </SectionWrapper>
   )
