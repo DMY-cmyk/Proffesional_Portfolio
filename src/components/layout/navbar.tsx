@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import { useScrollSpy } from '@/hooks/use-scroll-spy'
 import { allNavItems, sectionLinks } from '@/config/navigation'
 import { NavLinks } from '@/components/navigation/nav-links'
@@ -14,9 +15,9 @@ export function Navbar() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
       <div className="mx-auto max-w-6xl flex items-center justify-between px-4 h-16">
-        <a href="/" className="text-lg font-bold text-gold-500">
+        <Link href="/" className="text-lg font-bold text-gold-500">
           DM
-        </a>
+        </Link>
         <div className="flex items-center gap-2">
           <NavLinks items={allNavItems} activeSection={activeSection} />
           <ThemeToggle />
