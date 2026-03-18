@@ -16,6 +16,7 @@ A modern, responsive professional portfolio website built with Next.js 15, Tailw
 - **Full SEO** — Open Graph, Twitter Cards, JSON-LD structured data, dynamic sitemap, robots config
 - **Accessibility** — Reduced motion support (`prefers-reduced-motion`), semantic HTML, ARIA labels
 - **Error Handling** — Custom 404 page and error boundary
+- **GitHub Pages basePath** — `withBasePath()` utility ensures all asset paths work under `/Proffesional_Portfolio`
 - **CI/CD** — GitHub Actions workflow with tests → build → deploy to GitHub Pages
 
 ## 🛠 Tech Stack
@@ -45,7 +46,7 @@ src/
 ├── content/          # JSON data files + MDX research articles
 ├── data/             # Typed content loader functions
 ├── hooks/            # useTheme, useReducedMotion
-├── lib/              # MDX utilities
+├── lib/              # MDX utilities, basePath helper
 ├── styles/           # Tailwind CSS 4 global theme tokens
 ├── types/            # TypeScript interfaces
 └── utils/            # Format helpers
