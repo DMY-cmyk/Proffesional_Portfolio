@@ -14,6 +14,10 @@ vi.mock('@/hooks/use-scroll-spy', () => ({
   useScrollSpy: () => 'about',
 }))
 
+vi.mock('@/hooks/use-scroll-progress', () => ({
+  useScrollProgress: () => 0,
+}))
+
 describe('Navbar', () => {
   afterEach(() => {
     cleanup()
@@ -45,5 +49,14 @@ describe('Navbar', () => {
       </ThemeProvider>
     )
     expect(screen.getByRole('button', { name: /switch to/i })).toBeInTheDocument()
+  })
+
+  it('renders a scroll progress bar', () => {
+    render(
+      <ThemeProvider>
+        <Navbar />
+      </ThemeProvider>
+    )
+    expect(document.querySelector('[data-testid="scroll-progress"]')).toBeInTheDocument()
   })
 })
