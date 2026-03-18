@@ -1,6 +1,13 @@
-import { describe, it, expect, afterEach } from 'vitest'
+import { describe, it, expect, afterEach, vi } from 'vitest'
 import { render, screen, cleanup } from '@testing-library/react'
 import { NavLinks } from '@/components/navigation/nav-links'
+
+vi.mock('framer-motion', () => ({
+  motion: {
+    span: ({ children, layoutId, initial, animate, exit, transition, ...props }: any) => <span {...props}>{children}</span>,
+  },
+  AnimatePresence: ({ children }: React.PropsWithChildren) => <>{children}</>,
+}))
 
 const mockItems = [
   { label: 'About', href: '#about' },
@@ -30,5 +37,11 @@ describe('NavLinks', () => {
     render(<NavLinks items={mockItems} activeSection="about" />)
     const skillsLink = screen.getByText('Skills')
     expect(skillsLink.className).not.toContain('gold')
+  })
+
+  it('renders an underline indicator for the active link', () => {
+    const { container } = render(<NavLinks items={mockItems} activeSection="about" />)
+    const indicator = container.querySelector('[data-testid="active-indicator"]')
+    expect(indicator).toBeInTheDocument()
   })
 })
