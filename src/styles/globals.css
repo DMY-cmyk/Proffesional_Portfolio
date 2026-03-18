@@ -1,0 +1,63 @@
+@import "tailwindcss";
+
+@variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* Gold accents (same in both themes) */
+  --color-gold-400: #e5c158;
+  --color-gold-500: #d4af37;
+  --color-gold-600: #b8941f;
+  --color-gold-700: #9a7518;
+
+  /* Semantic tokens — reference CSS variables that switch with theme */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+}
+
+/* Light theme values (default for :root) */
+:root {
+  --background: #f8f8fa;
+  --foreground: #0f172a;
+  --surface: #ffffff;
+  --card: #f0f0f4;
+  --card-foreground: #0f172a;
+  --muted: #f0f0f4;
+  --muted-foreground: #64748b;
+  --border: #e2e2e8;
+}
+
+/* Dark theme values */
+.dark {
+  --background: #0a0a0f;
+  --foreground: #e4e4e7;
+  --surface: #111118;
+  --card: #1a1a24;
+  --card-foreground: #e4e4e7;
+  --muted: #1a1a24;
+  --muted-foreground: #a1a1aa;
+  --border: #2a2a36;
+}
+
+/* Base styles */
+body {
+  font-family: var(--font-inter), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  background-color: var(--background);
+  color: var(--foreground);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+::selection {
+  background-color: var(--color-gold-500);
+  color: #000;
+}
