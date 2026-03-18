@@ -1,6 +1,13 @@
-import { describe, it, expect, afterEach } from 'vitest'
+import { describe, it, expect, vi, afterEach } from 'vitest'
 import { render, screen, cleanup } from '@testing-library/react'
 import { Footer } from '@/components/layout/footer'
+
+vi.mock('framer-motion', () => ({
+  motion: {
+    div: ({ children, initial, animate, exit, transition, whileHover, whileInView, whileTap, viewport, variants, ...props }: any) => <div {...props}>{children}</div>,
+    button: ({ children, initial, animate, exit, transition, whileHover, whileInView, whileTap, viewport, variants, ...props }: any) => <button {...props}>{children}</button>,
+  },
+}))
 
 describe('Footer', () => {
   afterEach(() => {
@@ -24,5 +31,10 @@ describe('Footer', () => {
     const linkedinLink = screen.getByLabelText('LinkedIn')
     expect(linkedinLink).toHaveAttribute('target', '_blank')
     expect(linkedinLink).toHaveAttribute('rel', 'noopener noreferrer')
+  })
+
+  it('renders a back-to-top button', () => {
+    render(<Footer />)
+    expect(screen.getByRole('button', { name: /top|scroll/i })).toBeInTheDocument()
   })
 })

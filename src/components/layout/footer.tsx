@@ -1,3 +1,6 @@
+'use client'
+
+import { motion } from 'framer-motion'
 import { getContact } from '@/data/content'
 
 function LinkedInIcon({ className }: { className?: string }) {
@@ -24,42 +27,69 @@ function EmailIcon({ className }: { className?: string }) {
   )
 }
 
+function ChevronUpIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M5 15l7-7 7 7" />
+    </svg>
+  )
+}
+
 export function Footer() {
   const contact = getContact()
   const year = new Date().getFullYear()
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
   return (
     <footer className="border-t border-border py-8 px-4">
-      <div className="mx-auto max-w-6xl flex flex-col md:flex-row items-center justify-between gap-4">
-        <p className="text-sm text-muted-foreground">
-          © {year} Dzaki Muhammad Yusfian. All rights reserved.
-        </p>
-        <div className="flex items-center gap-4">
-          <a
-            href={contact.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-muted-foreground hover:text-gold-500 transition-colors"
-            aria-label="LinkedIn"
+      <div className="mx-auto max-w-6xl">
+        <div className="flex justify-center mb-6">
+          <motion.button
+            onClick={scrollToTop}
+            whileHover={{ y: -2 }}
+            whileTap={{ scale: 0.95 }}
+            className="flex items-center gap-1 text-sm text-muted-foreground hover:text-gold-500 transition-colors"
+            aria-label="Scroll to top"
           >
-            <LinkedInIcon className="h-5 w-5" />
-          </a>
-          <a
-            href={contact.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-muted-foreground hover:text-gold-500 transition-colors"
-            aria-label="GitHub"
-          >
-            <GitHubIcon className="h-5 w-5" />
-          </a>
-          <a
-            href={`mailto:${contact.email}`}
-            className="text-muted-foreground hover:text-gold-500 transition-colors"
-            aria-label="Email"
-          >
-            <EmailIcon className="h-5 w-5" />
-          </a>
+            <ChevronUpIcon className="h-4 w-4" />
+            Back to top
+          </motion.button>
+        </div>
+
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-sm text-muted-foreground">
+            © {year} Dzaki Muhammad Yusfian. All rights reserved.
+          </p>
+          <div className="flex items-center gap-4">
+            <a
+              href={contact.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-muted-foreground hover:text-gold-500 hover:scale-110 transition-all duration-200"
+              aria-label="LinkedIn"
+            >
+              <LinkedInIcon className="h-5 w-5" />
+            </a>
+            <a
+              href={contact.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-muted-foreground hover:text-gold-500 hover:scale-110 transition-all duration-200"
+              aria-label="GitHub"
+            >
+              <GitHubIcon className="h-5 w-5" />
+            </a>
+            <a
+              href={`mailto:${contact.email}`}
+              className="text-muted-foreground hover:text-gold-500 hover:scale-110 transition-all duration-200"
+              aria-label="Email"
+            >
+              <EmailIcon className="h-5 w-5" />
+            </a>
+          </div>
         </div>
       </div>
     </footer>
