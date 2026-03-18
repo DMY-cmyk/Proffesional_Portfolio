@@ -4,6 +4,7 @@ import { Card } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { getResearchEntries } from '@/data/content'
 import { formatDate } from '@/utils/format-date'
+import { StaggerChildren } from '@/components/motion/stagger-children'
 
 export const metadata: Metadata = {
   title: 'Research',
@@ -18,7 +19,7 @@ export default function ResearchPage() {
       <div className="mx-auto max-w-4xl">
         <SectionHeading title="Research" subtitle="Academic and professional research work" />
 
-        <div className="space-y-6">
+        <StaggerChildren className="space-y-6">
           {entries.map((entry) => (
             <Card key={entry.slug} href={`/research/${entry.slug}`}>
               <h3 className="text-xl font-semibold text-foreground">
@@ -35,7 +36,7 @@ export default function ResearchPage() {
               </div>
             </Card>
           ))}
-        </div>
+        </StaggerChildren>
       </div>
     </div>
   )
