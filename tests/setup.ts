@@ -16,3 +16,14 @@ Object.defineProperty(window, 'localStorage', {
   value: localStorageMock,
   writable: true,
 })
+
+// Mock IntersectionObserver
+Object.defineProperty(global, 'IntersectionObserver', {
+  value: function IntersectionObserver(this: any, callback: IntersectionObserverCallback) {
+    this.observe = vi.fn()
+    this.disconnect = vi.fn()
+    this.unobserve = vi.fn()
+    this._callback = callback
+  },
+  writable: true,
+})
