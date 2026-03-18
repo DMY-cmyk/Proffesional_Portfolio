@@ -21,7 +21,7 @@ export default function ErrorPage({
         <Button variant="primary" size="lg" onClick={reset}>
           Try Again
         </Button>
-        <Button href="/" variant="outline" size="lg">
+        <Button href="/" variant="ghost" size="lg">
           Back to Home
         </Button>
       </div>
