@@ -1,0 +1,45 @@
+{
+  "name": "proffesional_portfolio",
+  "version": "1.0.0",
+  "description": "Dzaki Portfolio Website",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "test": "vitest",
+    "test:run": "vitest run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DMY-cmyk/Proffesional_Portfolio.git"
+  },
+  "keywords": [],
+  "author": "Dzaki Muhammad Yusfian",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DMY-cmyk/Proffesional_Portfolio/issues"
+  },
+  "homepage": "https://github.com/DMY-cmyk/Proffesional_Portfolio#readme",
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "framer-motion": "^12.38.0",
+    "next": "^15.5.13",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "tailwind-merge": "^3.5.0"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3.3.5",
+    "@tailwindcss/postcss": "^4.2.1",
+    "@types/node": "^25.5.0",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "eslint": "^9.39.4",
+    "eslint-config-next": "^15.5.13",
+    "postcss": "^8.5.8",
+    "tailwindcss": "^4.2.1",
+    "typescript": "^5.9.3"
+  }
+}
