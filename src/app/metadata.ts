@@ -37,4 +37,7 @@ export const siteMetadata: Metadata = {
     index: true,
     follow: true,
   },
+  icons: {
+    icon: '/icons/favicon.ico',
+  },
 }

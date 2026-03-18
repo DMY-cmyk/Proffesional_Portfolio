@@ -1,13 +1,18 @@
+import dynamic from 'next/dynamic'
 import { Inter } from 'next/font/google'
 import '@/styles/globals.css'
 import { siteMetadata } from './metadata'
 import { ThemeProvider } from '@/hooks/use-theme'
 import { Navbar } from '@/components/layout/navbar'
 import { Footer } from '@/components/layout/footer'
-import { AuroraBackground } from '@/components/motion/aurora-background'
 import { CustomCursor } from '@/components/motion/custom-cursor'
 import { PageTransition } from '@/components/motion/page-transition'
 import { JsonLd } from '@/components/layout/json-ld'
+
+const AuroraBackground = dynamic(
+  () => import('@/components/motion/aurora-background').then((m) => ({ default: m.AuroraBackground })),
+  { loading: () => null }
+)
 
 const inter = Inter({
   subsets: ['latin'],
