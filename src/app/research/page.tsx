@@ -1,8 +1,14 @@
+import type { Metadata } from 'next'
 import { SectionHeading } from '@/components/ui/section-heading'
 import { Card } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { getResearchEntries } from '@/data/content'
 import { formatDate } from '@/utils/format-date'
+
+export const metadata: Metadata = {
+  title: 'Research',
+  description: 'Academic and professional research work.',
+}
 
 export default function ResearchPage() {
   const entries = getResearchEntries()

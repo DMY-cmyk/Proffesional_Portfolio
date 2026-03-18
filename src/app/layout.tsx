@@ -1,13 +1,13 @@
-import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import '@/styles/globals.css'
-import { getSiteConfig } from '@/data/content'
+import { siteMetadata } from './metadata'
 import { ThemeProvider } from '@/hooks/use-theme'
 import { Navbar } from '@/components/layout/navbar'
 import { Footer } from '@/components/layout/footer'
 import { AuroraBackground } from '@/components/motion/aurora-background'
 import { CustomCursor } from '@/components/motion/custom-cursor'
 import { PageTransition } from '@/components/motion/page-transition'
+import { JsonLd } from '@/components/layout/json-ld'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -15,12 +15,7 @@ const inter = Inter({
   variable: '--font-inter',
 })
 
-const siteConfig = getSiteConfig()
-
-export const metadata: Metadata = {
-  title: siteConfig.title,
-  description: siteConfig.description,
-}
+export const metadata = siteMetadata
 
 export default function RootLayout({
   children,
@@ -37,6 +32,7 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen">
+        <JsonLd />
         <ThemeProvider>
           <AuroraBackground />
           <CustomCursor />

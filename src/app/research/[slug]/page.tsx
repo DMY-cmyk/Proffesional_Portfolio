@@ -1,4 +1,6 @@
+import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
+import Link from 'next/link'
 import { MDXRemote } from 'next-mdx-remote/rsc'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -13,6 +15,16 @@ export async function generateStaticParams() {
   return getAllResearchSlugs().map((slug) => ({ slug }))
 }
 
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params
+  const research = getResearchBySlug(slug)
+  if (!research) return {}
+  return {
+    title: research.frontmatter.title,
+    description: research.frontmatter.abstract,
+  }
+}
+
 export default async function ResearchDetailPage({ params }: PageProps) {
   const { slug } = await params
   const research = getResearchBySlug(slug)
@@ -24,12 +36,12 @@ export default async function ResearchDetailPage({ params }: PageProps) {
   return (
     <div className="py-20 px-4">
       <div className="mx-auto max-w-3xl">
-        <a
+        <Link
           href="/research"
           className="text-sm text-muted-foreground hover:text-gold-500 transition-colors mb-8 inline-block"
         >
           ← Back to Research
-        </a>
+        </Link>
 
         <h1 className="text-3xl md:text-4xl font-bold text-foreground mt-4">
           {research.frontmatter.title}

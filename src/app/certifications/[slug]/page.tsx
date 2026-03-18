@@ -1,4 +1,6 @@
+import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
+import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { getCertifications } from '@/data/content'
 import { formatDate } from '@/utils/format-date'
@@ -10,6 +12,17 @@ interface PageProps {
 export async function generateStaticParams() {
   const certifications = getCertifications()
   return certifications.map((cert) => ({ slug: cert.slug }))
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params
+  const certifications = getCertifications()
+  const cert = certifications.find((c) => c.slug === slug)
+  if (!cert) return {}
+  return {
+    title: cert.name,
+    description: `${cert.name} certification from ${cert.issuer}`,
+  }
 }
 
 export default async function CertificationDetailPage({ params }: PageProps) {
@@ -24,12 +37,12 @@ export default async function CertificationDetailPage({ params }: PageProps) {
   return (
     <div className="py-20 px-4">
       <div className="mx-auto max-w-3xl">
-        <a
+        <Link
           href="/#certifications"
           className="text-sm text-muted-foreground hover:text-gold-500 transition-colors mb-8 inline-block"
         >
           ← Back to Certifications
-        </a>
+        </Link>
 
         <h1 className="text-3xl md:text-4xl font-bold text-foreground mt-4">
           {cert.name}
