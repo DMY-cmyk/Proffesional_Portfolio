@@ -30,7 +30,8 @@ A bold, editorial-quality professional portfolio website built with Next.js 15, 
 - **Analog Warmth** — SVG noise grain texture overlay, warm ivory light mode (`#faf9f7`), and deep dark mode with subtle surface layering give the site a tactile, analog feel
 - **Cinematic Layout** — Asymmetric hero grid, left-aligned editorial section headings with monospace numbering (`01`, `02`...), and gradient dividers break the grid monotony
 - **Micro-interactions** — Animated link underlines, button hover shine effects, badge shimmer animations, scroll hints, and pulsing avatar glow — subtle details that reward exploration
-- **Gold Accent System** — `#d4af37` threads through headings, hover states, cursor glows, section numbers, and interactive elements as the unifying accent color
+- **Gold Accent System** — `#d4af37` threads through decorative fills, borders, cursor glows, and interactive elements as the unifying accent color. In light mode, text uses dark amber (`#78600f`, 7.3:1 contrast) while gold stays decorative; dark mode uses gold directly
+- **WCAG Contrast** — All text meets WCAG AA (4.5:1+). Muted text uses warm stone (`#3f3a36`, 9.2:1) in light mode. Dual-mode `.text-gold-accent` utility ensures readability without sacrificing the gold identity
 
 ## 🛠 Tech Stack
 
@@ -114,8 +115,9 @@ All content is data-driven via JSON files in `src/content/`:
 
 The gold-accented theme is defined in `src/styles/globals.css` using CSS custom properties:
 
-- **Primary Accent:** `#d4af37` (Gold 500)
-- **Light Mode:** Warm ivory (`#faf9f7`) backgrounds with white cards and subtle shadows
+- **Primary Accent:** `#d4af37` (Gold 500) — decorative fills, borders, backgrounds
+- **Light Mode Text Accent:** `#78600f` (Dark Amber) — WCAG AA compliant gold-family text via `.text-gold-accent`
+- **Light Mode:** Warm ivory (`#faf9f7`) backgrounds, muted text `#3f3a36`, borders `#c8c2b8`
 - **Dark Mode:** Deep dark (`#09090b`) with glass-morphism cards (`bg-white/[0.03] backdrop-blur-xl`)
 - **Grain Overlay:** SVG noise texture on `body::after` with theme-adaptive opacity
 
