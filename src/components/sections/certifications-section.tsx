@@ -18,7 +18,7 @@ export function CertificationsSection() {
               {cert.name}
             </h3>
             <p className="mt-1 text-sm text-muted-foreground">{cert.issuer}</p>
-            <p className="mt-2 text-sm text-gold-500">{formatDate(cert.date)}</p>
+            <p className="mt-2 text-sm text-gold-accent">{formatDate(cert.date)}</p>
             {cert.description && (
               <p className="mt-3 text-sm text-muted-foreground line-clamp-2">
                 {cert.description}

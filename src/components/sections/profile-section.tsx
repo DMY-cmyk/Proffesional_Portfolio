@@ -16,7 +16,7 @@ export function ProfileSection() {
             {profile.bio}
           </p>
           <div className="mt-10">
-            <blockquote className="border-l-2 border-gold-500 pl-6 text-2xl md:text-3xl font-display italic text-gold-500">
+            <blockquote className="border-l-2 border-gold-500 pl-6 text-2xl md:text-3xl font-display italic text-gold-accent">
               {profile.brandStatement}
             </blockquote>
           </div>

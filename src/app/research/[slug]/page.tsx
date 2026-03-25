@@ -38,7 +38,7 @@ export default async function ResearchDetailPage({ params }: PageProps) {
       <div className="mx-auto max-w-3xl">
         <Link
           href="/research"
-          className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-gold-500 transition-colors mb-8"
+          className="inline-flex items-center gap-1 text-sm text-muted-foreground hover-gold-accent transition-colors mb-8"
         >
           <span aria-hidden="true">←</span> Back to Research
         </Link>
@@ -47,7 +47,7 @@ export default async function ResearchDetailPage({ params }: PageProps) {
           {research.frontmatter.title}
         </h1>
 
-        <p className="mt-3 text-gold-500 font-medium">{formatDate(research.frontmatter.date)}</p>
+        <p className="mt-3 text-gold-accent font-medium">{formatDate(research.frontmatter.date)}</p>
 
         <div className="mt-4 flex flex-wrap gap-2">
           {research.frontmatter.tags.map((tag) => (
@@ -64,7 +64,7 @@ export default async function ResearchDetailPage({ params }: PageProps) {
         )}
 
         <div className="mt-10 border-t border-border pt-10">
-          <div className="prose prose-invert max-w-none prose-headings:text-foreground prose-p:text-muted-foreground prose-a:text-gold-500 prose-strong:text-foreground">
+          <div className="prose prose-invert max-w-none prose-headings:text-foreground prose-p:text-muted-foreground prose-a:text-[#78600f] dark:prose-a:text-gold-500 prose-strong:text-foreground">
             <MDXRemote source={research.content} />
           </div>
         </div>

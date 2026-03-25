@@ -40,7 +40,7 @@ export function SkillsSection() {
               <Card key={award.title}>
                 <h4 className="font-semibold text-foreground">{award.title}</h4>
                 <p className="text-sm text-muted-foreground">{award.issuer}</p>
-                <p className="text-sm text-gold-500 mt-1">
+                <p className="text-sm text-gold-accent mt-1">
                   {formatDate(award.date)}
                 </p>
                 {award.description && (
@@ -64,7 +64,7 @@ export function SkillsSection() {
               <Card key={course.name}>
                 <h4 className="font-semibold text-foreground">{course.name}</h4>
                 <p className="text-sm text-muted-foreground">{course.provider}</p>
-                <p className="text-sm text-gold-500 mt-1">
+                <p className="text-sm text-gold-accent mt-1">
                   {formatDate(course.date)}
                 </p>
               </Card>

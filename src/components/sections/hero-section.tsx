@@ -84,7 +84,7 @@ export function HeroSection() {
         >
           <motion.span
             variants={fadeUp}
-            className="font-mono text-xs text-gold-500 tracking-widest uppercase"
+            className="font-mono text-xs text-gold-accent tracking-widest uppercase"
           >
             {profile.name}
           </motion.span>
@@ -109,7 +109,7 @@ export function HeroSection() {
           >
             <a
               href="#certifications"
-              className="inline-flex items-center px-6 py-3 rounded-full bg-gold-500 text-white font-medium hover:bg-gold-600 transition-colors"
+              className="inline-flex items-center px-6 py-3 rounded-full bg-gold-500 text-black font-medium hover:bg-gold-600 transition-colors dark:text-white"
             >
               See my work
             </a>

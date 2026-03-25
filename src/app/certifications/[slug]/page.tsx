@@ -40,7 +40,7 @@ export default async function CertificationDetailPage({ params }: PageProps) {
       <div className="mx-auto max-w-3xl">
         <Link
           href="/#certifications"
-          className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-gold-500 transition-colors mb-8"
+          className="inline-flex items-center gap-1 text-sm text-muted-foreground hover-gold-accent transition-colors mb-8"
         >
           <span aria-hidden="true">←</span> Back to Certifications
         </Link>
@@ -57,7 +57,7 @@ export default async function CertificationDetailPage({ params }: PageProps) {
             </p>
             <p className="text-muted-foreground">
               <span className="font-medium text-foreground">Date:</span>{' '}
-              <span className="text-gold-500">{formatDate(cert.date)}</span>
+              <span className="text-gold-accent">{formatDate(cert.date)}</span>
             </p>
           </div>
         </div>

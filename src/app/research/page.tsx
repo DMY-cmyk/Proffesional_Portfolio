@@ -25,7 +25,7 @@ export default function ResearchPage() {
               <h3 className="text-xl font-semibold text-foreground">
                 {entry.title}
               </h3>
-              <p className="mt-1 text-sm text-gold-500">
+              <p className="mt-1 text-sm text-gold-accent">
                 {formatDate(entry.date)}
               </p>
               <p className="mt-3 text-muted-foreground">{entry.abstract}</p>
