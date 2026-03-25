@@ -26,26 +26,26 @@
 
 /* Light theme values (default for :root) */
 :root {
-  --background: #f8f8fa;
+  --background: #faf9f7;
   --foreground: #0f172a;
   --surface: #ffffff;
-  --card: #f0f0f4;
+  --card: #ffffff;
   --card-foreground: #0f172a;
-  --muted: #f0f0f4;
+  --muted: #f5f3f0;
   --muted-foreground: #64748b;
-  --border: #e2e2e8;
+  --border: #e8e4df;
 }
 
 /* Dark theme values */
 .dark {
-  --background: #0a0a0f;
+  --background: #09090b;
   --foreground: #e4e4e7;
-  --surface: #111118;
-  --card: #1a1a24;
+  --surface: #111113;
+  --card: #14141b;
   --card-foreground: #e4e4e7;
   --muted: #1a1a24;
   --muted-foreground: #a1a1aa;
-  --border: #2a2a36;
+  --border: #1e1e28;
 }
 
 /* Base styles */
