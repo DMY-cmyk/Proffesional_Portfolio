@@ -29,59 +29,116 @@ const scaleIn = {
   },
 }
 
+function ScrollHint() {
+  return (
+    <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
+      <span className="animate-scroll-hint inline-block text-muted-foreground" aria-hidden="true">
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M6 9l6 6 6-6" />
+        </svg>
+      </span>
+    </div>
+  )
+}
+
+function AvatarWithGlow({ src, alt }: { src: string; alt: string }) {
+  return (
+    <div className="relative flex items-center justify-center">
+      {/* Ambient glow */}
+      <div className="animate-avatar-glow absolute h-64 w-64 md:h-80 md:w-80 rounded-3xl bg-gold-500/20 blur-2xl" />
+      {/* Avatar */}
+      <div className="relative h-64 w-64 md:h-80 md:w-80 overflow-hidden rounded-3xl border-2 border-gold-500/30 bg-muted shadow-lg shadow-gold-500/20">
+        <img
+          src={src}
+          alt={alt}
+          className="h-full w-full object-cover"
+        />
+      </div>
+    </div>
+  )
+}
+
 export function HeroSection() {
   const profile = getProfile()
 
   return (
     <section
       id="hero"
-      className="relative flex min-h-screen items-center justify-center px-4"
+      className="relative flex min-h-screen items-center px-4"
     >
-      <motion.div
-        className="text-center"
-        variants={stagger}
-        initial="hidden"
-        animate="visible"
-      >
+      <div className="mx-auto grid w-full max-w-6xl items-center gap-12 md:grid-cols-2">
+        {/* Left column — text */}
         <motion.div
+          variants={stagger}
+          initial="hidden"
+          animate="visible"
+        >
+          <motion.span
+            variants={fadeUp}
+            className="font-mono text-xs text-gold-500 tracking-widest uppercase"
+          >
+            {profile.name}
+          </motion.span>
+
+          <motion.h1
+            variants={fadeUp}
+            className="mt-4 font-display text-5xl md:text-7xl lg:text-8xl font-normal tracking-tight hero-gradient-text"
+          >
+            {profile.title}
+          </motion.h1>
+
+          <motion.p
+            variants={fadeUp}
+            className="mt-6 text-lg text-muted-foreground max-w-md"
+          >
+            {profile.tagline}
+          </motion.p>
+
+          <motion.div
+            variants={fadeUp}
+            className="mt-8 flex flex-wrap gap-4"
+          >
+            <a
+              href="#certifications"
+              className="inline-flex items-center px-6 py-3 rounded-full bg-gold-500 text-white font-medium hover:bg-gold-600 transition-colors"
+            >
+              See my work
+            </a>
+            <a
+              href="#about"
+              className="inline-flex items-center px-6 py-3 rounded-full border border-border text-foreground font-medium hover:border-gold-500/50 transition-colors"
+            >
+              About me
+            </a>
+          </motion.div>
+        </motion.div>
+
+        {/* Right column — avatar */}
+        <motion.div
+          className="flex items-center justify-center"
           variants={scaleIn}
-          className="mx-auto mb-6 h-32 w-32 overflow-hidden rounded-full border-2 border-gold-500 bg-muted shadow-lg shadow-gold-500/20"
+          initial="hidden"
+          animate="visible"
         >
           {profile.avatar && (
-            <img
+            <AvatarWithGlow
               src={withBasePath(profile.avatar)}
               alt={profile.name}
-              className="h-full w-full object-cover"
             />
           )}
         </motion.div>
-        <motion.h1
-          variants={fadeUp}
-          className="text-4xl md:text-6xl font-bold hero-gradient-text"
-        >
-          {profile.name}
-        </motion.h1>
-        <motion.p
-          variants={fadeUp}
-          className="mt-4 text-xl md:text-2xl text-gold-500"
-        >
-          {profile.title}
-        </motion.p>
-        <motion.p
-          variants={fadeUp}
-          className="mt-2 text-lg text-muted-foreground max-w-lg mx-auto"
-        >
-          {profile.tagline}
-        </motion.p>
-        <motion.div
-          variants={fadeUp}
-          className="mt-8 flex justify-center gap-2"
-        >
-          <span className="inline-block h-1 w-8 rounded-full bg-gold-500/40" />
-          <span className="inline-block h-1 w-3 rounded-full bg-gold-500/25" />
-          <span className="inline-block h-1 w-1.5 rounded-full bg-gold-500/15" />
-        </motion.div>
-      </motion.div>
+      </div>
+
+      <ScrollHint />
     </section>
   )
 }

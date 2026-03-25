@@ -103,6 +103,20 @@ html {
   50% { background-position: -200% center; }
 }
 
+/* Scroll hint animation */
+@keyframes scroll-hint {
+  0%, 100% { opacity: 1; transform: translateY(0); }
+  50% { opacity: 0.5; transform: translateY(8px); }
+}
+.animate-scroll-hint { animation: scroll-hint 2s ease-in-out infinite; }
+
+/* Avatar ambient glow animation */
+@keyframes avatar-glow {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.05); }
+}
+.animate-avatar-glow { animation: avatar-glow 4s ease-in-out infinite; }
+
 /* Font utility classes */
 .font-display {
   font-family: var(--font-display);
