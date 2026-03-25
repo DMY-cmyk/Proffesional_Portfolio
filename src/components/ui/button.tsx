@@ -18,7 +18,7 @@ interface ButtonProps {
 
 const variantStyles = {
   primary: 'bg-gold-500 text-black hover:bg-gold-600 font-medium',
-  secondary: 'border border-gold-500 text-gold-500 hover:bg-gold-500/10 font-medium',
+  secondary: 'border border-gold-500 text-gold-accent hover:bg-gold-500/10 font-medium',
   ghost: 'text-muted-foreground hover:text-foreground hover:bg-muted',
 }
 

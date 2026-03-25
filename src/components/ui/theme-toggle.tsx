@@ -25,7 +25,7 @@ export function ThemeToggle() {
   return (
     <button
       onClick={toggleTheme}
-      className="rounded-full p-2 text-muted-foreground hover:text-gold-500 transition-colors"
+      className="rounded-full p-2 text-muted-foreground hover-gold-accent transition-colors"
       aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
     >
       <motion.div

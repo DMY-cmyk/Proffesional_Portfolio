@@ -22,7 +22,7 @@ export function TimelineItem({
         <div className="h-2 w-2 rounded-full bg-gold-500" />
       </div>
       <div>
-        <p className="text-sm text-gold-500 font-medium">{dateRange}</p>
+        <p className="text-sm text-gold-accent font-medium">{dateRange}</p>
         <h3 className="text-lg font-semibold text-foreground mt-1">{title}</h3>
         <p className="text-muted-foreground">{subtitle}</p>
         <div className="mt-2 text-sm text-muted-foreground">{children}</div>

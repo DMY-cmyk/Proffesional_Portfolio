@@ -10,7 +10,7 @@ export function SectionHeading({ title, subtitle, sectionNumber, label }: Sectio
     <div className="mb-16">
       {sectionNumber && label && (
         <div className="flex items-center gap-3 mb-4">
-          <span className="font-mono text-xs text-gold-500 tracking-widest">{sectionNumber}</span>
+          <span className="font-mono text-xs text-gold-accent tracking-widest">{sectionNumber}</span>
           <span className="font-mono text-xs text-muted-foreground tracking-widest uppercase">{label}</span>
         </div>
       )}
