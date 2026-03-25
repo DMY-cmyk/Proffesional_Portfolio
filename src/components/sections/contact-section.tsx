@@ -18,7 +18,7 @@ export function ContactSection() {
 
   return (
     <SectionWrapper id="contact">
-      <SectionHeading title="Get In Touch" />
+      <SectionHeading title="Get In Touch" sectionNumber="05" label="Connect" />
 
       <div className="max-w-2xl mx-auto">
         <div className="rounded-xl border border-gold-500/20 bg-gold-500/5 backdrop-blur-sm p-8 text-center">

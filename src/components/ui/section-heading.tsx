@@ -1,18 +1,23 @@
 interface SectionHeadingProps {
   title: string
   subtitle?: string
+  sectionNumber?: string
+  label?: string
 }
 
-export function SectionHeading({ title, subtitle }: SectionHeadingProps) {
+export function SectionHeading({ title, subtitle, sectionNumber, label }: SectionHeadingProps) {
   return (
-    <div className="text-center mb-12">
-      <h2 className="text-3xl md:text-4xl font-bold text-foreground">
+    <div className="mb-16">
+      {sectionNumber && label && (
+        <div className="flex items-center gap-3 mb-4">
+          <span className="font-mono text-xs text-gold-500 tracking-widest">{sectionNumber}</span>
+          <span className="font-mono text-xs text-muted-foreground tracking-widest uppercase">{label}</span>
+        </div>
+      )}
+      <h2 className="font-display text-4xl md:text-5xl font-normal text-foreground tracking-tight">
         {title}
       </h2>
-      {subtitle && (
-        <p className="mt-2 text-lg text-muted-foreground">{subtitle}</p>
-      )}
-      <div className="mt-4 mx-auto h-1 w-16 rounded-full bg-gold-500" />
+      {subtitle && <p className="mt-3 text-lg text-muted-foreground">{subtitle}</p>}
     </div>
   )
 }

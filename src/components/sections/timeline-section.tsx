@@ -39,7 +39,7 @@ export function TimelineSection() {
 
   return (
     <SectionWrapper id="experience">
-      <SectionHeading title="Experience & Education" />
+      <SectionHeading title="Experience & Education" sectionNumber="02" label="Background" />
       <div className="max-w-3xl mx-auto">
         <StaggerChildren staggerDelay={0.12} direction="left">
           {allItems.map((item, index) => (

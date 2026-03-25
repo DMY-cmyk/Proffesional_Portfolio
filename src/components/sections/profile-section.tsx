@@ -7,7 +7,7 @@ export function ProfileSection() {
 
   return (
     <SectionWrapper id="about">
-      <SectionHeading title="About Me" />
+      <SectionHeading title="About Me" sectionNumber="01" label="Who I am" />
       <div className="max-w-3xl mx-auto text-center">
         <p className="text-lg text-muted-foreground leading-relaxed">
           {profile.bio}

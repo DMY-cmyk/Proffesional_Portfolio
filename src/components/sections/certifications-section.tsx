@@ -10,7 +10,7 @@ export function CertificationsSection() {
 
   return (
     <SectionWrapper id="certifications">
-      <SectionHeading title="Certifications" />
+      <SectionHeading title="Certifications" sectionNumber="03" label="Credentials" />
       <StaggerChildren className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {certifications.map((cert) => (
           <Card key={cert.slug} href={`/certifications/${cert.slug}`}>

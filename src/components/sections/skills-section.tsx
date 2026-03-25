@@ -13,7 +13,7 @@ export function SkillsSection() {
 
   return (
     <SectionWrapper id="skills">
-      <SectionHeading title="Skills & Achievements" />
+      <SectionHeading title="Skills & Achievements" sectionNumber="04" label="Expertise" />
 
       <StaggerChildren className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mb-12">
         {skills.map((category) => (
