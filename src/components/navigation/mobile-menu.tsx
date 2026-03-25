@@ -57,7 +57,7 @@ export function MobileMenu({ items, activeSection }: MobileMenuProps) {
                     className={cn(
                       'text-lg font-medium transition-colors',
                       'text-muted-foreground hover:text-foreground',
-                      activeSection && item.href === `#${activeSection}` && 'text-gold-500'
+                      activeSection && item.href === `#${activeSection}` && 'text-gold-accent'
                     )}
                   >
                     {item.label}

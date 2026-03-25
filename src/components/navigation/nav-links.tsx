@@ -22,7 +22,7 @@ export function NavLinks({ items, activeSection }: NavLinksProps) {
             className={cn(
               'relative px-3 py-2 text-sm font-medium rounded-md transition-colors',
               'text-muted-foreground hover:text-foreground',
-              isActive && 'text-gold-500'
+              isActive && 'text-gold-accent'
             )}
           >
             {item.label}

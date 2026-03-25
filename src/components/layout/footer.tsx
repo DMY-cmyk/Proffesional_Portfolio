@@ -61,7 +61,7 @@ export function Footer() {
                 href={contact.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-gold-500 hover:scale-110 transition-all duration-200"
+                className="text-muted-foreground hover-gold-accent hover:scale-110 transition-all duration-200"
                 aria-label="LinkedIn"
               >
                 <LinkedInIcon className="h-5 w-5" />
@@ -70,14 +70,14 @@ export function Footer() {
                 href={contact.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-gold-500 hover:scale-110 transition-all duration-200"
+                className="text-muted-foreground hover-gold-accent hover:scale-110 transition-all duration-200"
                 aria-label="GitHub"
               >
                 <GitHubIcon className="h-5 w-5" />
               </a>
               <a
                 href={`mailto:${contact.email}`}
-                className="text-muted-foreground hover:text-gold-500 hover:scale-110 transition-all duration-200"
+                className="text-muted-foreground hover-gold-accent hover:scale-110 transition-all duration-200"
                 aria-label="Email"
               >
                 <EmailIcon className="h-5 w-5" />
@@ -86,7 +86,7 @@ export function Footer() {
                 onClick={scrollToTop}
                 whileHover={{ y: -2 }}
                 whileTap={{ scale: 0.95 }}
-                className="rounded-full border border-border px-3 py-1 text-xs text-muted-foreground hover:text-gold-500 transition-colors flex items-center gap-1"
+                className="rounded-full border border-border px-3 py-1 text-xs text-muted-foreground hover-gold-accent transition-colors flex items-center gap-1"
                 aria-label="Scroll to top"
               >
                 <ChevronUpIcon className="h-3 w-3" />
