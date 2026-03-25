@@ -60,4 +60,14 @@ describe('Navbar', () => {
     )
     expect(document.querySelector('[data-testid="scroll-progress"]')).toBeInTheDocument()
   })
+
+  it('has floating pill styling with rounded corners', () => {
+    const { container } = render(
+      <ThemeProvider>
+        <Navbar />
+      </ThemeProvider>
+    )
+    const header = container.querySelector('header')
+    expect(header?.className).toContain('rounded-2xl')
+  })
 })

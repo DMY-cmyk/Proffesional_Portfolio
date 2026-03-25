@@ -58,7 +58,7 @@ export default function RootLayout({
           <CustomCursor />
           <Navbar />
           <PageTransition>
-            <main className="pt-16">{children}</main>
+            <main className="pt-24">{children}</main>
           </PageTransition>
           <Footer />
         </ThemeProvider>

@@ -17,12 +17,12 @@ export function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border transition-shadow duration-300 ${
-        hasScrolled ? 'shadow-md shadow-black/5' : ''
+      className={`fixed top-2.5 left-1/2 -translate-x-1/2 z-50 w-[calc(100vw-24px)] rounded-xl md:top-3.5 md:w-[min(1200px,calc(100vw-40px))] md:rounded-2xl bg-background/50 backdrop-blur-2xl backdrop-saturate-150 border border-white/15 dark:border-white/10 shadow-lg shadow-black/5 transition-all duration-300 ${
+        hasScrolled ? 'bg-background/65 shadow-xl shadow-black/10' : ''
       }`}
     >
-      <div className="mx-auto max-w-6xl flex items-center justify-between px-4 h-16">
-        <Link href="/" className="text-lg font-bold text-gold-500">
+      <div className="flex items-center justify-between px-6 h-16">
+        <Link href="/" className="text-lg font-bold font-display text-gold-500">
           DM
         </Link>
         <div className="flex items-center gap-2">
@@ -33,7 +33,7 @@ export function Navbar() {
       </div>
       <div
         data-testid="scroll-progress"
-        className="absolute bottom-0 left-0 h-0.5 bg-gold-500 transition-none"
+        className="absolute bottom-0 left-0 h-0.5 rounded-full bg-gold-500 transition-none"
         style={{ width: `${scrollProgress * 100}%` }}
       />
     </header>
