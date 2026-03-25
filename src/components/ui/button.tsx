@@ -43,11 +43,18 @@ export function Button({
   disabled,
 }: ButtonProps) {
   const classes = cn(
-    'inline-flex items-center justify-center rounded-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-500',
+    'inline-flex items-center justify-center rounded-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-500 overflow-hidden relative group',
     variantStyles[variant],
     sizeStyles[size],
     disabled && 'opacity-50 pointer-events-none',
     className
+  )
+
+  const shineOverlay = (
+    <span
+      className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-500 pointer-events-none"
+      aria-hidden="true"
+    />
   )
 
   if (href) {
@@ -60,7 +67,8 @@ export function Button({
         transition={springTransition}
         {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
       >
-        {children}
+        {shineOverlay}
+        <span className="relative z-10">{children}</span>
       </motion.a>
     )
   }
@@ -74,7 +82,8 @@ export function Button({
       whileTap={tapAnimation}
       transition={springTransition}
     >
-      {children}
+      {shineOverlay}
+      <span className="relative z-10">{children}</span>
     </motion.button>
   )
 }

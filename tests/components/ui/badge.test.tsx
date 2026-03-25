@@ -13,6 +13,11 @@ describe('Badge', () => {
     expect(container.firstElementChild?.tagName).toBe('SPAN')
   })
 
+  it('has shimmer animation class', () => {
+    const { container } = render(<Badge>Shimmer</Badge>)
+    expect(container.firstElementChild?.className).toContain('animate-')
+  })
+
   it('applies custom className', () => {
     const { container } = render(<Badge className="ml-2">Extra</Badge>)
     expect(container.firstElementChild?.className).toContain('ml-2')

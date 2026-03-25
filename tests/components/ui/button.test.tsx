@@ -46,6 +46,20 @@ describe('Button', () => {
     expect(btn.className).not.toContain('border-gold')
   })
 
+  it('has overflow-hidden and relative classes', () => {
+    render(<Button>Styled</Button>)
+    const btn = screen.getByRole('button')
+    expect(btn.className).toContain('overflow-hidden')
+    expect(btn.className).toContain('relative')
+  })
+
+  it('contains a shine span element', () => {
+    render(<Button>Shine</Button>)
+    const btn = screen.getByRole('button')
+    const shineSpan = btn.querySelector('span[aria-hidden="true"]')
+    expect(shineSpan).toBeInTheDocument()
+  })
+
   it('calls onClick handler', async () => {
     const handleClick = vi.fn()
     const user = userEvent.setup()

@@ -125,3 +125,28 @@ html {
 .font-mono {
   font-family: var(--font-mono);
 }
+
+/* Animated link underline */
+.link-underline {
+  position: relative;
+  display: inline-block;
+}
+.link-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: currentColor;
+  transition: width 0.3s ease;
+}
+.link-underline:hover::after {
+  width: 100%;
+}
+
+/* Badge shimmer */
+@keyframes badge-shimmer {
+  0% { background-position: -100% 0; }
+  100% { background-position: 200% 0; }
+}
