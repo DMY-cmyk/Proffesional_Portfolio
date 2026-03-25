@@ -7,21 +7,19 @@ export function ProfileSection() {
 
   return (
     <SectionWrapper id="about">
-      <SectionHeading title="About Me" sectionNumber="01" label="Who I am" />
-      <div className="max-w-3xl mx-auto text-center">
-        <p className="text-lg text-muted-foreground leading-relaxed">
-          {profile.bio}
-        </p>
-        <div className="mt-10 relative">
-          <span className="absolute -top-4 -left-2 text-5xl text-gold-500/20 font-serif select-none" aria-hidden="true">
-            &ldquo;
-          </span>
-          <blockquote className="rounded-lg border border-gold-500/20 bg-gold-500/5 px-8 py-6 text-xl italic text-gold-500 font-medium">
-            {profile.brandStatement}
-          </blockquote>
-          <span className="absolute -bottom-6 -right-2 text-5xl text-gold-500/20 font-serif select-none" aria-hidden="true">
-            &rdquo;
-          </span>
+      <div className="grid md:grid-cols-5 gap-12 items-start">
+        <div className="md:col-span-2">
+          <SectionHeading title="About Me" sectionNumber="01" label="Who I am" />
+        </div>
+        <div className="md:col-span-3">
+          <p className="text-lg text-muted-foreground leading-relaxed">
+            {profile.bio}
+          </p>
+          <div className="mt-10">
+            <blockquote className="border-l-2 border-gold-500 pl-6 text-2xl md:text-3xl font-display italic text-gold-500">
+              {profile.brandStatement}
+            </blockquote>
+          </div>
         </div>
       </div>
     </SectionWrapper>

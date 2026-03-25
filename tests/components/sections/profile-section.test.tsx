@@ -14,6 +14,11 @@ describe('ProfileSection', () => {
     expect(screen.getByRole('heading', { name: /about me/i })).toBeInTheDocument()
   })
 
+  it('renders section number 01', () => {
+    render(<ProfileSection />)
+    expect(screen.getByText('01')).toBeInTheDocument()
+  })
+
   it('renders the bio text', () => {
     render(<ProfileSection />)
     expect(screen.getByText(/accounting|finance|professional/i)).toBeInTheDocument()

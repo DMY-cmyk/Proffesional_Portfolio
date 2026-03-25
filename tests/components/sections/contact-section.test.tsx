@@ -14,8 +14,13 @@ describe('ContactSection', () => {
   it('renders the Contact heading', () => {
     render(<ContactSection />)
     expect(
-      screen.getByRole('heading', { name: /get in touch/i })
+      screen.getByRole('heading', { name: /let.*build.*something.*together/i })
     ).toBeInTheDocument()
+  })
+
+  it('renders status badge with open to opportunities', () => {
+    render(<ContactSection />)
+    expect(screen.getByText(/open to opportunities/i)).toBeInTheDocument()
   })
 
   it('renders email link', () => {
