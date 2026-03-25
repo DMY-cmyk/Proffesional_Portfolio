@@ -37,4 +37,15 @@ describe('Footer', () => {
     render(<Footer />)
     expect(screen.getByRole('button', { name: /top|scroll/i })).toBeInTheDocument()
   })
+
+  it('renders the tagline text', () => {
+    render(<Footer />)
+    expect(screen.getByText('Designed & built with curiosity.')).toBeInTheDocument()
+  })
+
+  it('renders a gradient top border', () => {
+    const { container } = render(<Footer />)
+    const gradientDiv = container.querySelector('.bg-gradient-to-r')
+    expect(gradientDiv).toBeInTheDocument()
+  })
 })

@@ -44,54 +44,58 @@ export function Footer() {
   }
 
   return (
-    <footer className="border-t border-border py-8 px-4">
-      <div className="mx-auto max-w-6xl">
-        <div className="flex justify-center mb-6">
-          <motion.button
-            onClick={scrollToTop}
-            whileHover={{ y: -2 }}
-            whileTap={{ scale: 0.95 }}
-            className="flex items-center gap-1 text-sm text-muted-foreground hover:text-gold-500 transition-colors"
-            aria-label="Scroll to top"
-          >
-            <ChevronUpIcon className="h-4 w-4" />
-            Back to top
-          </motion.button>
-        </div>
-
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-muted-foreground">
-            © {year} Dzaki Muhammad Yusfian. All rights reserved.
+    <>
+      <div className="h-px bg-gradient-to-r from-transparent via-border to-transparent" />
+      <footer className="py-8 px-4">
+        <div className="mx-auto max-w-6xl">
+          <p className="text-center font-display italic text-muted-foreground mb-6">
+            Designed &amp; built with curiosity.
           </p>
-          <div className="flex items-center gap-4">
-            <a
-              href={contact.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-gold-500 hover:scale-110 transition-all duration-200"
-              aria-label="LinkedIn"
-            >
-              <LinkedInIcon className="h-5 w-5" />
-            </a>
-            <a
-              href={contact.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-gold-500 hover:scale-110 transition-all duration-200"
-              aria-label="GitHub"
-            >
-              <GitHubIcon className="h-5 w-5" />
-            </a>
-            <a
-              href={`mailto:${contact.email}`}
-              className="text-muted-foreground hover:text-gold-500 hover:scale-110 transition-all duration-200"
-              aria-label="Email"
-            >
-              <EmailIcon className="h-5 w-5" />
-            </a>
+
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+            <p className="text-sm text-muted-foreground">
+              © {year} Dzaki Muhammad Yusfian. All rights reserved.
+            </p>
+            <div className="flex items-center gap-4">
+              <a
+                href={contact.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-muted-foreground hover:text-gold-500 hover:scale-110 transition-all duration-200"
+                aria-label="LinkedIn"
+              >
+                <LinkedInIcon className="h-5 w-5" />
+              </a>
+              <a
+                href={contact.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-muted-foreground hover:text-gold-500 hover:scale-110 transition-all duration-200"
+                aria-label="GitHub"
+              >
+                <GitHubIcon className="h-5 w-5" />
+              </a>
+              <a
+                href={`mailto:${contact.email}`}
+                className="text-muted-foreground hover:text-gold-500 hover:scale-110 transition-all duration-200"
+                aria-label="Email"
+              >
+                <EmailIcon className="h-5 w-5" />
+              </a>
+              <motion.button
+                onClick={scrollToTop}
+                whileHover={{ y: -2 }}
+                whileTap={{ scale: 0.95 }}
+                className="rounded-full border border-border px-3 py-1 text-xs text-muted-foreground hover:text-gold-500 transition-colors flex items-center gap-1"
+                aria-label="Scroll to top"
+              >
+                <ChevronUpIcon className="h-3 w-3" />
+                Top
+              </motion.button>
+            </div>
           </div>
         </div>
-      </div>
-    </footer>
+      </footer>
+    </>
   )
 }
