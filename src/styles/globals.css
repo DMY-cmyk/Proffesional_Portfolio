@@ -18,6 +18,10 @@
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-border: var(--border);
+
+  /* Font families */
+  --font-display: 'Instrument Serif', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
 }
 
 /* Light theme values (default for :root) */
@@ -82,4 +86,13 @@ html {
 @keyframes shimmer {
   0%, 100% { background-position: 200% center; }
   50% { background-position: -200% center; }
+}
+
+/* Font utility classes */
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-mono {
+  font-family: var(--font-mono);
 }

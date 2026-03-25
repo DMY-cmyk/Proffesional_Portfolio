@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic'
-import { Inter } from 'next/font/google'
+import { Inter, Instrument_Serif, JetBrains_Mono } from 'next/font/google'
 import '@/styles/globals.css'
 import { siteMetadata } from './metadata'
 import { ThemeProvider } from '@/hooks/use-theme'
@@ -20,6 +20,21 @@ const inter = Inter({
   variable: '--font-inter',
 })
 
+const instrumentSerif = Instrument_Serif({
+  weight: '400',
+  style: 'italic',
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-display',
+})
+
+const jetbrainsMono = JetBrains_Mono({
+  weight: ['400', '500'],
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-mono',
+})
+
 export const metadata = siteMetadata
 
 export default function RootLayout({
@@ -28,7 +43,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={inter.variable} suppressHydrationWarning>
+    <html lang="en" className={`${inter.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable}`} suppressHydrationWarning>
       <head>
         <script
           dangerouslySetInnerHTML={{
