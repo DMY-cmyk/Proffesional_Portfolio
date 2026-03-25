@@ -32,8 +32,8 @@
   --card: #ffffff;
   --card-foreground: #0f172a;
   --muted: #f5f3f0;
-  --muted-foreground: #64748b;
-  --border: #e8e4df;
+  --muted-foreground: #3f3a36;
+  --border: #c8c2b8;
 }
 
 /* Dark theme values */
@@ -143,6 +143,21 @@ html {
 }
 .link-underline:hover::after {
   width: 100%;
+}
+
+/* Gold accent text — dark amber in light mode, original gold in dark mode */
+.text-gold-accent {
+  color: #78600f;
+}
+.dark .text-gold-accent {
+  color: #d4af37;
+}
+
+.hover-gold-accent:hover {
+  color: #78600f;
+}
+.dark .hover-gold-accent:hover {
+  color: #d4af37;
 }
 
 /* Badge shimmer */
