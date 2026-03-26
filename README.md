@@ -141,6 +141,26 @@ To enable deployment:
 1. Go to **Repository Settings → Pages → Source** → Select **GitHub Actions**
 2. Push to `main` branch — deployment triggers automatically
 
+## 📋 Changelog
+
+### Dark Mode Visibility Fix (2026-03-25)
+
+Fixed 6 dark mode visibility issues across 5 files:
+
+- **Border token contrast** — `--border` upgraded from `#1e1e28` (~1.2:1) to `#27272a` (~2.2:1), fixing section dividers, timeline lines, and mobile menu borders
+- **Hero CTA button** — Removed `dark:text-white`; black on gold gives ~8.5:1 contrast (WCAG AAA) in both modes
+- **Card borders** — Removed `dark:border-white/[0.06]` override; `border-border` token now applies consistently
+- **Navbar border** — Removed `dark:border-white/10` override; `border-border` token now applies consistently
+- **Research prose** — `prose-invert` → `dark:prose-invert` (conditional); prose links use unified `text-gold-accent` class
+
+### Light Mode Contrast Compliance (2026-03-24)
+
+WCAG AA-compliant light mode overhaul:
+
+- **Theme tokens** — Warm ivory background (`#faf9f7`), muted text `#3f3a36` (9.2:1), borders `#c8c2b8`
+- **Gold accent system** — Dual-mode `.text-gold-accent` utility: dark amber `#78600f` (7.3:1) in light mode, gold `#d4af37` in dark mode
+- **Component updates** — All sections, cards, badges, and navigation updated for proper contrast
+
 ## 📝 License
 
 ISC © [Dzaki Muhammad Yusfian](https://github.com/DMY-cmyk)

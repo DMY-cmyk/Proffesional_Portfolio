@@ -1,6 +1,8 @@
 # Dark Mode Visibility Fix Implementation Plan
 
-> **For agentic workers:** REQUIRED: Use superpowers:subagent-driven-development (if subagents available) or superpowers:executing-plans to implement this plan. Steps use checkbox (`- [ ]`) syntax for tracking.
+> ✅ **Status: COMPLETED** — All 6 tasks implemented, reviewed, tested (148/148 pass), and deployed to GitHub Pages.
+
+> **For agentic workers:** REQUIRED: Use superpowers:subagent-driven-development (if subagents available) or superpowers:executing-plans to implement this plan. Steps use checkbox (`- [x]`) syntax for tracking.
 
 **Goal:** Fix 6 dark mode visibility issues across 5 files so structural elements (borders, dividers, lines) and one CTA button have proper contrast.
 
@@ -19,7 +21,7 @@
 **Files:**
 - Modify: `src/styles/globals.css:48`
 
-- [ ] **Step 1: Update the border token**
+- [x] **Step 1: Update the border token**
 
 In `src/styles/globals.css`, inside the `.dark { }` block (line 48), change:
 ```css
@@ -32,13 +34,13 @@ to:
 
 This single change fixes section dividers (`section-divider.tsx`), timeline connecting line (`timeline-item.tsx`), and mobile menu border (`mobile-menu.tsx`) since they all reference the `border` token.
 
-- [ ] **Step 2: Run existing tests**
+- [x] **Step 2: Run existing tests**
 
 Run: `npx vitest run tests/components/ui/section-divider.test.tsx tests/components/ui/timeline-item.test.tsx tests/components/navigation/mobile-menu.test.tsx --reporter=verbose`
 
 Expected: All pass (tests don't check hex values, just structure)
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add src/styles/globals.css
@@ -54,7 +56,7 @@ Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>"
 **Files:**
 - Modify: `src/components/sections/hero-section.tsx:112`
 
-- [ ] **Step 1: Remove dark:text-white from CTA button**
+- [x] **Step 1: Remove dark:text-white from CTA button**
 
 In `src/components/sections/hero-section.tsx` line 112, change:
 ```tsx
@@ -67,13 +69,13 @@ className="inline-flex items-center px-6 py-3 rounded-full bg-gold-500 text-blac
 
 Black text on gold gives ~8.5:1 contrast in both modes.
 
-- [ ] **Step 2: Run hero section tests**
+- [x] **Step 2: Run hero section tests**
 
 Run: `npx vitest run tests/components/sections/hero-section.test.tsx --reporter=verbose`
 
 Expected: All pass
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add src/components/sections/hero-section.tsx
@@ -91,7 +93,7 @@ Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>"
 **Files:**
 - Modify: `src/components/ui/card.tsx:30`
 
-- [ ] **Step 1: Remove dark border override from card**
+- [x] **Step 1: Remove dark border override from card**
 
 In `src/components/ui/card.tsx` line 30, change:
 ```tsx
@@ -104,13 +106,13 @@ to:
 
 The `border-border` class on line 29 already applies the theme border token in both modes.
 
-- [ ] **Step 2: Run card tests**
+- [x] **Step 2: Run card tests**
 
 Run: `npx vitest run tests/components/ui/card.test.tsx --reporter=verbose`
 
 Expected: All pass
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add src/components/ui/card.tsx
@@ -129,7 +131,7 @@ Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>"
 **Files:**
 - Modify: `src/components/layout/navbar.tsx:20`
 
-- [ ] **Step 1: Remove dark border override from navbar**
+- [x] **Step 1: Remove dark border override from navbar**
 
 In `src/components/layout/navbar.tsx` line 20, in the long className string, remove ` dark:border-white/10` from:
 ```
@@ -140,13 +142,13 @@ so it becomes:
 border border-border shadow-lg
 ```
 
-- [ ] **Step 2: Run navbar tests**
+- [x] **Step 2: Run navbar tests**
 
 Run: `npx vitest run tests/components/layout/navbar.test.tsx --reporter=verbose`
 
 Expected: All pass
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add src/components/layout/navbar.tsx
@@ -162,7 +164,7 @@ Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>"
 **Files:**
 - Modify: `src/app/research/[slug]/page.tsx:67`
 
-- [ ] **Step 1: Fix prose-invert and prose link classes**
+- [x] **Step 1: Fix prose-invert and prose link classes**
 
 In `src/app/research/[slug]/page.tsx` line 67, change:
 ```tsx
@@ -177,13 +179,13 @@ Two changes:
 1. `prose-invert` → `dark:prose-invert` — only invert prose colors in dark mode
 2. `prose-a:text-[#78600f] dark:prose-a:text-gold-500` → `prose-a:text-gold-accent` — the custom `.text-gold-accent` class has proper specificity (0,2,0) to override in both modes: `#78600f` in light, `#d4af37` in dark
 
-- [ ] **Step 2: Run research detail tests**
+- [x] **Step 2: Run research detail tests**
 
 Run: `npx vitest run tests/app/research-detail.test.tsx --reporter=verbose`
 
 Expected: All pass
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add src/app/research/[slug]/page.tsx
@@ -201,19 +203,19 @@ Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>"
 
 ### Task 6: Run full test suite
 
-- [ ] **Step 1: Run all tests**
+- [x] **Step 1: Run all tests**
 
 Run: `npx vitest run --reporter=verbose`
 
 Expected: All tests pass with no regressions.
 
-- [ ] **Step 2: Run production build**
+- [x] **Step 2: Run production build**
 
 Run: `npm run build`
 
 Expected: Build succeeds with no errors. The `out/` directory is generated for static export.
 
-- [ ] **Step 3: Visual verification (dark mode)**
+- [x] **Step 3: Visual verification (dark mode)**
 
 Start dev server and use Playwright to capture dark mode screenshots of all 6 homepage sections + research page. Compare against baseline screenshots in session files to confirm:
 - Section dividers visible
@@ -224,12 +226,12 @@ Start dev server and use Playwright to capture dark mode screenshots of all 6 ho
 - Research prose links properly colored
 - Mobile menu border visible
 
-- [ ] **Step 4: Visual verification (light mode)**
+- [x] **Step 4: Visual verification (light mode)**
 
 Capture light mode screenshots to confirm no regressions:
 - Research page prose text still readable (was broken by unconditional prose-invert)
 - All other sections unchanged
 
-- [ ] **Step 5: Final commit (if any adjustments needed)**
+- [x] **Step 5: Final commit (if any adjustments needed)**
 
 If visual verification reveals issues, fix and commit. Otherwise, task is complete.
