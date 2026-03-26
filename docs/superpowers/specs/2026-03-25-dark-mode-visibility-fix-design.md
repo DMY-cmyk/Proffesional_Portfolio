@@ -58,9 +58,9 @@ Targeted fixes to 6 issues across 5 files. Minimal changes, low risk of side eff
 
 **Problem:** `prose-a:text-[#78600f]` may override `dark:prose-a:text-gold-500` due to Tailwind CSS 4's `:where()` specificity model for dark variants.
 
-**Fix:** Use the custom `.text-gold-accent` class (which has `.dark .text-gold-accent` with 0,2,0 specificity) for prose links instead of Tailwind dark utility.
+**Fix:** Replace `prose-a:text-[#78600f] dark:prose-a:text-gold-500` with `prose-a:text-gold-accent`. The custom `.text-gold-accent` class (specificity 0,2,0 via `.dark .text-gold-accent`) properly overrides in both modes: `#78600f` in light, `#d4af37` in dark.
 
-**File:** `src/app/research/[slug]/page.tsx` (line ~67)
+**File:** `src/app/research/[slug]/page.tsx` (line 67)
 
 ## Files Changed
 
