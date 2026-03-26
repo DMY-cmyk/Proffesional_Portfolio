@@ -109,7 +109,7 @@ export function HeroSection() {
           >
             <a
               href="#certifications"
-              className="inline-flex items-center px-6 py-3 rounded-full bg-gold-500 text-black font-medium hover:bg-gold-600 transition-colors dark:text-white"
+              className="inline-flex items-center px-6 py-3 rounded-full bg-gold-500 text-black font-medium hover:bg-gold-600 transition-colors"
             >
               See my work
             </a>
