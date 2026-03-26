@@ -9,16 +9,19 @@ A bold, editorial-quality professional portfolio website built with Next.js 15, 
 ## ✨ Features
 
 - **Dark/Light Theme** — System preference detection with localStorage persistence and flash prevention
-- **6 Homepage Sections** — Cinematic hero, editorial profile, timeline, certifications, skills, contact
-- **Glass-Morphism UI** — Translucent cards with backdrop blur, cursor-reactive gold glow, floating glass pill navbar
+- **6 Homepage Sections** — Cinematic hero, editorial profile, timeline, certifications, skills with animated progress bars, contact with form
+- **Glass-Morphism UI** — Translucent cards with backdrop blur, cursor-reactive gold glow, floating glass pill navbar, touch-responsive feedback
 - **Editorial Typography** — Instrument Serif (display), Inter (body), JetBrains Mono (labels) triple-font system
 - **Animation Layer** — Aurora canvas background, custom cursor with spring physics, scroll reveal, blur page transitions, avatar glow, scroll hints
 - **Micro-interactions** — Animated link underlines, button hover shine, badge shimmer, cursor-tracking card glow
 - **Visual Rhythm** — Monospace-numbered section headings, gradient dividers, grain texture overlay
 - **Research Pages** — MDX-powered research articles with dynamic routing
 - **Certification Detail** — Individual certification pages with document viewer
-- **Full SEO** — Open Graph, Twitter Cards, JSON-LD structured data, dynamic sitemap, robots config
-- **Accessibility** — Reduced motion support (`prefers-reduced-motion`), semantic HTML, ARIA labels
+- **Full SEO** — Open Graph image, Twitter Cards, JSON-LD structured data, dynamic sitemap, robots config, apple-touch-icon
+- **Accessibility** — Skip-to-content link, focus-visible outlines, reduced motion support, semantic HTML, ARIA labels
+- **Contact Form** — Web3Forms-powered contact form (no backend needed) with validation and success states
+- **Skill Progress Bars** — Animated gold gradient bars with Framer Motion scroll-triggered animation
+- **Loading Skeletons** — Shimmer skeleton screens for dynamic routes (research, certifications)
 - **Error Handling** — Custom 404 page and error boundary
 - **GitHub Pages basePath** — `withBasePath()` utility ensures all asset paths work under `/Proffesional_Portfolio`
 - **CI/CD** — GitHub Actions workflow with tests → build → deploy to GitHub Pages
@@ -56,7 +59,7 @@ src/
 │   ├── layout/       # Navbar, Footer, SectionWrapper, JsonLd
 │   ├── motion/       # AuroraBackground, CustomCursor, ScrollReveal, HoverGlow, PageTransition
 │   ├── sections/     # Hero, Profile, Timeline, Certifications, Skills, Contact
-│   └── ui/           # Button, Card, Badge, SectionHeading, SectionDivider, TimelineItem
+│   └── ui/           # Button, Card, Badge, Skeleton, ContactForm, SectionHeading, SectionDivider, ThemeToggle, TimelineItem
 ├── config/           # Performance configuration
 ├── content/          # JSON data files + MDX research articles
 ├── data/             # Typed content loader functions
@@ -65,7 +68,7 @@ src/
 ├── styles/           # Tailwind CSS 4 global theme tokens
 ├── types/            # TypeScript interfaces
 └── utils/            # Format helpers
-tests/                # 37 test files, 148 tests (mirrors src/ structure)
+tests/                # 38 test files, 152 tests (mirrors src/ structure)
 ```
 
 ## 🚀 Getting Started
@@ -105,7 +108,7 @@ All content is data-driven via JSON files in `src/content/`:
 | `experience.json` | Work experience timeline |
 | `education.json` | Education timeline |
 | `certifications.json` | Certifications grid |
-| `skills.json` | Skill categories and items |
+| `skills.json` | Skill categories with proficiency levels |
 | `awards.json` | Awards list |
 | `courses.json` | Courses list |
 | `downloads.json` | Downloadable files (CV, portfolio) |
@@ -127,7 +130,7 @@ The gold-accented theme is defined in `src/styles/globals.css` using CSS custom 
 npm run test:run
 ```
 
-- **148 tests** across **37 test files**
+- **152 tests** across **38 test files**
 - Vitest + React Testing Library + jsdom
 - Components, hooks, utilities, pages, and content loaders are all tested
 
@@ -142,6 +145,40 @@ To enable deployment:
 2. Push to `main` branch — deployment triggers automatically
 
 ## 📋 Changelog
+
+### Improvement Roadmap (2026-03-26)
+
+Comprehensive 5-phase improvement cycle covering SEO, content, UX, features, and accessibility:
+
+**Sub-project 1 — SEO & Metadata Fixes (P0)**
+- Fixed robots.txt sitemap URL (placeholder → real domain)
+- Generated branded OG image (1200×630), avatar (400×400), apple-touch-icon (180×180) via Sharp
+- Added JSON-LD null-safety guard and proper typing
+- Fixed OG image basePath resolution for GitHub Pages
+- Added apple-touch-icon to metadata
+
+**Sub-project 2 — Content & Data Cleanup (P0)**
+- Replaced all placeholder content with real user data across 7 JSON files
+- Added real research article (sustainability reporting & firm value) from skripsi
+- Updated contact info, experience (3 positions), education, courses
+- Added downloadable CV PDF
+
+**Sub-project 3 — P1 UX Polish**
+- Added `width`/`height` to hero avatar to prevent layout shift (CLS)
+- Created shimmer skeleton loading screens for research and certification detail pages
+- Added touch feedback to Card component (gold overlay + active:scale press effect)
+- Added skeleton-shimmer animation and tap highlight CSS
+
+**Sub-project 4 — P2 New Features**
+- Converted skills section from badge list to Style B grid cards with animated gold progress bars
+- Added proficiency levels to skills data (visual bars only, no percentages shown)
+- Added Web3Forms-powered contact form with validation and success states
+
+**Sub-project 5 — Accessibility**
+- Added global `focus-visible` gold outline for all interactive elements
+- Added skip-to-content link for keyboard navigation
+- Added aria-label to navbar logo link
+- Added main content landmark id
 
 ### Dark Mode Visibility Fix (2026-03-25)
 
