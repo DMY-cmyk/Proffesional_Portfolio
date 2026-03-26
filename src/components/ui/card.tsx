@@ -27,7 +27,7 @@ export function Card({ children, className, href }: CardProps) {
   const classes = cn(
     'relative overflow-hidden rounded-lg p-6 transition-all duration-300',
     'bg-white border border-border shadow-sm',
-    'dark:bg-white/[0.03] dark:backdrop-blur-xl dark:border-white/[0.06]',
+    'dark:bg-white/[0.03] dark:backdrop-blur-xl',
     'hover:-translate-y-1 hover:border-gold-500/30 hover:shadow-lg hover:shadow-gold-500/5',
     className
   )
