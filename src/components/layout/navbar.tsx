@@ -17,7 +17,7 @@ export function Navbar() {
 
   return (
     <header
-      className={`fixed top-2.5 left-1/2 -translate-x-1/2 z-50 w-[calc(100vw-24px)] rounded-xl md:top-3.5 md:w-[min(1200px,calc(100vw-40px))] md:rounded-2xl bg-background/50 backdrop-blur-2xl backdrop-saturate-150 border border-border dark:border-white/10 shadow-lg shadow-black/5 transition-all duration-300 ${
+      className={`fixed top-2.5 left-1/2 -translate-x-1/2 z-50 w-[calc(100vw-24px)] rounded-xl md:top-3.5 md:w-[min(1200px,calc(100vw-40px))] md:rounded-2xl bg-background/50 backdrop-blur-2xl backdrop-saturate-150 border border-border shadow-lg shadow-black/5 transition-all duration-300 ${
         hasScrolled ? 'bg-background/65 shadow-xl shadow-black/10' : ''
       }`}
     >
