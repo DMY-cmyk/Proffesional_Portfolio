@@ -65,7 +65,7 @@ export function ContactForm() {
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       {/* Web3Forms access key — public, safe to expose */}
-      <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY" />
+      <input type="hidden" name="access_key" value="b5470dd5-8c03-49aa-b97a-60b117d0ef6f" />
       <input type="hidden" name="subject" value="New message from portfolio" />
       <input type="hidden" name="from_name" value="Portfolio Contact Form" />
       <input type="checkbox" name="botcheck" className="hidden" />
