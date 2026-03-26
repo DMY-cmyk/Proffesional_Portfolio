@@ -22,7 +22,7 @@ export function Navbar() {
       }`}
     >
       <div className="flex items-center justify-between px-6 h-16">
-        <Link href="/" className="text-lg font-bold font-display text-gold-accent">
+        <Link href="/" className="text-lg font-bold font-display text-gold-accent" aria-label="Dzaki Muhammad Yusfian — Home">
           DM
         </Link>
         <div className="flex items-center gap-2">

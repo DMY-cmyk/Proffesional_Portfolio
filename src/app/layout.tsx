@@ -52,13 +52,14 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen">
+        <a href="#main-content" className="skip-to-content">Skip to content</a>
         <JsonLd />
         <ThemeProvider>
           <AuroraBackground />
           <CustomCursor />
           <Navbar />
           <PageTransition>
-            <main className="pt-24">{children}</main>
+            <main id="main-content" className="pt-24">{children}</main>
           </PageTransition>
           <Footer />
         </ThemeProvider>
