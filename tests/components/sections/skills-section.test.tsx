@@ -23,7 +23,7 @@ describe('SkillsSection', () => {
     expect(screen.getByText('Soft Skills')).toBeInTheDocument()
   })
 
-  it('renders individual skill items as badges', () => {
+  it('renders individual skill items with progress bars', () => {
     render(<SkillsSection />)
     expect(screen.getByText('Financial Reporting')).toBeInTheDocument()
     expect(screen.getByText('Microsoft Excel')).toBeInTheDocument()

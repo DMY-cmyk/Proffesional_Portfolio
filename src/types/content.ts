@@ -36,9 +36,14 @@ export interface CertificationEntry {
   description?: string
 }
 
+export interface SkillItem {
+  name: string
+  level: number
+}
+
 export interface SkillCategory {
   category: string
-  items: string[]
+  items: SkillItem[]
 }
 
 export interface AwardEntry {

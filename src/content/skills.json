@@ -1,14 +1,32 @@
 [
   {
     "category": "Technical Skills",
-    "items": ["Financial Reporting", "Tax Compliance", "Auditing", "Budgeting & Forecasting", "Financial Analysis"]
+    "items": [
+      { "name": "Financial Reporting", "level": 90 },
+      { "name": "Tax Compliance", "level": 85 },
+      { "name": "Auditing", "level": 80 },
+      { "name": "Budgeting & Forecasting", "level": 75 },
+      { "name": "Financial Analysis", "level": 85 }
+    ]
   },
   {
     "category": "Tools & Software",
-    "items": ["Microsoft Excel", "SAP", "MYOB", "e-SPT", "SPSS"]
+    "items": [
+      { "name": "Microsoft Excel", "level": 90 },
+      { "name": "SAP", "level": 70 },
+      { "name": "MYOB", "level": 75 },
+      { "name": "e-SPT", "level": 85 },
+      { "name": "SPSS", "level": 65 }
+    ]
   },
   {
     "category": "Soft Skills",
-    "items": ["Analytical Thinking", "Attention to Detail", "Team Collaboration", "Communication", "Time Management"]
+    "items": [
+      { "name": "Analytical Thinking", "level": 90 },
+      { "name": "Attention to Detail", "level": 85 },
+      { "name": "Team Collaboration", "level": 80 },
+      { "name": "Communication", "level": 80 },
+      { "name": "Time Management", "level": 85 }
+    ]
   }
 ]

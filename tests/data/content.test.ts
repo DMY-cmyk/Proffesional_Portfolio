@@ -56,12 +56,14 @@ describe('getCertifications', () => {
 })
 
 describe('getSkills', () => {
-  it('returns array of skill categories', () => {
+  it('returns array of skill categories with proficiency levels', () => {
     const categories = getSkills()
     expect(Array.isArray(categories)).toBe(true)
     expect(categories.length).toBeGreaterThan(0)
     expect(categories[0].category).toBeTruthy()
     expect(Array.isArray(categories[0].items)).toBe(true)
+    expect(categories[0].items[0]).toHaveProperty('name')
+    expect(categories[0].items[0]).toHaveProperty('level')
   })
 })
 

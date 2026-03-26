@@ -1,5 +1,6 @@
 import { SectionWrapper } from '@/components/layout/section-wrapper'
 import { Button } from '@/components/ui/button'
+import { ContactForm } from '@/components/ui/contact-form'
 import { getContact, getDownloads } from '@/data/content'
 import { StaggerChildren } from '@/components/motion/stagger-children'
 
@@ -58,6 +59,14 @@ export function ContactSection() {
             </Button>
           )}
         </StaggerChildren>
+
+        {/* Contact form */}
+        <div className="border-t border-border pt-8">
+          <h3 className="text-xl font-semibold text-foreground mb-4">Send me a message</h3>
+          <div className="max-w-xl">
+            <ContactForm />
+          </div>
+        </div>
 
         <div className="border-t border-border pt-8">
           <p className="text-muted-foreground mb-4">Download my documents:</p>
