@@ -60,6 +60,8 @@ function AvatarWithGlow({ src, alt }: { src: string; alt: string }) {
         <img
           src={src}
           alt={alt}
+          width={320}
+          height={320}
           className="h-full w-full object-cover"
         />
       </div>
