@@ -29,9 +29,9 @@ describe('SkillsSection', () => {
     expect(screen.getByText('Microsoft Excel')).toBeInTheDocument()
   })
 
-  it('renders awards subsection', () => {
+  it('hides awards subsection when no awards exist', () => {
     render(<SkillsSection />)
-    expect(screen.getByText(/awards/i)).toBeInTheDocument()
+    expect(screen.queryByText(/awards/i)).not.toBeInTheDocument()
   })
 
   it('renders courses subsection', () => {

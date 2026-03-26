@@ -1,14 +1,39 @@
 [
   {
-    "company": "Placeholder Company",
-    "role": "Tax & Audit Intern",
-    "startDate": "2024-01",
-    "endDate": "2024-06",
-    "location": "Bandung, Indonesia",
+    "company": "PT. Kolosal Kecerdasan Artifisial",
+    "role": "Operations Officer",
+    "startDate": "2026-03",
+    "endDate": null,
+    "location": "Jakarta, Indonesia",
     "bullets": [
-      "Assisted in preparing tax compliance reports for corporate clients",
-      "Supported audit fieldwork including substantive testing procedures",
-      "Compiled and analyzed financial data for quarterly reviews"
+      "Leading end-to-end operational workflows across finance, administration, and cross-functional teams",
+      "Driving process improvements and operational efficiency initiatives to support company scaling objectives"
+    ]
+  },
+  {
+    "company": "PT. Kolosal Kecerdasan Artifisial",
+    "role": "Finance Operation Staff",
+    "startDate": "2025-12",
+    "endDate": "2026-03",
+    "location": "Jakarta, Indonesia",
+    "bullets": [
+      "Oversaw end-to-end daily finance operations including AP/AR management, invoice processing, and payment/collection activities",
+      "Executed account reconciliations and contributed to month-end financial closing including adjusting entries and financial statement preparation",
+      "Ensured integrity and completeness of financial records and documentation, maintaining high standards of accuracy and compliance",
+      "Produced regular financial reports and delivered budget and forecast variance analysis to support management decision-making"
+    ]
+  },
+  {
+    "company": "Direktorat Jenderal Pajak",
+    "role": "Tax Volunteer",
+    "startDate": "2025-01",
+    "endDate": "2025-12",
+    "location": "Yogyakarta, Indonesia",
+    "bullets": [
+      "Assisted 90+ individual taxpayers and entrepreneurs in accurately filing SPT PPh 23 returns, reducing errors and increasing on-time submissions by 30%",
+      "Spearheaded community outreach programs in Bantul Regency, educating 200+ taxpayers on compliance benefits and contributing to the Patuh Pajak initiative",
+      "Designed and promoted tax literacy campaigns on Instagram & TikTok, simplifying complex tax concepts into digestible content to enhance public trust",
+      "Resolved tax challenges through consultation and pioneered Core Tax system adoption"
     ]
   }
 ]

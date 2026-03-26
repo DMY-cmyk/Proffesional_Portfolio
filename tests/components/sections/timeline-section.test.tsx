@@ -18,12 +18,12 @@ describe('TimelineSection', () => {
 
   it('renders education entries', () => {
     render(<TimelineSection />)
-    expect(screen.getByText(/universitas|university/i)).toBeInTheDocument()
+    expect(screen.getByText(/STIE YKPN|Business School/i)).toBeInTheDocument()
   })
 
   it('renders experience entries', () => {
     render(<TimelineSection />)
-    expect(screen.getByText(/Tax & Audit Intern/i)).toBeInTheDocument()
+    expect(screen.getByText(/Operations Officer/i)).toBeInTheDocument()
   })
 
   it('has the experience section id', () => {

@@ -18,11 +18,11 @@ vi.mock('framer-motion', () => ({
 describe('ResearchDetailPage', () => {
   it('renders research title', async () => {
     const page = await ResearchDetailPage({
-      params: Promise.resolve({ slug: 'placeholder-research' }),
+      params: Promise.resolve({ slug: 'sustainability-reporting-firm-value' }),
     })
     render(page)
     expect(
-      screen.getByRole('heading', { name: /placeholder research/i })
+      screen.getByRole('heading', { name: /keberlanjutan|sustainability/i })
     ).toBeInTheDocument()
   })
 })

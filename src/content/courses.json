@@ -1,8 +1,15 @@
 [
   {
-    "name": "Placeholder Professional Development Course",
-    "provider": "Coursera",
-    "date": "2025-01",
-    "certificateUrl": "/files/certificates/course-cert.pdf"
+    "name": "English for Professional Development",
+    "provider": "Duta Wacana Christian University",
+    "date": "2023-06",
+    "certificateUrl": ""
+  },
+  {
+    "name": "Brevet Pajak AB",
+    "provider": "Fakultas Ekonomika dan Bisnis UGM",
+    "date": "2025-10",
+    "certificateUrl": "",
+    "credentialId": "1113/UN1/EK.RSDI/DL/2025"
   }
 ]

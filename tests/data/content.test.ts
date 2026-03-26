@@ -69,8 +69,6 @@ describe('getAwards', () => {
   it('returns array of awards', () => {
     const awards = getAwards()
     expect(Array.isArray(awards)).toBe(true)
-    expect(awards.length).toBeGreaterThan(0)
-    expect(awards[0].title).toBeTruthy()
   })
 })
 

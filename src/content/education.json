@@ -1,13 +1,14 @@
 [
   {
-    "school": "Universitas Padjadjaran",
+    "school": "STIE YKPN Business School Yogyakarta",
     "degree": "Bachelor of Accounting",
     "field": "Accounting",
-    "startDate": "2021-08",
-    "endDate": "2025-07",
+    "startDate": "2022-09",
+    "endDate": "2026-04",
     "details": [
       "Focus on taxation, auditing, and financial reporting",
-      "Active in academic research and student organizations"
+      "Active in academic research and student organizations",
+      "Thesis: The Effect of Sustainability Report Disclosure on Firm Value in the Manufacturing Sector"
     ]
   }
 ]
