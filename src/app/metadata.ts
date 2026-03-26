@@ -40,5 +40,6 @@ export const siteMetadata: Metadata = {
   },
   icons: {
     icon: withBasePath('/icons/favicon.ico'),
+    apple: withBasePath('/icons/apple-touch-icon.png'),
   },
 }
