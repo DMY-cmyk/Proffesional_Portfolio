@@ -64,7 +64,7 @@ export default async function ResearchDetailPage({ params }: PageProps) {
         )}
 
         <div className="mt-10 border-t border-border pt-10">
-          <div className="prose prose-invert max-w-none prose-headings:text-foreground prose-p:text-muted-foreground prose-a:text-[#78600f] dark:prose-a:text-gold-500 prose-strong:text-foreground">
+          <div className="prose dark:prose-invert max-w-none prose-headings:text-foreground prose-p:text-muted-foreground prose-a:text-gold-accent prose-strong:text-foreground">
             <MDXRemote source={research.content} />
           </div>
         </div>
