@@ -6,7 +6,7 @@ Several structural and text elements become invisible or nearly invisible in dar
 
 ## Approach
 
-Targeted fixes to 8 specific issues across 6 files. Minimal changes, low risk of side effects.
+Targeted fixes to 6 issues across 5 files. Minimal changes, low risk of side effects. Issue #1 (border token) cascades to fix three elements (section dividers, timeline line, mobile menu border) in a single change.
 
 ## Issues and Fixes
 
@@ -32,17 +32,19 @@ Targeted fixes to 8 specific issues across 6 files. Minimal changes, low risk of
 
 **Problem:** `dark:border-white/[0.06]` is nearly invisible glass-morphism border.
 
-**Fix:** Replace the inline dark border with `border-border` token to use the theme's border color consistently.
+**Fix:** Remove `dark:border-white/[0.06]` from the dark mode class string. The element already has `border-border` in its base classes (line 29), which will then apply in both modes using the theme token.
 
-**File:** `src/components/ui/card.tsx` (line ~30)
+**File:** `src/components/ui/card.tsx` (line 30)
 
 ### 4. Navbar Border (navbar.tsx)
 
 **Problem:** `dark:border-white/10` is very faint.
 
-**Fix:** Replace `dark:border-white/10` with `border-border` token for consistency with other elements.
+**Fix:** Remove `dark:border-white/10` from the class string. The element already has `border-border` (line 20), which will then apply in both modes using the theme token.
 
-**File:** `src/components/layout/navbar.tsx` (line ~20)
+**File:** `src/components/layout/navbar.tsx` (line 20)
+
+> **Note:** The new `--border: #27272a` gives ~2.2:1 contrast, which is intentionally below WCAG AA's 3:1 minimum for non-text elements. This is appropriate for decorative borders that don't convey meaning — they provide subtle structure without demanding attention.
 
 ### 5. Research Prose — `prose-invert` (research/[slug]/page.tsx)
 
@@ -66,8 +68,8 @@ Targeted fixes to 8 specific issues across 6 files. Minimal changes, low risk of
 |------|--------|
 | `src/styles/globals.css` | `--border: #1e1e28` → `--border: #27272a` in dark theme |
 | `src/components/sections/hero-section.tsx` | Remove `dark:text-white` from CTA button |
-| `src/components/ui/card.tsx` | Replace `dark:border-white/[0.06]` with `border-border` |
-| `src/components/layout/navbar.tsx` | Replace `dark:border-white/10` with `border-border` |
+| `src/components/ui/card.tsx` | Remove `dark:border-white/[0.06]`; `border-border` already present |
+| `src/components/layout/navbar.tsx` | Remove `dark:border-white/10`; `border-border` already present |
 | `src/app/research/[slug]/page.tsx` | `prose-invert` → `dark:prose-invert`; fix prose link dark specificity |
 
 ## Verification
