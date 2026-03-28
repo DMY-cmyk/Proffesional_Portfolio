@@ -8,6 +8,7 @@ import { Footer } from '@/components/layout/footer'
 import { CustomCursor } from '@/components/motion/custom-cursor'
 import { PageTransition } from '@/components/motion/page-transition'
 import { JsonLd } from '@/components/layout/json-ld'
+import { PreloadLinks } from '@/components/layout/preload-links'
 
 const AuroraBackground = dynamic(
   () => import('@/components/motion/aurora-background').then((m) => ({ default: m.AuroraBackground })),
@@ -50,6 +51,7 @@ export default function RootLayout({
             __html: `(function(){var t=localStorage.getItem('theme')||'dark';if(t==='dark')document.documentElement.classList.add('dark')})()`,
           }}
         />
+        <PreloadLinks />
       </head>
       <body className="min-h-screen">
         <a href="#main-content" className="skip-to-content">Skip to content</a>
