@@ -138,12 +138,16 @@ export function AuroraBackground() {
     let waves: AuroraWave[]
     let particles: Particle[]
 
+    let resizeTimeout: ReturnType<typeof setTimeout>
     function resize() {
       canvas!.width = window.innerWidth
       canvas!.height = window.innerHeight
-      waves = createWaves(canvas!.width, canvas!.height)
-      particles = createParticles(canvas!.width, canvas!.height)
       cachedScrollHeight = document.body.scrollHeight
+      clearTimeout(resizeTimeout)
+      resizeTimeout = setTimeout(() => {
+        waves = createWaves(canvas!.width, canvas!.height)
+        particles = createParticles(canvas!.width, canvas!.height)
+      }, 250)
     }
 
     let cachedScrollHeight = document.body.scrollHeight
@@ -310,7 +314,11 @@ export function AuroraBackground() {
       animationId = requestAnimationFrame(draw)
     }
 
-    resize()
+    canvas.width = window.innerWidth
+    canvas.height = window.innerHeight
+    cachedScrollHeight = document.body.scrollHeight
+    waves = createWaves(canvas.width, canvas.height)
+    particles = createParticles(canvas.width, canvas.height)
     draw()
 
     window.addEventListener('resize', resize)
@@ -328,6 +336,7 @@ export function AuroraBackground() {
 
     return () => {
       cancelAnimationFrame(animationId)
+      clearTimeout(resizeTimeout)
       window.removeEventListener('resize', resize)
       window.removeEventListener('mousemove', handleMouseMove)
       window.removeEventListener('scroll', handleScroll)
