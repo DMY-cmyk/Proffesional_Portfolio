@@ -12,7 +12,7 @@ A bold, editorial-quality professional portfolio website built with Next.js 15, 
 - **6 Homepage Sections** — Cinematic hero, editorial profile, timeline, certifications, skills with animated progress bars, contact with form
 - **Glass-Morphism UI** — Translucent cards with backdrop blur, cursor-reactive gold glow, floating glass pill navbar, touch-responsive feedback
 - **Editorial Typography** — Instrument Serif (display), Inter (body), JetBrains Mono (labels) triple-font system
-- **Animation Layer** — Aurora canvas background, custom cursor with spring physics, scroll reveal, blur page transitions, avatar glow, scroll hints
+- **Animation Layer** — Aurora canvas background, custom cursor with spring physics, scroll reveal, smooth page transitions, avatar glow, scroll hints
 - **Micro-interactions** — Animated link underlines, button hover shine, badge shimmer, cursor-tracking card glow
 - **Visual Rhythm** — Monospace-numbered section headings, gradient dividers, grain texture overlay
 - **Research Pages** — MDX-powered research articles with dynamic routing
@@ -21,7 +21,9 @@ A bold, editorial-quality professional portfolio website built with Next.js 15, 
 - **Accessibility** — Skip-to-content link, focus-visible outlines, reduced motion support, semantic HTML, ARIA labels
 - **Contact Form** — Web3Forms-powered contact form (no backend needed) with validation and success states
 - **Skill Progress Bars** — Animated gold gradient bars with Framer Motion scroll-triggered animation
-- **Loading Skeletons** — Shimmer skeleton screens for dynamic routes (research, certifications)
+- **Loading Skeletons** — Shimmer skeleton screens for dynamic routes and lazy-loaded homepage sections
+- **Lazy Loading** — Below-fold homepage sections loaded on demand via `next/dynamic` with skeleton fallbacks
+- **Performance Optimizations** — Preconnect/preload hints, throttled canvas event handlers, adaptive particle count based on device capability
 - **Error Handling** — Custom 404 page and error boundary
 - **GitHub Pages basePath** — `withBasePath()` utility ensures all asset paths work under `/Proffesional_Portfolio`
 - **CI/CD** — GitHub Actions workflow with tests → build → deploy to GitHub Pages
@@ -68,7 +70,7 @@ src/
 ├── styles/           # Tailwind CSS 4 global theme tokens
 ├── types/            # TypeScript interfaces
 └── utils/            # Format helpers
-tests/                # 38 test files, 152 tests (mirrors src/ structure)
+tests/                # 39 test files, 162 tests (mirrors src/ structure)
 ```
 
 ## 🚀 Getting Started
@@ -130,7 +132,7 @@ The gold-accented theme is defined in `src/styles/globals.css` using CSS custom 
 npm run test:run
 ```
 
-- **152 tests** across **38 test files**
+- **162 tests** across **39 test files**
 - Vitest + React Testing Library + jsdom
 - Components, hooks, utilities, pages, and content loaders are all tested
 
@@ -145,6 +147,16 @@ To enable deployment:
 2. Push to `main` branch — deployment triggers automatically
 
 ## 📋 Changelog
+
+### Phase 1 — Performance Foundation (2026-03-28)
+
+5-task performance optimization pass reducing initial bundle size and CPU usage:
+
+- **Lazy-loaded homepage sections** — 5 below-fold sections (`ProfileSection`, `TimelineSection`, `CertificationsSection`, `SkillsSection`, `ContactSection`) converted to `next/dynamic` imports with skeleton loading fallbacks; `HeroSection` stays static (above-the-fold)
+- **Throttled Aurora canvas** — Mousemove and scroll event handlers throttled at 16ms (~60fps); `scrollHeight` cached instead of read every animation frame; cache updated on scroll and resize
+- **Adaptive particle count** — Replaced hardcoded 80 particles with `getParticleCount()` returning 20 (mobile/low-end), 40 (tablet/mid-range), or 80 (desktop/high-end) based on `navigator.hardwareConcurrency` and `window.innerWidth`
+- **Preconnect & preload hints** — Added `<link rel="preconnect">` for Google Fonts domains and `<link rel="preload">` for avatar image (LCP element)
+- **Removed blur filter** — Page transitions now use opacity + transform only (no `filter: blur()` compositing)
 
 ### Improvement Roadmap (2026-03-26)
 
