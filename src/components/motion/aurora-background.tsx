@@ -50,7 +50,16 @@ export function throttleHandler<T extends (...args: any[]) => void>(callback: T,
   }) as T
 }
 
-const PARTICLE_COUNT = 80
+export function getParticleCount(): number {
+  if (typeof window === 'undefined') return 40
+  const cores = navigator.hardwareConcurrency || 2
+  const width = window.innerWidth
+
+  if (width < 768 || cores <= 2) return 20
+  if (width < 1280 || cores <= 4) return 40
+  return 80
+}
+
 const CONNECTION_DISTANCE = 120
 const MOUSE_REPEL_RADIUS = 180
 const MOUSE_ATTRACT_WAVE_STRENGTH = 0.015
@@ -90,7 +99,8 @@ function createWaves(width: number, height: number): AuroraWave[] {
 }
 
 function createParticles(width: number, height: number): Particle[] {
-  return Array.from({ length: PARTICLE_COUNT }, () => {
+  const count = getParticleCount()
+  return Array.from({ length: count }, () => {
     const x = Math.random() * width
     const y = Math.random() * height
     return {

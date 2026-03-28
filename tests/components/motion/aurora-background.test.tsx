@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { render } from '@testing-library/react'
-import { AuroraBackground, throttleHandler } from '@/components/motion/aurora-background'
+import { AuroraBackground, throttleHandler, getParticleCount } from '@/components/motion/aurora-background'
 
 let mockReducedMotion = false
 vi.mock('@/hooks/use-reduced-motion', () => ({
@@ -61,5 +61,35 @@ describe('throttleHandler', () => {
     mockTime = 20
     throttled() // t=20, fires (>16ms elapsed)
     expect(cb).toHaveBeenCalledTimes(2)
+  })
+})
+
+describe('getParticleCount', () => {
+  afterEach(() => {
+    vi.unstubAllGlobals()
+  })
+
+  it('returns 20 for small screens (mobile)', () => {
+    vi.stubGlobal('innerWidth', 375)
+    Object.defineProperty(navigator, 'hardwareConcurrency', { value: 4, configurable: true })
+    expect(getParticleCount()).toBe(20)
+  })
+
+  it('returns 40 for medium screens (tablet)', () => {
+    vi.stubGlobal('innerWidth', 1024)
+    Object.defineProperty(navigator, 'hardwareConcurrency', { value: 4, configurable: true })
+    expect(getParticleCount()).toBe(40)
+  })
+
+  it('returns 80 for large screens with many cores (desktop)', () => {
+    vi.stubGlobal('innerWidth', 1920)
+    Object.defineProperty(navigator, 'hardwareConcurrency', { value: 8, configurable: true })
+    expect(getParticleCount()).toBe(80)
+  })
+
+  it('returns 20 for low-core devices regardless of screen size', () => {
+    vi.stubGlobal('innerWidth', 1920)
+    Object.defineProperty(navigator, 'hardwareConcurrency', { value: 2, configurable: true })
+    expect(getParticleCount()).toBe(20)
   })
 })
