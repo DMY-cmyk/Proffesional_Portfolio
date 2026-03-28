@@ -39,6 +39,16 @@ interface Particle {
   orbitSpeed: number
   orbitRadius: number
 }
+
+export function throttleHandler<T extends (...args: any[]) => void>(callback: T, intervalMs: number): T {
+  let lastTime = -Infinity
+  return ((...args: any[]) => {
+    const now = performance.now()
+    if (now - lastTime < intervalMs) return
+    lastTime = now
+    callback(...args)
+  }) as T
+}
 
 const PARTICLE_COUNT = 80
 const CONNECTION_DISTANCE = 120
@@ -123,15 +133,19 @@ export function AuroraBackground() {
       canvas!.height = window.innerHeight
       waves = createWaves(canvas!.width, canvas!.height)
       particles = createParticles(canvas!.width, canvas!.height)
+      cachedScrollHeight = document.body.scrollHeight
     }
 
-    const handleMouseMove = (e: MouseEvent) => {
+    let cachedScrollHeight = document.body.scrollHeight
+
+    const handleMouseMove = throttleHandler((e: MouseEvent) => {
       mouseRef.current = { x: e.clientX, y: e.clientY }
-    }
+    }, 16)
 
-    const handleScroll = () => {
+    const handleScroll = throttleHandler(() => {
+      cachedScrollHeight = document.body.scrollHeight
       scrollRef.current = window.scrollY
-    }
+    }, 16)
 
     function draw() {
       const w = canvas!.width
@@ -140,7 +154,7 @@ export function AuroraBackground() {
 
       const t = timeRef.current
       const scrollY = scrollRef.current
-      const maxScroll = Math.max(document.body.scrollHeight - window.innerHeight, 1)
+      const maxScroll = Math.max(cachedScrollHeight - window.innerHeight, 1)
       const scrollProgress = scrollY / maxScroll
 
       ctx!.clearRect(0, 0, w, h)
