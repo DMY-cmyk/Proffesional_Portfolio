@@ -34,20 +34,22 @@ export default async function ResearchDetailPage({ params }: PageProps) {
   }
 
   return (
-    <div className="py-20 px-4">
+    <article className="py-16 px-6">
       <div className="mx-auto max-w-3xl">
         <Link
-          href="/research"
-          className="inline-flex items-center gap-1 text-sm text-muted-foreground hover-gold-accent transition-colors mb-8"
+          href="/"
+          className="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-widest text-subtle hover:text-accent transition-colors"
         >
-          <span aria-hidden="true">←</span> Back to Research
+          ← Back to portfolio
         </Link>
 
-        <h1 className="text-3xl md:text-4xl font-bold text-foreground mt-4">
+        <h1 className="mt-6 font-display text-3xl md:text-4xl font-medium leading-tight tracking-tight text-foreground">
           {research.frontmatter.title}
         </h1>
 
-        <p className="mt-3 text-gold-accent font-medium">{formatDate(research.frontmatter.date)}</p>
+        <p className="mt-3 font-mono text-xs uppercase tracking-widest text-subtle">
+          {formatDate(research.frontmatter.date)}
+        </p>
 
         <div className="mt-4 flex flex-wrap gap-2">
           {research.frontmatter.tags.map((tag) => (
@@ -63,12 +65,10 @@ export default async function ResearchDetailPage({ params }: PageProps) {
           </div>
         )}
 
-        <div className="mt-10 border-t border-border pt-10">
-          <div className="prose dark:prose-invert max-w-none prose-headings:text-foreground prose-p:text-muted-foreground prose-a:text-gold-accent prose-strong:text-foreground">
-            <MDXRemote source={research.content} />
-          </div>
+        <div className="mt-10 border-t border-border pt-10 prose prose-neutral dark:prose-invert max-w-none prose-headings:font-display prose-headings:font-medium prose-a:text-accent prose-strong:text-foreground">
+          <MDXRemote source={research.content} />
         </div>
       </div>
-    </div>
+    </article>
   )
 }
