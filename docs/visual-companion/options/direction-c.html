@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Direction C · Research Journal (Recommended)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --paper:#fbf9f4;--surface:#ffffff;--ink:#0f1419;--muted:#4a5568;--subtle:#718096;--rule:#e6ddd0;
+  --teal:#0d4f5c;--teal-2:#0a3d47;--gold:#b8944a;--gold-soft:#d4b574;
+}
+html{font-family:'Inter',system-ui,sans-serif;background:var(--paper);color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased}
+body{margin:0}
+.serif{font-family:'Newsreader',Georgia,serif}
+.mono{font-family:'JetBrains Mono',ui-monospace,monospace}
+a{color:var(--teal);text-decoration:none}
+a:hover{color:var(--teal-2)}
+.container{max-width:1120px;margin:0 auto;padding:0 32px}
+/* annotation strip at top */
+.annotation{background:var(--ink);color:#f1e9d8;padding:12px 24px;font-family:'JetBrains Mono',monospace;font-size:12px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.annotation a{color:var(--gold-soft);border-bottom:1px dotted var(--gold-soft)}
+.annotation a:hover{color:white}
+/* navbar */
+.navbar{position:sticky;top:0;background:rgba(251,249,244,0.92);backdrop-filter:saturate(180%) blur(14px);-webkit-backdrop-filter:saturate(180%) blur(14px);border-bottom:1px solid var(--rule);z-index:10}
+.navbar .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:16px 0}
+.navbar .brand{font-family:'Newsreader',serif;font-weight:500;font-size:20px;letter-spacing:-0.01em}
+.navbar .brand span{color:var(--gold)}
+.navbar nav ul{list-style:none;display:flex;gap:24px;align-items:center}
+.navbar nav a{font-family:'JetBrains Mono',monospace;font-size:11.5px;text-transform:uppercase;letter-spacing:0.12em;color:var(--ink);font-weight:500}
+.navbar nav a:hover{color:var(--teal)}
+.navbar .cv-btn{display:inline-flex;align-items:center;gap:6px;background:var(--ink);color:white;padding:8px 14px;border-radius:6px;font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;font-weight:500}
+.navbar .cv-btn:hover{background:var(--teal);color:white}
+/* hero */
+.hero{padding:88px 0 72px;border-bottom:1px solid var(--rule)}
+.hero-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:56px;align-items:center}
+@media(max-width:900px){.hero-grid{grid-template-columns:1fr;gap:32px}}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.22em;color:var(--teal);margin-bottom:14px;display:inline-block}
+.hero h1{font-family:'Newsreader',serif;font-size:clamp(44px,5vw,68px);font-weight:500;line-height:1.05;letter-spacing:-0.025em;margin:4px 0 8px;color:var(--ink)}
+.hero h1 em{font-weight:500;font-style:italic;color:var(--gold)}
+.hero .role{font-family:'Newsreader',serif;font-size:22px;font-style:italic;color:var(--muted);font-weight:400;margin-bottom:20px}
+.hero .bio{font-size:17px;line-height:1.7;color:#2d3748;max-width:540px;margin-bottom:24px}
+.status{display:flex;gap:24px;flex-wrap:wrap;padding:16px 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);margin-bottom:24px}
+.status div{font-size:13px}
+.status strong{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.14em;color:var(--subtle);display:block;margin-bottom:4px;font-weight:500}
+.status span{color:var(--ink);font-weight:500}
+.cta-row{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 22px;border-radius:8px;font-size:14px;font-weight:500;font-family:inherit;border:1px solid transparent}
+.btn.primary{background:var(--ink);color:white}
+.btn.primary:hover{background:var(--teal)}
+.btn.secondary{background:transparent;border-color:var(--ink);color:var(--ink)}
+.btn.secondary:hover{background:var(--ink);color:white}
+.hero-avatar{aspect-ratio:4/5;border-radius:8px;background:linear-gradient(160deg,#ddd3c0 0%,#c9bda3 100%);position:relative;overflow:hidden;border:1px solid var(--rule);box-shadow:0 12px 40px -16px rgba(15,20,25,0.15)}
+.hero-avatar::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 30%,rgba(255,255,255,0.4),transparent 50%)}
+.hero-avatar::after{content:'D';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Newsreader',serif;font-size:140px;font-weight:500;color:rgba(15,20,25,0.15)}
+/* section */
+section{padding:72px 0;border-bottom:1px solid var(--rule)}
+section .s-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:40px;border-bottom:1px solid var(--rule);padding-bottom:12px}
+section .s-head h2{font-family:'Newsreader',serif;font-size:34px;font-weight:500;letter-spacing:-0.015em}
+section .s-head .num{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--subtle);letter-spacing:0.12em;text-transform:uppercase}
+/* research section */
+.research-featured{background:white;border:1px solid var(--rule);border-left:3px solid var(--gold);border-radius:4px;padding:40px;margin-bottom:24px;position:relative}
+.research-featured .badge{position:absolute;top:-11px;left:30px;background:var(--gold);color:white;font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.14em;padding:4px 10px;border-radius:2px;font-weight:500}
+.research-featured .meta{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:16px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--subtle);text-transform:uppercase;letter-spacing:0.12em}
+.research-featured h3{font-family:'Newsreader',serif;font-size:28px;font-weight:500;line-height:1.2;margin-bottom:16px;letter-spacing:-0.01em;max-width:760px}
+.research-featured h3 em{color:var(--gold);font-style:italic;font-weight:500}
+.research-featured .abstract{color:#2d3748;font-size:16px;line-height:1.7;margin-bottom:20px;max-width:720px}
+.research-featured .tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.research-featured .read{font-family:'JetBrains Mono',monospace;font-size:12px;text-transform:uppercase;letter-spacing:0.12em;color:var(--teal);font-weight:500;display:inline-flex;align-items:center;gap:6px}
+.tag{display:inline-block;padding:4px 10px;background:var(--paper);border:1px solid var(--rule);border-radius:4px;font-size:12px;color:var(--ink);font-family:'JetBrains Mono',monospace;letter-spacing:0.04em}
+.research-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:700px){.research-grid{grid-template-columns:1fr}}
+.research-card{background:white;border:1px solid var(--rule);border-radius:4px;padding:24px;transition:border-color 0.2s,transform 0.2s}
+.research-card:hover{border-color:var(--teal);transform:translateY(-1px)}
+.research-card .meta{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--subtle);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px}
+.research-card h4{font-family:'Newsreader',serif;font-size:20px;font-weight:500;line-height:1.3;margin-bottom:10px}
+.research-card p{color:var(--muted);font-size:14px;line-height:1.6}
+/* experience timeline */
+.timeline-row{display:grid;grid-template-columns:220px 1fr;gap:40px;padding:28px 0;border-bottom:1px solid var(--rule)}
+.timeline-row:last-child{border-bottom:none}
+@media(max-width:700px){.timeline-row{grid-template-columns:1fr;gap:12px}}
+.t-dates{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--subtle);text-transform:uppercase;letter-spacing:0.08em;padding-top:6px}
+.t-dates .now{color:var(--gold);font-weight:600}
+.t-role{font-family:'Newsreader',serif;font-size:22px;font-weight:500;line-height:1.25;margin-bottom:4px}
+.t-org{font-size:15px;color:var(--muted);margin-bottom:14px}
+.t-org span{color:var(--ink);font-weight:500}
+.t-bullets{list-style:none;padding:0}
+.t-bullets li{position:relative;padding-left:22px;color:#2d3748;font-size:14.5px;line-height:1.65;margin-bottom:8px}
+.t-bullets li::before{content:'';position:absolute;left:2px;top:10px;width:8px;height:1.5px;background:var(--gold)}
+.t-impact{display:inline-block;background:#fef7e0;color:#7a5a0d;font-family:'JetBrains Mono',monospace;font-size:11px;padding:2px 8px;border-radius:3px;margin-left:4px;font-weight:500;letter-spacing:0.04em}
+/* credentials */
+.creds-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+@media(max-width:700px){.creds-grid{grid-template-columns:1fr}}
+.cred-col h3{font-family:'Newsreader',serif;font-size:18px;font-weight:500;margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid var(--rule)}
+.cred-item{padding:12px 0;border-bottom:1px solid var(--rule)}
+.cred-item:last-child{border-bottom:none}
+.cred-item .ci-name{font-weight:500;font-size:15px;color:var(--ink)}
+.cred-item .ci-meta{font-size:13px;color:var(--muted);margin-top:2px}
+.cred-item .ci-id{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--subtle);margin-top:4px}
+/* skills */
+.skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+@media(max-width:700px){.skills-grid{grid-template-columns:1fr}}
+.skill-col h3{font-family:'Newsreader',serif;font-size:18px;font-weight:500;margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid var(--rule)}
+.skill-col .tags{display:flex;gap:8px;flex-wrap:wrap}
+.skill-tag{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;background:white;border:1px solid var(--rule);border-radius:4px;font-size:13px;color:var(--ink);font-weight:500}
+.skill-tag .lv{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--subtle);font-weight:400;text-transform:uppercase;letter-spacing:0.06em}
+/* contact */
+.contact-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:48px;align-items:start}
+@media(max-width:700px){.contact-grid{grid-template-columns:1fr}}
+.contact-grid h2{font-family:'Newsreader',serif;font-size:40px;font-weight:500;letter-spacing:-0.02em;line-height:1.1;margin-bottom:16px}
+.contact-grid p{color:#2d3748;font-size:17px;line-height:1.7;margin-bottom:24px;max-width:440px}
+.contact-list{list-style:none;padding:0}
+.contact-list li{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid var(--rule)}
+.contact-list li:last-child{border-bottom:none}
+.contact-list .lbl{font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.12em;color:var(--subtle);width:72px;flex-shrink:0}
+.contact-list .val{color:var(--ink);font-weight:500;font-size:15px}
+/* footer */
+footer{padding:40px 0;color:var(--subtle);font-size:13px;font-family:'JetBrains Mono',monospace}
+footer .fi{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+/* annotation inline */
+.anno{position:relative}
+.anno::after{content:attr(data-anno);position:absolute;left:calc(100% + 12px);top:0;background:var(--ink);color:var(--gold-soft);font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 8px;border-radius:4px;white-space:nowrap;opacity:0.85}
+@media(max-width:900px){.anno::after{display:none}}
+</style>
+</head>
+<body>
+
+<div class="annotation">
+  <span><strong>Direction C · Research Journal</strong> &nbsp;·&nbsp; Recommended for audience D + E</span>
+  <span><a href="../index.html">← Back to Visual Companion</a> &nbsp;·&nbsp; <a href="direction-a.html">Compare A</a> &nbsp;·&nbsp; <a href="direction-b.html">Compare B</a></span>
+</div>
+
+<header class="navbar">
+  <div class="container nav-inner">
+    <a class="brand" href="#">Dzaki<span>.</span></a>
+    <nav>
+      <ul>
+        <li><a href="#research">Research</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#credentials">Credentials</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a class="cv-btn" href="#">↓ Download CV</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" style="border-bottom:none;padding-bottom:0">
+  <div class="container hero-grid">
+    <div>
+      <span class="eyebrow">Dzaki Muhammad Yusfian</span>
+      <h1>Accounting, tax &amp; <em>sustainability research</em>.</h1>
+      <p class="role">Early-career professional working at the intersection of financial reporting and sustainability disclosure.</p>
+      <div class="status">
+        <div><strong>Now</strong><span>Operations Officer @ Kolosal AI</span></div>
+        <div><strong>Based in</strong><span>Jakarta, Indonesia</span></div>
+        <div><strong>Education</strong><span>B.Acc. · STIE YKPN · Apr 2026</span></div>
+      </div>
+      <p class="bio">Specializing in tax compliance, auditing, and financial analysis — with ongoing research on how sustainability reporting affects firm value in Indonesian manufacturing. Previously a Tax Volunteer at DJP, serving 90+ taxpayers and running community outreach across Bantul Regency.</p>
+      <div class="cta-row">
+        <a class="btn primary" href="#research">Read my research →</a>
+        <a class="btn secondary" href="#">Download CV</a>
+      </div>
+    </div>
+    <div class="hero-avatar"></div>
+  </div>
+</section>
+
+<!-- RESEARCH -->
+<section id="research" style="background:#fefcf6">
+  <div class="container">
+    <div class="s-head">
+      <h2>Research</h2>
+      <span class="num">Section 01</span>
+    </div>
+
+    <div class="research-featured">
+      <span class="badge">Featured · Thesis</span>
+      <div class="meta">
+        <span>Undergraduate Thesis</span>
+        <span>April 2026</span>
+        <span>Advisor · [Name]</span>
+      </div>
+      <h3>The Effect of <em>Sustainability Report Disclosure</em> on Firm Value in the Manufacturing Sector</h3>
+      <p class="abstract">This study examines the relationship between sustainability disclosure quality and firm value among publicly listed Indonesian manufacturers, drawing on GRI Standards and ESG indicators. Using panel data regression across a 5-year window, the research investigates whether investors reward transparency on environmental and social metrics — and under what conditions.</p>
+      <div class="tags">
+        <span class="tag">Sustainability reporting</span>
+        <span class="tag">Firm value</span>
+        <span class="tag">Panel data</span>
+        <span class="tag">GRI Standards</span>
+        <span class="tag">IDX manufacturers</span>
+      </div>
+      <a href="#" class="read">Read full abstract &amp; download PDF →</a>
+    </div>
+
+    <div class="research-grid">
+      <div class="research-card">
+        <div class="meta">Working Paper · 2025</div>
+        <h4>Tax Literacy &amp; Compliance Outcomes: A Field Study of Indonesian SMEs</h4>
+        <p>Analysis of compliance behavior among 90+ taxpayers served during my DJP volunteer tenure — informed by the Patuh Pajak initiative.</p>
+      </div>
+      <div class="research-card">
+        <div class="meta">In progress · 2026</div>
+        <h4>ESG Reporting Quality and Cost of Capital in Emerging Markets</h4>
+        <p>Extending thesis findings to examine whether sustainability disclosure maturity correlates with reduced cost of equity in Southeast Asian manufacturing.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="container">
+    <div class="s-head">
+      <h2>Experience</h2>
+      <span class="num">Section 02</span>
+    </div>
+
+    <div class="timeline-row">
+      <div class="t-dates"><span class="now">MAR 2026 — Present</span></div>
+      <div>
+        <div class="t-role">Operations Officer</div>
+        <div class="t-org"><span>PT. Kolosal Kecerdasan Artifisial</span> · Jakarta, Indonesia</div>
+        <ul class="t-bullets">
+          <li>Leading end-to-end operational workflows across finance, administration, and cross-functional teams.</li>
+          <li>Driving process-improvement and efficiency initiatives to support company scaling.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="timeline-row">
+      <div class="t-dates">DEC 2025 — MAR 2026</div>
+      <div>
+        <div class="t-role">Finance Operation Staff</div>
+        <div class="t-org"><span>PT. Kolosal Kecerdasan Artifisial</span> · Jakarta, Indonesia</div>
+        <ul class="t-bullets">
+          <li>Oversaw daily AP/AR management, invoice processing, and payment/collection workflows.</li>
+          <li>Executed account reconciliations and contributed to month-end closing, including adjusting entries and financial statement preparation.</li>
+          <li>Ensured integrity and completeness of financial records, maintaining high standards of accuracy and compliance.</li>
+          <li>Produced regular financial reports and delivered budget-vs-actual variance analysis to management.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="timeline-row">
+      <div class="t-dates">JAN 2025 — DEC 2025</div>
+      <div>
+        <div class="t-role">Tax Volunteer</div>
+        <div class="t-org"><span>Direktorat Jenderal Pajak (DJP)</span> · Yogyakarta, Indonesia</div>
+        <ul class="t-bullets">
+          <li>Assisted <strong>90+</strong> individual taxpayers and entrepreneurs with accurate filing of SPT PPh 23 returns. <span class="t-impact">↑ 30% on-time submissions</span></li>
+          <li>Led community outreach in Bantul Regency, educating <strong>200+</strong> taxpayers on compliance benefits — contributing to the Patuh Pajak initiative.</li>
+          <li>Designed and promoted tax-literacy content on Instagram &amp; TikTok, simplifying complex concepts for public trust.</li>
+          <li>Pioneered Core Tax system adoption and resolved edge-case tax challenges via consultation.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CREDENTIALS -->
+<section id="credentials" style="background:#fefcf6">
+  <div class="container">
+    <div class="s-head">
+      <h2>Credentials</h2>
+      <span class="num">Section 03</span>
+    </div>
+
+    <div class="creds-grid">
+      <div class="cred-col">
+        <h3>Certifications</h3>
+        <div class="cred-item">
+          <div class="ci-name">Brevet A &amp; B Taxation</div>
+          <div class="ci-meta">IAI — Ikatan Akuntan Indonesia · March 2025</div>
+          <div class="ci-id">Professional certification covering individual &amp; corporate taxation in Indonesia</div>
+        </div>
+      </div>
+      <div class="cred-col">
+        <h3>Training &amp; Courses</h3>
+        <div class="cred-item">
+          <div class="ci-name">Brevet Pajak AB</div>
+          <div class="ci-meta">Fakultas Ekonomika dan Bisnis UGM · October 2025</div>
+          <div class="ci-id">Credential ID · 1113/UN1/EK.RSDI/DL/2025</div>
+        </div>
+        <div class="cred-item">
+          <div class="ci-name">English for Professional Development</div>
+          <div class="ci-meta">Duta Wacana Christian University · June 2023</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container">
+    <div class="s-head">
+      <h2>Skills</h2>
+      <span class="num">Section 04</span>
+    </div>
+
+    <div class="skills-grid">
+      <div class="skill-col">
+        <h3>Technical</h3>
+        <div class="tags">
+          <span class="skill-tag">Financial Reporting <span class="lv">· applied</span></span>
+          <span class="skill-tag">Tax Compliance <span class="lv">· applied</span></span>
+          <span class="skill-tag">Auditing <span class="lv">· coursework</span></span>
+          <span class="skill-tag">Budgeting &amp; Forecasting <span class="lv">· applied</span></span>
+          <span class="skill-tag">Financial Analysis <span class="lv">· applied</span></span>
+          <span class="skill-tag">Account Reconciliation <span class="lv">· applied</span></span>
+        </div>
+      </div>
+      <div class="skill-col">
+        <h3>Tools &amp; Software</h3>
+        <div class="tags">
+          <span class="skill-tag">Microsoft Excel <span class="lv">· daily</span></span>
+          <span class="skill-tag">SAP <span class="lv">· project</span></span>
+          <span class="skill-tag">MYOB <span class="lv">· coursework</span></span>
+          <span class="skill-tag">e-SPT <span class="lv">· DJP</span></span>
+          <span class="skill-tag">SPSS <span class="lv">· research</span></span>
+          <span class="skill-tag">Core Tax <span class="lv">· DJP</span></span>
+        </div>
+      </div>
+      <div class="skill-col">
+        <h3>Research &amp; Soft</h3>
+        <div class="tags">
+          <span class="skill-tag">Panel data regression</span>
+          <span class="skill-tag">Analytical thinking</span>
+          <span class="skill-tag">Attention to detail</span>
+          <span class="skill-tag">Team collaboration</span>
+          <span class="skill-tag">Communication</span>
+          <span class="skill-tag">Time management</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" style="background:#fefcf6">
+  <div class="container contact-grid">
+    <div>
+      <span class="eyebrow">Get in touch</span>
+      <h2>Open to research collaboration, internships, and conversation.</h2>
+      <p>I'm currently open to discussions around tax, audit, and sustainability-reporting research — including graduate program opportunities. The fastest way to reach me is email or LinkedIn.</p>
+      <div class="cta-row">
+        <a class="btn primary" href="mailto:dmy.23022004@gmail.com">Email me</a>
+        <a class="btn secondary" href="https://linkedin.com/in/dzakimyusfian">LinkedIn →</a>
+      </div>
+    </div>
+    <ul class="contact-list">
+      <li><span class="lbl">Email</span><span class="val">dmy.23022004@gmail.com</span></li>
+      <li><span class="lbl">LinkedIn</span><span class="val">/in/dzakimyusfian</span></li>
+      <li><span class="lbl">GitHub</span><span class="val">@DMY-cmyk</span></li>
+      <li><span class="lbl">Location</span><span class="val">Jakarta, Indonesia</span></li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <div class="container fi">
+    <span>© 2026 Dzaki Muhammad Yusfian</span>
+    <span>Built with Next.js · Deployed via GitHub Pages</span>
+  </div>
+</footer>
+
+</body>
+</html>

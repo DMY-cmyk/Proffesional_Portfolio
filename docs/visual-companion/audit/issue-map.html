@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Issue Map</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:wght@400;500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--paper:#fbf9f4;--ink:#0f1419;--muted:#4a5568;--rule:#e6ddd0;--teal:#0d4f5c;--red:#b91c1c;--amber:#b45309;--yellow:#ca8a04;--green:#65a30d}
+html{font-family:'Inter',system-ui,sans-serif;background:var(--paper);color:var(--ink);line-height:1.6}
+body{max-width:1280px;margin:0 auto;padding:48px 32px 80px}
+.serif{font-family:'Newsreader',serif}
+.mono{font-family:'JetBrains Mono',monospace}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.18em;color:var(--teal)}
+h1{font-family:'Newsreader',serif;font-size:44px;font-weight:500;line-height:1.1;margin:12px 0 16px;letter-spacing:-0.02em}
+h2{font-family:'Newsreader',serif;font-size:28px;font-weight:500;margin:40px 0 16px;letter-spacing:-0.01em}
+p{color:var(--muted);max-width:720px;margin-bottom:12px}
+a{color:var(--teal)}
+.backlink{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:12px;margin-bottom:16px;color:var(--muted);text-decoration:none}
+.matrix{display:grid;grid-template-columns:160px repeat(5,1fr);gap:0;border:1px solid var(--rule);border-radius:12px;overflow:hidden;background:white;margin-top:24px}
+.matrix .cell{padding:14px 16px;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);font-size:13px}
+.matrix .cell:nth-child(6n){border-right:none}
+.matrix .cell.head{background:var(--paper);font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.12em;color:var(--muted);font-weight:500}
+.matrix .cell.label{font-weight:600;color:var(--ink);background:#fefcf6}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;vertical-align:middle}
+.dot.crit{background:var(--red)}
+.dot.high{background:var(--amber)}
+.dot.med{background:var(--yellow)}
+.dot.low{background:var(--green)}
+.dot.none{background:#e5e7eb}
+.key{margin:12px 0 24px;display:flex;gap:16px;flex-wrap:wrap}
+.key span{font-size:13px;color:var(--muted)}
+.tag{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.08em;padding:2px 8px;border-radius:4px;background:var(--paper)}
+.section-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin:20px 0}
+.issue-card{background:white;border:1px solid var(--rule);border-radius:10px;padding:18px}
+.issue-card h4{font-family:'Newsreader',serif;font-size:18px;font-weight:500;margin:6px 0 8px}
+.issue-card p{font-size:14px;margin:6px 0}
+.issue-card .sev{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.1em;padding:2px 8px;border-radius:4px;font-weight:500}
+.sev-crit{background:#fef2f2;color:var(--red)}
+.sev-high{background:#fffbeb;color:var(--amber)}
+.sev-med{background:#fefce8;color:var(--yellow)}
+.sev-low{background:#f7fee7;color:#15803d}
+hr{border:none;border-top:1px solid var(--rule);margin:48px 0}
+</style>
+</head>
+<body>
+
+<a class="backlink" href="../index.html">← Visual Companion</a>
+<span class="eyebrow">Audit · Issue Map</span>
+<h1>Issue map by reviewer impact</h1>
+<p>How each issue affects each of the four reviewer types simulated in the HR critique. Red = disqualifying. Green = no impact.</p>
+
+<div class="key">
+  <span><span class="dot crit"></span> Critical / disqualifying</span>
+  <span><span class="dot high"></span> High (reduces trust)</span>
+  <span><span class="dot med"></span> Medium (noticeable)</span>
+  <span><span class="dot low"></span> Low (polish)</span>
+  <span><span class="dot none"></span> No impact</span>
+</div>
+
+<div class="matrix">
+  <div class="cell head">Issue</div>
+  <div class="cell head">Big 4 Audit HR</div>
+  <div class="cell head">Grad School Adm.</div>
+  <div class="cell head">LinkedIn Recruiter</div>
+  <div class="cell head">Corp Finance HM</div>
+  <div class="cell head">Severity</div>
+
+  <div class="cell label">Placeholder research entry</div>
+  <div class="cell"><span class="dot high"></span></div>
+  <div class="cell"><span class="dot crit"></span></div>
+  <div class="cell"><span class="dot med"></span></div>
+  <div class="cell"><span class="dot med"></span></div>
+  <div class="cell"><span class="tag" style="background:#fef2f2;color:var(--red)">Critical</span></div>
+
+  <div class="cell label">Skill % bars</div>
+  <div class="cell"><span class="dot crit"></span></div>
+  <div class="cell"><span class="dot high"></span></div>
+  <div class="cell"><span class="dot high"></span></div>
+  <div class="cell"><span class="dot high"></span></div>
+  <div class="cell"><span class="tag" style="background:#fef2f2;color:var(--red)">Critical</span></div>
+
+  <div class="cell label">Research not on homepage</div>
+  <div class="cell"><span class="dot med"></span></div>
+  <div class="cell"><span class="dot crit"></span></div>
+  <div class="cell"><span class="dot low"></span></div>
+  <div class="cell"><span class="dot low"></span></div>
+  <div class="cell"><span class="tag" style="background:#fef2f2;color:var(--red)">Critical</span></div>
+
+  <div class="cell label">Aurora + cursor + shimmer</div>
+  <div class="cell"><span class="dot high"></span></div>
+  <div class="cell"><span class="dot high"></span></div>
+  <div class="cell"><span class="dot low"></span></div>
+  <div class="cell"><span class="dot med"></span></div>
+  <div class="cell"><span class="tag" style="background:#fffbeb;color:var(--amber)">High</span></div>
+
+  <div class="cell label">Thesis as one bullet</div>
+  <div class="cell"><span class="dot med"></span></div>
+  <div class="cell"><span class="dot crit"></span></div>
+  <div class="cell"><span class="dot low"></span></div>
+  <div class="cell"><span class="dot low"></span></div>
+  <div class="cell"><span class="tag" style="background:#fffbeb;color:var(--amber)">High</span></div>
+
+  <div class="cell label">No hero status line</div>
+  <div class="cell"><span class="dot high"></span></div>
+  <div class="cell"><span class="dot med"></span></div>
+  <div class="cell"><span class="dot high"></span></div>
+  <div class="cell"><span class="dot high"></span></div>
+  <div class="cell"><span class="tag" style="background:#fffbeb;color:var(--amber)">High</span></div>
+
+  <div class="cell label">&quot;See my work&quot; → thin section</div>
+  <div class="cell"><span class="dot med"></span></div>
+  <div class="cell"><span class="dot med"></span></div>
+  <div class="cell"><span class="dot med"></span></div>
+  <div class="cell"><span class="dot med"></span></div>
+  <div class="cell"><span class="tag" style="background:#fefce8;color:var(--yellow)">Medium</span></div>
+
+  <div class="cell label">Thin grids (1 cert, 0 awards)</div>
+  <div class="cell"><span class="dot med"></span></div>
+  <div class="cell"><span class="dot med"></span></div>
+  <div class="cell"><span class="dot low"></span></div>
+  <div class="cell"><span class="dot med"></span></div>
+  <div class="cell"><span class="tag" style="background:#fefce8;color:var(--yellow)">Medium</span></div>
+
+  <div class="cell label">Personal socials (IG, TikTok)</div>
+  <div class="cell"><span class="dot med"></span></div>
+  <div class="cell"><span class="dot med"></span></div>
+  <div class="cell"><span class="dot none"></span></div>
+  <div class="cell"><span class="dot low"></span></div>
+  <div class="cell"><span class="tag" style="background:#fefce8;color:var(--yellow)">Medium</span></div>
+
+  <div class="cell label">Italic-only serif display</div>
+  <div class="cell"><span class="dot low"></span></div>
+  <div class="cell"><span class="dot low"></span></div>
+  <div class="cell"><span class="dot none"></span></div>
+  <div class="cell"><span class="dot low"></span></div>
+  <div class="cell"><span class="tag" style="background:#f7fee7;color:#15803d">Low</span></div>
+
+  <div class="cell label">No CV download in navbar</div>
+  <div class="cell"><span class="dot high"></span></div>
+  <div class="cell"><span class="dot med"></span></div>
+  <div class="cell"><span class="dot med"></span></div>
+  <div class="cell"><span class="dot high"></span></div>
+  <div class="cell"><span class="tag" style="background:#fffbeb;color:var(--amber)">High</span></div>
+
+</div>
+
+<hr>
+
+<h2>Top-3 fixes with disproportionate impact</h2>
+<p>If only three changes could ship, these recover the most credibility:</p>
+
+<div class="section-grid">
+  <div class="issue-card">
+    <span class="sev sev-crit">#1 Critical</span>
+    <h4>Replace the placeholder research entry</h4>
+    <p>Zero design cost. Immediate disqualifier removed. Has to happen before ANY redesign ships.</p>
+  </div>
+  <div class="issue-card">
+    <span class="sev sev-crit">#2 Critical</span>
+    <h4>Research → homepage feature</h4>
+    <p>Adds a dedicated Research section to the homepage with thesis as a featured card. Rebalances information hierarchy for audience D.</p>
+  </div>
+  <div class="issue-card">
+    <span class="sev sev-crit">#3 Critical</span>
+    <h4>Kill skill percentages</h4>
+    <p>Replace bars with categorized tag clouds + proof (years, where, outcome). Universally improves credibility across all reviewer types.</p>
+  </div>
+</div>
+
+<hr>
+
+<h2>Where the redesigns respond</h2>
+<p>Each direction file addresses the full issue list. They differ in <em>aesthetic response</em>, not <em>issue coverage</em>.</p>
+
+<p><a href="../options/direction-c.html">→ Open Direction C (recommended)</a> &nbsp;·&nbsp; <a href="../options/direction-a.html">A</a> &nbsp;·&nbsp; <a href="../options/direction-b.html">B</a></p>
+
+<hr>
+<p><a href="../index.html">← Back to Visual Companion</a></p>
+
+</body>
+</html>

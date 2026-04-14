@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Direction A · Editorial Scholar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --paper:#f8f5ef;--surface:#fbf9f4;--ink:#1a1a1a;--muted:#544c43;--subtle:#86796b;--rule:#d8d2c8;
+  --burgundy:#7a1f3d;--burgundy-dk:#521428;
+}
+html{font-family:'Inter',system-ui,sans-serif;background:var(--paper);color:var(--ink);line-height:1.7;-webkit-font-smoothing:antialiased}
+body{margin:0}
+.serif{font-family:'Fraunces',Georgia,serif}
+.mono{font-family:'JetBrains Mono',monospace}
+a{color:var(--burgundy);text-decoration:none}
+a:hover{text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px}
+.container{max-width:960px;margin:0 auto;padding:0 32px}
+.annotation{background:var(--ink);color:#f1e9d8;padding:12px 24px;font-family:'JetBrains Mono',monospace;font-size:12px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.annotation a{color:#d4b574;border-bottom:1px dotted #d4b574}
+.navbar{border-bottom:1px solid var(--rule)}
+.navbar .inner{display:flex;align-items:center;justify-content:space-between;padding:20px 0}
+.navbar .brand{font-family:'Fraunces',serif;font-weight:500;font-size:22px;letter-spacing:-0.01em}
+.navbar nav ul{list-style:none;display:flex;gap:28px;align-items:center}
+.navbar nav a{font-family:'Fraunces',serif;font-size:15px;font-style:italic;color:var(--ink);font-weight:400}
+.navbar .cv-btn{font-family:'Fraunces',serif;font-style:italic;border:1px solid var(--ink);padding:6px 14px;border-radius:999px;font-size:14px}
+/* HERO - magazine cover style */
+.hero{padding:80px 0 60px;border-bottom:2px solid var(--ink)}
+.hero-grid{display:grid;grid-template-columns:220px 1fr;gap:48px;align-items:start}
+@media(max-width:760px){.hero-grid{grid-template-columns:1fr}}
+.hero-portrait{width:200px;height:220px;border-radius:50% 50% 50% 50% / 60% 60% 40% 40%;background:linear-gradient(155deg,#d8ccb5,#b5a68a);overflow:hidden;position:relative;box-shadow:0 8px 24px -10px rgba(26,26,26,0.2)}
+.hero-portrait::after{content:'D';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-size:110px;font-weight:500;color:rgba(26,26,26,0.2);font-style:italic}
+.issue-num{font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.2em;color:var(--burgundy);display:block;margin-bottom:16px}
+.hero h1{font-family:'Fraunces',serif;font-size:clamp(40px,5.5vw,68px);font-weight:500;line-height:1.02;letter-spacing:-0.02em;margin-bottom:14px;color:var(--ink)}
+.hero h1 em{font-style:italic;color:var(--burgundy)}
+.hero .kicker{font-family:'Fraunces',serif;font-style:italic;font-size:24px;font-weight:400;color:var(--muted);line-height:1.4;margin-bottom:24px;max-width:640px}
+.byline{display:flex;gap:24px;flex-wrap:wrap;padding-top:16px;border-top:1px solid var(--rule);font-size:14px;color:var(--muted);margin-bottom:20px}
+.byline strong{color:var(--ink);font-weight:600}
+.dek{font-size:18px;line-height:1.75;color:#2d2d2d;max-width:640px;font-family:'Fraunces',serif;font-weight:400}
+.dek::first-letter{font-family:'Fraunces',serif;font-size:56px;font-weight:500;float:left;line-height:0.9;padding:6px 10px 0 0;color:var(--burgundy)}
+.hero-ctas{margin-top:32px;display:flex;gap:18px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:12px 22px;border-radius:999px;font-family:'Fraunces',serif;font-size:15px;font-style:italic;border:1px solid transparent;font-weight:500}
+.btn.primary{background:var(--ink);color:white}
+.btn.secondary{border-color:var(--ink);color:var(--ink)}
+/* SECTIONS */
+section{padding:72px 0;border-bottom:1px solid var(--rule)}
+.s-rule{display:flex;align-items:baseline;gap:16px;margin-bottom:40px}
+.s-rule::before{content:'§';font-family:'Fraunces',serif;font-style:italic;font-size:40px;color:var(--burgundy);line-height:1;font-weight:400}
+.s-rule h2{font-family:'Fraunces',serif;font-size:42px;font-weight:500;letter-spacing:-0.015em}
+.s-rule .num{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--subtle);letter-spacing:0.12em;text-transform:uppercase}
+/* RESEARCH - magazine feature */
+.feature-article{position:relative;padding:32px 0}
+.feature-label{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--burgundy);margin-bottom:12px}
+.feature-article h3{font-family:'Fraunces',serif;font-size:44px;font-weight:500;line-height:1.05;margin-bottom:16px;letter-spacing:-0.02em;max-width:780px}
+.feature-article h3 em{font-style:italic;color:var(--burgundy)}
+.feature-article .byline-small{font-family:'Fraunces',serif;font-style:italic;color:var(--muted);font-size:16px;margin-bottom:24px}
+.feature-article .abstract{column-count:2;column-gap:40px;font-size:17px;line-height:1.75;color:#2d2d2d;font-family:'Fraunces',serif;font-weight:400;margin-bottom:24px}
+@media(max-width:700px){.feature-article .abstract{column-count:1}}
+.feature-article .pull{font-family:'Fraunces',serif;font-size:24px;font-style:italic;font-weight:500;color:var(--burgundy);border-left:3px solid var(--burgundy);padding:12px 20px;margin:24px 0;max-width:560px;line-height:1.35}
+.tags{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+.tag{font-family:'Fraunces',serif;font-style:italic;font-size:13px;color:var(--muted);padding:3px 10px;border:1px solid var(--rule);border-radius:2px}
+.research-secondary{margin-top:48px;display:grid;grid-template-columns:1fr 1fr;gap:40px}
+@media(max-width:700px){.research-secondary{grid-template-columns:1fr}}
+.research-secondary article{border-top:1px solid var(--rule);padding-top:16px}
+.research-secondary .lbl{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.14em;color:var(--subtle);margin-bottom:8px}
+.research-secondary h4{font-family:'Fraunces',serif;font-size:22px;font-weight:500;line-height:1.25;margin-bottom:10px}
+.research-secondary p{font-size:15px;line-height:1.65;color:var(--muted)}
+/* TIMELINE - vertical rule with dates in margin */
+.cv-row{display:grid;grid-template-columns:200px 1fr;gap:40px;padding:28px 0;border-bottom:1px dotted var(--rule)}
+.cv-row:last-child{border-bottom:none}
+@media(max-width:700px){.cv-row{grid-template-columns:1fr;gap:8px}}
+.cv-dates{font-family:'Fraunces',serif;font-style:italic;font-size:15px;color:var(--muted);padding-top:4px}
+.cv-dates .now{color:var(--burgundy);font-weight:500}
+.cv-role{font-family:'Fraunces',serif;font-size:24px;font-weight:500;line-height:1.2}
+.cv-org{font-size:15px;color:var(--muted);font-style:italic;font-family:'Fraunces',serif;margin-bottom:14px}
+.cv-bullets{list-style:none;padding:0}
+.cv-bullets li{font-size:15px;line-height:1.65;color:#2d2d2d;margin-bottom:8px;padding-left:16px;position:relative}
+.cv-bullets li::before{content:'—';position:absolute;left:-4px;color:var(--burgundy)}
+/* CREDENTIALS */
+.creds{display:grid;grid-template-columns:1fr 1fr;gap:48px}
+@media(max-width:700px){.creds{grid-template-columns:1fr}}
+.cred-col h3{font-family:'Fraunces',serif;font-size:22px;font-weight:500;margin-bottom:14px;font-style:italic;color:var(--burgundy)}
+.cred-item{padding:14px 0;border-bottom:1px solid var(--rule)}
+.cred-item:last-child{border-bottom:none}
+.cred-item .name{font-family:'Fraunces',serif;font-size:18px;font-weight:500}
+.cred-item .by{font-size:14px;color:var(--muted);font-style:italic}
+.cred-item .id{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--subtle);margin-top:4px}
+/* SKILLS - inline prose */
+.skills-prose{font-family:'Fraunces',serif;font-size:19px;line-height:1.85;color:#2d2d2d;max-width:720px}
+.skills-prose strong{color:var(--burgundy);font-weight:500}
+.skills-prose em{color:var(--muted)}
+.skills-prose p{margin-bottom:18px}
+/* CONTACT */
+.contact-grid{display:grid;grid-template-columns:1fr 380px;gap:48px;align-items:start}
+@media(max-width:760px){.contact-grid{grid-template-columns:1fr}}
+.contact-grid h2{font-family:'Fraunces',serif;font-size:48px;font-weight:500;letter-spacing:-0.02em;line-height:1.05;margin-bottom:16px}
+.contact-grid h2 em{font-style:italic;color:var(--burgundy)}
+.contact-grid p{font-family:'Fraunces',serif;font-size:18px;line-height:1.7;color:#2d2d2d;margin-bottom:24px;max-width:480px}
+.contact-list{list-style:none;padding:0;border-top:2px solid var(--ink)}
+.contact-list li{display:flex;padding:14px 0;border-bottom:1px solid var(--rule)}
+.contact-list .lbl{font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.14em;color:var(--subtle);width:100px;flex-shrink:0}
+.contact-list .val{font-family:'Fraunces',serif;font-size:17px;color:var(--ink)}
+/* FOOTER */
+footer{padding:36px 0;color:var(--subtle);font-size:13px;font-family:'Fraunces',serif;font-style:italic;border-top:2px solid var(--ink)}
+footer .fi{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;max-width:960px;margin:0 auto;padding:0 32px}
+</style>
+</head>
+<body>
+
+<div class="annotation">
+  <span><strong>Direction A · Editorial Scholar</strong> &nbsp;·&nbsp; Leans into audience D (academic)</span>
+  <span><a href="../index.html">← Back</a> &nbsp;·&nbsp; <a href="direction-c.html">See C (recommended)</a> &nbsp;·&nbsp; <a href="direction-b.html">Compare B</a></span>
+</div>
+
+<header class="navbar">
+  <div class="container inner">
+    <span class="brand">Dzaki M. Yusfian</span>
+    <nav>
+      <ul>
+        <li><a href="#research">Research</a></li>
+        <li><a href="#cv">CV</a></li>
+        <li><a href="#credentials">Credentials</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a class="cv-btn" href="#">Download CV</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO: MAGAZINE COVER -->
+<section class="hero" style="border-bottom:2px solid var(--ink)">
+  <div class="container hero-grid">
+    <div class="hero-portrait"></div>
+    <div>
+      <span class="issue-num">Vol. I · Issue 2026 · Bantul / Jakarta</span>
+      <h1>Accounting, tax, and <em>sustainability</em>.</h1>
+      <p class="kicker">Essays, research, and practice notes from an early-career accounting professional working on sustainability disclosure and firm value.</p>
+      <div class="byline">
+        <span><strong>Status</strong> · Operations Officer @ Kolosal AI</span>
+        <span><strong>Reading</strong> · GRI Standards, ESG disclosure</span>
+        <span><strong>Degree</strong> · B.Acc. STIE YKPN (2026)</span>
+      </div>
+      <p class="dek">Dzaki Muhammad Yusfian is an accounting and finance professional based in Jakarta, Indonesia. His undergraduate thesis examines the effect of sustainability report disclosure on firm value in the Indonesian manufacturing sector — research conducted alongside a year of field work as a Tax Volunteer at the Directorate General of Taxes, where he served 90+ taxpayers and led literacy outreach to 200+ more.</p>
+      <div class="hero-ctas">
+        <a class="btn primary" href="#research">Read the thesis</a>
+        <a class="btn secondary" href="#">Download CV</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESEARCH FEATURE -->
+<section id="research">
+  <div class="container">
+    <div class="s-rule"><h2>Research</h2><span class="num">Section One</span></div>
+
+    <article class="feature-article">
+      <div class="feature-label">Featured Thesis · April 2026</div>
+      <h3>The Effect of <em>Sustainability Report Disclosure</em> on Firm Value in the Manufacturing Sector</h3>
+      <div class="byline-small">By Dzaki M. Yusfian — undergraduate thesis, STIE YKPN Business School. Panel data across five fiscal years; Indonesian manufacturers listed on IDX.</div>
+
+      <div class="abstract">
+        <p>Sustainability reporting has moved from voluntary disclosure toward institutional expectation, yet the question of whether investors actually price sustainability information remains contested in emerging markets. This thesis asks: does the quality — not merely the presence — of sustainability disclosure affect firm value among Indonesian manufacturers?</p>
+        <p>Drawing on GRI Standards as the disclosure reference and combining Tobin's Q with market-to-book ratios as firm-value proxies, the study tests the relationship across a panel of manufacturing firms, controlling for leverage, size, and profitability. Findings inform how Indonesian regulators, standard-setters, and investors should read the growing corpus of sustainability reports.</p>
+      </div>
+
+      <blockquote class="pull">&ldquo;The quality of disclosure, not its presence, drives the relationship with firm value.&rdquo;</blockquote>
+
+      <div class="tags">
+        <span class="tag">Sustainability reporting</span>
+        <span class="tag">Firm value</span>
+        <span class="tag">Panel data</span>
+        <span class="tag">GRI Standards</span>
+        <span class="tag">IDX manufacturers</span>
+      </div>
+    </article>
+
+    <div class="research-secondary">
+      <article>
+        <div class="lbl">Working Paper · 2025</div>
+        <h4>Tax Literacy &amp; Compliance Outcomes: A Field Study</h4>
+        <p>Analysis of compliance behaviour among 90+ taxpayers served during field work at DJP — informed by the Patuh Pajak initiative and Core Tax system adoption.</p>
+      </article>
+      <article>
+        <div class="lbl">In progress · 2026</div>
+        <h4>ESG Reporting Quality and Cost of Capital</h4>
+        <p>Extending the thesis findings to examine whether sustainability disclosure maturity correlates with reduced cost of equity across Southeast Asian manufacturing.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- CV -->
+<section id="cv">
+  <div class="container">
+    <div class="s-rule"><h2>Curriculum Vitae</h2><span class="num">Section Two</span></div>
+
+    <div class="cv-row">
+      <div class="cv-dates"><span class="now">March 2026 — present</span></div>
+      <div>
+        <div class="cv-role">Operations Officer</div>
+        <div class="cv-org">PT. Kolosal Kecerdasan Artifisial · Jakarta</div>
+        <ul class="cv-bullets">
+          <li>Leading end-to-end operational workflows across finance, administration, and cross-functional teams.</li>
+          <li>Driving process improvements and operational efficiency initiatives to support company scaling.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="cv-row">
+      <div class="cv-dates">December 2025 — March 2026</div>
+      <div>
+        <div class="cv-role">Finance Operation Staff</div>
+        <div class="cv-org">PT. Kolosal Kecerdasan Artifisial · Jakarta</div>
+        <ul class="cv-bullets">
+          <li>Oversaw daily AP/AR management, invoice processing, and payment/collection activities.</li>
+          <li>Executed account reconciliations and contributed to month-end financial closing.</li>
+          <li>Produced regular financial reports and budget-vs-actual variance analysis to support management.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="cv-row">
+      <div class="cv-dates">January — December 2025</div>
+      <div>
+        <div class="cv-role">Tax Volunteer</div>
+        <div class="cv-org">Direktorat Jenderal Pajak (DJP) · Yogyakarta</div>
+        <ul class="cv-bullets">
+          <li>Assisted 90+ individual taxpayers with SPT PPh 23 filing — increasing on-time submissions by 30%.</li>
+          <li>Led community outreach across Bantul Regency; educated 200+ taxpayers as part of the Patuh Pajak initiative.</li>
+          <li>Designed tax-literacy content for Instagram and TikTok, translating compliance concepts for public audiences.</li>
+          <li>Pioneered Core Tax system adoption and resolved edge-case consultation challenges.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="cv-row">
+      <div class="cv-dates">September 2022 — April 2026</div>
+      <div>
+        <div class="cv-role">Bachelor of Accounting</div>
+        <div class="cv-org">STIE YKPN Business School Yogyakarta</div>
+        <ul class="cv-bullets">
+          <li>Focus: taxation, auditing, and financial reporting.</li>
+          <li>Thesis: see Research section.</li>
+          <li>Active in academic research and student organizations.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CREDENTIALS -->
+<section id="credentials">
+  <div class="container">
+    <div class="s-rule"><h2>Credentials</h2><span class="num">Section Three</span></div>
+    <div class="creds">
+      <div class="cred-col">
+        <h3>Certifications</h3>
+        <div class="cred-item">
+          <div class="name">Brevet A &amp; B Taxation</div>
+          <div class="by">Ikatan Akuntan Indonesia (IAI) — March 2025</div>
+          <div class="id">Professional certification · individual &amp; corporate taxation</div>
+        </div>
+      </div>
+      <div class="cred-col">
+        <h3>Training</h3>
+        <div class="cred-item">
+          <div class="name">Brevet Pajak AB</div>
+          <div class="by">FEB Universitas Gadjah Mada — October 2025</div>
+          <div class="id">ID · 1113/UN1/EK.RSDI/DL/2025</div>
+        </div>
+        <div class="cred-item">
+          <div class="name">English for Professional Development</div>
+          <div class="by">Duta Wacana Christian University — June 2023</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS - prose -->
+<section id="skills">
+  <div class="container">
+    <div class="s-rule"><h2>On practice</h2><span class="num">Section Four</span></div>
+    <div class="skills-prose">
+      <p>I work in <strong>financial reporting</strong>, <strong>tax compliance</strong>, and <strong>audit</strong>, with daily tools across <strong>Excel</strong>, <strong>SAP</strong>, <strong>MYOB</strong>, <strong>e-SPT</strong>, and the DJP <strong>Core Tax</strong> system. Academic research uses <strong>SPSS</strong> and <strong>panel data regression</strong>.</p>
+      <p>Process work I care about: month-end close, reconciliation, variance analysis, budget-vs-actual narrative, and the slow work of getting controls right. <em>I'd rather reconcile to the rupiah than guess to the million.</em></p>
+      <p>For research I focus on <strong>sustainability reporting quality</strong>, <strong>firm value</strong>, and the behavioural economics of <strong>tax compliance</strong> in emerging markets.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" style="border-bottom:2px solid var(--ink)">
+  <div class="container contact-grid">
+    <div>
+      <h2>Let's <em>correspond</em>.</h2>
+      <p>Open to research collaboration, internships, and conversations on sustainability reporting, tax, and audit — including graduate program discussions. Email is fastest.</p>
+      <div class="hero-ctas">
+        <a class="btn primary" href="mailto:dmy.23022004@gmail.com">Write to me</a>
+        <a class="btn secondary" href="https://linkedin.com/in/dzakimyusfian">LinkedIn</a>
+      </div>
+    </div>
+    <ul class="contact-list">
+      <li><span class="lbl">Email</span><span class="val">dmy.23022004@gmail.com</span></li>
+      <li><span class="lbl">LinkedIn</span><span class="val">/in/dzakimyusfian</span></li>
+      <li><span class="lbl">GitHub</span><span class="val">@DMY-cmyk</span></li>
+      <li><span class="lbl">Location</span><span class="val">Jakarta, Indonesia</span></li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <div class="fi">
+    <span>© 2026 Dzaki Muhammad Yusfian — all rights reserved</span>
+    <span>Volume I · Issue 2026</span>
+  </div>
+</footer>
+
+</body>
+</html>
