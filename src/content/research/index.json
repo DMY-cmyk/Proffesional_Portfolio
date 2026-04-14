@@ -1,10 +1,11 @@
 [
   {
-    "title": "Placeholder Research Paper Title",
-    "slug": "placeholder-research",
-    "abstract": "This is a placeholder abstract for a research paper exploring financial topics.",
-    "tags": ["accounting", "taxation"],
-    "date": "2025-06",
-    "pdfPath": "/files/research/placeholder-research.pdf"
+    "title": "The Effect of Sustainability Report Disclosure on Firm Value in the Manufacturing Sector",
+    "slug": "sustainability-reporting-firm-value",
+    "abstract": "This study examines whether the quality of sustainability disclosure — not merely its presence — affects firm value among publicly listed Indonesian manufacturers. Using panel data across a five-year window and GRI Standards as the disclosure reference, the research tests the relationship between disclosure quality and firm value (Tobin's Q and market-to-book), controlling for leverage, size, and profitability. Findings inform how Indonesian regulators, standard-setters, and investors should read the growing corpus of sustainability reports.",
+    "tags": ["sustainability reporting", "firm value", "panel data", "GRI Standards", "IDX manufacturers"],
+    "date": "2026-04",
+    "type": "thesis",
+    "featured": true
   }
 ]
