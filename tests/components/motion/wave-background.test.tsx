@@ -19,4 +19,15 @@ describe('WaveBackground', () => {
     expect(canvas?.className).toMatch(/fixed/)
     expect(canvas?.className).toMatch(/pointer-events-none/)
   })
+
+  it('does not call requestAnimationFrame when reduced-motion is true', async () => {
+    vi.resetModules()
+    vi.doMock('@/hooks/use-reduced-motion', () => ({ useReducedMotion: () => true }))
+    const rafSpy = vi.spyOn(window, 'requestAnimationFrame')
+    const mod = await import('@/components/motion/wave-background')
+    render(<mod.WaveBackground />)
+    expect(rafSpy).not.toHaveBeenCalled()
+    rafSpy.mockRestore()
+    vi.doUnmock('@/hooks/use-reduced-motion')
+  })
 })
