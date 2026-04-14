@@ -21,7 +21,9 @@ describe('ResearchPage', () => {
 
   it('renders research entry cards', () => {
     render(<ResearchPage />)
-    expect(screen.getByText(/placeholder research/i)).toBeInTheDocument()
+    expect(
+      screen.getByRole('heading', { level: 3, name: /sustainability report disclosure/i })
+    ).toBeInTheDocument()
   })
 
   it('renders links to individual research pages', () => {
