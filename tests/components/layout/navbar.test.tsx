@@ -30,7 +30,7 @@ describe('Navbar', () => {
         <Navbar />
       </ThemeProvider>
     )
-    expect(screen.getByText('DM')).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: /dzaki muhammad yusfian/i })).toBeInTheDocument()
   })
 
   it('renders navigation links', () => {
@@ -69,5 +69,15 @@ describe('Navbar', () => {
     )
     const header = container.querySelector('header')
     expect(header?.className).toContain('rounded-2xl')
+  })
+
+  it('renders a persistent Download CV link', () => {
+    render(
+      <ThemeProvider>
+        <Navbar />
+      </ThemeProvider>
+    )
+    const cv = screen.getByRole('link', { name: /download cv/i })
+    expect(cv.getAttribute('href')).toMatch(/\/files\/cv\//)
   })
 })
