@@ -117,3 +117,31 @@ describe('getResearchEntries', () => {
     expect(entries[0].title).toBeTruthy()
   })
 })
+
+describe('content shape — redesign additions', () => {
+  it('contact exposes professional + personal groups', () => {
+    const contact = getContact()
+    expect(contact.professional.email).toMatch(/@/)
+    expect(contact.professional.linkedin).toMatch(/linkedin/)
+    expect(contact.professional.github).toMatch(/github/)
+    expect(contact.professional.location).toBeTruthy()
+    expect(contact.personal?.instagram).toMatch(/instagram/)
+    expect(contact.personal?.tiktok).toMatch(/tiktok/)
+  })
+
+  it('profile exposes headline + positioning + statusLine', () => {
+    const profile = getProfile()
+    expect(profile.headline?.plain).toBeTruthy()
+    expect(profile.headline?.emphasis).toBeTruthy()
+    expect(profile.positioning).toBeTruthy()
+    expect(profile.statusLine?.now).toBeTruthy()
+    expect(profile.statusLine?.basedIn).toBeTruthy()
+    expect(profile.statusLine?.education).toBeTruthy()
+  })
+
+  it('thesis research entry is marked featured with type thesis', () => {
+    const [thesis] = getResearchEntries()
+    expect(thesis.type).toBe('thesis')
+    expect(thesis.featured).toBe(true)
+  })
+})

@@ -5,6 +5,20 @@ export interface Profile {
   bio: string
   brandStatement: string
   avatar: string
+  /** Tokenized headline so we can italicize/tint one phrase without embedding HTML in JSON. */
+  headline?: {
+    plain: string
+    emphasis: string
+    suffix: string
+  }
+  /** Single-sentence positioning line under the H1. */
+  positioning?: string
+  /** Three-part status ribbon in the hero. */
+  statusLine?: {
+    now: string
+    basedIn: string
+    education: string
+  }
 }
 
 export interface EducationEntry {
@@ -38,7 +52,10 @@ export interface CertificationEntry {
 
 export interface SkillItem {
   name: string
-  level: number
+  /** @deprecated Use `context` instead. Still present on disk for one release; not rendered. */
+  level?: number
+  /** E.g. "applied", "coursework", "daily", "research", "DJP". */
+  context?: string
 }
 
 export interface SkillCategory {
@@ -58,14 +75,25 @@ export interface CourseEntry {
   provider: string
   date: string
   certificateUrl?: string
+  credentialId?: string
 }
 
-export interface ContactInfo {
+export interface ProfessionalContact {
   email: string
   linkedin: string
   github: string
+  location: string
+}
+
+export interface PersonalContact {
   instagram?: string
   tiktok?: string
+  note?: string
+}
+
+export interface ContactInfo {
+  professional: ProfessionalContact
+  personal?: PersonalContact
 }
 
 export interface DownloadItem {
@@ -87,6 +115,13 @@ export interface SiteConfig {
   locale: string
 }
 
+export type ResearchType =
+  | 'thesis'
+  | 'working-paper'
+  | 'in-progress'
+  | 'presentation'
+  | 'published'
+
 export interface ResearchEntry {
   title: string
   slug: string
@@ -94,4 +129,8 @@ export interface ResearchEntry {
   tags: string[]
   date: string
   pdfPath?: string
+  type?: ResearchType
+  featured?: boolean
+  venue?: string
+  advisor?: string
 }
