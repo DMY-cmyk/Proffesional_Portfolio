@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Background motion — v2 (clearly visible)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:wght@400;500;600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--paper:#fbf9f4;--ink:#0f1419;--muted:#4a5568;--rule:#e6ddd0;--teal:#0d4f5c;--teal-dk:#0a3d47;--gold:#b8944a}
+html,body{background:#1a1a1a;color:#eee;font-family:'Inter',system-ui,sans-serif;min-height:100vh}
+body{padding:32px}
+.shell{max-width:1320px;margin:0 auto}
+h1{font-family:'Newsreader',serif;font-weight:500;font-size:34px;margin-bottom:8px;color:#f5f5f5;letter-spacing:-0.01em}
+.sub{color:#bbb;font-size:15px;margin-bottom:28px;line-height:1.65;max-width:900px}
+.sub a{color:#fbbf24;text-decoration:none;border-bottom:1px dotted #fbbf24}
+.sub strong{color:#fff}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media(max-width:1100px){.grid{grid-template-columns:1fr}}
+.card{border-radius:14px;overflow:hidden;background:#0f0f0f;border:1px solid #2a2a2a;box-shadow:0 20px 40px -20px rgba(0,0,0,0.6)}
+.card .head{padding:18px 20px 14px;border-bottom:1px solid #2a2a2a}
+.card .tag{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.18em;color:#fbbf24;font-weight:500}
+.card h2{font-family:'Newsreader',serif;font-size:22px;font-weight:500;margin:6px 0 4px;color:#f5f5f5}
+.card .desc{font-size:13px;color:#aaa;line-height:1.6}
+.stage{position:relative;height:420px;background:var(--paper);overflow:hidden}
+.content{position:relative;z-index:5;padding:40px 28px;color:var(--ink);pointer-events:none}
+.content .eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.22em;color:var(--teal);font-weight:500}
+.content h3{font-family:'Newsreader',serif;font-size:28px;font-weight:500;line-height:1.08;margin:10px 0 10px;letter-spacing:-0.018em;max-width:280px}
+.content h3 em{font-style:italic;color:var(--gold);font-weight:500}
+.content p{font-size:13px;color:var(--muted);line-height:1.6;max-width:280px}
+.pick{display:flex;justify-content:space-between;padding:14px 20px;border-top:1px solid #2a2a2a;font-family:'JetBrains Mono',monospace;font-size:11px;color:#999;text-transform:uppercase;letter-spacing:0.1em}
+.pick strong{color:#fff}
+
+/* ────────────── OPTION 1: Particle Network ────────────── */
+.canvasP{position:absolute;inset:0;z-index:1}
+
+/* ────────────── OPTION 2: Flowing data lines (SVG) ────────────── */
+.svg-waves{position:absolute;inset:0;z-index:1;width:100%;height:100%}
+.wave{fill:none;stroke-width:1.5}
+.wave.w1{stroke:rgba(13,79,92,0.55);stroke-width:2;animation:wshift1 12s ease-in-out infinite alternate}
+.wave.w2{stroke:rgba(13,79,92,0.35);animation:wshift2 16s ease-in-out infinite alternate}
+.wave.w3{stroke:rgba(184,148,74,0.6);stroke-width:1.8;animation:wshift3 14s ease-in-out infinite alternate}
+.wave.w4{stroke:rgba(15,20,25,0.22);animation:wshift4 18s ease-in-out infinite alternate}
+@keyframes wshift1{0%{transform:translateY(0)}100%{transform:translateY(14px)}}
+@keyframes wshift2{0%{transform:translateY(0)}100%{transform:translateY(-18px)}}
+@keyframes wshift3{0%{transform:translateY(0)}100%{transform:translateY(10px)}}
+@keyframes wshift4{0%{transform:translateY(0)}100%{transform:translateY(-12px)}}
+.dots-overlay{position:absolute;inset:0;z-index:2;pointer-events:none}
+.tick{fill:var(--teal);opacity:0.8}
+
+/* ────────────── OPTION 3: Orbital geometry ────────────── */
+.orbit-wrap{position:absolute;inset:0;z-index:1;pointer-events:none}
+.orbit{
+  position:absolute;top:50%;left:60%;transform:translate(-50%,-50%);
+  width:320px;height:320px;
+}
+.ring{
+  position:absolute;inset:0;border-radius:50%;
+  border:1px solid var(--teal);
+  opacity:0.55;
+  animation:rspin 40s linear infinite;
+}
+.ring.r2{inset:16%;border-color:rgba(13,79,92,0.4);animation-duration:30s;animation-direction:reverse}
+.ring.r3{inset:30%;border-color:rgba(184,148,74,0.65);border-width:1.2px;animation-duration:22s}
+.ring.r4{inset:44%;border-color:rgba(13,79,92,0.35);animation-duration:18s;animation-direction:reverse}
+.marker{
+  position:absolute;width:8px;height:8px;border-radius:50%;
+  background:var(--teal);
+  box-shadow:0 0 0 3px rgba(13,79,92,0.15);
+}
+.marker.m1{top:-4px;left:50%;transform:translateX(-50%)}
+.marker.m2{top:50%;right:-4px;transform:translateY(-50%);background:var(--gold);box-shadow:0 0 0 3px rgba(184,148,74,0.2)}
+.marker.m3{bottom:-4px;left:30%;background:var(--ink);opacity:0.6;width:5px;height:5px}
+@keyframes rspin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+.dotgrid{
+  position:absolute;inset:0;z-index:0;pointer-events:none;
+  background-image:radial-gradient(circle,rgba(13,79,92,0.22) 1px,transparent 1.5px);
+  background-size:28px 28px;
+  mask:radial-gradient(ellipse at 60% 50%,transparent 25%,black 70%);
+  -webkit-mask:radial-gradient(ellipse at 60% 50%,transparent 25%,black 70%);
+}
+
+.footer-note{margin-top:32px;padding:22px 24px;border:1px solid #333;border-radius:12px;background:#0d0d0d;font-size:14px;color:#ccc;line-height:1.7}
+.footer-note strong{color:#f5f5f5}
+.footer-note .row{display:grid;grid-template-columns:140px 1fr;gap:14px;margin:6px 0}
+.footer-note .row strong{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#fbbf24;padding-top:2px}
+</style>
+</head>
+<body>
+
+<div class="shell">
+  <h1>Background motion — v2 · clearly visible</h1>
+  <p class="sub">
+    Your feedback: the previous gradient-blob options were too close to the cream paper color and disappeared. These three options use <strong>distinct visual elements</strong> (not color washes) so they can't blend into the background. Watch each for 10–15 seconds.
+    <br><br><a href="index.html">← Visual Companion index</a> &nbsp;·&nbsp; <a href="background-concepts.html">← See v1 (too subtle)</a>
+  </p>
+
+  <div class="grid">
+
+    <div class="card">
+      <div class="head">
+        <div class="tag">Option 4 · Recommended</div>
+        <h2>Particle network</h2>
+        <div class="desc">~55 small teal particles drift gently, with thin teal lines connecting those within 120px. Move your cursor over the stage — particles subtly drift toward it. Classic premium-tech look, clearly visible, fits research/data theme.</div>
+      </div>
+      <div class="stage">
+        <canvas class="canvasP" data-particles data-count="55" data-color="#0d4f5c" data-link-color="rgba(13,79,92,0.28)"></canvas>
+        <div class="content">
+          <span class="eyebrow">DZAKI MUHAMMAD YUSFIAN</span>
+          <h3>Accounting, tax, &amp; <em>sustainability research</em>.</h3>
+          <p>Specializing in tax compliance, auditing, and financial analysis.</p>
+        </div>
+      </div>
+      <div class="pick"><span>Feel</span><strong>Tech · Data · Modern</strong></div>
+    </div>
+
+    <div class="card">
+      <div class="head">
+        <div class="tag">Option 5</div>
+        <h2>Flowing data lines</h2>
+        <div class="desc">Four slow-flowing line-chart-style waves in teal and gold. Each wave drifts independently at a different tempo. Gold "tick" markers pulse periodically. Thematically matches finance/research data.</div>
+      </div>
+      <div class="stage">
+        <svg class="svg-waves" viewBox="0 0 600 420" preserveAspectRatio="none">
+          <path class="wave w4" d="M0,260 C120,250 180,300 300,260 C420,220 480,270 600,250"/>
+          <path class="wave w2" d="M0,220 C120,190 180,240 300,210 C420,180 480,225 600,200"/>
+          <path class="wave w3" d="M0,290 C120,320 200,260 320,290 C440,320 500,280 600,310"/>
+          <path class="wave w1" d="M0,180 C120,150 200,210 320,170 C440,130 500,180 600,150"/>
+        </svg>
+        <div class="dots-overlay">
+          <svg width="100%" height="100%" viewBox="0 0 600 420" preserveAspectRatio="none">
+            <circle class="tick" cx="80" cy="220" r="3"><animate attributeName="opacity" values="0.2;1;0.2" dur="3s" repeatCount="indefinite"/></circle>
+            <circle class="tick" cx="320" cy="170" r="3" fill="#b8944a"><animate attributeName="opacity" values="0.2;1;0.2" dur="3.5s" begin="1s" repeatCount="indefinite"/></circle>
+            <circle class="tick" cx="500" cy="200" r="3"><animate attributeName="opacity" values="0.2;1;0.2" dur="2.8s" begin="0.5s" repeatCount="indefinite"/></circle>
+          </svg>
+        </div>
+        <div class="content">
+          <span class="eyebrow">DZAKI MUHAMMAD YUSFIAN</span>
+          <h3>Accounting, tax, &amp; <em>sustainability research</em>.</h3>
+          <p>Specializing in tax compliance, auditing, and financial analysis.</p>
+        </div>
+      </div>
+      <div class="pick"><span>Feel</span><strong>Finance · Editorial · On-theme</strong></div>
+    </div>
+
+    <div class="card">
+      <div class="head">
+        <div class="tag">Option 6</div>
+        <h2>Orbital geometry</h2>
+        <div class="desc">Concentric rings slowly rotate in opposite directions, with markers orbiting them, on a subtle dot-grid field. Feels like a scholarly instrument — compass, astrolabe, data plot. Quietly precise.</div>
+      </div>
+      <div class="stage">
+        <div class="dotgrid"></div>
+        <div class="orbit-wrap">
+          <div class="orbit">
+            <div class="ring r1"><div class="marker m1"></div></div>
+            <div class="ring r2"><div class="marker m2"></div></div>
+            <div class="ring r3"><div class="marker m3"></div></div>
+            <div class="ring r4"></div>
+          </div>
+        </div>
+        <div class="content">
+          <span class="eyebrow">DZAKI MUHAMMAD YUSFIAN</span>
+          <h3>Accounting, tax, &amp; <em>sustainability research</em>.</h3>
+          <p>Specializing in tax compliance, auditing, and financial analysis.</p>
+        </div>
+      </div>
+      <div class="pick"><span>Feel</span><strong>Scholarly · Precise · Distinctive</strong></div>
+    </div>
+
+  </div>
+
+  <div class="footer-note">
+    <strong style="display:block;margin-bottom:10px;font-size:16px">My pick: Option 4 (Particle network)</strong>
+    <div class="row"><strong>Why</strong><span>Classic premium-tech aesthetic, immediately reads as "modern professional portfolio". Particles at full teal opacity on cream — <em>definitely</em> visible. Low CPU (pure 2d canvas, ~55 points). Responds to cursor, satisfying the "interactive background" part of your brief in the cleanest way.</span></div>
+    <div class="row"><strong>Alt 1</strong><span>Option 5 (Flowing data lines) is the most on-theme — your portfolio is literally about financial data, and this animates actual chart-like waves. More editorial than tech.</span></div>
+    <div class="row"><strong>Alt 2</strong><span>Option 6 (Orbital geometry) is the most visually distinctive and scholarly. Strongest academic feel. Only downside: one focal point rather than ambient coverage.</span></div>
+  </div>
+</div>
+
+<script>
+  // ——— Particle network renderer for Option 4 ———
+  document.querySelectorAll('canvas[data-particles]').forEach((canvas) => {
+    const ctx = canvas.getContext('2d');
+    const count = parseInt(canvas.dataset.count || '50', 10);
+    const color = canvas.dataset.color || '#0d4f5c';
+    const linkColor = canvas.dataset.linkColor || 'rgba(13,79,92,0.25)';
+    let w, h, dpr, particles, mouse = { x: null, y: null };
+
+    function resize() {
+      dpr = window.devicePixelRatio || 1;
+      const rect = canvas.getBoundingClientRect();
+      w = rect.width; h = rect.height;
+      canvas.width = w * dpr; canvas.height = h * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+
+    function init() {
+      resize();
+      particles = [];
+      for (let i = 0; i < count; i++) {
+        particles.push({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          vx: (Math.random() - 0.5) * 0.25,
+          vy: (Math.random() - 0.5) * 0.25,
+          r: 1.6 + Math.random() * 1.2,
+        });
+      }
+    }
+
+    function step() {
+      ctx.clearRect(0, 0, w, h);
+
+      // draw connections
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const a = particles[i], b = particles[j];
+          const dx = a.x - b.x, dy = a.y - b.y;
+          const d = Math.hypot(dx, dy);
+          if (d < 130) {
+            ctx.strokeStyle = linkColor.replace(/[\d.]+\)$/, (1 - d / 130) * 0.4 + ')');
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y);
+            ctx.stroke();
+          }
+        }
+      }
+
+      // update + draw particles
+      for (const p of particles) {
+        // subtle cursor attraction
+        if (mouse.x != null) {
+          const dx = mouse.x - p.x, dy = mouse.y - p.y;
+          const d2 = dx * dx + dy * dy;
+          if (d2 < 150 * 150) {
+            p.vx += dx * 0.00004;
+            p.vy += dy * 0.00004;
+          }
+        }
+        // damping
+        p.vx *= 0.99; p.vy *= 0.99;
+        p.x += p.vx; p.y += p.vy;
+        // wrap
+        if (p.x < -10) p.x = w + 10;
+        if (p.x > w + 10) p.x = -10;
+        if (p.y < -10) p.y = h + 10;
+        if (p.y > h + 10) p.y = -10;
+
+        ctx.fillStyle = color;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      requestAnimationFrame(step);
+    }
+
+    canvas.parentElement.addEventListener('mousemove', (e) => {
+      const r = canvas.getBoundingClientRect();
+      mouse.x = e.clientX - r.left;
+      mouse.y = e.clientY - r.top;
+    });
+    canvas.parentElement.addEventListener('mouseleave', () => { mouse.x = null; mouse.y = null; });
+
+    window.addEventListener('resize', () => { resize(); init(); });
+    init();
+    step();
+  });
+</script>
+
+</body>
+</html>

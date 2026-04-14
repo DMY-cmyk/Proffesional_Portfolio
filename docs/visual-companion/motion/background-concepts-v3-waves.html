@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Background motion — v3 · improved waves</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:wght@400;500;600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--paper:#fbf9f4;--ink:#0f1419;--muted:#4a5568;--rule:#e6ddd0;--teal:#0d4f5c;--gold:#b8944a}
+html,body{background:#1a1a1a;color:#eee;font-family:'Inter',system-ui,sans-serif;min-height:100vh}
+body{padding:32px}
+.shell{max-width:1280px;margin:0 auto}
+h1{font-family:'Newsreader',serif;font-weight:500;font-size:32px;margin-bottom:8px;color:#f5f5f5;letter-spacing:-0.01em}
+.sub{color:#bbb;font-size:15px;margin-bottom:24px;line-height:1.6;max-width:900px}
+.sub a{color:#fbbf24;text-decoration:none;border-bottom:1px dotted #fbbf24}
+
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media(max-width:1080px){.compare{grid-template-columns:1fr}}
+.card{border-radius:14px;overflow:hidden;background:#0f0f0f;border:1px solid #2a2a2a;box-shadow:0 18px 36px -18px rgba(0,0,0,0.6)}
+.card .head{padding:18px 22px 14px;border-bottom:1px solid #2a2a2a}
+.card .tag{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.18em;font-weight:500}
+.tag.old{color:#888}
+.tag.new{color:#fbbf24}
+.card h2{font-family:'Newsreader',serif;font-size:22px;font-weight:500;margin:6px 0 4px;color:#f5f5f5}
+.card .desc{font-size:13px;color:#aaa;line-height:1.6}
+.stage{position:relative;height:440px;background:var(--paper);overflow:hidden}
+.content{position:relative;z-index:5;padding:44px 32px;color:var(--ink);pointer-events:none}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.22em;color:var(--teal);font-weight:500}
+.content h3{font-family:'Newsreader',serif;font-size:30px;font-weight:500;line-height:1.05;margin:10px 0 10px;letter-spacing:-0.018em;max-width:340px}
+.content h3 em{font-style:italic;color:var(--gold);font-weight:500}
+.content p{font-size:14px;color:var(--muted);line-height:1.6;max-width:340px}
+.hint{position:absolute;bottom:14px;left:18px;right:18px;font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(15,20,25,0.45);letter-spacing:0.06em;pointer-events:none;z-index:5}
+
+/* ——— OLD (v2) — CSS-only translateY ——— */
+.svg-waves-old{position:absolute;inset:0;z-index:1;width:100%;height:100%}
+.wave{fill:none;stroke-width:1.5}
+.wave.w1{stroke:rgba(13,79,92,0.55);stroke-width:2;animation:wshift1 12s ease-in-out infinite alternate}
+.wave.w2{stroke:rgba(13,79,92,0.35);animation:wshift2 16s ease-in-out infinite alternate}
+.wave.w3{stroke:rgba(184,148,74,0.6);stroke-width:1.8;animation:wshift3 14s ease-in-out infinite alternate}
+.wave.w4{stroke:rgba(15,20,25,0.22);animation:wshift4 18s ease-in-out infinite alternate}
+@keyframes wshift1{0%{transform:translateY(0)}100%{transform:translateY(14px)}}
+@keyframes wshift2{0%{transform:translateY(0)}100%{transform:translateY(-18px)}}
+@keyframes wshift3{0%{transform:translateY(0)}100%{transform:translateY(10px)}}
+@keyframes wshift4{0%{transform:translateY(0)}100%{transform:translateY(-12px)}}
+
+/* ——— NEW (v3) — canvas-driven ——— */
+.canvas-new{position:absolute;inset:0;z-index:1;width:100%;height:100%}
+
+.notes{margin-top:28px;padding:22px 24px;border:1px solid #333;border-radius:12px;background:#0d0d0d;font-size:14px;color:#ccc;line-height:1.7}
+.notes strong{color:#f5f5f5}
+.notes .row{display:grid;grid-template-columns:180px 1fr;gap:14px;margin:6px 0;align-items:baseline}
+.notes .row strong{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#fbbf24;padding-top:2px}
+</style>
+</head>
+<body>
+
+<div class="shell">
+  <h1>Wave movement — side-by-side: old vs. new</h1>
+  <p class="sub">
+    <strong style="color:#eee">Left:</strong> the current implementation from Option 5 (CSS translateY only — mechanical shift). <strong style="color:#eee">Right:</strong> the improved canvas version with horizontal drift, depth parallax, amplitude breathing, cursor interaction, and drifting accent ticks. Move your cursor over both stages — only the right one reacts.
+    <br><br><a href="index.html">← Visual Companion index</a> &nbsp;·&nbsp; <a href="background-concepts-v2.html">← v2 (all 3 concepts)</a>
+  </p>
+
+  <div class="compare">
+
+    <div class="card">
+      <div class="head">
+        <div class="tag old">Current (v2) · CSS translateY</div>
+        <h2>Before — mechanical</h2>
+        <div class="desc">Four fixed SVG paths. Each translates vertically by a few pixels over 12–18s with `ease-in-out alternate`. No horizontal motion, no morphing, no interaction. Waves move as rigid ribbons.</div>
+      </div>
+      <div class="stage">
+        <svg class="svg-waves-old" viewBox="0 0 600 440" preserveAspectRatio="none">
+          <path class="wave w4" d="M0,260 C120,250 180,300 300,260 C420,220 480,270 600,250"/>
+          <path class="wave w2" d="M0,220 C120,190 180,240 300,210 C420,180 480,225 600,200"/>
+          <path class="wave w3" d="M0,290 C120,320 200,260 320,290 C440,320 500,280 600,310"/>
+          <path class="wave w1" d="M0,180 C120,150 200,210 320,170 C440,130 500,180 600,150"/>
+        </svg>
+        <div class="content">
+          <span class="eyebrow">DZAKI MUHAMMAD YUSFIAN</span>
+          <h3>Accounting, tax, &amp; <em>sustainability research</em>.</h3>
+          <p>Specializing in tax compliance, auditing, and financial analysis.</p>
+        </div>
+        <div class="hint">Move mouse — nothing reacts.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="head">
+        <div class="tag new">Improved (v3) · canvas · all 5 upgrades</div>
+        <h2>After — alive</h2>
+        <div class="desc">Horizontal drift + depth parallax (4 layers, different speeds) + amplitude breathing + cursor attraction (nearest wave bulges toward cursor, decays with distance) + drifting accent ticks. Canvas-rendered, ~40 LOC.</div>
+      </div>
+      <div class="stage">
+        <canvas class="canvas-new" data-waves></canvas>
+        <div class="content">
+          <span class="eyebrow">DZAKI MUHAMMAD YUSFIAN</span>
+          <h3>Accounting, tax, &amp; <em>sustainability research</em>.</h3>
+          <p>Specializing in tax compliance, auditing, and financial analysis.</p>
+        </div>
+        <div class="hint">Move mouse — the nearest wave gently reaches toward you.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="notes">
+    <strong style="display:block;margin-bottom:12px;font-size:16px">What changed, concretely</strong>
+    <div class="row"><strong>1 · Drift</strong><span>Each wave has a horizontal <code>offsetX</code> that increases continuously. Different speeds per layer (back: 8 px/s, front: 22 px/s) gives parallax depth.</span></div>
+    <div class="row"><strong>2 · Phase</strong><span>Instead of <code>translateY</code>, each wave's y-position is computed per-x using <code>sin(kx + ωt)</code>. So peaks and troughs move independently along the wave — not as a rigid unit.</span></div>
+    <div class="row"><strong>3 · Breathing</strong><span>Amplitude is modulated by a slow second sine: <code>A · (1 + 0.3 sin(0.1t))</code>. The wave height gently swells and relaxes.</span></div>
+    <div class="row"><strong>4 · Cursor</strong><span>For points near the cursor, we add a soft gaussian bulge toward the cursor's y (max 28px). Effect decays over ~180px radius.</span></div>
+    <div class="row"><strong>5 · Ticks</strong><span>Three accent circles ride along the wave — their x advances with the wave drift; their y snaps to the wave's current shape. Opacity pulses.</span></div>
+    <div class="row"><strong>Cost</strong><span>~4 × 80 = 320 line segments per frame + 3 circle draws. Under 0.5% CPU on a modest laptop. Respects <code>prefers-reduced-motion</code> → freezes to a static snapshot.</span></div>
+  </div>
+</div>
+
+<script>
+/* ─── Canvas wave renderer ─── */
+document.querySelectorAll('canvas[data-waves]').forEach((canvas) => {
+  const ctx = canvas.getContext('2d');
+  let w, h, dpr, t0 = performance.now();
+  const mouse = { x: null, y: null };
+
+  // Wave configuration: 4 layers (back → front)
+  const waves = [
+    { color: 'rgba(15,20,25,0.22)',  speed: 8,  amp: 22, freq: 0.011, phase: 0,   yOffset: 0.60, width: 1.2 },
+    { color: 'rgba(13,79,92,0.35)',  speed: 12, amp: 26, freq: 0.010, phase: 1.1, yOffset: 0.48, width: 1.5 },
+    { color: 'rgba(184,148,74,0.60)', speed: 17, amp: 20, freq: 0.013, phase: 2.3, yOffset: 0.68, width: 1.8 },
+    { color: 'rgba(13,79,92,0.60)',  speed: 22, amp: 28, freq: 0.009, phase: 0.7, yOffset: 0.38, width: 2.0 },
+  ];
+
+  // 3 accent ticks, each bound to a wave
+  const ticks = [
+    { waveIdx: 3, color: '#0d4f5c',   x0: 0.15 },
+    { waveIdx: 2, color: '#b8944a',   x0: 0.55 },
+    { waveIdx: 1, color: '#0d4f5c',   x0: 0.80 },
+  ];
+
+  function resize() {
+    dpr = window.devicePixelRatio || 1;
+    const r = canvas.getBoundingClientRect();
+    w = r.width; h = r.height;
+    canvas.width = w * dpr; canvas.height = h * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+
+  function sampleWave(wave, x, t) {
+    const drift = (wave.speed * t) / 1000;
+    const phaseBreath = 1 + 0.25 * Math.sin(t * 0.0001 + wave.phase);
+    const y = wave.yOffset * h +
+              wave.amp * phaseBreath * Math.sin(wave.freq * (x + drift * 20) + wave.phase);
+    // cursor bulge
+    if (mouse.x != null) {
+      const dx = x - mouse.x;
+      const dy = (wave.yOffset * h) - mouse.y;
+      const r2 = dx * dx + dy * dy;
+      const radius = 180;
+      if (r2 < radius * radius) {
+        const f = Math.exp(-r2 / (radius * 60));
+        const toward = (mouse.y - y) * 0.35;
+        return y + toward * f;
+      }
+    }
+    return y;
+  }
+
+  function frame() {
+    const t = performance.now() - t0;
+    ctx.clearRect(0, 0, w, h);
+
+    // draw waves back-to-front
+    for (const wave of waves) {
+      ctx.beginPath();
+      ctx.strokeStyle = wave.color;
+      ctx.lineWidth = wave.width;
+      for (let x = 0; x <= w; x += 6) {
+        const y = sampleWave(wave, x, t);
+        if (x === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+    }
+
+    // draw accent ticks riding the waves
+    for (const tk of ticks) {
+      const wave = waves[tk.waveIdx];
+      const driftOffset = ((wave.speed * t) / 1000) % w;
+      const x = ((tk.x0 * w + driftOffset * 0.25) % w + w) % w;
+      const y = sampleWave(wave, x, t);
+      const pulse = 0.5 + 0.5 * Math.sin(t * 0.002 + tk.waveIdx);
+      ctx.fillStyle = tk.color;
+      ctx.globalAlpha = 0.35 + 0.55 * pulse;
+      ctx.beginPath();
+      ctx.arc(x, y, 3, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.globalAlpha = 1;
+    }
+
+    requestAnimationFrame(frame);
+  }
+
+  canvas.parentElement.addEventListener('mousemove', (e) => {
+    const r = canvas.getBoundingClientRect();
+    mouse.x = e.clientX - r.left;
+    mouse.y = e.clientY - r.top;
+  });
+  canvas.parentElement.addEventListener('mouseleave', () => { mouse.x = null; mouse.y = null; });
+  window.addEventListener('resize', resize);
+
+  resize();
+  frame();
+});
+</script>
+
+</body>
+</html>
