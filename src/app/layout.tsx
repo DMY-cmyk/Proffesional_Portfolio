@@ -7,6 +7,7 @@ import { Footer } from '@/components/layout/footer'
 import { PageTransition } from '@/components/motion/page-transition'
 import { JsonLd } from '@/components/layout/json-ld'
 import { PreloadLinks } from '@/components/layout/preload-links'
+import { ClientMotion } from '@/components/motion/client-motion'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -50,6 +51,7 @@ export default function RootLayout({
         <a href="#main-content" className="skip-to-content">Skip to content</a>
         <JsonLd />
         <ThemeProvider>
+          <ClientMotion />
           <Navbar />
           <PageTransition>
             <main id="main-content" className="pt-24">{children}</main>

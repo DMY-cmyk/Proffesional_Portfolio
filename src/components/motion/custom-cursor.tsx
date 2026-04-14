@@ -19,8 +19,12 @@ export function CustomCursor() {
 
     const canvas = canvasRef.current
     if (!canvas) return
-    const ctx = canvas.getContext('2d')
-    if (!ctx) return
+    const ctxOrNull = canvas.getContext('2d')
+    if (!ctxOrNull) return
+
+    // Non-null aliases for use inside closures (narrowing does not propagate into closures)
+    const cvs: HTMLCanvasElement = canvas
+    const ctx: CanvasRenderingContext2D = ctxOrNull
 
     // Add class to <html> to hide native cursor
     document.documentElement.classList.add('custom-cursor-active')
@@ -37,8 +41,8 @@ export function CustomCursor() {
       const dpr = window.devicePixelRatio || 1
       w = window.innerWidth
       h = window.innerHeight
-      canvas.width = w * dpr
-      canvas.height = h * dpr
+      cvs.width = w * dpr
+      cvs.height = h * dpr
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
     }
 
