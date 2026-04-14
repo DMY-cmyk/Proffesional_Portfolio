@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest'
-import { render, screen } from '@testing-library/react'
+import { render, screen, fireEvent } from '@testing-library/react'
 import { SkillsSection } from '@/components/sections/skills-section'
 
 vi.mock('framer-motion', () => ({
@@ -39,5 +39,17 @@ describe('SkillsSection (redesigned)', () => {
   it('renders context labels where provided', () => {
     render(<SkillsSection />)
     expect(screen.getByText(/· daily/i)).toBeInTheDocument()
+  })
+
+  it('renders the filter pill row', () => {
+    render(<SkillsSection />)
+    expect(screen.getByRole('group', { name: /filter skills/i })).toBeInTheDocument()
+  })
+  it('dims non-matching skills when a filter pill is clicked', () => {
+    render(<SkillsSection />)
+    const applied = screen.getByRole('button', { name: /^applied/i })
+    fireEvent.click(applied)
+    const excel = screen.getByText('Microsoft Excel').closest('span')
+    expect(excel).toHaveClass('opacity-[0.22]')
   })
 })
