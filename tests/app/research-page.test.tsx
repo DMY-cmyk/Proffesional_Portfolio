@@ -15,7 +15,7 @@ describe('ResearchPage', () => {
   it('renders Research heading', () => {
     render(<ResearchPage />)
     expect(
-      screen.getByRole('heading', { level: 2, name: /research/i })
+      screen.getByRole('heading', { level: 1, name: /research/i })
     ).toBeInTheDocument()
   })
 

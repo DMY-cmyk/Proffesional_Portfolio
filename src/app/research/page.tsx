@@ -1,10 +1,8 @@
 import type { Metadata } from 'next'
-import { SectionHeading } from '@/components/ui/section-heading'
-import { Card } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
+import Link from 'next/link'
+import { FeaturedResearchCard } from '@/components/ui/featured-research-card'
+import { ResearchCard } from '@/components/ui/research-card'
 import { getResearchEntries } from '@/data/content'
-import { formatDate } from '@/utils/format-date'
-import { StaggerChildren } from '@/components/motion/stagger-children'
 
 export const metadata: Metadata = {
   title: 'Research',
@@ -13,30 +11,37 @@ export const metadata: Metadata = {
 
 export default function ResearchPage() {
   const entries = getResearchEntries()
+  const featured = entries.find((e) => e.featured) ?? entries[0]
+  const others = entries.filter((e) => e !== featured)
 
   return (
-    <div className="py-20 px-4">
+    <div className="py-16 px-6">
       <div className="mx-auto max-w-4xl">
-        <SectionHeading title="Research" subtitle="Academic and professional research work" />
+        <Link
+          href="/"
+          className="font-mono text-xs uppercase tracking-widest text-subtle hover:text-accent transition-colors"
+        >
+          ← Back to portfolio
+        </Link>
 
-        <StaggerChildren className="space-y-6">
-          {entries.map((entry) => (
-            <Card key={entry.slug} href={`/research/${entry.slug}`}>
-              <h3 className="text-xl font-semibold text-foreground">
-                {entry.title}
-              </h3>
-              <p className="mt-1 text-sm text-gold-accent">
-                {formatDate(entry.date)}
-              </p>
-              <p className="mt-3 text-muted-foreground">{entry.abstract}</p>
-              <div className="mt-4 flex flex-wrap gap-2">
-                {entry.tags.map((tag) => (
-                  <Badge key={tag}>{tag}</Badge>
-                ))}
-              </div>
-            </Card>
-          ))}
-        </StaggerChildren>
+        <h1 className="mt-6 font-display text-3xl md:text-4xl font-medium leading-tight tracking-tight text-foreground">
+          Research
+        </h1>
+        <p className="mt-2 text-muted text-base">Academic and professional research work.</p>
+
+        {featured && (
+          <div className="mt-12">
+            <FeaturedResearchCard entry={featured} />
+          </div>
+        )}
+
+        {others.length > 0 && (
+          <div className="mt-6 grid gap-4 md:grid-cols-2">
+            {others.map((entry) => (
+              <ResearchCard key={entry.slug} entry={entry} />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   )
