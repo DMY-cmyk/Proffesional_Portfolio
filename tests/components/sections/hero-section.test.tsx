@@ -8,26 +8,46 @@ vi.mock('framer-motion', () => ({
     h1: ({ children, ...props }: any) => <h1 {...props}>{children}</h1>,
     p: ({ children, ...props }: any) => <p {...props}>{children}</p>,
     span: ({ children, ...props }: any) => <span {...props}>{children}</span>,
+    a: ({ children, ...props }: any) => <a {...props}>{children}</a>,
   },
   AnimatePresence: ({ children }: any) => <>{children}</>,
 }))
 
-describe('HeroSection', () => {
-  it('renders the profile title as h1', () => {
+describe('HeroSection (redesigned)', () => {
+  it('renders owner name as the eyebrow', () => {
     render(<HeroSection />)
-    const heading = screen.getByRole('heading', { level: 1 })
-    expect(heading).toBeInTheDocument()
-    expect(heading.textContent).toBeTruthy()
+    expect(screen.getByText(/Dzaki Muhammad Yusfian/i)).toBeInTheDocument()
   })
 
-  it('renders the profile title', () => {
+  it('renders the headline as an h1', () => {
     render(<HeroSection />)
-    expect(screen.getByText(/accounting.*sustainability research/i)).toBeInTheDocument()
+    const h1 = screen.getByRole('heading', { level: 1 })
+    expect(h1).toBeInTheDocument()
+    expect(h1.textContent).toMatch(/sustainability research/i)
   })
 
-  it('renders the tagline', () => {
+  it('renders the status ribbon with three labels', () => {
     render(<HeroSection />)
-    expect(screen.getByText(/specializing|tax|audit/i)).toBeInTheDocument()
+    expect(screen.getByText(/^Now$/i)).toBeInTheDocument()
+    expect(screen.getByText(/^Based in$/i)).toBeInTheDocument()
+    expect(screen.getByText(/^Education$/i)).toBeInTheDocument()
+  })
+
+  it('renders the Read my research CTA anchoring to #research', () => {
+    render(<HeroSection />)
+    const link = screen.getByRole('link', { name: /read my research/i })
+    expect(link).toHaveAttribute('href', '#research')
+  })
+
+  it('renders Download CV as the secondary CTA', () => {
+    render(<HeroSection />)
+    expect(screen.getByRole('link', { name: /download cv/i })).toBeInTheDocument()
+  })
+
+  it('renders the avatar image', () => {
+    render(<HeroSection />)
+    const img = screen.getByAltText(/dzaki/i)
+    expect(img.tagName).toBe('IMG')
   })
 
   it('has the hero section id', () => {
@@ -35,26 +55,13 @@ describe('HeroSection', () => {
     expect(document.getElementById('hero')).toBeInTheDocument()
   })
 
-  it('renders the avatar image', () => {
-    render(<HeroSection />)
-    const avatar = screen.getByAltText(/dzaki/i)
-    expect(avatar).toBeInTheDocument()
-    expect(avatar.tagName).toBe('IMG')
+  it('does NOT render the old shimmer gradient text', () => {
+    const { container } = render(<HeroSection />)
+    expect(container.querySelector('.hero-gradient-text')).toBeNull()
   })
 
-  it('renders CTA buttons', () => {
-    render(<HeroSection />)
-    const seeWork = screen.getByText('See my work')
-    const aboutMe = screen.getByText('About me')
-    expect(seeWork).toBeInTheDocument()
-    expect(seeWork.closest('a')).toHaveAttribute('href', '#certifications')
-    expect(aboutMe).toBeInTheDocument()
-    expect(aboutMe.closest('a')).toHaveAttribute('href', '#about')
-  })
-
-  it('renders scroll hint', () => {
-    render(<HeroSection />)
-    const scrollHint = document.querySelector('.animate-scroll-hint')
-    expect(scrollHint).toBeInTheDocument()
+  it('does NOT render the old avatar glow', () => {
+    const { container } = render(<HeroSection />)
+    expect(container.querySelector('.animate-avatar-glow')).toBeNull()
   })
 })
