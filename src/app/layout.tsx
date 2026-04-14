@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic'
-import { Inter, Instrument_Serif, JetBrains_Mono } from 'next/font/google'
+import { Inter, Newsreader, JetBrains_Mono } from 'next/font/google'
 import '@/styles/globals.css'
 import { siteMetadata } from './metadata'
 import { ThemeProvider } from '@/hooks/use-theme'
@@ -21,9 +21,9 @@ const inter = Inter({
   variable: '--font-inter',
 })
 
-const instrumentSerif = Instrument_Serif({
-  weight: '400',
-  style: 'italic',
+const newsreader = Newsreader({
+  weight: ['400', '500', '600'],
+  style: ['normal', 'italic'],
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-display',
@@ -44,7 +44,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${inter.variable} ${newsreader.variable} ${jetbrainsMono.variable}`} suppressHydrationWarning>
       <head>
         <script
           dangerouslySetInnerHTML={{
