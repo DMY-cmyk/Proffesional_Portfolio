@@ -5,9 +5,10 @@ export interface NavItem {
 }
 
 export const sectionLinks: NavItem[] = [
-  { label: 'About', href: '#about' },
+  { label: 'Research', href: '#research' },
   { label: 'Experience', href: '#experience' },
-  { label: 'Certifications', href: '#certifications' },
+  { label: 'Education', href: '#education' },
+  { label: 'Credentials', href: '#credentials' },
   { label: 'Skills', href: '#skills' },
   { label: 'Contact', href: '#contact' },
 ]

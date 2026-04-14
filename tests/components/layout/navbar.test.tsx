@@ -39,8 +39,8 @@ describe('Navbar', () => {
         <Navbar />
       </ThemeProvider>
     )
-    expect(screen.getByText('About')).toBeInTheDocument()
-    expect(screen.getByText('Research')).toBeInTheDocument()
+    expect(screen.getByText('Education')).toBeInTheDocument()
+    expect(screen.getAllByText('Research').length).toBeGreaterThanOrEqual(1)
   })
 
   it('renders the theme toggle', () => {
