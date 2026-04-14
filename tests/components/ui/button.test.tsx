@@ -31,7 +31,7 @@ describe('Button', () => {
 
   it('applies primary variant styles by default', () => {
     render(<Button>Primary</Button>)
-    expect(screen.getByRole('button').className).toContain('bg-gold')
+    expect(screen.getByRole('button').className).toContain('bg-foreground')
   })
 
   it('applies secondary variant styles', () => {
@@ -46,18 +46,16 @@ describe('Button', () => {
     expect(btn.className).not.toContain('border-gold')
   })
 
-  it('has overflow-hidden and relative classes', () => {
+  it('has core layout classes', () => {
     render(<Button>Styled</Button>)
     const btn = screen.getByRole('button')
-    expect(btn.className).toContain('overflow-hidden')
-    expect(btn.className).toContain('relative')
+    expect(btn.className).toContain('inline-flex')
+    expect(btn.className).toContain('rounded-md')
   })
 
-  it('contains a shine span element', () => {
+  it('renders children inside the button', () => {
     render(<Button>Shine</Button>)
-    const btn = screen.getByRole('button')
-    const shineSpan = btn.querySelector('span[aria-hidden="true"]')
-    expect(shineSpan).toBeInTheDocument()
+    expect(screen.getByRole('button')).toHaveTextContent('Shine')
   })
 
   it('calls onClick handler', async () => {

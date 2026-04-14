@@ -14,22 +14,20 @@ interface ButtonProps {
   onClick?: () => void
   type?: 'button' | 'submit'
   disabled?: boolean
+  ariaLabel?: string
 }
 
-const variantStyles = {
-  primary: 'bg-gold-500 text-black hover:bg-gold-600 font-medium',
-  secondary: 'border border-gold-500 text-gold-accent hover:bg-gold-500/10 font-medium',
-  ghost: 'text-muted-foreground hover:text-foreground hover:bg-muted',
+const variantStyles: Record<string, string> = {
+  primary: 'bg-foreground text-background hover:bg-accent font-medium',
+  secondary: 'border border-foreground text-foreground hover:bg-foreground hover:text-background font-medium',
+  ghost: 'text-muted hover:text-foreground hover:bg-muted/20',
 }
 
-const sizeStyles = {
+const sizeStyles: Record<string, string> = {
   sm: 'px-3 py-1.5 text-sm',
   md: 'px-4 py-2 text-sm',
-  lg: 'px-6 py-3 text-base',
+  lg: 'px-5 py-3 text-sm',
 }
-
-const tapAnimation = { scale: 0.97 }
-const springTransition = { type: 'spring' as const, stiffness: 400, damping: 17 }
 
 export function Button({
   variant = 'primary',
@@ -41,20 +39,14 @@ export function Button({
   onClick,
   type = 'button',
   disabled,
+  ariaLabel,
 }: ButtonProps) {
   const classes = cn(
-    'inline-flex items-center justify-center rounded-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-500 overflow-hidden relative group',
+    'inline-flex items-center justify-center gap-2 rounded-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent',
     variantStyles[variant],
     sizeStyles[size],
     disabled && 'opacity-50 pointer-events-none',
     className
-  )
-
-  const shineOverlay = (
-    <span
-      className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-500 pointer-events-none"
-      aria-hidden="true"
-    />
   )
 
   if (href) {
@@ -63,12 +55,12 @@ export function Button({
       <motion.a
         href={resolvedHref}
         className={classes}
-        whileTap={tapAnimation}
-        transition={springTransition}
+        aria-label={ariaLabel}
+        whileTap={{ scale: 0.98 }}
+        transition={{ type: 'spring' as const, stiffness: 400, damping: 18 }}
         {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
       >
-        {shineOverlay}
-        <span className="relative z-10">{children}</span>
+        {children}
       </motion.a>
     )
   }
@@ -79,11 +71,11 @@ export function Button({
       onClick={onClick}
       type={type}
       disabled={disabled}
-      whileTap={tapAnimation}
-      transition={springTransition}
+      aria-label={ariaLabel}
+      whileTap={{ scale: 0.98 }}
+      transition={{ type: 'spring' as const, stiffness: 400, damping: 18 }}
     >
-      {shineOverlay}
-      <span className="relative z-10">{children}</span>
+      {children}
     </motion.button>
   )
 }
