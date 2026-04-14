@@ -16,7 +16,7 @@ describe('ProfileSection', () => {
 
   it('renders section number 01', () => {
     render(<ProfileSection />)
-    expect(screen.getByText('01')).toBeInTheDocument()
+    expect(screen.getByText(/01/)).toBeInTheDocument()
   })
 
   it('renders the bio text', () => {

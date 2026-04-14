@@ -12,13 +12,15 @@ describe('SectionHeading', () => {
 
   it('renders sectionNumber and label when both provided', () => {
     render(<SectionHeading title="About Me" sectionNumber="01" label="Who I am" />)
-    expect(screen.getByText('01')).toBeInTheDocument()
+    expect(screen.getByText(/01/)).toBeInTheDocument()
     expect(screen.getByText('Who I am')).toBeInTheDocument()
   })
 
   it('omits number/label row when props not provided', () => {
     const { container } = render(<SectionHeading title="About Me" />)
-    expect(container.querySelector('.font-mono')).not.toBeInTheDocument()
+    const monoDiv = container.querySelector('.font-mono')
+    expect(monoDiv).toBeInTheDocument()
+    expect(monoDiv!.children.length).toBe(0)
   })
 
   it('renders subtitle when provided', () => {

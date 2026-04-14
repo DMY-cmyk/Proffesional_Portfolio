@@ -7,17 +7,15 @@ interface SectionHeadingProps {
 
 export function SectionHeading({ title, subtitle, sectionNumber, label }: SectionHeadingProps) {
   return (
-    <div className="mb-16">
-      {sectionNumber && label && (
-        <div className="flex items-center gap-3 mb-4">
-          <span className="font-mono text-xs text-gold-accent tracking-widest">{sectionNumber}</span>
-          <span className="font-mono text-xs text-muted-foreground tracking-widest uppercase">{label}</span>
-        </div>
-      )}
-      <h2 className="font-display text-4xl md:text-5xl font-normal text-foreground tracking-tight">
+    <div className="mb-12 pb-3 border-b border-border flex items-baseline justify-between gap-6 flex-wrap">
+      <h2 className="font-display text-3xl md:text-4xl font-medium text-foreground tracking-tight">
         {title}
       </h2>
-      {subtitle && <p className="mt-3 text-lg text-muted-foreground">{subtitle}</p>}
+      <div className="flex items-baseline gap-3 font-mono text-xs uppercase tracking-widest text-subtle">
+        {label && <span>{label}</span>}
+        {sectionNumber && <span>Section {sectionNumber}</span>}
+      </div>
+      {subtitle && <p className="w-full mt-3 text-base text-muted">{subtitle}</p>}
     </div>
   )
 }
