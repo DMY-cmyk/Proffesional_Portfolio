@@ -24,27 +24,18 @@ describe('Card', () => {
     expect(cardElement).toBeInTheDocument()
   })
 
-  it('shows glow element on mouse move', () => {
+  it('has border and transition classes', () => {
     const { container } = render(<Card><p>Content</p></Card>)
     const card = container.firstElementChild as HTMLElement
-    fireEvent.mouseMove(card, { clientX: 100, clientY: 50 })
-    const glowDiv = card.querySelector('.pointer-events-none')
-    expect(glowDiv).toBeInTheDocument()
+    expect(card.className).toContain('border')
+    expect(card.className).toContain('transition-all')
   })
 
-  it('hides glow element on mouse leave', () => {
+  it('has no glow overlay element', () => {
     const { container } = render(<Card><p>Content</p></Card>)
     const card = container.firstElementChild as HTMLElement
     fireEvent.mouseMove(card, { clientX: 100, clientY: 50 })
-    fireEvent.mouseLeave(card)
     const glowDiv = card.querySelector('.pointer-events-none')
     expect(glowDiv).not.toBeInTheDocument()
-  })
-
-  it('has glass-morphism related classes', () => {
-    const { container } = render(<Card><p>Content</p></Card>)
-    const card = container.firstElementChild as HTMLElement
-    expect(card.className).toContain('overflow-hidden')
-    expect(card.className).toContain('relative')
   })
 })
