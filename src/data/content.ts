@@ -7,6 +7,8 @@ import type {
   AwardEntry,
   CourseEntry,
   ContactInfo,
+  ProfessionalContact,
+  PersonalContact,
   Downloads,
   SiteConfig,
   ResearchEntry,
@@ -66,4 +68,12 @@ export function getSiteConfig(): SiteConfig {
 
 export function getResearchEntries(): ResearchEntry[] {
   return researchData as ResearchEntry[]
+}
+
+export function getProfessionalContact(): ProfessionalContact {
+  return getContact().professional
+}
+
+export function getPersonalContact(): PersonalContact | undefined {
+  return getContact().personal
 }

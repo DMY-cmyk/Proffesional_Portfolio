@@ -144,4 +144,17 @@ describe('content shape — redesign additions', () => {
     expect(thesis.type).toBe('thesis')
     expect(thesis.featured).toBe(true)
   })
+
+  it('exposes getProfessionalContact helper', async () => {
+    const { getProfessionalContact } = await import('@/data/content')
+    const p = getProfessionalContact()
+    expect(p.email).toMatch(/@/)
+    expect(p.linkedin).toMatch(/linkedin/)
+  })
+
+  it('exposes getPersonalContact helper', async () => {
+    const { getPersonalContact } = await import('@/data/content')
+    const p = getPersonalContact()
+    expect(p?.instagram).toMatch(/instagram/)
+  })
 })
