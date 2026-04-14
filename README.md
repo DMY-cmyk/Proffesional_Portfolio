@@ -1,6 +1,6 @@
 # Dzaki Muhammad Yusfian — Professional Portfolio
 
-> Accounting & Finance Professional | Specializing in Tax, Audit, and Financial Analysis
+> Accounting · Finance · Tax · Audit — early-career researcher on sustainability reporting and firm value.
 
 🌐 **Live:** [https://DMY-cmyk.github.io/Proffesional_Portfolio](https://DMY-cmyk.github.io/Proffesional_Portfolio)
 
@@ -9,7 +9,7 @@ A research-journal-inspired professional portfolio built with Next.js 15, Tailwi
 ## ✨ Features
 
 - **7 Homepage Sections** — Hero → Research → Experience → Education → Credentials → Skills → Contact, in editorial reading order
-- **Visual System** — Cool cream paper background (`#fbf9f4`), deep teal primary (`#0d4f5c`), muted gold highlight (`#b8944a`), and a grain texture overlay for tactile warmth
+- **Visual System** — Cool cream paper background (`#fbf9f4`), deep teal primary (`#0d4f5c`), muted gold highlight (`#b8944a`) — restrained motion, no ambient decoration
 - **Editorial Typography** — Newsreader (display/serif), Inter (body), JetBrains Mono (labels/mono) triple-font system
 - **Research Pages** — MDX-powered research articles at `/research` and `/research/[slug]` with featured-thesis card on the homepage
 - **Certification Detail** — Individual certification pages at `/certifications/[slug]` with document viewer
@@ -153,7 +153,7 @@ To enable deployment:
 
 Full visual and information-architecture overhaul replacing the dark glass-morphism system with a research-journal aesthetic:
 
-- **New visual system** — Cool cream paper ground (`#fbf9f4`), deep teal primary (`#0d4f5c`), muted gold highlight (`#b8944a`); grain texture overlay retained for warmth
+- **New visual system** — Cool cream paper ground (`#fbf9f4`), deep teal primary (`#0d4f5c`), muted gold highlight (`#b8944a`); light mode default, dark mode preserved as a toggle
 - **Typography swap** — Newsreader serif replaces the previous display font; Inter body and JetBrains Mono labels retained
 - **Homepage IA reordered** — Seven sections in CV-logical order: Hero → Research → Experience → Education → Credentials → Skills → Contact
 - **New routes** — `/research` list, `/research/[slug]` detail, `/certifications/[slug]` detail, `/personal` page
