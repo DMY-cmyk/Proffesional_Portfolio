@@ -5,17 +5,25 @@ import { render, cleanup } from '@testing-library/react'
 vi.mock('@/data/content', () => ({
   getProfile: vi.fn(),
   getSiteConfig: vi.fn(),
-  getContact: vi.fn(),
+  getProfessionalContact: vi.fn(),
+  getPersonalContact: vi.fn(),
 }))
 
-import { getProfile, getSiteConfig, getContact } from '@/data/content'
+import { getProfile, getSiteConfig, getProfessionalContact, getPersonalContact } from '@/data/content'
 import { JsonLd } from '@/components/layout/json-ld'
 
 const mockGetProfile = vi.mocked(getProfile)
 const mockGetSiteConfig = vi.mocked(getSiteConfig)
-const mockGetContact = vi.mocked(getContact)
+const mockGetProfessionalContact = vi.mocked(getProfessionalContact)
+const mockGetPersonalContact = vi.mocked(getPersonalContact)
 
-function setupMocks(overrides: { avatar?: string; linkedin?: string; github?: string; instagram?: string } = {}) {
+function setupMocks(overrides: {
+  avatar?: string
+  linkedin?: string
+  github?: string
+  instagram?: string
+  tiktok?: string
+} = {}) {
   mockGetProfile.mockReturnValue({
     name: 'Test User',
     title: 'Test Title',
@@ -31,12 +39,15 @@ function setupMocks(overrides: { avatar?: string; linkedin?: string; github?: st
     ogImage: '/portfolio/images/og-image.jpg',
     locale: 'en',
   })
-  mockGetContact.mockReturnValue({
+  mockGetProfessionalContact.mockReturnValue({
     email: 'test@example.com',
     linkedin: overrides.linkedin ?? 'https://linkedin.com/in/test',
     github: overrides.github ?? 'https://github.com/test',
-    instagram: overrides.instagram ?? '',
     location: 'Test City',
+  })
+  mockGetPersonalContact.mockReturnValue({
+    instagram: overrides.instagram ?? '',
+    tiktok: overrides.tiktok ?? '',
   })
 }
 
@@ -75,7 +86,7 @@ describe('JsonLd', () => {
   })
 
   it('filters out empty social links from sameAs', () => {
-    setupMocks({ linkedin: 'https://linkedin.com/in/test', github: '', instagram: '' })
+    setupMocks({ linkedin: 'https://linkedin.com/in/test', github: '', instagram: '', tiktok: '' })
     const { container } = render(<JsonLd />)
     const data = getStructuredData(container)
 
@@ -87,6 +98,7 @@ describe('JsonLd', () => {
       linkedin: 'https://linkedin.com/in/test',
       github: 'https://github.com/test',
       instagram: 'https://instagram.com/test',
+      tiktok: 'https://tiktok.com/@test',
     })
     const { container } = render(<JsonLd />)
     const data = getStructuredData(container)
@@ -95,6 +107,21 @@ describe('JsonLd', () => {
       'https://linkedin.com/in/test',
       'https://github.com/test',
       'https://instagram.com/test',
+      'https://tiktok.com/@test',
     ])
+  })
+
+  it('includes knowsAbout with Sustainability Reporting', () => {
+    setupMocks()
+    const { container } = render(<JsonLd />)
+    const script = container.querySelector('script[type="application/ld+json"]')
+    expect(script?.textContent).toContain('Sustainability Reporting')
+  })
+
+  it('includes alumniOf STIE YKPN', () => {
+    setupMocks()
+    const { container } = render(<JsonLd />)
+    const script = container.querySelector('script[type="application/ld+json"]')
+    expect(script?.textContent).toContain('STIE YKPN')
   })
 })

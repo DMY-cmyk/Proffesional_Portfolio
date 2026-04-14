@@ -1,9 +1,10 @@
-import { getProfile, getSiteConfig, getContact } from '@/data/content'
+import { getProfile, getProfessionalContact, getPersonalContact, getSiteConfig } from '@/data/content'
 
 export function JsonLd() {
   const profile = getProfile()
   const site = getSiteConfig()
-  const contact = getContact()
+  const contact = getProfessionalContact()
+  const personal = getPersonalContact()
 
   const structuredData: Record<string, unknown> = {
     '@context': 'https://schema.org',
@@ -11,8 +12,30 @@ export function JsonLd() {
     name: profile.name,
     jobTitle: profile.title,
     description: profile.bio,
+    email: `mailto:${contact.email}`,
     url: site.url,
-    sameAs: [contact.linkedin, contact.github, contact.instagram].filter(Boolean),
+    worksFor: {
+      '@type': 'Organization',
+      name: 'PT. Kolosal Kecerdasan Artifisial',
+    },
+    alumniOf: {
+      '@type': 'CollegeOrUniversity',
+      name: 'STIE YKPN Business School Yogyakarta',
+    },
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Jakarta',
+      addressCountry: 'ID',
+    },
+    knowsAbout: [
+      'Taxation',
+      'Auditing',
+      'Financial Reporting',
+      'Financial Analysis',
+      'Sustainability Reporting',
+      'Firm Value',
+    ],
+    sameAs: [contact.linkedin, contact.github, personal?.instagram, personal?.tiktok].filter(Boolean),
   }
 
   // Only include image if avatar path is set.
