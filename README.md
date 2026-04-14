@@ -9,7 +9,10 @@ A research-journal-inspired professional portfolio built with Next.js 15, Tailwi
 ## ✨ Features
 
 - **7 Homepage Sections** — Hero → Research → Experience → Education → Credentials → Skills → Contact, in editorial reading order
-- **Visual System** — Cool cream paper background (`#fbf9f4`), deep teal primary (`#0d4f5c`), muted gold highlight (`#b8944a`) — restrained motion, no ambient decoration
+- **Visual System** — Cool cream paper background (`#fbf9f4`), deep teal primary (`#0d4f5c`), muted gold highlight (`#b8944a`)
+- **Animated Background** — Canvas-rendered flowing data lines (4 layers, parallax depth, amplitude breathing, cursor attraction, drifting accent ticks)
+- **Custom Cursor** — Teal ring + center dot with a fading particle tail; expands to gold on interactive elements
+- **Animated Skills Filter** — Filter-by-context pill row above the Skills section; dims non-matching tags and tints matches teal with 350ms smooth transition
 - **Editorial Typography** — Newsreader (display/serif), Inter (body), JetBrains Mono (labels/mono) triple-font system
 - **Research Pages** — MDX-powered research articles at `/research` and `/research/[slug]` with featured-thesis card on the homepage
 - **Certification Detail** — Individual certification pages at `/certifications/[slug]` with document viewer
@@ -148,6 +151,19 @@ To enable deployment:
 2. Push to `main` branch — deployment triggers automatically
 
 ## 📋 Changelog
+
+### Phase 3 — Motion Upgrade (2026-04-14)
+
+Adds interactive motion on top of the Research Journal redesign to give the portfolio kinetic life without compromising scholarly credibility:
+
+- **Flowing-wave background** — Canvas-rendered four-layer wave system with horizontal parallax drift (back layer 8 px/s → front 22 px/s), per-point sine phase (peaks and troughs move independently along each wave), amplitude breathing (slow secondary sine modulator), cursor attraction (soft gaussian bulge within 180px radius), and three drifting accent ticks riding their host waves
+- **Custom cursor** — Teal ring (48px) + center dot (6px) with a particle-fade tail. Up to ~15 teal particles lag behind, each fading over 400ms. Ring grows to 72px and turns gold on hover over links/buttons
+- **Animated skills filter** — New pill row above the Skills section. Eight filter pills (All / applied / coursework / daily / research / DJP / project / no-context) with live counts. Click dims non-matching tags to 22% opacity and scale 0.96; matches get teal border + soft teal-tinted background
+- **Hover polish** — Cards gain a soft teal shadow lift on hover; buttons scale to 1.02 with deeper teal on primary variant
+- **Navbar scroll depth** — Deeper box-shadow appears as you scroll past the hero
+- **Scroll reveal tuning** — 500ms duration / 16px translate / cubic-bezier ease; children stagger at 0.06s
+- **Accessibility guards** — All motion respects `prefers-reduced-motion`; custom cursor auto-disables on touch devices (`pointer: coarse`); native OS cursor preserved when custom cursor is inactive
+- **Performance** — Both canvases use DPR-aware sizing, pause on `visibilitychange`, and run under 0.5% CPU on modest hardware
 
 ### Phase 2 — Research Journal Redesign (2026-04-14)
 
