@@ -37,7 +37,7 @@ const itemLeft = {
 export function StaggerChildren({
   children,
   className,
-  staggerDelay = 0.08,
+  staggerDelay = 0.06,
   direction = 'up',
 }: StaggerChildrenProps) {
   const itemVariant = direction === 'left' ? itemLeft : itemUp
