@@ -1,7 +1,13 @@
 {
-  "email": "dmy.23022004@gmail.com",
-  "linkedin": "https://www.linkedin.com/in/dzakimyusfian/",
-  "github": "https://github.com/DMY-cmyk",
-  "instagram": "https://instagram.com/dzaki_yusfian",
-  "tiktok": "https://tiktok.com/@dmy_0223"
+  "professional": {
+    "email": "dmy.23022004@gmail.com",
+    "linkedin": "https://www.linkedin.com/in/dzakimyusfian/",
+    "github": "https://github.com/DMY-cmyk",
+    "location": "Jakarta, Indonesia"
+  },
+  "personal": {
+    "instagram": "https://instagram.com/dzaki_yusfian",
+    "tiktok": "https://tiktok.com/@dmy_0223",
+    "note": "A few corners of the internet where I share tax-literacy content and personal updates."
+  }
 }
