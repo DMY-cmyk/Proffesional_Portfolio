@@ -4,7 +4,6 @@ import { siteMetadata } from './metadata'
 import { ThemeProvider } from '@/hooks/use-theme'
 import { Navbar } from '@/components/layout/navbar'
 import { Footer } from '@/components/layout/footer'
-import { CustomCursor } from '@/components/motion/custom-cursor'
 import { PageTransition } from '@/components/motion/page-transition'
 import { JsonLd } from '@/components/layout/json-ld'
 import { PreloadLinks } from '@/components/layout/preload-links'
@@ -51,7 +50,6 @@ export default function RootLayout({
         <a href="#main-content" className="skip-to-content">Skip to content</a>
         <JsonLd />
         <ThemeProvider>
-          <CustomCursor />
           <Navbar />
           <PageTransition>
             <main id="main-content" className="pt-24">{children}</main>
