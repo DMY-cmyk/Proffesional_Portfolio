@@ -94,6 +94,66 @@ A short, dated log of the key design decisions made during the redesign brainsto
 
 ---
 
+## 2026-04-14 · Thesis shown as abstract-only (no PDF download)
+
+**Decision:** The Featured Thesis card links to the existing MDX detail page (`/research/sustainability-reporting-firm-value`) rather than a PDF download. Full PDF is not publicly hosted.
+
+**Why:** Owner elected to keep the full paper private while exposing abstract and key findings. The abstract + MDX detail satisfies grad-school reviewers' need to evaluate substance; full-paper requests can still come via email.
+
+**How to apply:** If thesis PDF ever becomes public, add `/files/research/thesis.pdf`, update `ResearchEntry.pdfPath`, extend `.gitignore` exception, and switch the card's CTA from "Read abstract" to "Read abstract & download PDF."
+
+---
+
+## 2026-04-14 · Thesis advisor name omitted
+
+**Decision:** Do not render the thesis advisor's name anywhere in the UI.
+
+**Why:** Owner preference. Advisor attribution is a personal / relational detail that doesn't belong on a public portfolio unless the owner wants it there.
+
+**How to apply:** The `ResearchEntry.advisor` field remains in the schema (optional) in case future entries want it — but the Featured Thesis card renders without it.
+
+---
+
+## 2026-04-14 · Thesis is the only research entry for initial launch
+
+**Decision:** The Research section's secondary grid is hidden on launch because only the thesis exists. The grid markup is built but conditionally rendered (`research.length > 1`).
+
+**Why:** Owner confirmed E (more than thesis exists) at brainstorm time but hasn't provided concrete entries yet. Shipping with a visibly empty grid would signal the same thinness the audit flagged. Conditional rendering preserves the design for when real entries arrive.
+
+**How to apply:** When a second research entry is added, the grid should render automatically without design changes. Never hard-code "Coming soon" placeholders in the grid.
+
+---
+
+## 2026-04-14 · Brevet: keep IAI, remove UGM duplicate
+
+**Decision:** The IAI `Brevet A & B Taxation` entry stays in `certifications.json`. The UGM `Brevet Pajak AB` entry is removed from `courses.json`.
+
+**Why:** Owner confirmed these are the same credential listed twice by mistake. IAI (Ikatan Akuntan Indonesia) is the professional accounting body — its certification is the authoritative version.
+
+**How to apply:** If it turns out the two were actually different credentials after all (e.g., IAI = professional cert, UGM = separate training course), the removed UGM entry can be restored from git history. Re-evaluate after content review.
+
+---
+
+## 2026-04-14 · Personal socials moved to `/personal` subpage
+
+**Decision:** Instagram and TikTok links move from the main contact section to a new `/personal` page, linked only from the footer's right-aligned `personal →` link.
+
+**Why:** Owner wants the personal/creative content accessible but separated from the professional portfolio. This lets audience D/E see the clean professional surface while curious visitors can still find the personal brand.
+
+**How to apply:** `/personal` is intentionally minimal — name, portrait, one paragraph, two links. Don't turn it into a second portfolio. If the personal side ever grows, it moves to a separate domain.
+
+---
+
+## 2026-04-14 · Site title uses pipes-as-middots format
+
+**Decision:** `site.json.title` becomes `Dzaki Muhammad Yusfian — Accounting · Finance · Tax · Audit Enthusiast` (user-supplied wording; pipe separators rendered as middots).
+
+**Why:** Owner's preferred framing emphasizes breadth across finance subdomains and positions as an enthusiast rather than over-claiming seniority. The middot rendering is a typographic choice — pipes render poorly at display sizes across browsers.
+
+**How to apply:** Keep "Enthusiast" at the end; don't promote to "Professional" or "Specialist" unless owner says so explicitly. It's a deliberate signal of early-career humility.
+
+---
+
 ## 2026-04-14 · Print-fidelity as a requirement, not a nice-to-have
 
 **Decision:** A dedicated print stylesheet is part of the redesign scope. Printing the site must produce a clean CV-like document.

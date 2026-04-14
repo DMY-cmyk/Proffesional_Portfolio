@@ -85,12 +85,12 @@ The flagship section. Lives immediately after the hero.
 **Structure:**
 1. Section heading: `Research` + mono section number `Section 01`.
 2. **Featured thesis card** — bordered on 3 sides + 3px teal left border + "Featured · Thesis" gold badge. Contains:
-   - Meta row (mono): `Undergraduate Thesis · [completion month] · Advisor · [name if public]`
+   - Meta row (mono): `Undergraduate Thesis · April 2026`  *(no advisor rendered — decision 2)*
    - H3: thesis title (Newsreader 500, 28px, italicize one key phrase)
    - Abstract paragraph (16px, max-width 720px)
    - Tag row (5 tags max): subject area keywords
-   - Read link: `Read full abstract &amp; download PDF →`
-3. **Secondary research grid** (2 cols on desktop, 1 on mobile) for other papers — working papers, in-progress work, presentations. Each card:
+   - Read link: `Read abstract →` pointing at `/research/sustainability-reporting-firm-value`  *(no PDF download — decision 1)*
+3. **Secondary research grid** (2 cols on desktop, 1 on mobile) — **renders only when `research.length > 1`** (decision 3). For the initial launch, only the thesis exists, so this grid is not rendered. The markup is kept ready so adding future entries (`type: 'working-paper' | 'in-progress' | 'presentation' | 'published'`) does not require rewriting the section. Each future card:
    - Meta (mono): `[Paper Type] · [Year]`
    - H4: title
    - One-sentence description
@@ -132,9 +132,9 @@ Each skill rendered as a pill with:
 
 Two-column grid: narrative block + contact list.
 
-- Left: H2 "Open to research collaboration, internships, and conversation." + paragraph + primary/secondary CTAs.
-- Right: bordered list — `Email / LinkedIn / GitHub / Location` with mono labels.
-- **Instagram and TikTok removed** from the professional portfolio. (Content json retains them; components don't render them.)
+- Left: H2 "Open to research collaboration, internships, and conversation." + paragraph + primary/secondary CTAs (Email + LinkedIn).
+- Right: bordered list — `Email / LinkedIn / GitHub / Location` with mono labels. Only these four rendered here.
+- **Instagram and TikTok moved to `/personal`** (decision 5). Reached only via the footer's `personal →` link. Not rendered in the main contact section.
 
 ### 3.10 Navbar
 
@@ -167,22 +167,29 @@ These are **content**, not code, but block the redesign from shipping credibly.
 
 ### 5.1 Must-delete-or-replace
 
-- [ ] Remove `placeholder-research` entry from `src/content/research/index.json` — replace with real entries or hide the research section until real content exists.
+- [ ] Remove `placeholder-research` entry from `src/content/research/index.json`.
+- [ ] Remove the `Brevet Pajak AB` entry (UGM) from `src/content/courses.json` — keep only the IAI Brevet in `certifications.json` (resolved decision 4).
 
 ### 5.2 Must-expand
 
-- [ ] Expand thesis representation in `education.json` + add a research index entry pointing at the existing `sustainability-reporting-firm-value.mdx` with:
-  - Real abstract
-  - Advisor name (optional, if public)
-  - Completion date
-  - Tags
-  - Optional PDF path
-- [ ] Add at least 1–2 additional research entries (working papers, in-progress, presentations) to the research index — user said audience E applies, meaning real pieces exist.
-- [ ] Clarify whether `Brevet A &amp; B Taxation` (IAI) and `Brevet Pajak AB` (UGM) are the same credential, related, or different. Update JSON accordingly.
+- [ ] Populate the thesis entry in `src/content/research/index.json` with real data:
+  - Real abstract (written, not placeholder)
+  - Completion date: `2026-04`
+  - `type: 'thesis'`
+  - `featured: true`
+  - Tags: `['sustainability reporting', 'firm value', 'panel data', 'GRI Standards', 'IDX manufacturers']`
+  - Links to the existing `sustainability-reporting-firm-value.mdx` detail page
+  - **No advisor field rendered.** (Decision 2.)
+  - **No PDF path.** (Decision 1 — abstract only.)
+- [ ] Update `src/content/education.json` to shrink the thesis bullet to a pointer: *"See Research section."*
 
-### 5.3 Must-prune
+### 5.3 Must-prune &amp; restructure
 
-- [ ] Remove `instagram` and `tiktok` from `contact.json` **or** add a `professional: boolean` flag and only render `professional: true` links in components.
+- [ ] Restructure `src/content/contact.json` from a flat shape to `{ professional: { email, linkedin, github, location }, personal: { instagram, tiktok, note? } }` (decision 5).
+- [ ] Update `src/types/content.ts` `ContactData` shape accordingly.
+- [ ] Update `src/content/site.json`:
+  - `title: "Dzaki Muhammad Yusfian — Accounting · Finance · Tax · Audit Enthusiast"`
+  - `description: "Dzaki Muhammad Yusfian is an accounting, finance, tax, and audit enthusiast. Operations Officer at Kolosal AI, Jakarta. Undergraduate research on sustainability reporting and firm value in Indonesian manufacturing."`
 
 ### 5.4 Schema additions
 
@@ -229,6 +236,8 @@ Keep `hover-glow.tsx`, `scroll-reveal.tsx`, `stagger-children.tsx`, `page-transi
 | `src/components/ui/skill-pill.tsx` | **New** | Replaces SkillBar. |
 | `src/components/ui/status-ribbon.tsx` | **New** | Hero status line component. |
 | `src/components/layout/navbar.tsx` | **Update** | Add persistent CV download button; adjust typography. |
+| `src/app/personal/page.tsx` | **New** | Minimal `/personal` page — name, portrait, 1-paragraph note, Instagram + TikTok links. Linked from footer only (decision 5). |
+| `src/components/layout/footer.tsx` | **Update** | Add small `personal →` link on the right side. Strip Instagram/TikTok from the main professional contact rendering. |
 
 ### 6.3 Tests
 
@@ -342,10 +351,12 @@ All motion wrapped in `useReducedMotion` check — when `true`, motion component
 To be expanded by writing-plans into a full plan. Rough order:
 
 **Chunk 1 — Content surgery (no UI work):**
-- Remove placeholder research entry.
-- Expand thesis metadata in research index.
-- Prune Instagram / TikTok from professional rendering.
-- Clarify Brevet duplication.
+- Remove `placeholder-research` entry from research index.
+- Populate the thesis entry with real metadata (abstract, tags, date, `featured:true`) — user to supply real abstract text during this chunk.
+- Remove the UGM `Brevet Pajak AB` entry from `courses.json` (decision 4).
+- Restructure `contact.json` into `{ professional, personal }` shape (decision 5).
+- Update `site.json` title and description to new wording (decision 6).
+- Shrink the thesis bullet in `education.json` to a pointer.
 
 **Chunk 2 — Design tokens + base CSS:**
 - Replace globals.css theme section.
@@ -374,7 +385,7 @@ To be expanded by writing-plans into a full plan. Rough order:
 - Persistent CV button.
 - Reduced social list.
 
-**Chunk 7 — Research detail page update.**
+**Chunk 7 — Research detail page update + `/personal` page creation.**
 
 **Chunk 8 — Print stylesheet + SEO updates.**
 
@@ -384,18 +395,29 @@ To be expanded by writing-plans into a full plan. Rough order:
 
 ---
 
-## 13. Open questions for the user
+## 13. Resolved content decisions
 
-Flagged here so writing-plans can address them before implementation begins:
+All six content questions have been answered by the user. The spec now reflects these choices — they are no longer open.
 
-1. **Thesis PDF publishing:** is the thesis PDF shareable publicly? If yes, we host it under `public/files/research/`. If not, the "Download PDF" CTA becomes "Request PDF (email)".
-2. **Thesis advisor name:** publish or not?
-3. **Other research pieces:** user said they have more than the thesis (audience E). Please provide titles, brief descriptions, dates, and any PDFs so chunks 1 and 5 can be populated with real content.
-4. **Brevet duplication:** IAI Brevet vs UGM Brevet — same credential, related, or different? Content change needed.
-5. **Instagram / TikTok fate:** strip entirely, or move to a separate "Personal" page linked in footer only? (Default: strip entirely from professional rendering; content JSON retains them behind a `professional:true` flag.)
-6. **Currency of site.json description:** am I clear to update the description and title to include "sustainability reporting research"?
+1. **Thesis PDF publishing → Abstract + key findings only.** No `/files/research/thesis.pdf` download. The Featured Thesis card's action link becomes `Read abstract →` pointing at the existing MDX detail route `/research/sustainability-reporting-firm-value`. No PDF download button on the homepage thesis card.
 
-(Dark mode retained as a toggle with light as the default — this is a decided point, not an open question; see Design Decisions log.)
+2. **Thesis advisor name → do not publish.** Omit the advisor line from the Featured Thesis card. Remove the `advisor` concept from the homepage rendering. (The `ResearchEntry.advisor` schema field still exists as optional so future entries can use it.)
+
+3. **Other research pieces → thesis only for now.** The Research section renders:
+   - The Featured Thesis card (only).
+   - The secondary research grid is hidden when `research.length ≤ 1`. The grid's JSX/CSS is built so that adding entries later does not require restructuring the section.
+
+4. **Brevet duplication → same credential listed twice by mistake.** Keep only the IAI (Ikatan Akuntan Indonesia) entry in `certifications.json`. Remove the UGM entry `Brevet Pajak AB` from `courses.json`. Rationale for keeping IAI: IAI is the professional accounting body; its certification is the authoritative version. (If it turns out the two were different after all, the removed entry can be restored from git history — the change is one content edit.)
+
+5. **Instagram / TikTok → separate `/personal` page.** Build a new route at `/personal` rendering a minimal page with name, portrait thumbnail, a 1-paragraph personal note, and the Instagram + TikTok links. Link to this page *only* from the main footer (small text, right-aligned: `personal →`). It is not in the navbar, not in the main contact section, not in the hero. The `contact.json` shape evolves: `{ professional: { email, linkedin, github, location }, personal: { instagram, tiktok, note? } }`.
+
+6. **Site.json title → user's custom wording.**
+   - New title: `Dzaki Muhammad Yusfian — Accounting · Finance · Tax · Audit Enthusiast`
+     - (Pipe separators in the user's input are rendered as middots `·` to avoid the pipe character's poor typographic appearance; the effect is identical.)
+   - New description: `Dzaki Muhammad Yusfian is an accounting, finance, tax, and audit enthusiast. Operations Officer at Kolosal AI, Jakarta. Undergraduate research on sustainability reporting and firm value in Indonesian manufacturing.`
+   - OG image title text updates to match.
+
+(Dark mode retained as a toggle with light as the default — see Design Decisions log.)
 
 ---
 
