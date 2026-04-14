@@ -38,4 +38,10 @@ describe('Card', () => {
     const glowDiv = card.querySelector('.pointer-events-none')
     expect(glowDiv).not.toBeInTheDocument()
   })
+
+  it('includes hover shadow class', () => {
+    const { container } = render(<Card>x</Card>)
+    const cls = (container.firstChild as HTMLElement).className
+    expect(cls).toMatch(/hover:shadow-\[0_8px_24px/)
+  })
 })
