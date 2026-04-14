@@ -13,9 +13,9 @@ describe('Badge', () => {
     expect(container.firstElementChild?.tagName).toBe('SPAN')
   })
 
-  it('has shimmer animation class', () => {
-    const { container } = render(<Badge>Shimmer</Badge>)
-    expect(container.firstElementChild?.className).toContain('animate-')
+  it('has border class for muted tag style', () => {
+    const { container } = render(<Badge>Tag</Badge>)
+    expect(container.firstElementChild?.className).toContain('border')
   })
 
   it('applies custom className', () => {
