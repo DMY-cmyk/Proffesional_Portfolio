@@ -22,7 +22,7 @@ describe('HeroSection', () => {
 
   it('renders the profile title', () => {
     render(<HeroSection />)
-    expect(screen.getByText(/accounting|finance/i)).toBeInTheDocument()
+    expect(screen.getByText(/accounting.*sustainability research/i)).toBeInTheDocument()
   })
 
   it('renders the tagline', () => {

@@ -21,7 +21,7 @@ describe('ProfileSection', () => {
 
   it('renders the bio text', () => {
     render(<ProfileSection />)
-    expect(screen.getByText(/accounting|finance|professional/i)).toBeInTheDocument()
+    expect(screen.getByText(/specializing|tax|audit/i)).toBeInTheDocument()
   })
 
   it('renders the brand statement as a blockquote', () => {

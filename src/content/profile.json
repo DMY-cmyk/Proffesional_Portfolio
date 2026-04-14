@@ -1,8 +1,19 @@
 {
   "name": "Dzaki Muhammad Yusfian",
-  "title": "Accounting & Finance Professional",
-  "tagline": "Specializing in Tax, Audit, and Financial Analysis",
-  "bio": "A dedicated accounting and finance professional with expertise in tax compliance, auditing, and financial analysis. Committed to transforming complex financial data into actionable insights that drive business decisions.",
+  "title": "Accounting, tax & sustainability research",
+  "tagline": "Early-career accounting professional researching sustainability reporting and firm value.",
+  "bio": "Specializing in tax compliance, auditing, and financial analysis — with ongoing research on how sustainability reporting affects firm value in Indonesian manufacturing. Previously a Tax Volunteer at DJP, serving 90+ taxpayers and running community outreach across Bantul Regency.",
   "brandStatement": "Transforming financial complexity into clarity.",
-  "avatar": "/images/profile/avatar.jpg"
+  "avatar": "/images/profile/avatar.jpg",
+  "headline": {
+    "plain": "Accounting, tax, &",
+    "emphasis": "sustainability research",
+    "suffix": "."
+  },
+  "positioning": "Early-career professional working at the intersection of financial reporting and sustainability disclosure.",
+  "statusLine": {
+    "now": "Operations Officer @ Kolosal AI",
+    "basedIn": "Jakarta, Indonesia",
+    "education": "B.Acc. · STIE YKPN · Apr 2026"
+  }
 }
