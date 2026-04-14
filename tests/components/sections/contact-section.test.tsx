@@ -4,44 +4,48 @@ import { ContactSection } from '@/components/sections/contact-section'
 
 vi.mock('framer-motion', () => ({
   motion: {
-    div: ({ children, ...props }: any) => <div {...props}>{children}</div>,
-    button: ({ children, ...props }: any) => <button {...props}>{children}</button>,
-    a: ({ children, ...props }: any) => <a {...props}>{children}</a>,
+    div: ({ children, ...p }: any) => <div {...p}>{children}</div>,
+    p: ({ children, ...p }: any) => <p {...p}>{children}</p>,
+    a: ({ children, ...p }: any) => <a {...p}>{children}</a>,
+    button: ({ children, ...p }: any) => <button {...p}>{children}</button>,
+    span: ({ children, ...p }: any) => <span {...p}>{children}</span>,
+    h2: ({ children, ...p }: any) => <h2 {...p}>{children}</h2>,
   },
+  AnimatePresence: ({ children }: any) => <>{children}</>,
 }))
 
-describe('ContactSection', () => {
+describe('ContactSection (redesigned)', () => {
   it('renders the Contact heading', () => {
     render(<ContactSection />)
-    expect(
-      screen.getByRole('heading', { name: /let.*build.*something.*together/i })
-    ).toBeInTheDocument()
+    expect(screen.getByRole('heading', { level: 2 })).toBeInTheDocument()
   })
 
-  it('renders status badge with open to opportunities', () => {
+  it('renders the professional email as a mailto', () => {
     render(<ContactSection />)
-    expect(screen.getByText(/open to opportunities/i)).toBeInTheDocument()
-  })
-
-  it('renders email link', () => {
-    render(<ContactSection />)
-    const emailLink = screen.getByRole('link', { name: /email/i })
+    const emailLink = screen.getByRole('link', { name: /email me/i })
     expect(emailLink).toHaveAttribute('href', expect.stringContaining('mailto:'))
   })
 
-  it('renders LinkedIn link', () => {
+  it('renders the LinkedIn link', () => {
     render(<ContactSection />)
-    const linkedinLink = screen.getByRole('link', { name: /linkedin/i })
-    expect(linkedinLink).toHaveAttribute('href', expect.stringContaining('linkedin'))
+    expect(screen.getByRole('link', { name: /linkedin/i })).toBeInTheDocument()
   })
 
-  it('renders download buttons', () => {
+  it('renders a structured contact list with email / linkedin / github / location', () => {
     render(<ContactSection />)
-    expect(screen.getByText(/download cv/i)).toBeInTheDocument()
+    expect(screen.getByText(/^Email$/i)).toBeInTheDocument()
+    expect(screen.getByText(/^LinkedIn$/i)).toBeInTheDocument()
+    expect(screen.getByText(/^GitHub$/i)).toBeInTheDocument()
+    expect(screen.getByText(/^Location$/i)).toBeInTheDocument()
   })
 
-  it('has the contact section id', () => {
+  it('does NOT render Instagram in the professional contact section', () => {
     render(<ContactSection />)
-    expect(document.getElementById('contact')).toBeInTheDocument()
+    expect(screen.queryByRole('link', { name: /instagram/i })).not.toBeInTheDocument()
+  })
+
+  it('does NOT render TikTok in the professional contact section', () => {
+    render(<ContactSection />)
+    expect(screen.queryByRole('link', { name: /tiktok/i })).not.toBeInTheDocument()
   })
 })

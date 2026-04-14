@@ -1,84 +1,53 @@
 import { SectionWrapper } from '@/components/layout/section-wrapper'
 import { Button } from '@/components/ui/button'
-import { ContactForm } from '@/components/ui/contact-form'
-import { getContact, getDownloads } from '@/data/content'
-import { StaggerChildren } from '@/components/motion/stagger-children'
-
-function DownloadIcon({ className }: { className?: string }) {
-  return (
-    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-    </svg>
-  )
-}
+import { getProfessionalContact } from '@/data/content'
 
 export function ContactSection() {
-  const contact = getContact()
-  const downloads = getDownloads()
+  const c = getProfessionalContact()
+  const linkedinHandle = c.linkedin.replace(/https?:\/\/(www\.)?linkedin\.com/, '')
+  const githubHandle = c.github.replace(/https?:\/\/(www\.)?github\.com/, '@')
 
   return (
-    <SectionWrapper id="contact">
-      <div className="space-y-8">
-        <div className="flex items-center gap-4 font-mono text-sm text-muted-foreground">
-          <span>05</span>
-          <span className="h-px w-8 bg-border" />
-          <span>Connect</span>
-        </div>
-
-        <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-normal text-foreground tracking-tight">
-          Let&apos;s build<br /><em>something together.</em>
-        </h2>
-
-        <div className="flex items-center">
-          <span className="inline-block h-2 w-2 rounded-full bg-green-500 animate-pulse mr-2" />
-          <span className="text-sm text-muted-foreground">Open to opportunities</span>
-        </div>
-
-        <p className="text-muted-foreground max-w-xl">
-          Always open to interesting conversations and collaboration opportunities.
-        </p>
-
-        <StaggerChildren className="flex flex-wrap gap-4">
-          <Button href={contact.linkedin} variant="primary" size="lg" external>
-            <span aria-label="LinkedIn">LinkedIn</span>
-          </Button>
-          <Button href={contact.github} variant="secondary" size="lg" external>
-            <span aria-label="GitHub">GitHub</span>
-          </Button>
-          <Button href={`mailto:${contact.email}`} variant="secondary" size="lg">
-            <span aria-label="Email">✉ Email Me</span>
-          </Button>
-          {contact.instagram && (
-            <Button href={contact.instagram} variant="ghost" size="lg" external>
-              Instagram
+    <SectionWrapper id="contact" className="bg-surface-alt">
+      <div className="grid gap-12 md:grid-cols-[1.3fr_1fr] items-start">
+        <div>
+          <span className="font-mono text-[11px] uppercase tracking-widest text-accent font-medium">
+            Get in touch
+          </span>
+          <h2 className="font-display text-3xl md:text-4xl font-medium leading-[1.1] tracking-tight mt-4 mb-4">
+            Open to research collaboration, internships, and conversation.
+          </h2>
+          <p className="text-[color:var(--foreground)] opacity-90 text-[17px] leading-relaxed max-w-xl mb-7">
+            I&apos;m currently open to discussions around tax, audit, and sustainability-reporting research — including graduate program opportunities. The fastest way to reach me is email or LinkedIn.
+          </p>
+          <div className="flex flex-wrap gap-3">
+            <Button href={`mailto:${c.email}`} variant="primary" size="lg">
+              Email me
             </Button>
-          )}
-          {contact.tiktok && (
-            <Button href={contact.tiktok} variant="ghost" size="lg" external>
-              TikTok
+            <Button href={c.linkedin} variant="secondary" size="lg" external>
+              LinkedIn →
             </Button>
-          )}
-        </StaggerChildren>
-
-        {/* Contact form */}
-        <div className="border-t border-border pt-8">
-          <h3 className="text-xl font-semibold text-foreground mb-4">Send me a message</h3>
-          <div className="max-w-xl">
-            <ContactForm />
           </div>
         </div>
 
-        <div className="border-t border-border pt-8">
-          <p className="text-muted-foreground mb-4">Download my documents:</p>
-          <StaggerChildren className="flex flex-wrap gap-4">
-            {downloads.items.map((item) => (
-              <Button key={item.filePath} href={item.filePath} variant="primary" size="lg" external>
-                <DownloadIcon className="h-4 w-4 mr-2" />
-                {item.label}
-              </Button>
-            ))}
-          </StaggerChildren>
-        </div>
+        <ul className="list-none p-0">
+          <li className="flex items-center gap-4 py-3.5 border-b border-border">
+            <span className="font-mono text-[11px] uppercase tracking-widest text-subtle w-20 shrink-0">Email</span>
+            <span className="text-foreground font-medium text-[15px]">{c.email}</span>
+          </li>
+          <li className="flex items-center gap-4 py-3.5 border-b border-border">
+            <span className="font-mono text-[11px] uppercase tracking-widest text-subtle w-20 shrink-0">LinkedIn</span>
+            <span className="text-foreground font-medium text-[15px]">{linkedinHandle}</span>
+          </li>
+          <li className="flex items-center gap-4 py-3.5 border-b border-border">
+            <span className="font-mono text-[11px] uppercase tracking-widest text-subtle w-20 shrink-0">GitHub</span>
+            <span className="text-foreground font-medium text-[15px]">{githubHandle}</span>
+          </li>
+          <li className="flex items-center gap-4 py-3.5">
+            <span className="font-mono text-[11px] uppercase tracking-widest text-subtle w-20 shrink-0">Location</span>
+            <span className="text-foreground font-medium text-[15px]">{c.location}</span>
+          </li>
+        </ul>
       </div>
     </SectionWrapper>
   )

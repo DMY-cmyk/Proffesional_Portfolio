@@ -84,10 +84,10 @@ describe('getCourses', () => {
 })
 
 describe('getContact', () => {
-  it('returns contact info with email and linkedin', () => {
+  it('returns contact info with professional email and linkedin', () => {
     const contact = getContact()
-    expect(contact.email).toBeTruthy()
-    expect(contact.linkedin).toBeTruthy()
+    expect(contact.professional.email).toMatch(/@/)
+    expect(contact.professional.linkedin).toMatch(/linkedin/)
   })
 })
 
