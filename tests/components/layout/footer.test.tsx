@@ -1,51 +1,29 @@
-import { describe, it, expect, vi, afterEach } from 'vitest'
-import { render, screen, cleanup } from '@testing-library/react'
+import { describe, it, expect, vi } from 'vitest'
+import { render, screen } from '@testing-library/react'
 import { Footer } from '@/components/layout/footer'
 
 vi.mock('framer-motion', () => ({
   motion: {
-    div: ({ children, initial, animate, exit, transition, whileHover, whileInView, whileTap, viewport, variants, ...props }: any) => <div {...props}>{children}</div>,
-    button: ({ children, initial, animate, exit, transition, whileHover, whileInView, whileTap, viewport, variants, ...props }: any) => <button {...props}>{children}</button>,
+    button: ({ children, ...p }: any) => <button {...p}>{children}</button>,
   },
 }))
 
-describe('Footer', () => {
-  afterEach(() => {
-    cleanup()
-  })
-
-  it('renders copyright text', () => {
+describe('Footer (redesigned)', () => {
+  it('renders copyright year', () => {
     render(<Footer />)
-    expect(screen.getByText(/All rights reserved/)).toBeInTheDocument()
+    expect(screen.getByText(new RegExp(`${new Date().getFullYear()}`))).toBeInTheDocument()
   })
-
-  it('renders social links with accessible labels', () => {
+  it('renders the personal link to /personal', () => {
     render(<Footer />)
-    expect(screen.getByLabelText('LinkedIn')).toBeInTheDocument()
-    expect(screen.getByLabelText('GitHub')).toBeInTheDocument()
-    expect(screen.getByLabelText('Email')).toBeInTheDocument()
+    const link = screen.getByRole('link', { name: /personal/i })
+    expect(link.getAttribute('href')).toMatch(/\/personal$/)
   })
-
-  it('renders social links as external links', () => {
+  it('does NOT render Instagram in the footer', () => {
     render(<Footer />)
-    const linkedinLink = screen.getByLabelText('LinkedIn')
-    expect(linkedinLink).toHaveAttribute('target', '_blank')
-    expect(linkedinLink).toHaveAttribute('rel', 'noopener noreferrer')
+    expect(screen.queryByRole('link', { name: /instagram/i })).not.toBeInTheDocument()
   })
-
-  it('renders a back-to-top button', () => {
+  it('does NOT render TikTok in the footer', () => {
     render(<Footer />)
-    expect(screen.getByRole('button', { name: /top|scroll/i })).toBeInTheDocument()
-  })
-
-  it('renders the tagline text', () => {
-    render(<Footer />)
-    expect(screen.getByText('Designed & built with curiosity.')).toBeInTheDocument()
-  })
-
-  it('renders a gradient top border', () => {
-    const { container } = render(<Footer />)
-    const gradientDiv = container.querySelector('.bg-gradient-to-r')
-    expect(gradientDiv).toBeInTheDocument()
+    expect(screen.queryByRole('link', { name: /tiktok/i })).not.toBeInTheDocument()
   })
 })
