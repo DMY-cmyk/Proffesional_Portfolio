@@ -19,7 +19,7 @@ export function Navbar() {
   return (
     <header
       className={`fixed top-2.5 left-1/2 -translate-x-1/2 z-50 w-[calc(100vw-24px)] rounded-xl md:top-3.5 md:w-[min(1200px,calc(100vw-40px))] md:rounded-2xl bg-background/70 backdrop-blur-2xl backdrop-saturate-150 border border-border shadow-sm transition-all duration-300 ${
-        hasScrolled ? 'bg-background/85 shadow-md' : ''
+        hasScrolled ? 'bg-background/85 shadow-[0_4px_16px_-8px_rgba(15,20,25,0.15)]' : ''
       }`}
     >
       <div className="flex items-center justify-between px-5 h-14">
