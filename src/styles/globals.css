@@ -157,3 +157,9 @@ select:focus-visible {
 .animate-scroll-hint { animation: scroll-hint 2.4s ease-in-out infinite; }
 
 @import './print.css';
+
+/* Custom cursor activation — hides native cursor when CustomCursor is mounted */
+html.custom-cursor-active,
+html.custom-cursor-active * {
+  cursor: none !important;
+}
