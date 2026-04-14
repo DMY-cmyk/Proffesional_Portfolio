@@ -2,14 +2,12 @@
 
 import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/button'
-import { AuroraBackground } from '@/components/motion/aurora-background'
 
 const easeOut: [number, number, number, number] = [0.22, 1, 0.36, 1]
 
 export default function NotFound() {
   return (
     <>
-      <AuroraBackground />
       <div className="flex min-h-[80vh] flex-col items-center justify-center px-4 text-center relative z-10">
         <motion.h1
           className="text-8xl md:text-9xl font-bold hero-gradient-text"

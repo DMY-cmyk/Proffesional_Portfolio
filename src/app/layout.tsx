@@ -1,4 +1,3 @@
-import dynamic from 'next/dynamic'
 import { Inter, Newsreader, JetBrains_Mono } from 'next/font/google'
 import '@/styles/globals.css'
 import { siteMetadata } from './metadata'
@@ -9,11 +8,6 @@ import { CustomCursor } from '@/components/motion/custom-cursor'
 import { PageTransition } from '@/components/motion/page-transition'
 import { JsonLd } from '@/components/layout/json-ld'
 import { PreloadLinks } from '@/components/layout/preload-links'
-
-const AuroraBackground = dynamic(
-  () => import('@/components/motion/aurora-background').then((m) => ({ default: m.AuroraBackground })),
-  { loading: () => null }
-)
 
 const inter = Inter({
   subsets: ['latin'],
@@ -57,7 +51,6 @@ export default function RootLayout({
         <a href="#main-content" className="skip-to-content">Skip to content</a>
         <JsonLd />
         <ThemeProvider>
-          <AuroraBackground />
           <CustomCursor />
           <Navbar />
           <PageTransition>
