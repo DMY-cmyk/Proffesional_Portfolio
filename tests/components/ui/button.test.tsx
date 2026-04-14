@@ -65,4 +65,9 @@ describe('Button', () => {
     await user.click(screen.getByRole('button'))
     expect(handleClick).toHaveBeenCalledOnce()
   })
+
+  it('applies hover scale class', () => {
+    const { container } = render(<Button>go</Button>)
+    expect((container.firstChild as HTMLElement).className).toMatch(/hover:scale-\[1\.02\]/)
+  })
 })

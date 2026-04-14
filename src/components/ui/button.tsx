@@ -18,7 +18,7 @@ interface ButtonProps {
 }
 
 const variantStyles: Record<string, string> = {
-  primary: 'bg-foreground text-background hover:bg-accent font-medium',
+  primary: 'bg-foreground text-background hover:bg-[#0a3d47] font-medium',
   secondary: 'border border-foreground text-foreground hover:bg-foreground hover:text-background font-medium',
   ghost: 'text-muted hover:text-foreground hover:bg-muted/20',
 }
@@ -42,7 +42,7 @@ export function Button({
   ariaLabel,
 }: ButtonProps) {
   const classes = cn(
-    'inline-flex items-center justify-center gap-2 rounded-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent',
+    'inline-flex items-center justify-center gap-2 rounded-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent hover:scale-[1.02]',
     variantStyles[variant],
     sizeStyles[size],
     disabled && 'opacity-50 pointer-events-none',
