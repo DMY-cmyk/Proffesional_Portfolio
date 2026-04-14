@@ -3,73 +3,65 @@
 @variant dark (&:where(.dark, .dark *));
 
 @theme {
-  /* Gold accents (same in both themes) */
-  --color-gold-400: #e5c158;
-  --color-gold-500: #d4af37;
-  --color-gold-600: #b8941f;
-  --color-gold-700: #9a7518;
+  /* Accent tokens — exposed to Tailwind as color-* utilities */
+  --color-accent: var(--accent-primary);
+  --color-accent-dark: var(--accent-primary-dark);
+  --color-highlight: var(--accent-highlight);
+  --color-highlight-soft: var(--accent-highlight-soft);
 
   /* Semantic tokens — reference CSS variables that switch with theme */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-surface: var(--surface);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
+  --color-surface-alt: var(--surface-alt);
   --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
+  --color-subtle: var(--subtle);
   --color-border: var(--border);
 
   /* Font families */
-  --font-display: 'Instrument Serif', 'Georgia', serif;
+  --font-display: 'Newsreader', 'Georgia', serif;
   --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
 }
 
-/* Light theme values (default for :root) */
+/* Light theme (default) — paper + ink */
 :root {
-  --background: #faf9f7;
-  --foreground: #0f172a;
+  --background: #fbf9f4;
   --surface: #ffffff;
-  --card: #ffffff;
-  --card-foreground: #0f172a;
-  --muted: #f5f3f0;
-  --muted-foreground: #3f3a36;
-  --border: #c8c2b8;
+  --surface-alt: #fefcf6;
+  --foreground: #0f1419;
+  --muted: #4a5568;
+  --subtle: #718096;
+  --border: #e6ddd0;
+
+  --accent-primary: #0d4f5c;
+  --accent-primary-dark: #0a3d47;
+  --accent-highlight: #b8944a;
+  --accent-highlight-soft: #fef7e0;
 }
 
-/* Dark theme values */
+/* Dark theme — ink + warm type */
 .dark {
-  --background: #09090b;
-  --foreground: #e4e4e7;
-  --surface: #111113;
-  --card: #14141b;
-  --card-foreground: #e4e4e7;
-  --muted: #1a1a24;
-  --muted-foreground: #a1a1aa;
-  --border: #27272a;
+  --background: #0f1419;
+  --surface: #1a2028;
+  --surface-alt: #141a22;
+  --foreground: #f1e9d8;
+  --muted: #a1a1aa;
+  --subtle: #71717a;
+  --border: #2d3748;
+
+  --accent-primary: #2dd4bf;
+  --accent-primary-dark: #14b8a6;
+  --accent-highlight: #d4b574;
+  --accent-highlight-soft: #3f2e1a;
 }
 
-/* Base styles */
 body {
   font-family: var(--font-inter), ui-sans-serif, system-ui, -apple-system, sans-serif;
   background-color: var(--background);
   color: var(--foreground);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-body::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 9998;
-  opacity: 0.025;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-size: 200px 200px;
-}
-
-.dark body::after {
-  opacity: 0.04;
+  font-feature-settings: 'ss01', 'cv11';
 }
 
 html {
@@ -77,45 +69,9 @@ html {
 }
 
 ::selection {
-  background-color: var(--color-gold-500);
-  color: #000;
+  background-color: var(--accent-primary);
+  color: white;
 }
-
-/* Hero name gradient shimmer */
-.hero-gradient-text {
-  background: linear-gradient(
-    120deg,
-    var(--foreground) 0%,
-    var(--foreground) 35%,
-    #d4af37 50%,
-    var(--foreground) 65%,
-    var(--foreground) 100%
-  );
-  background-size: 200% 100%;
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: shimmer 6s ease-in-out infinite;
-}
-
-@keyframes shimmer {
-  0%, 100% { background-position: 200% center; }
-  50% { background-position: -200% center; }
-}
-
-/* Scroll hint animation */
-@keyframes scroll-hint {
-  0%, 100% { opacity: 1; transform: translateY(0); }
-  50% { opacity: 0.5; transform: translateY(8px); }
-}
-.animate-scroll-hint { animation: scroll-hint 2s ease-in-out infinite; }
-
-/* Avatar ambient glow animation */
-@keyframes avatar-glow {
-  0%, 100% { opacity: 0.4; transform: scale(1); }
-  50% { opacity: 0.7; transform: scale(1.05); }
-}
-.animate-avatar-glow { animation: avatar-glow 4s ease-in-out infinite; }
 
 /* Font utility classes */
 .font-display {
@@ -145,39 +101,17 @@ html {
   width: 100%;
 }
 
-/* Gold accent text — dark amber in light mode, original gold in dark mode */
-.text-gold-accent {
-  color: #78600f;
+/* Accent text helpers */
+.text-accent {
+  color: var(--accent-primary);
 }
-.dark .text-gold-accent {
-  color: #d4af37;
-}
-
-.hover-gold-accent:hover {
-  color: #78600f;
-}
-.dark .hover-gold-accent:hover {
-  color: #d4af37;
-}
-
-/* Badge shimmer */
-@keyframes badge-shimmer {
-  0% { background-position: -100% 0; }
-  100% { background-position: 200% 0; }
-}
-
-/* Skeleton shimmer for loading states */
-@keyframes skeleton-shimmer {
-  0%, 100% { opacity: 0.5; }
-  50% { opacity: 1; }
-}
-.animate-skeleton-shimmer {
-  animation: skeleton-shimmer 1.5s ease-in-out infinite;
+.text-highlight {
+  color: var(--accent-highlight);
 }
 
 /* Touch tap highlight */
 a, button {
-  -webkit-tap-highlight-color: rgba(212, 175, 55, 0.15);
+  -webkit-tap-highlight-color: rgba(13, 79, 92, 0.15);
 }
 
 /* Global focus-visible styles */
@@ -186,7 +120,7 @@ button:focus-visible,
 input:focus-visible,
 textarea:focus-visible,
 select:focus-visible {
-  outline: 2px solid var(--color-gold-500);
+  outline: 2px solid var(--accent-primary);
   outline-offset: 2px;
 }
 
@@ -197,11 +131,29 @@ select:focus-visible {
   top: 0;
   z-index: 9999;
   padding: 0.75rem 1.5rem;
-  background: var(--color-gold-500);
-  color: #000;
+  background: var(--accent-primary);
+  color: white;
   font-weight: 600;
   border-radius: 0 0 0.5rem 0;
 }
 .skip-to-content:focus {
   left: 0;
 }
+
+/* Skeleton shimmer for loading states (kept) */
+@keyframes skeleton-shimmer {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+.animate-skeleton-shimmer {
+  animation: skeleton-shimmer 1.5s ease-in-out infinite;
+}
+
+/* Scroll hint animation (kept, subtler) */
+@keyframes scroll-hint {
+  0%, 100% { opacity: 0.7; transform: translateY(0); }
+  50% { opacity: 0.3; transform: translateY(4px); }
+}
+.animate-scroll-hint { animation: scroll-hint 2.4s ease-in-out infinite; }
+
+@import './print.css';

@@ -1,0 +1,31 @@
+/* Print styles — clean CV-like output when a reviewer prints the site. */
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+    font-size: 11pt;
+  }
+  header, footer, .navbar, .skip-to-content, nav, .mobile-only {
+    display: none !important;
+  }
+  a {
+    color: black !important;
+    text-decoration: none !important;
+  }
+  a[href]::after {
+    content: " (" attr(href) ")";
+    font-size: 9pt;
+    color: #444;
+  }
+  section {
+    page-break-inside: avoid;
+    padding: 0.5rem 0 !important;
+    border: none !important;
+  }
+  .dark {
+    color-scheme: light !important;
+  }
+  .print-hide {
+    display: none !important;
+  }
+}
