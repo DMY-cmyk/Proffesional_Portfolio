@@ -3,44 +3,41 @@ import { render, screen } from '@testing-library/react'
 import { SkillsSection } from '@/components/sections/skills-section'
 
 vi.mock('framer-motion', () => ({
-  motion: {
-    div: ({ children, ...props }: any) => <div {...props}>{children}</div>,
-  },
+  motion: { div: ({ children, ...p }: any) => <div {...p}>{children}</div> },
+  AnimatePresence: ({ children }: any) => <>{children}</>,
 }))
 
-describe('SkillsSection', () => {
+describe('SkillsSection (redesigned)', () => {
   it('renders the Skills heading', () => {
     render(<SkillsSection />)
-    expect(
-      screen.getByRole('heading', { name: /skills & achievements/i })
-    ).toBeInTheDocument()
+    expect(screen.getByRole('heading', { level: 2, name: /skills/i })).toBeInTheDocument()
   })
 
-  it('renders skill categories', () => {
+  it('renders the three category labels', () => {
     render(<SkillsSection />)
-    expect(screen.getByText('Technical Skills')).toBeInTheDocument()
-    expect(screen.getByText('Tools & Software')).toBeInTheDocument()
-    expect(screen.getByText('Soft Skills')).toBeInTheDocument()
+    expect(screen.getByText(/^Technical$/i)).toBeInTheDocument()
+    expect(screen.getByText(/Tools & Software/i)).toBeInTheDocument()
+    expect(screen.getByText(/Research & Soft/i)).toBeInTheDocument()
   })
 
-  it('renders individual skill items with progress bars', () => {
+  it('renders some skills', () => {
     render(<SkillsSection />)
     expect(screen.getByText('Financial Reporting')).toBeInTheDocument()
     expect(screen.getByText('Microsoft Excel')).toBeInTheDocument()
   })
 
-  it('hides awards subsection when no awards exist', () => {
-    render(<SkillsSection />)
-    expect(screen.queryByText(/awards/i)).not.toBeInTheDocument()
+  it('does NOT render any percentage text', () => {
+    const { container } = render(<SkillsSection />)
+    expect(container.textContent).not.toMatch(/\d{2,3}%/)
   })
 
-  it('renders courses subsection', () => {
-    render(<SkillsSection />)
-    expect(screen.getByText(/courses|training/i)).toBeInTheDocument()
+  it('does NOT render any progress bar elements', () => {
+    const { container } = render(<SkillsSection />)
+    expect(container.querySelectorAll('[role="progressbar"]')).toHaveLength(0)
   })
 
-  it('has the skills section id', () => {
+  it('renders context labels where provided', () => {
     render(<SkillsSection />)
-    expect(document.getElementById('skills')).toBeInTheDocument()
+    expect(screen.getByText(/· daily/i)).toBeInTheDocument()
   })
 })

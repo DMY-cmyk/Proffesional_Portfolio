@@ -1,32 +1,35 @@
 [
   {
-    "category": "Technical Skills",
+    "category": "Technical",
     "items": [
-      { "name": "Financial Reporting", "level": 90 },
-      { "name": "Tax Compliance", "level": 85 },
-      { "name": "Auditing", "level": 80 },
-      { "name": "Budgeting & Forecasting", "level": 75 },
-      { "name": "Financial Analysis", "level": 85 }
+      { "name": "Financial Reporting", "context": "applied" },
+      { "name": "Tax Compliance", "context": "applied" },
+      { "name": "Auditing", "context": "coursework" },
+      { "name": "Budgeting & Forecasting", "context": "applied" },
+      { "name": "Financial Analysis", "context": "applied" },
+      { "name": "Account Reconciliation", "context": "applied" }
     ]
   },
   {
     "category": "Tools & Software",
     "items": [
-      { "name": "Microsoft Excel", "level": 90 },
-      { "name": "SAP", "level": 70 },
-      { "name": "MYOB", "level": 75 },
-      { "name": "e-SPT", "level": 85 },
-      { "name": "SPSS", "level": 65 }
+      { "name": "Microsoft Excel", "context": "daily" },
+      { "name": "SAP", "context": "project" },
+      { "name": "MYOB", "context": "coursework" },
+      { "name": "e-SPT", "context": "DJP" },
+      { "name": "SPSS", "context": "research" },
+      { "name": "Core Tax", "context": "DJP" }
     ]
   },
   {
-    "category": "Soft Skills",
+    "category": "Research & Soft",
     "items": [
-      { "name": "Analytical Thinking", "level": 90 },
-      { "name": "Attention to Detail", "level": 85 },
-      { "name": "Team Collaboration", "level": 80 },
-      { "name": "Communication", "level": 80 },
-      { "name": "Time Management", "level": 85 }
+      { "name": "Panel data regression" },
+      { "name": "Analytical thinking" },
+      { "name": "Attention to detail" },
+      { "name": "Team collaboration" },
+      { "name": "Communication" },
+      { "name": "Time management" }
     ]
   }
 ]
