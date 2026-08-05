@@ -16,7 +16,7 @@ export function HoverGlow({ children, className }: HoverGlowProps) {
       className={cn('group relative', className)}
     >
       {/* Glow effect */}
-      <div className="absolute -inset-0.5 rounded-lg bg-gold-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10" />
+      <div className="absolute -inset-0.5 rounded-lg bg-highlight/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10" />
       {children}
     </motion.div>
   )

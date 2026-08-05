@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { cn } from '@/utils/cn'
 import { withBasePath } from '@/lib/base-path'
@@ -14,11 +14,20 @@ interface MobileMenuProps {
 export function MobileMenu({ items, activeSection }: MobileMenuProps) {
   const [isOpen, setIsOpen] = useState(false)
 
+  useEffect(() => {
+    if (!isOpen) return
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setIsOpen(false)
+    }
+    window.addEventListener('keydown', onKeyDown)
+    return () => window.removeEventListener('keydown', onKeyDown)
+  }, [isOpen])
+
   return (
     <div className="md:hidden">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="p-2 text-muted-foreground hover:text-foreground transition-colors"
+        className="p-2.5 text-muted hover:text-foreground transition-colors"
         aria-label={isOpen ? 'Close menu' : 'Open menu'}
         aria-expanded={isOpen}
       >
@@ -46,18 +55,21 @@ export function MobileMenu({ items, activeSection }: MobileMenuProps) {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'tween', duration: 0.3 }}
+              role="dialog"
+              aria-modal="true"
+              aria-label="Navigation menu"
               className="fixed inset-y-0 right-0 w-64 bg-surface border-l border-border z-50 p-6"
             >
-              <nav className="flex flex-col gap-4 mt-12">
+              <nav className="flex flex-col gap-2 mt-12">
                 {items.map((item) => (
                   <a
                     key={item.href}
                     href={item.href.startsWith('#') ? item.href : withBasePath(item.href)}
                     onClick={() => setIsOpen(false)}
                     className={cn(
-                      'text-lg font-medium transition-colors',
-                      'text-muted-foreground hover:text-foreground',
-                      activeSection && item.href === `#${activeSection}` && 'text-gold-accent'
+                      'py-2 text-lg font-medium transition-colors',
+                      'text-muted hover:text-foreground',
+                      activeSection && item.href === `#${activeSection}` && 'text-accent'
                     )}
                   >
                     {item.label}

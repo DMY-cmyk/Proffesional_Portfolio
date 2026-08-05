@@ -14,7 +14,7 @@ export default function ErrorPage({
       <h1 className="text-4xl font-bold text-foreground">
         Something went wrong
       </h1>
-      <p className="mt-4 text-lg text-muted-foreground">
+      <p className="mt-4 text-lg text-muted">
         An unexpected error occurred. Please try again.
       </p>
       <div className="mt-8 flex gap-4">

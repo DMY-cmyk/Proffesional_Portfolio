@@ -21,8 +21,8 @@ export function NavLinks({ items, activeSection }: NavLinksProps) {
             href={item.href.startsWith('#') ? item.href : withBasePath(item.href)}
             className={cn(
               'relative px-3 py-2 text-sm font-medium rounded-md transition-colors',
-              'text-muted-foreground hover:text-foreground',
-              isActive && 'text-gold-accent'
+              'text-muted hover:text-foreground',
+              isActive && 'text-accent'
             )}
           >
             {item.label}
@@ -31,7 +31,7 @@ export function NavLinks({ items, activeSection }: NavLinksProps) {
                 <motion.span
                   data-testid="active-indicator"
                   layoutId="nav-underline"
-                  className="absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 w-4 rounded-full bg-gold-500"
+                  className="absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 w-4 rounded-full bg-accent"
                   initial={{ opacity: 0, scaleX: 0 }}
                   animate={{ opacity: 1, scaleX: 1 }}
                   exit={{ opacity: 0, scaleX: 0 }}

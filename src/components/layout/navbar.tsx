@@ -34,10 +34,21 @@ export function Navbar() {
           <NavLinks items={allNavItems} activeSection={activeSection} />
           <a
             href={withBasePath('/files/cv/dzaki-cv.pdf')}
+            download
             className="hidden md:inline-flex items-center gap-1.5 bg-foreground text-background px-3 py-1.5 rounded-md text-xs font-mono uppercase tracking-wider font-medium hover:bg-accent transition-colors"
             aria-label="Download CV"
           >
-            ↓ CV
+            <svg
+              aria-hidden="true"
+              className="h-3.5 w-3.5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v12m0 0l-5-5m5 5l5-5M5 20h14" />
+            </svg>
+            CV
           </a>
           <ThemeToggle />
           <MobileMenu items={allNavItems} activeSection={activeSection} />

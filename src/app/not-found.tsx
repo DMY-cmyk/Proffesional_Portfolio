@@ -10,7 +10,7 @@ export default function NotFound() {
     <>
       <div className="flex min-h-[80vh] flex-col items-center justify-center px-4 text-center relative z-10">
         <motion.h1
-          className="text-8xl md:text-9xl font-bold hero-gradient-text"
+          className="text-8xl md:text-9xl font-bold bg-linear-to-r from-accent to-highlight bg-clip-text text-transparent"
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, ease: easeOut }}
@@ -18,7 +18,7 @@ export default function NotFound() {
           404
         </motion.h1>
         <motion.p
-          className="mt-4 text-xl text-muted-foreground"
+          className="mt-4 text-xl text-muted"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
@@ -26,7 +26,7 @@ export default function NotFound() {
           Page not found
         </motion.p>
         <motion.p
-          className="mt-2 text-muted-foreground"
+          className="mt-2 text-muted"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}

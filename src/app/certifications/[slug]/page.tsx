@@ -40,7 +40,7 @@ export default async function CertificationDetailPage({ params }: PageProps) {
       <div className="mx-auto max-w-3xl">
         <Link
           href="/#certifications"
-          className="inline-flex items-center gap-1 text-sm text-muted-foreground hover-gold-accent transition-colors mb-8"
+          className="inline-flex items-center gap-1 text-sm text-muted hover:text-accent transition-colors mb-8"
         >
           <span aria-hidden="true">←</span> Back to Certifications
         </Link>
@@ -49,15 +49,15 @@ export default async function CertificationDetailPage({ params }: PageProps) {
           {cert.name}
         </h1>
 
-        <div className="mt-6 rounded-lg border border-border bg-card/80 backdrop-blur-sm p-6">
+        <div className="mt-6 rounded-lg border border-border bg-surface/80 backdrop-blur-sm p-6">
           <div className="flex flex-wrap gap-x-8 gap-y-2 text-sm">
-            <p className="text-muted-foreground">
+            <p className="text-muted">
               <span className="font-medium text-foreground">Issued by:</span>{' '}
               {cert.issuer}
             </p>
-            <p className="text-muted-foreground">
+            <p className="text-muted">
               <span className="font-medium text-foreground">Date:</span>{' '}
-              <span className="text-gold-accent">{formatDate(cert.date)}</span>
+              <span className="text-accent">{formatDate(cert.date)}</span>
             </p>
           </div>
         </div>
@@ -69,7 +69,7 @@ export default async function CertificationDetailPage({ params }: PageProps) {
           <a
             href={withBasePath(cert.documentPath)}
             download
-            className="inline-flex items-center justify-center rounded-md border border-border text-foreground hover:bg-surface hover:border-gold-500/50 px-6 py-3 text-lg font-medium transition-colors"
+            className="inline-flex items-center justify-center rounded-md border border-border text-foreground hover:bg-surface hover:border-accent/50 px-6 py-3 text-lg font-medium transition-colors"
           >
             Download PDF
           </a>

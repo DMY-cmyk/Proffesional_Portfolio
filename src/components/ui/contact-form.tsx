@@ -40,14 +40,14 @@ export function ContactForm() {
 
   if (status === 'success') {
     return (
-      <div className="rounded-lg border border-gold-500/30 bg-gold-500/5 p-6 text-center">
+      <div className="rounded-lg border border-highlight/30 bg-highlight/5 p-6 text-center" role="status">
         <p className="text-lg font-medium text-foreground">Message sent! ✓</p>
-        <p className="mt-2 text-sm text-muted-foreground">
+        <p className="mt-2 text-sm text-muted">
           Thank you for reaching out. I&apos;ll get back to you soon.
         </p>
         <button
           onClick={() => setStatus('idle')}
-          className="mt-4 text-sm text-gold-accent hover:underline"
+          className="mt-4 text-sm text-accent hover:underline"
         >
           Send another message
         </button>
@@ -57,8 +57,8 @@ export function ContactForm() {
 
   const inputClasses = cn(
     'w-full rounded-md border border-border bg-surface px-4 py-3 text-foreground',
-    'placeholder:text-muted-foreground/60',
-    'focus:border-gold-500/50 focus:outline-none focus:ring-1 focus:ring-gold-500/30',
+    'placeholder:text-subtle/60',
+    'focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent/40',
     'transition-colors'
   )
 
@@ -114,7 +114,7 @@ export function ContactForm() {
       </div>
 
       {status === 'error' && (
-        <p className="text-sm text-red-400">{errorMessage}</p>
+        <p role="alert" className="text-sm text-red-600 dark:text-red-400">{errorMessage}</p>
       )}
 
       <button
@@ -122,7 +122,7 @@ export function ContactForm() {
         disabled={status === 'sending'}
         className={cn(
           'inline-flex items-center justify-center rounded-full px-8 py-3 font-medium transition-colors',
-          'bg-gold-500 text-black hover:bg-gold-600',
+          'bg-foreground text-background hover:bg-accent',
           'disabled:opacity-60 disabled:cursor-not-allowed'
         )}
       >
