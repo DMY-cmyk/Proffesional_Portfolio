@@ -2,6 +2,7 @@ import { Inter, Newsreader, JetBrains_Mono } from 'next/font/google'
 import '@/styles/globals.css'
 import { siteMetadata } from './metadata'
 import { ThemeProvider } from '@/hooks/use-theme'
+import { LanguageProvider } from '@/hooks/use-language'
 import { Navbar } from '@/components/layout/navbar'
 import { Footer } from '@/components/layout/footer'
 import { PageTransition } from '@/components/motion/page-transition'
@@ -52,13 +53,15 @@ export default function RootLayout({
         <a href="#main-content" className="skip-to-content">Skip to content</a>
         <JsonLd />
         <ThemeProvider>
-          <ClientMotion />
-          <CommandPalette />
-          <Navbar />
-          <PageTransition>
-            <main id="main-content" className="pt-24">{children}</main>
-          </PageTransition>
-          <Footer />
+          <LanguageProvider>
+            <ClientMotion />
+            <CommandPalette />
+            <Navbar />
+            <PageTransition>
+              <main id="main-content" className="pt-24">{children}</main>
+            </PageTransition>
+            <Footer />
+          </LanguageProvider>
         </ThemeProvider>
       </body>
     </html>
