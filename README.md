@@ -18,6 +18,7 @@ A research-journal-inspired professional portfolio built with Next.js 15, Tailwi
 - **Journal Reading Experience** — Sticky table of contents, reading progress bar, reading-time estimate, and "Cite this" (APA + BibTeX) on research articles
 - **Per-Article OG Images** — Branded 1200×630 preview images generated at build time for every research article
 - **Command Palette** — Ctrl+K / Cmd+K quick navigation across sections, pages, articles, and actions
+- **Bilingual EN/ID** — Client-side language toggle (navbar + mobile menu) covering the homepage and site chrome; content JSON carries `{en, id}` fields with EN fallback; research/notes article bodies remain English
 - **Notes** — Plain-language MDX notes at `/notes` with the same content pipeline as research articles
 - **Testimonials (data-driven)** — `testimonials.json`-powered section that appears only when quotes exist
 - **Certification Detail** — Individual certification pages at `/certifications/[slug]` with document viewer
@@ -156,6 +157,14 @@ To enable deployment:
 2. Push to `main` branch — deployment triggers automatically
 
 ## 📋 Changelog
+
+### Phase 4 Plan 3 — Bilingual EN/ID (2026-08-06)
+
+- EN ↔ ID language toggle (localStorage-persisted, `document.documentElement.lang` synced, EN fallback for any missing string)
+- Localized: hero, stats, experience, education, contact + form, footer, section headings, nav labels via `ui-strings.json`
+- Content JSON fields carry `{en, id}` objects resolved by typed loaders — component prop shapes unchanged
+- Note: prerendered HTML is English; ID users see a brief EN flash after hydration (text cannot be pre-hydration-swapped the way theme classes can)
+- Research/notes article bodies remain English by design
 
 ### Phase 4 Plan 2 — Substance (2026-08-06)
 
