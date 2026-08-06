@@ -1,6 +1,7 @@
 import { describe, it, expect, vi, afterEach } from 'vitest'
 import { render, cleanup } from '@testing-library/react'
 import { ThemeProvider } from '@/hooks/use-theme'
+import { LanguageProvider } from '@/hooks/use-language'
 
 vi.mock('framer-motion', () => ({
   motion: {
@@ -26,9 +27,11 @@ describe('Navbar (scrolled state)', () => {
   it('applies deeper shadow when scrolled', async () => {
     const { Navbar } = await import('@/components/layout/navbar')
     render(
-      <ThemeProvider>
-        <Navbar />
-      </ThemeProvider>
+      <LanguageProvider>
+        <ThemeProvider>
+          <Navbar />
+        </ThemeProvider>
+      </LanguageProvider>
     )
     const header = document.querySelector('header')
     expect(header?.className).toMatch(/shadow-\[0_4px_16px/)

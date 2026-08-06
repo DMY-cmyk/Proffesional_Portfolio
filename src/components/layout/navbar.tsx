@@ -6,6 +6,7 @@ import { useScrollProgress } from '@/hooks/use-scroll-progress'
 import { allNavItems, sectionLinks } from '@/config/navigation'
 import { NavLinks } from '@/components/navigation/nav-links'
 import { MobileMenu } from '@/components/navigation/mobile-menu'
+import { LanguageToggle } from '@/components/ui/language-toggle'
 import { ThemeToggle } from '@/components/ui/theme-toggle'
 import { withBasePath } from '@/lib/base-path'
 
@@ -57,6 +58,7 @@ export function Navbar() {
             </svg>
             CV
           </a>
+          <LanguageToggle />
           <ThemeToggle />
           <MobileMenu items={allNavItems} activeSection={activeSection} />
         </div>

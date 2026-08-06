@@ -1,6 +1,7 @@
 import { describe, it, expect, vi, afterEach } from 'vitest'
 import { render, screen, cleanup } from '@testing-library/react'
 import { ThemeProvider } from '@/hooks/use-theme'
+import { LanguageProvider } from '@/hooks/use-language'
 import { Navbar } from '@/components/layout/navbar'
 
 vi.mock('framer-motion', () => ({
@@ -26,18 +27,22 @@ describe('Navbar', () => {
 
   it('renders the site logo/brand', () => {
     render(
-      <ThemeProvider>
-        <Navbar />
-      </ThemeProvider>
+      <LanguageProvider>
+        <ThemeProvider>
+          <Navbar />
+        </ThemeProvider>
+      </LanguageProvider>
     )
     expect(screen.getByRole('link', { name: /dzaki muhammad yusfian/i })).toBeInTheDocument()
   })
 
   it('renders navigation links', () => {
     render(
-      <ThemeProvider>
-        <Navbar />
-      </ThemeProvider>
+      <LanguageProvider>
+        <ThemeProvider>
+          <Navbar />
+        </ThemeProvider>
+      </LanguageProvider>
     )
     expect(screen.getByText('Education')).toBeInTheDocument()
     expect(screen.getAllByText('Research').length).toBeGreaterThanOrEqual(1)
@@ -45,27 +50,33 @@ describe('Navbar', () => {
 
   it('renders the theme toggle', () => {
     render(
-      <ThemeProvider>
-        <Navbar />
-      </ThemeProvider>
+      <LanguageProvider>
+        <ThemeProvider>
+          <Navbar />
+        </ThemeProvider>
+      </LanguageProvider>
     )
-    expect(screen.getByRole('button', { name: /switch to/i })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: /switch to (dark|light) mode/i })).toBeInTheDocument()
   })
 
   it('renders a scroll progress bar', () => {
     render(
-      <ThemeProvider>
-        <Navbar />
-      </ThemeProvider>
+      <LanguageProvider>
+        <ThemeProvider>
+          <Navbar />
+        </ThemeProvider>
+      </LanguageProvider>
     )
     expect(document.querySelector('[data-testid="scroll-progress"]')).toBeInTheDocument()
   })
 
   it('has floating pill styling with rounded corners', () => {
     const { container } = render(
-      <ThemeProvider>
-        <Navbar />
-      </ThemeProvider>
+      <LanguageProvider>
+        <ThemeProvider>
+          <Navbar />
+        </ThemeProvider>
+      </LanguageProvider>
     )
     const header = container.querySelector('header')
     expect(header?.className).toContain('rounded-2xl')
@@ -73,9 +84,11 @@ describe('Navbar', () => {
 
   it('renders a persistent Download CV link', () => {
     render(
-      <ThemeProvider>
-        <Navbar />
-      </ThemeProvider>
+      <LanguageProvider>
+        <ThemeProvider>
+          <Navbar />
+        </ThemeProvider>
+      </LanguageProvider>
     )
     const cv = screen.getByRole('link', { name: /download cv/i })
     expect(cv.getAttribute('href')).toMatch(/\/files\/cv\//)

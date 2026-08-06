@@ -1,6 +1,7 @@
 import { describe, it, expect, vi, afterEach } from 'vitest'
 import { render, screen, cleanup } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { LanguageProvider } from '@/hooks/use-language'
 import { MobileMenu } from '@/components/navigation/mobile-menu'
 
 vi.mock('framer-motion', () => ({
@@ -21,13 +22,21 @@ describe('MobileMenu', () => {
   })
 
   it('renders hamburger button', () => {
-    render(<MobileMenu items={mockItems} />)
+    render(
+      <LanguageProvider>
+        <MobileMenu items={mockItems} />
+      </LanguageProvider>
+    )
     expect(screen.getByRole('button', { name: /open menu/i })).toBeInTheDocument()
   })
 
   it('shows menu items when opened', async () => {
     const user = userEvent.setup()
-    render(<MobileMenu items={mockItems} />)
+    render(
+      <LanguageProvider>
+        <MobileMenu items={mockItems} />
+      </LanguageProvider>
+    )
     await user.click(screen.getByRole('button', { name: /open menu/i }))
     expect(screen.getByText('About')).toBeInTheDocument()
     expect(screen.getByText('Skills')).toBeInTheDocument()
@@ -35,7 +44,11 @@ describe('MobileMenu', () => {
 
   it('closes when a link is clicked', async () => {
     const user = userEvent.setup()
-    render(<MobileMenu items={mockItems} />)
+    render(
+      <LanguageProvider>
+        <MobileMenu items={mockItems} />
+      </LanguageProvider>
+    )
     await user.click(screen.getByRole('button', { name: /open menu/i }))
     await user.click(screen.getByText('About'))
     expect(screen.getByRole('button', { name: /open menu/i })).toBeInTheDocument()

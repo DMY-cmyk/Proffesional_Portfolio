@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { cn } from '@/utils/cn'
 import { withBasePath } from '@/lib/base-path'
+import { LanguageToggle } from '@/components/ui/language-toggle'
 import type { NavItem } from '@/config/navigation'
 
 interface MobileMenuProps {
@@ -76,6 +77,9 @@ export function MobileMenu({ items, activeSection }: MobileMenuProps) {
                   </a>
                 ))}
               </nav>
+              <div className="mt-12 pt-6 border-t border-border flex justify-center">
+                <LanguageToggle />
+              </div>
             </motion.div>
           </>
         )}
