@@ -1,5 +1,5 @@
 import type { MetadataRoute } from 'next'
-import { getSiteConfig, getResearchEntries, getCertifications } from '@/data/content'
+import { getSiteConfig, getResearchEntries, getCertifications, getNoteEntries } from '@/data/content'
 
 export const dynamic = 'force-static'
 
@@ -26,6 +26,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 0.8,
     },
+    {
+      url: `${baseUrl}/notes`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
   ]
 
   const researchRoutes: MetadataRoute.Sitemap = getResearchEntries().map(
@@ -46,5 +52,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })
   )
 
-  return [...staticRoutes, ...researchRoutes, ...certRoutes]
+  const noteRoutes: MetadataRoute.Sitemap = getNoteEntries().map((note) => ({
+    url: `${baseUrl}/notes/${note.slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly' as const,
+    priority: 0.5,
+  }))
+
+  return [...staticRoutes, ...researchRoutes, ...certRoutes, ...noteRoutes]
 }

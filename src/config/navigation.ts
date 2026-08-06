@@ -15,6 +15,7 @@ export const sectionLinks: NavItem[] = [
 
 export const pageLinks: NavItem[] = [
   { label: 'Research', href: '/research' },
+  { label: 'Notes', href: '/notes' },
 ]
 
 export const allNavItems: NavItem[] = [...sectionLinks, ...pageLinks]

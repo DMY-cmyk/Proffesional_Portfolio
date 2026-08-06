@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useRouter, usePathname } from 'next/navigation'
 import { allNavItems } from '@/config/navigation'
-import { getResearchEntries, getProfessionalContact } from '@/data/content'
+import { getResearchEntries, getNoteEntries, getProfessionalContact } from '@/data/content'
 import { useTheme } from '@/hooks/use-theme'
 import { withBasePath } from '@/lib/base-path'
 import { cn } from '@/utils/cn'
@@ -59,12 +59,18 @@ export function CommandPalette() {
       hint: 'Research',
       run: () => goTo(`/research/${entry.slug}`),
     }))
+    const notes: Command[] = getNoteEntries().map((note) => ({
+      id: `note:${note.slug}`,
+      label: note.title,
+      hint: 'Note',
+      run: () => goTo(`/notes/${note.slug}`),
+    }))
     const actions: Command[] = [
       { id: 'action:theme', label: 'Toggle dark mode', hint: 'Action', run: () => { toggleTheme(); close() } },
       { id: 'action:cv', label: 'Download CV', hint: 'Action', run: () => { window.open(withBasePath('/files/cv/dzaki-cv.pdf'), '_blank'); close() } },
       { id: 'action:email', label: 'Copy email address', hint: 'Action', run: () => { navigator.clipboard?.writeText(getProfessionalContact().email).catch(() => {}); close() } },
     ]
-    return [...nav, ...research, ...actions]
+    return [...nav, ...research, ...notes, ...actions]
   }, [goTo, toggleTheme, close])
 
   const filtered = useMemo(() => {

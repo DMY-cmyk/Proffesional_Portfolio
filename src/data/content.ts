@@ -13,6 +13,7 @@ import type {
   SiteConfig,
   ResearchEntry,
   StatEntry,
+  NoteEntry,
 } from '@/types/content'
 
 import profileData from '@/content/profile.json'
@@ -26,6 +27,7 @@ import contactData from '@/content/contact.json'
 import downloadsData from '@/content/downloads.json'
 import siteData from '@/content/site.json'
 import researchData from '@/content/research/index.json'
+import noteData from '@/content/notes/index.json'
 
 export function getProfile(): Profile {
   return profileData as Profile
@@ -69,6 +71,10 @@ export function getSiteConfig(): SiteConfig {
 
 export function getResearchEntries(): ResearchEntry[] {
   return researchData as ResearchEntry[]
+}
+
+export function getNoteEntries(): NoteEntry[] {
+  return noteData as NoteEntry[]
 }
 
 export function getProfessionalContact(): ProfessionalContact {

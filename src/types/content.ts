@@ -140,3 +140,11 @@ export interface StatEntry {
   value: number
   suffix?: string
 }
+
+export interface NoteEntry {
+  title: string
+  slug: string
+  summary: string
+  date: string
+  tags: string[]
+}
