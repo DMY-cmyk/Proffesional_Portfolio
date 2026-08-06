@@ -13,6 +13,7 @@ const citation = {
 
 describe('CiteThis', () => {
   beforeEach(() => {
+    // Setup clipboard for first test (render test doesn't use userEvent)
     Object.defineProperty(navigator, 'clipboard', {
       value: { writeText: vi.fn().mockResolvedValue(undefined) },
       configurable: true,
@@ -30,6 +31,8 @@ describe('CiteThis', () => {
     const user = userEvent.setup()
     render(<CiteThis citation={citation} />)
     await user.click(screen.getByRole('button', { name: /copy apa/i }))
+    // userEvent.setup() provides a functional clipboard stub with readText()
+    expect(await navigator.clipboard.readText()).toContain('Yusfian, D. M. (2026).')
     expect(await screen.findByText(/copied/i)).toBeInTheDocument()
   })
 })
