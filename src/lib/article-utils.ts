@@ -37,3 +37,43 @@ export function readingTimeMinutes(markdown: string): number {
   const words = markdown.split(/\s+/).filter(Boolean).length
   return Math.max(1, Math.ceil(words / 200))
 }
+
+export interface CitationInput {
+  authorName: string
+  title: string
+  year: string
+  institution: string
+  kind: string
+}
+
+export function apaAuthor(fullName: string): string {
+  const parts = fullName.trim().split(/\s+/)
+  if (parts.length === 1) return parts[0]
+  const last = parts[parts.length - 1]
+  const initials = parts
+    .slice(0, -1)
+    .map((p) => `${p[0].toUpperCase()}.`)
+    .join(' ')
+  return `${last}, ${initials}`
+}
+
+function kindLabel(kind: string): string {
+  return kind === 'thesis' ? 'Undergraduate thesis' : kind.charAt(0).toUpperCase() + kind.slice(1)
+}
+
+export function buildApaCitation(c: CitationInput): string {
+  return `${apaAuthor(c.authorName)} (${c.year}). ${c.title} [${kindLabel(c.kind)}, ${c.institution}].`
+}
+
+export function buildBibtex(c: CitationInput): string {
+  const lastName = c.authorName.trim().split(/\s+/).pop()?.toLowerCase() ?? 'author'
+  return [
+    `@thesis{${lastName}${c.year},`,
+    `  author = {${c.authorName}},`,
+    `  title = {${c.title}},`,
+    `  year = {${c.year}},`,
+    `  school = {${c.institution}},`,
+    `  type = {${kindLabel(c.kind)}}`,
+    `}`,
+  ].join('\n')
+}
