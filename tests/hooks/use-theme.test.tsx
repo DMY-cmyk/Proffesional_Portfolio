@@ -83,4 +83,58 @@ describe('toggleTheme with view transitions', () => {
     expect(svt).toHaveBeenCalledOnce()
     delete (document as unknown as { startViewTransition?: typeof svt }).startViewTransition
   })
+
+  it('skips startViewTransition and toggles instantly when reduced motion is preferred', () => {
+    // Reduced-motion preference must be in place before the provider mounts,
+    // since useReducedMotion reads it in an effect on mount.
+    Object.defineProperty(window, 'matchMedia', {
+      writable: true,
+      configurable: true,
+      value: vi.fn().mockImplementation((query: string) => ({
+        matches: true,
+        media: query,
+        addEventListener: vi.fn(),
+        removeEventListener: vi.fn(),
+      })),
+    })
+    const ready = Promise.resolve()
+    const svt = vi.fn((cb: () => void) => { cb(); return { ready } })
+    ;(document as unknown as { startViewTransition: typeof svt }).startViewTransition = svt
+
+    const { result } = renderHook(() => useTheme(), { wrapper })
+    const before = result.current.theme
+    act(() => result.current.toggleTheme({ x: 10, y: 10 }))
+
+    expect(result.current.theme).not.toBe(before)
+    expect(svt).not.toHaveBeenCalled()
+
+    delete (document as unknown as { startViewTransition?: typeof svt }).startViewTransition
+    // Restore the default (no-preference) matchMedia stub from tests/setup.ts
+    // so later tests in this file aren't affected by this override.
+    Object.defineProperty(window, 'matchMedia', {
+      writable: true,
+      configurable: true,
+      value: vi.fn().mockImplementation((query: string) => ({
+        matches: false,
+        media: query,
+        addEventListener: vi.fn(),
+        removeEventListener: vi.fn(),
+      })),
+    })
+  })
+
+  it('skips startViewTransition and toggles instantly when no origin is given', () => {
+    const ready = Promise.resolve()
+    const svt = vi.fn((cb: () => void) => { cb(); return { ready } })
+    ;(document as unknown as { startViewTransition: typeof svt }).startViewTransition = svt
+
+    const { result } = renderHook(() => useTheme(), { wrapper })
+    const before = result.current.theme
+    act(() => result.current.toggleTheme())
+
+    expect(result.current.theme).not.toBe(before)
+    expect(svt).not.toHaveBeenCalled()
+
+    delete (document as unknown as { startViewTransition?: typeof svt }).startViewTransition
+  })
 })
