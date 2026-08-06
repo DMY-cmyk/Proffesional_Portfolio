@@ -1,8 +1,13 @@
+'use client'
+
 import { SectionWrapper } from '@/components/layout/section-wrapper'
 import { Button } from '@/components/ui/button'
-import { getProfessionalContact } from '@/data/content'
+import { getProfessionalContact, getUiStrings } from '@/data/content'
+import { useLanguage } from '@/hooks/use-language'
 
 export function ContactSection() {
+  const { lang } = useLanguage()
+  const ui = getUiStrings(lang)
   const c = getProfessionalContact()
   const linkedinHandle = c.linkedin.replace(/https?:\/\/(www\.)?linkedin\.com/, '')
   const githubHandle = c.github.replace(/https?:\/\/(www\.)?github\.com/, '@')
@@ -12,17 +17,17 @@ export function ContactSection() {
       <div className="grid gap-12 md:grid-cols-[1.3fr_1fr] items-start">
         <div>
           <span className="font-mono text-[11px] uppercase tracking-widest text-accent font-medium">
-            Get in touch
+            {ui.contactEyebrow}
           </span>
           <h2 className="font-display text-3xl md:text-4xl font-medium leading-[1.1] tracking-tight mt-4 mb-4">
-            Open to research collaboration, internships, and conversation.
+            {ui.contactHeading}
           </h2>
           <p className="text-[color:var(--foreground)] opacity-90 text-[17px] leading-relaxed max-w-xl mb-7">
-            I&apos;m currently open to discussions around tax, audit, and sustainability-reporting research — including graduate program opportunities. The fastest way to reach me is email or LinkedIn.
+            {ui.contactBody}
           </p>
           <div className="flex flex-wrap gap-3">
             <Button href={`mailto:${c.email}`} variant="primary" size="lg">
-              Email me
+              {ui.contactEmailMe}
             </Button>
             <Button href={c.linkedin} variant="secondary" size="lg" external>
               LinkedIn →

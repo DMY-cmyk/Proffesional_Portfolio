@@ -1,6 +1,9 @@
+'use client'
+
 import { SectionWrapper } from '@/components/layout/section-wrapper'
 import { SectionHeading } from '@/components/ui/section-heading'
-import { getCertifications, getCourses, getAwards } from '@/data/content'
+import { getCertifications, getCourses, getAwards, getUiStrings } from '@/data/content'
+import { useLanguage } from '@/hooks/use-language'
 import { formatDate } from '@/utils/format-date'
 
 function CredItem({
@@ -28,13 +31,15 @@ function CredItem({
 }
 
 export function CredentialsSection() {
+  const { lang } = useLanguage()
+  const ui = getUiStrings(lang)
   const certs = getCertifications()
   const courses = getCourses()
   const awards = getAwards()
 
   return (
     <SectionWrapper id="credentials">
-      <SectionHeading title="Credentials" sectionNumber="04" label="Credentials" />
+      <SectionHeading title={ui.sectionCredentials} sectionNumber="04" label="Credentials" />
       <div className="grid gap-10 md:grid-cols-2">
         <div>
           <h3 className="font-display text-lg font-medium mb-4 pb-2 border-b border-border">

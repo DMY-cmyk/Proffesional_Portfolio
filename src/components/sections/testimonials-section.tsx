@@ -1,14 +1,19 @@
+'use client'
+
 import { SectionWrapper } from '@/components/layout/section-wrapper'
 import { SectionHeading } from '@/components/ui/section-heading'
-import { getTestimonials } from '@/data/content'
+import { getTestimonials, getUiStrings } from '@/data/content'
+import { useLanguage } from '@/hooks/use-language'
 
 export function TestimonialsSection() {
+  const { lang } = useLanguage()
+  const ui = getUiStrings(lang)
   const testimonials = getTestimonials()
   if (testimonials.length === 0) return null
 
   return (
     <SectionWrapper id="testimonials">
-      <SectionHeading title="Testimonials" label="References" />
+      <SectionHeading title={ui.sectionTestimonials} label="References" />
       <div className="grid gap-6 md:grid-cols-2">
         {testimonials.map((t) => (
           <figure key={`${t.name}-${t.quote.slice(0, 16)}`} className="rounded-lg border border-border bg-surface-alt/60 p-6">

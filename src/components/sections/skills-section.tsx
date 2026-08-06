@@ -4,15 +4,18 @@ import { SectionWrapper } from '@/components/layout/section-wrapper'
 import { SectionHeading } from '@/components/ui/section-heading'
 import { SkillPill } from '@/components/ui/skill-pill'
 import { SkillsFilter } from '@/components/sections/skills-filter'
-import { getSkills } from '@/data/content'
+import { getSkills, getUiStrings } from '@/data/content'
+import { useLanguage } from '@/hooks/use-language'
 
 export function SkillsSection() {
+  const { lang } = useLanguage()
+  const ui = getUiStrings(lang)
   const skills = getSkills()
   const [filter, setFilter] = useState('all')
 
   return (
     <SectionWrapper id="skills">
-      <SectionHeading title="Skills" sectionNumber="05" label="Practice" />
+      <SectionHeading title={ui.sectionSkills} sectionNumber="05" label="Practice" />
       <SkillsFilter categories={skills} active={filter} onChange={setFilter} />
       <div className="grid gap-10 md:grid-cols-3">
         {skills.map((category) => (

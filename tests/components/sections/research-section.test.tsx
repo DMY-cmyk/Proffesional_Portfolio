@@ -1,6 +1,10 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import { ResearchSection } from '@/components/sections/research-section'
+
+vi.mock('@/hooks/use-language', () => ({
+  useLanguage: vi.fn(() => ({ lang: 'en', setLang: () => {} })),
+}))
 
 describe('ResearchSection', () => {
   it('renders the section heading Research', () => {

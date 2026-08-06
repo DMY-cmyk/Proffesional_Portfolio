@@ -1,6 +1,11 @@
-import { describe, it, expect, vi } from 'vitest'
+import { describe, it, expect, vi, afterEach } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import { ContactSection } from '@/components/sections/contact-section'
+
+const mockLang = vi.hoisted(() => ({ lang: 'en' as 'en' | 'id' }))
+vi.mock('@/hooks/use-language', () => ({
+  useLanguage: () => ({ lang: mockLang.lang, setLang: () => {} }),
+}))
 
 vi.mock('framer-motion', () => ({
   motion: {
@@ -20,6 +25,10 @@ vi.mock('@/hooks/use-reduced-motion', () => ({ useReducedMotion: () => false }))
 vi.mock('@/hooks/use-is-touch', () => ({ useIsTouch: () => false }))
 
 describe('ContactSection (redesigned)', () => {
+  afterEach(() => {
+    mockLang.lang = 'en'
+  })
+
   it('renders the Contact heading', () => {
     render(<ContactSection />)
     expect(screen.getByRole('heading', { level: 2 })).toBeInTheDocument()
@@ -52,5 +61,11 @@ describe('ContactSection (redesigned)', () => {
   it('does NOT render TikTok in the professional contact section', () => {
     render(<ContactSection />)
     expect(screen.queryByRole('link', { name: /tiktok/i })).not.toBeInTheDocument()
+  })
+
+  it('renders Indonesian copy when lang is id', () => {
+    mockLang.lang = 'id'
+    render(<ContactSection />)
+    expect(screen.getByText('Hubungi saya')).toBeInTheDocument()
   })
 })

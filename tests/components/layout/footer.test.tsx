@@ -2,6 +2,10 @@ import { describe, it, expect, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import { Footer } from '@/components/layout/footer'
 
+vi.mock('@/hooks/use-language', () => ({
+  useLanguage: vi.fn(() => ({ lang: 'en', setLang: () => {} })),
+}))
+
 vi.mock('framer-motion', () => ({
   motion: {
     button: ({ children, ...p }: any) => <button {...p}>{children}</button>,

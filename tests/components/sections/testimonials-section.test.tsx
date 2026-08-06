@@ -7,6 +7,10 @@ vi.mock('@/data/content', async (importOriginal) => {
   return { ...original, getTestimonials: () => mockData.entries }
 })
 
+vi.mock('@/hooks/use-language', () => ({
+  useLanguage: vi.fn(() => ({ lang: 'en', setLang: () => {} })),
+}))
+
 import { TestimonialsSection } from '@/components/sections/testimonials-section'
 
 describe('TestimonialsSection', () => {

@@ -2,10 +2,14 @@
 
 import { useState, type FormEvent } from 'react'
 import { cn } from '@/utils/cn'
+import { getUiStrings } from '@/data/content'
+import { useLanguage } from '@/hooks/use-language'
 
 type FormStatus = 'idle' | 'sending' | 'success' | 'error'
 
 export function ContactForm() {
+  const { lang } = useLanguage()
+  const ui = getUiStrings(lang)
   const [status, setStatus] = useState<FormStatus>('idle')
   const [errorMessage, setErrorMessage] = useState('')
 
@@ -41,15 +45,15 @@ export function ContactForm() {
   if (status === 'success') {
     return (
       <div className="rounded-lg border border-highlight/30 bg-highlight/5 p-6 text-center" role="status">
-        <p className="text-lg font-medium text-foreground">Message sent! ✓</p>
+        <p className="text-lg font-medium text-foreground">{ui.formSuccessTitle}</p>
         <p className="mt-2 text-sm text-muted">
-          Thank you for reaching out. I&apos;ll get back to you soon.
+          {ui.formSuccessBody}
         </p>
         <button
           onClick={() => setStatus('idle')}
           className="mt-4 text-sm text-accent hover:underline"
         >
-          Send another message
+          {ui.formSendAnother}
         </button>
       </div>
     )
@@ -73,27 +77,27 @@ export function ContactForm() {
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
           <label htmlFor="name" className="mb-1.5 block text-sm font-medium text-foreground">
-            Name
+            {ui.formName}
           </label>
           <input
             id="name"
             name="name"
             type="text"
             required
-            placeholder="Your name"
+            placeholder={ui.formNamePlaceholder}
             className={inputClasses}
           />
         </div>
         <div>
           <label htmlFor="email" className="mb-1.5 block text-sm font-medium text-foreground">
-            Email
+            {ui.formEmail}
           </label>
           <input
             id="email"
             name="email"
             type="email"
             required
-            placeholder="you@example.com"
+            placeholder={ui.formEmailPlaceholder}
             className={inputClasses}
           />
         </div>
@@ -101,14 +105,14 @@ export function ContactForm() {
 
       <div>
         <label htmlFor="message" className="mb-1.5 block text-sm font-medium text-foreground">
-          Message
+          {ui.formMessage}
         </label>
         <textarea
           id="message"
           name="message"
           required
           rows={5}
-          placeholder="How can I help you?"
+          placeholder={ui.formMessagePlaceholder}
           className={cn(inputClasses, 'resize-none')}
         />
       </div>
@@ -126,7 +130,7 @@ export function ContactForm() {
           'disabled:opacity-60 disabled:cursor-not-allowed'
         )}
       >
-        {status === 'sending' ? 'Sending...' : 'Send Message'}
+        {status === 'sending' ? ui.formSending : ui.formSend}
       </button>
     </form>
   )
