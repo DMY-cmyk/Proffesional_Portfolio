@@ -1,5 +1,6 @@
 import { describe, it, expect, vi, afterEach } from 'vitest'
 import { render, screen, cleanup } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import { ThemeProvider } from '@/hooks/use-theme'
 import { LanguageProvider } from '@/hooks/use-language'
 import { Navbar } from '@/components/layout/navbar'
@@ -92,5 +93,18 @@ describe('Navbar', () => {
     )
     const cv = screen.getByRole('link', { name: /download cv/i })
     expect(cv.getAttribute('href')).toMatch(/\/files\/cv\//)
+  })
+
+  it('renders localized nav labels when switching to Indonesian', async () => {
+    const user = userEvent.setup()
+    render(
+      <LanguageProvider>
+        <ThemeProvider>
+          <Navbar />
+        </ThemeProvider>
+      </LanguageProvider>
+    )
+    await user.click(screen.getByRole('button', { name: /beralih ke bahasa indonesia/i }))
+    expect(screen.getAllByText('Pendidikan').length).toBeGreaterThanOrEqual(1)
   })
 })

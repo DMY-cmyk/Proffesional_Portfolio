@@ -21,10 +21,10 @@ export function LanguageToggle() {
           aria-pressed={lang === opt.value}
           aria-label={opt.aria}
           className={cn(
-            'px-2 py-1.5 transition-colors',
+            'inline-flex min-h-11 min-w-9 items-center justify-center px-2.5 transition-colors',
             lang === opt.value
               ? 'text-accent font-semibold'
-              : 'text-subtle hover:text-foreground'
+              : 'text-muted hover:text-foreground'
           )}
         >
           {opt.label}

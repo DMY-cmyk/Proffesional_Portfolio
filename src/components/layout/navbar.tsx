@@ -3,6 +3,8 @@
 import Link from 'next/link'
 import { useScrollSpy } from '@/hooks/use-scroll-spy'
 import { useScrollProgress } from '@/hooks/use-scroll-progress'
+import { useLanguage } from '@/hooks/use-language'
+import { getUiStrings } from '@/data/content'
 import { allNavItems, sectionLinks } from '@/config/navigation'
 import { NavLinks } from '@/components/navigation/nav-links'
 import { MobileMenu } from '@/components/navigation/mobile-menu'
@@ -16,6 +18,12 @@ export function Navbar() {
   const activeSection = useScrollSpy(sectionIds)
   const scrollProgress = useScrollProgress()
   const hasScrolled = scrollProgress > 0.01
+  const { lang } = useLanguage()
+  const ui = getUiStrings(lang)
+  const localizedItems = allNavItems.map((item) => ({
+    ...item,
+    label: item.key ? ui[item.key] : item.label,
+  }))
 
   return (
     <header
@@ -32,7 +40,7 @@ export function Navbar() {
           Dzaki<span className="text-accent">.</span>
         </Link>
         <div className="flex items-center gap-3">
-          <NavLinks items={allNavItems} activeSection={activeSection} />
+          <NavLinks items={localizedItems} activeSection={activeSection} />
           <button
             onClick={() => window.dispatchEvent(new Event('open-command-palette'))}
             className="hidden md:inline-flex items-center gap-1 rounded-md border border-border px-2 py-1.5 font-mono text-[10px] uppercase tracking-wider text-subtle hover:text-accent hover:border-accent transition-colors"
@@ -60,7 +68,7 @@ export function Navbar() {
           </a>
           <LanguageToggle />
           <ThemeToggle />
-          <MobileMenu items={allNavItems} activeSection={activeSection} />
+          <MobileMenu items={localizedItems} activeSection={activeSection} />
         </div>
       </div>
       <div
