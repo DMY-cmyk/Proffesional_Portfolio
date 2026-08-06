@@ -8,10 +8,16 @@ describe('getExperience (localized)', () => {
     expect(en).toEqual(explicitEn)
   })
 
-  it('translates role and bullets into Indonesian', () => {
+  it('translates roles and bullets into Indonesian where a translation exists', () => {
     const en = getExperience('en')
     const id = getExperience('id')
-    expect(id[0].role).not.toBe(en[0].role)
+    // "Operations Officer" (index 0) is intentionally kept untranslated per
+    // Dzaki's review decision (2026-08-06) — assert on the Tax Volunteer role,
+    // which does carry a distinct Indonesian title.
+    const enTaxRole = en.find((e) => e.role === 'Tax Volunteer')
+    const idTaxRole = id[en.indexOf(enTaxRole!)]
+    expect(idTaxRole.role).toBe('Relawan Pajak')
+    expect(id[0].role).toBe('Operations Officer')
     expect(id[0].bullets[0]).not.toBe(en[0].bullets[0])
   })
 
