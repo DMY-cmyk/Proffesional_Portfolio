@@ -44,7 +44,7 @@ export function HeroSection() {
                 <em className="italic text-highlight font-medium">
                   <WordReveal
                     text={headline.emphasis}
-                    baseDelay={0.15 + headline.plain.split(/\s+/).length * 0.04}
+                    baseDelay={0.15 + headline.plain.split(/\s+/).filter(Boolean).length * 0.04}
                   />
                 </em>
                 {headline.suffix}

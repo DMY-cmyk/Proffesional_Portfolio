@@ -43,7 +43,7 @@ export function Button({
   ariaLabel,
 }: ButtonProps) {
   const classes = cn(
-    'inline-flex items-center justify-center gap-2 rounded-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent hover:scale-[1.02]',
+    'inline-flex items-center justify-center gap-2 rounded-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent',
     variantStyles[variant],
     sizeStyles[size],
     disabled && 'opacity-50 pointer-events-none',
@@ -59,6 +59,7 @@ export function Button({
         href={resolvedHref}
         className={classes}
         aria-label={ariaLabel}
+        whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
         transition={{ type: 'spring' as const, stiffness: 400, damping: 18 }}
         style={{ x, y }}
@@ -78,6 +79,7 @@ export function Button({
       type={type}
       disabled={disabled}
       aria-label={ariaLabel}
+      whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
       transition={{ type: 'spring' as const, stiffness: 400, damping: 18 }}
       style={{ x, y }}

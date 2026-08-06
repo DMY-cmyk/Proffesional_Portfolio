@@ -23,16 +23,16 @@ describe('useTheme', () => {
     cleanup()
   })
 
-  it('defaults to dark theme', () => {
+  it('defaults to light theme', () => {
     render(
       <ThemeProvider>
         <TestComponent />
       </ThemeProvider>
     )
-    expect(screen.getByTestId('theme').textContent).toBe('dark')
+    expect(screen.getByTestId('theme').textContent).toBe('light')
   })
 
-  it('toggles to light theme', async () => {
+  it('toggles to dark theme', async () => {
     const user = userEvent.setup()
     render(
       <ThemeProvider>
@@ -40,7 +40,7 @@ describe('useTheme', () => {
       </ThemeProvider>
     )
     await user.click(screen.getByText('Toggle'))
-    expect(screen.getByTestId('theme').textContent).toBe('light')
+    expect(screen.getByTestId('theme').textContent).toBe('dark')
   })
 
   it('persists theme to localStorage', async () => {
@@ -51,15 +51,26 @@ describe('useTheme', () => {
       </ThemeProvider>
     )
     await user.click(screen.getByText('Toggle'))
-    expect(localStorage.getItem('theme')).toBe('light')
+    expect(localStorage.getItem('theme')).toBe('dark')
   })
 
-  it('adds dark class to documentElement for dark theme', () => {
+  it('does not add dark class to documentElement by default (light default)', () => {
     render(
       <ThemeProvider>
         <TestComponent />
       </ThemeProvider>
     )
+    expect(document.documentElement.classList.contains('dark')).toBe(false)
+  })
+
+  it('adds dark class to documentElement after toggling to dark theme', async () => {
+    const user = userEvent.setup()
+    render(
+      <ThemeProvider>
+        <TestComponent />
+      </ThemeProvider>
+    )
+    await user.click(screen.getByText('Toggle'))
     expect(document.documentElement.classList.contains('dark')).toBe(true)
   })
 })

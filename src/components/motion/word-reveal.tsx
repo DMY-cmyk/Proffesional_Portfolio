@@ -20,7 +20,7 @@ export function WordReveal({ text, className, baseDelay = 0 }: WordRevealProps) 
   }
 
   return (
-    <span className={cn('inline', className)} aria-label={text} role="text">
+    <span className={cn('inline', className)} aria-label={text}>
       {words.map((word, i) => (
         <Fragment key={`${word}-${i}`}>
           <span

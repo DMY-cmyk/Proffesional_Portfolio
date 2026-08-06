@@ -20,12 +20,12 @@ interface ThemeContextValue {
 const ThemeContext = createContext<ThemeContextValue | undefined>(undefined)
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setTheme] = useState<Theme>('dark')
+  const [theme, setTheme] = useState<Theme>('light')
   const reduced = useReducedMotion()
 
   useEffect(() => {
     const stored = localStorage.getItem('theme') as Theme | null
-    const initial = stored || 'dark'
+    const initial = stored || 'light'
     setTheme(initial)
     document.documentElement.classList.toggle('dark', initial === 'dark')
   }, [])

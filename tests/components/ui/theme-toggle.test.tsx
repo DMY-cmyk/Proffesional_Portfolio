@@ -38,6 +38,6 @@ describe('ThemeToggle', () => {
     renderWithTheme()
     const button = screen.getByRole('button')
     await user.click(button)
-    expect(localStorage.getItem('theme')).toBe('light')
+    expect(localStorage.getItem('theme')).toBe('dark')
   })
 })

@@ -3,10 +3,23 @@ import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { Button } from '@/components/ui/button'
 
+const { buttonCalls, aCalls } = vi.hoisted(() => ({
+  buttonCalls: [] as any[],
+  aCalls: [] as any[],
+}))
+
 vi.mock('framer-motion', () => ({
   motion: {
-    button: ({ children, ...props }: any) => <button {...props}>{children}</button>,
-    a: ({ children, ...props }: any) => <a {...props}>{children}</a>,
+    button: ({ children, ...props }: any) => {
+      buttonCalls.push(props)
+      const { whileHover, whileTap, transition, ...domProps } = props
+      return <button {...domProps}>{children}</button>
+    },
+    a: ({ children, ...props }: any) => {
+      aCalls.push(props)
+      const { whileHover, whileTap, transition, ...domProps } = props
+      return <a {...domProps}>{children}</a>
+    },
   },
   useMotionValue: (v: number) => ({ get: () => v, set: () => {} }),
   useSpring: (v: unknown) => v,
@@ -71,8 +84,20 @@ describe('Button', () => {
     expect(handleClick).toHaveBeenCalledOnce()
   })
 
-  it('applies hover scale class', () => {
+  it('does not bake hover-scale into the class string (it would be dead under the magnetic inline transform)', () => {
     const { container } = render(<Button>go</Button>)
-    expect((container.firstChild as HTMLElement).className).toMatch(/hover:scale-\[1\.02\]/)
+    expect((container.firstChild as HTMLElement).className).not.toMatch(/hover:scale-\[1\.02\]/)
+  })
+
+  it('composes hover scale via framer whileHover on motion.button so it combines with the magnetic x/y transform', () => {
+    buttonCalls.length = 0
+    render(<Button>go</Button>)
+    expect(buttonCalls.at(-1)).toMatchObject({ whileHover: { scale: 1.02 } })
+  })
+
+  it('composes hover scale via framer whileHover on motion.a so it combines with the magnetic x/y transform', () => {
+    aCalls.length = 0
+    render(<Button href="/about">Go</Button>)
+    expect(aCalls.at(-1)).toMatchObject({ whileHover: { scale: 1.02 } })
   })
 })
