@@ -15,6 +15,10 @@ vi.mock('next/navigation', () => ({
   usePathname: () => '/',
 }))
 
+vi.mock('@/hooks/use-reduced-motion', () => ({
+  useReducedMotion: () => true,
+}))
+
 describe('PageTransition', () => {
   it('renders children', () => {
     render(
