@@ -32,6 +32,13 @@ export function Navbar() {
         </Link>
         <div className="flex items-center gap-3">
           <NavLinks items={allNavItems} activeSection={activeSection} />
+          <button
+            onClick={() => window.dispatchEvent(new Event('open-command-palette'))}
+            className="hidden md:inline-flex items-center gap-1 rounded-md border border-border px-2 py-1.5 font-mono text-[10px] uppercase tracking-wider text-subtle hover:text-accent hover:border-accent transition-colors"
+            aria-label="Open command palette"
+          >
+            Ctrl K
+          </button>
           <a
             href={withBasePath('/files/cv/dzaki-cv.pdf')}
             download

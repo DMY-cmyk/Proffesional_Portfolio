@@ -8,6 +8,7 @@ import { PageTransition } from '@/components/motion/page-transition'
 import { JsonLd } from '@/components/layout/json-ld'
 import { PreloadLinks } from '@/components/layout/preload-links'
 import { ClientMotion } from '@/components/motion/client-motion'
+import { CommandPalette } from '@/components/navigation/command-palette'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -52,6 +53,7 @@ export default function RootLayout({
         <JsonLd />
         <ThemeProvider>
           <ClientMotion />
+          <CommandPalette />
           <Navbar />
           <PageTransition>
             <main id="main-content" className="pt-24">{children}</main>
