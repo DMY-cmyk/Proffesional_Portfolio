@@ -74,7 +74,7 @@ src/
 ├── styles/           # Tailwind CSS 4 global theme tokens + print stylesheet
 ├── types/            # TypeScript interfaces
 └── utils/            # Format helpers
-tests/                # 170 tests across 39+ test files (mirrors src/ structure)
+tests/                # 195+ tests across 48+ test files (mirrors src/ structure)
 ```
 
 ## 🚀 Getting Started
@@ -136,7 +136,7 @@ The visual system is defined in `src/styles/globals.css` using CSS custom proper
 npm run test:run
 ```
 
-- **170 tests** across **39+ test files**
+- **195+ tests** across **48+ test files**
 - Vitest + React Testing Library + jsdom
 - Components, hooks, utilities, pages, and content loaders are all tested
 
@@ -151,6 +151,10 @@ To enable deployment:
 2. Push to `main` branch — deployment triggers automatically
 
 ## 📋 Changelog
+
+### Maintenance (2026-08-06)
+
+- Fixed stale test assertions in `nav-links.test.tsx` that still expected the removed `gold` class (commit `a04215e` mapped it to `text-accent` but missed the test); suite restored to green so CI deploys are unblocked
 
 ### Phase 3 — Motion Upgrade (2026-04-14)
 
