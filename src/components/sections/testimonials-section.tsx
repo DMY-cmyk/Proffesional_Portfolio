@@ -8,7 +8,7 @@ export function TestimonialsSection() {
 
   return (
     <SectionWrapper id="testimonials">
-      <SectionHeading title="Testimonials" sectionNumber="05" label="References" />
+      <SectionHeading title="Testimonials" label="References" />
       <div className="grid gap-6 md:grid-cols-2">
         {testimonials.map((t) => (
           <figure key={`${t.name}-${t.quote.slice(0, 16)}`} className="rounded-lg border border-border bg-surface-alt/60 p-6">
