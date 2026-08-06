@@ -20,7 +20,7 @@ export function NavLinks({ items, activeSection }: NavLinksProps) {
             key={item.href}
             href={item.href.startsWith('#') ? item.href : withBasePath(item.href)}
             className={cn(
-              'relative px-3 py-2 text-sm font-medium rounded-md transition-colors',
+              'relative px-3 py-2 text-sm font-medium rounded-md transition-colors link-underline',
               'text-muted hover:text-foreground',
               isActive && 'text-accent'
             )}

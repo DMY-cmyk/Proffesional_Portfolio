@@ -82,23 +82,30 @@ html {
   font-family: var(--font-mono);
 }
 
-/* Animated link underline */
+/* A5 — link underline draw-on */
 .link-underline {
   position: relative;
-  display: inline-block;
 }
 .link-underline::after {
   content: '';
   position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 0;
+  left: 0.75rem;
+  right: 0.75rem;
+  bottom: 4px;
   height: 1px;
   background: currentColor;
-  transition: width 0.3s ease;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 200ms cubic-bezier(0.22, 1, 0.36, 1);
 }
-.link-underline:hover::after {
-  width: 100%;
+.link-underline:hover::after,
+.link-underline:focus-visible::after {
+  transform: scaleX(1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .link-underline::after {
+    transition: none;
+  }
 }
 
 /* Accent text helpers */

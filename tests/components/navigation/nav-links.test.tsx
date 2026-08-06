@@ -44,4 +44,10 @@ describe('NavLinks', () => {
     const indicator = container.querySelector('[data-testid="active-indicator"]')
     expect(indicator).toBeInTheDocument()
   })
+
+  it('applies the underline draw-on class to links', () => {
+    render(<NavLinks items={mockItems} />)
+    const aboutLink = screen.getByText('About')
+    expect(aboutLink.className).toContain('link-underline')
+  })
 })
