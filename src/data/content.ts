@@ -14,6 +14,7 @@ import type {
   ResearchEntry,
   StatEntry,
   NoteEntry,
+  TestimonialEntry,
 } from '@/types/content'
 
 import profileData from '@/content/profile.json'
@@ -28,6 +29,7 @@ import downloadsData from '@/content/downloads.json'
 import siteData from '@/content/site.json'
 import researchData from '@/content/research/index.json'
 import noteData from '@/content/notes/index.json'
+import testimonialsData from '@/content/testimonials.json'
 
 export function getProfile(): Profile {
   return profileData as Profile
@@ -97,4 +99,8 @@ export function getStats(): StatEntry[] {
     { label: 'Certifications', value: getCertifications().length },
     { label: 'Research works', value: getResearchEntries().length },
   ]
+}
+
+export function getTestimonials(): TestimonialEntry[] {
+  return testimonialsData as TestimonialEntry[]
 }

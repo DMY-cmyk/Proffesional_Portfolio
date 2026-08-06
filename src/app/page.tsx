@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic'
 import { HeroSection } from '@/components/sections/hero-section'
 import { StatsStrip } from '@/components/sections/stats-strip'
+import { TestimonialsSection } from '@/components/sections/testimonials-section'
 import { Skeleton } from '@/components/ui/skeleton'
 
 function SectionSkeleton() {
@@ -48,6 +49,7 @@ export default function Home() {
       <ExperienceSection />
       <EducationSection />
       <CredentialsSection />
+      <TestimonialsSection />
       <SkillsSection />
       <ContactSection />
     </>

@@ -148,3 +148,10 @@ export interface NoteEntry {
   date: string
   tags: string[]
 }
+
+export interface TestimonialEntry {
+  quote: string
+  name: string
+  role: string
+  relationship: string
+}
