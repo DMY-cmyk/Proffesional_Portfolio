@@ -33,3 +33,17 @@ Object.defineProperty(global, 'IntersectionObserver', {
   },
   writable: true,
 })
+
+// Mock matchMedia (jsdom does not implement it). Default: no preference
+// expressed (matches: false). Individual tests may override this via
+// Object.defineProperty(window, 'matchMedia', ...) as needed.
+Object.defineProperty(window, 'matchMedia', {
+  writable: true,
+  configurable: true,
+  value: vi.fn().mockImplementation((query: string) => ({
+    matches: false,
+    media: query,
+    addEventListener: vi.fn(),
+    removeEventListener: vi.fn(),
+  })),
+})

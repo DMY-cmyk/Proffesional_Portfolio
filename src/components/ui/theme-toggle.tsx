@@ -24,7 +24,10 @@ export function ThemeToggle() {
 
   return (
     <button
-      onClick={toggleTheme}
+      onClick={(e) => {
+        const rect = e.currentTarget.getBoundingClientRect()
+        toggleTheme({ x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 })
+      }}
       className="inline-flex h-11 w-11 items-center justify-center rounded-full text-muted hover:text-accent transition-colors"
       aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
     >

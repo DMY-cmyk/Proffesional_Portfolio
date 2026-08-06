@@ -1,5 +1,5 @@
-import { describe, it, expect, beforeEach, afterEach } from 'vitest'
-import { render, screen, cleanup } from '@testing-library/react'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
+import { render, screen, cleanup, renderHook, act } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { ThemeProvider, useTheme } from '@/hooks/use-theme'
 
@@ -8,7 +8,7 @@ function TestComponent() {
   return (
     <div>
       <span data-testid="theme">{theme}</span>
-      <button onClick={toggleTheme}>Toggle</button>
+      <button onClick={() => toggleTheme()}>Toggle</button>
     </div>
   )
 }
@@ -61,5 +61,26 @@ describe('useTheme', () => {
       </ThemeProvider>
     )
     expect(document.documentElement.classList.contains('dark')).toBe(true)
+  })
+})
+
+describe('toggleTheme with view transitions', () => {
+  const wrapper = ({ children }: React.PropsWithChildren) => <ThemeProvider>{children}</ThemeProvider>
+
+  it('falls back to a plain toggle when startViewTransition is unavailable', () => {
+    const { result } = renderHook(() => useTheme(), { wrapper })
+    const before = result.current.theme
+    act(() => result.current.toggleTheme({ x: 10, y: 10 }))
+    expect(result.current.theme).not.toBe(before)
+  })
+
+  it('uses startViewTransition when available and origin given', () => {
+    const ready = Promise.resolve()
+    const svt = vi.fn((cb: () => void) => { cb(); return { ready } })
+    ;(document as unknown as { startViewTransition: typeof svt }).startViewTransition = svt
+    const { result } = renderHook(() => useTheme(), { wrapper })
+    act(() => result.current.toggleTheme({ x: 10, y: 10 }))
+    expect(svt).toHaveBeenCalledOnce()
+    delete (document as unknown as { startViewTransition?: typeof svt }).startViewTransition
   })
 })
