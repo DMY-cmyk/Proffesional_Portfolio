@@ -1,6 +1,7 @@
 import { describe, it, expect, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import { HeroSection } from '@/components/sections/hero-section'
+import { useLanguage } from '@/hooks/use-language'
 
 vi.mock('framer-motion', () => ({
   motion: {
@@ -17,6 +18,9 @@ vi.mock('framer-motion', () => ({
 
 vi.mock('@/hooks/use-reduced-motion', () => ({ useReducedMotion: () => false }))
 vi.mock('@/hooks/use-is-touch', () => ({ useIsTouch: () => false }))
+vi.mock('@/hooks/use-language', () => ({
+  useLanguage: vi.fn(() => ({ lang: 'en', setLang: () => {} })),
+}))
 
 describe('HeroSection (redesigned)', () => {
   it('renders owner name as the eyebrow', () => {
@@ -68,5 +72,11 @@ describe('HeroSection (redesigned)', () => {
   it('does NOT render the old avatar glow', () => {
     const { container } = render(<HeroSection />)
     expect(container.querySelector('.animate-avatar-glow')).toBeNull()
+  })
+
+  it('renders Indonesian bio text when lang is id', () => {
+    vi.mocked(useLanguage).mockReturnValueOnce({ lang: 'id', setLang: () => {} })
+    render(<HeroSection />)
+    expect(screen.getByText(/Berfokus/)).toBeInTheDocument()
   })
 })

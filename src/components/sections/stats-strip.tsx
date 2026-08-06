@@ -1,6 +1,7 @@
 'use client'
 
 import { getStats } from '@/data/content'
+import { useLanguage } from '@/hooks/use-language'
 import { useCountUp } from '@/hooks/use-count-up'
 
 function StatFigure({ label, value, suffix }: { label: string; value: number; suffix?: string }) {
@@ -17,7 +18,8 @@ function StatFigure({ label, value, suffix }: { label: string; value: number; su
 }
 
 export function StatsStrip() {
-  const stats = getStats()
+  const { lang } = useLanguage()
+  const stats = getStats(lang)
   return (
     <section aria-label="Key figures" className="border-y border-border bg-surface-alt/60">
       <div className="mx-auto grid max-w-6xl grid-cols-2 gap-2 px-6 py-6 md:grid-cols-4">

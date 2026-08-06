@@ -1,5 +1,6 @@
 import type {
   Profile,
+  RawProfile,
   EducationEntry,
   ExperienceEntry,
   CertificationEntry,
@@ -16,7 +17,7 @@ import type {
   NoteEntry,
   TestimonialEntry,
 } from '@/types/content'
-import type { Lang } from '@/lib/i18n'
+import { pickLang, type Lang } from '@/lib/i18n'
 
 import profileData from '@/content/profile.json'
 import uiStringsData from '@/content/ui-strings.json'
@@ -33,8 +34,21 @@ import researchData from '@/content/research/index.json'
 import noteData from '@/content/notes/index.json'
 import testimonialsData from '@/content/testimonials.json'
 
-export function getProfile(): Profile {
-  return profileData as Profile
+export function getProfile(lang: Lang = 'en'): Profile {
+  const raw = profileData as unknown as RawProfile
+  return {
+    ...raw,
+    title: pickLang(raw.title, lang),
+    tagline: pickLang(raw.tagline, lang),
+    bio: pickLang(raw.bio, lang),
+    brandStatement: pickLang(raw.brandStatement, lang),
+    positioning: raw.positioning ? pickLang(raw.positioning, lang) : undefined,
+    headline: raw.headline && {
+      plain: pickLang(raw.headline.plain, lang),
+      emphasis: pickLang(raw.headline.emphasis, lang),
+      suffix: raw.headline.suffix,
+    },
+  }
 }
 
 export function getEducation(): EducationEntry[] {
@@ -89,17 +103,18 @@ export function getPersonalContact(): PersonalContact | undefined {
   return getContact().personal
 }
 
-export function getStats(): StatEntry[] {
-  const experience = getExperience()
+export function getStats(lang: Lang = 'en'): StatEntry[] {
+  const ui = getUiStrings(lang)
+  const experience = getExperience() // lang param arrives in Task 5; counts are language-independent
   const earliestYear = Math.min(
     ...experience.map((e) => new Date(e.startDate).getFullYear())
   )
   const years = Math.max(1, new Date().getFullYear() - earliestYear)
   return [
-    { label: 'Years of experience', value: years, suffix: '+' },
-    { label: 'Positions held', value: experience.length },
-    { label: 'Certifications', value: getCertifications().length },
-    { label: 'Research works', value: getResearchEntries().length },
+    { label: ui.statYears, value: years, suffix: '+' },
+    { label: ui.statPositions, value: experience.length },
+    { label: ui.statCertifications, value: getCertifications().length },
+    { label: ui.statResearch, value: getResearchEntries().length },
   ]
 }
 

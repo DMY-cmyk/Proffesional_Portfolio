@@ -4,6 +4,7 @@ import { render, screen, cleanup } from '@testing-library/react'
 vi.mock('@/hooks/use-count-up', () => ({
   useCountUp: (target: number) => ({ value: target, ref: { current: null }, attach: () => {} }),
 }))
+vi.mock('@/hooks/use-language', () => ({ useLanguage: () => ({ lang: 'en', setLang: () => {} }) }))
 
 import { StatsStrip } from '@/components/sections/stats-strip'
 import { getStats } from '@/data/content'

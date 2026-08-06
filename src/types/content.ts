@@ -1,3 +1,5 @@
+import type { LocalizedString } from '@/lib/i18n'
+
 export interface Profile {
   name: string
   title: string
@@ -14,6 +16,27 @@ export interface Profile {
   /** Single-sentence positioning line under the H1. */
   positioning?: string
   /** Three-part status ribbon in the hero. */
+  statusLine?: {
+    now: string
+    basedIn: string
+    education: string
+  }
+}
+
+/** Raw on-disk shape of profile.json: localized fields carry both languages. */
+export interface RawProfile {
+  name: string
+  title: LocalizedString
+  tagline: LocalizedString
+  bio: LocalizedString
+  brandStatement: LocalizedString
+  avatar: string
+  headline?: {
+    plain: LocalizedString
+    emphasis: LocalizedString
+    suffix: string
+  }
+  positioning?: LocalizedString
   statusLine?: {
     now: string
     basedIn: string

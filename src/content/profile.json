@@ -1,16 +1,31 @@
 {
   "name": "Dzaki Muhammad Yusfian",
-  "title": "Accounting, tax & sustainability research",
-  "tagline": "Early-career accounting professional researching sustainability reporting and firm value.",
-  "bio": "Specializing in tax compliance, auditing, and financial analysis — with ongoing research on how sustainability reporting affects firm value in Indonesian manufacturing. Previously a Tax Volunteer at DJP, serving 90+ taxpayers and running community outreach across Bantul Regency.",
-  "brandStatement": "Transforming financial complexity into clarity.",
+  "title": {
+    "en": "Accounting, tax & sustainability research",
+    "id": "Akuntansi, pajak & riset keberlanjutan"
+  },
+  "tagline": {
+    "en": "Early-career accounting professional researching sustainability reporting and firm value.",
+    "id": "Profesional akuntansi awal karier yang meneliti pelaporan keberlanjutan dan nilai perusahaan."
+  },
+  "bio": {
+    "en": "Specializing in tax compliance, auditing, and financial analysis — with ongoing research on how sustainability reporting affects firm value in Indonesian manufacturing. Previously a Tax Volunteer at DJP, serving 90+ taxpayers and running community outreach across Bantul Regency.",
+    "id": "Berfokus pada kepatuhan pajak, audit, dan analisis keuangan — dengan riset berkelanjutan tentang pengaruh pelaporan keberlanjutan terhadap nilai perusahaan manufaktur Indonesia. Sebelumnya Relawan Pajak di DJP, melayani 90+ wajib pajak dan menjalankan penyuluhan masyarakat di Kabupaten Bantul."
+  },
+  "brandStatement": {
+    "en": "Transforming financial complexity into clarity.",
+    "id": "Mengubah kompleksitas keuangan menjadi kejelasan."
+  },
   "avatar": "/images/profile/avatar.jpg",
   "headline": {
-    "plain": "Accounting, tax, &",
-    "emphasis": "sustainability research",
+    "plain": { "en": "Accounting, tax, &", "id": "Akuntansi, pajak, &" },
+    "emphasis": { "en": "sustainability research", "id": "riset keberlanjutan" },
     "suffix": "."
   },
-  "positioning": "Early-career professional working at the intersection of financial reporting and sustainability disclosure.",
+  "positioning": {
+    "en": "Early-career professional working at the intersection of financial reporting and sustainability disclosure.",
+    "id": "Profesional awal karier yang bekerja di persimpangan pelaporan keuangan dan pengungkapan keberlanjutan."
+  },
   "statusLine": {
     "now": "Operations Officer @ Kolosal AI",
     "basedIn": "Jakarta, Indonesia",

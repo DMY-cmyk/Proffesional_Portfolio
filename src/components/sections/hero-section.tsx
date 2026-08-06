@@ -1,7 +1,8 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { getProfile } from '@/data/content'
+import { getProfile, getUiStrings } from '@/data/content'
+import { useLanguage } from '@/hooks/use-language'
 import { withBasePath } from '@/lib/base-path'
 import { StatusRibbon } from '@/components/ui/status-ribbon'
 import { Button } from '@/components/ui/button'
@@ -20,7 +21,9 @@ const fadeUp = {
 }
 
 export function HeroSection() {
-  const profile = getProfile()
+  const { lang } = useLanguage()
+  const profile = getProfile(lang)
+  const ui = getUiStrings(lang)
   const { headline, positioning, statusLine } = profile
 
   return (
@@ -78,10 +81,10 @@ export function HeroSection() {
 
           <motion.div variants={fadeUp} className="mt-7 flex flex-wrap gap-3">
             <Button href="#research" variant="primary" size="lg">
-              Read my research →
+              {ui.readResearch}
             </Button>
             <Button href="/files/cv/dzaki-cv.pdf" variant="secondary" size="lg" external>
-              Download CV
+              {ui.downloadCv}
             </Button>
           </motion.div>
         </motion.div>
