@@ -1,13 +1,17 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { buildApaCitation, buildBibtex, type CitationInput } from '@/lib/article-utils'
 
 function CopyButton({ label, text }: { label: string; text: string }) {
   const [copied, setCopied] = useState(false)
-  const clipboardAvailable = typeof navigator !== 'undefined' && !!navigator.clipboard
+  const [canCopy, setCanCopy] = useState(false)
 
-  if (!clipboardAvailable) {
+  useEffect(() => {
+    setCanCopy(!!navigator.clipboard)
+  }, [])
+
+  if (!canCopy) {
     return <span className="text-xs text-subtle">Select the text to copy</span>
   }
 

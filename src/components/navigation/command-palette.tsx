@@ -20,6 +20,7 @@ export function CommandPalette() {
   const [query, setQuery] = useState('')
   const [selected, setSelected] = useState(0)
   const inputRef = useRef<HTMLInputElement>(null)
+  const previouslyFocusedRef = useRef<HTMLElement | null>(null)
   const router = useRouter()
   const pathname = usePathname()
   const { toggleTheme } = useTheme()
@@ -28,13 +29,15 @@ export function CommandPalette() {
     setOpen(false)
     setQuery('')
     setSelected(0)
+    previouslyFocusedRef.current?.focus()
   }, [])
 
   const goTo = useCallback(
     (href: string) => {
       if (href.startsWith('#')) {
         if (pathname === '/') {
-          document.getElementById(href.slice(1))?.scrollIntoView({ behavior: 'smooth' })
+          const smooth = !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+          document.getElementById(href.slice(1))?.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto' })
         } else {
           router.push(`/${href}`)
         }
@@ -99,6 +102,7 @@ export function CommandPalette() {
 
   useEffect(() => {
     if (open) {
+      previouslyFocusedRef.current = document.activeElement as HTMLElement | null
       inputRef.current?.focus()
       document.body.style.overflow = 'hidden'
       return () => {
@@ -134,6 +138,7 @@ export function CommandPalette() {
             if (e.key === 'ArrowDown') { e.preventDefault(); setSelected((s) => Math.min(s + 1, filtered.length - 1)) }
             if (e.key === 'ArrowUp') { e.preventDefault(); setSelected((s) => Math.max(s - 1, 0)) }
             if (e.key === 'Enter' && filtered[selected]) { e.preventDefault(); filtered[selected].run() }
+            if (e.key === 'Tab') { e.preventDefault() }
           }}
           placeholder="Type a command or search…"
           aria-label="Search commands"

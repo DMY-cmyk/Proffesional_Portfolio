@@ -63,4 +63,38 @@ describe('CommandPalette', () => {
     })
     expect(screen.getByRole('dialog')).toBeInTheDocument()
   })
+
+  it('traps Tab so focus stays on the input while open', async () => {
+    const user = userEvent.setup()
+    render(<CommandPalette />)
+    await user.keyboard('{Control>}k{/Control}')
+    const input = screen.getByRole('combobox', { name: /search commands/i })
+    expect(input).toHaveFocus()
+    await user.keyboard('{Tab}')
+    expect(input).toHaveFocus()
+  })
+
+  it('restores focus to the previously focused element after Escape', async () => {
+    render(
+      <div>
+        <button>Trigger</button>
+        <CommandPalette />
+      </div>
+    )
+    const trigger = screen.getByRole('button', { name: /trigger/i })
+    trigger.focus()
+    expect(trigger).toHaveFocus()
+
+    const { act } = await import('@testing-library/react')
+    await act(async () => {
+      window.dispatchEvent(new Event('open-command-palette'))
+    })
+    expect(screen.getByRole('dialog')).toBeInTheDocument()
+
+    const user = userEvent.setup()
+    await user.keyboard('{Escape}')
+
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
+    expect(trigger).toHaveFocus()
+  })
 })
