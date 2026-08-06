@@ -12,7 +12,12 @@ vi.mock('framer-motion', () => ({
     h2: ({ children, ...p }: any) => <h2 {...p}>{children}</h2>,
   },
   AnimatePresence: ({ children }: any) => <>{children}</>,
+  useMotionValue: (v: number) => ({ get: () => v, set: () => {} }),
+  useSpring: (v: unknown) => v,
 }))
+
+vi.mock('@/hooks/use-reduced-motion', () => ({ useReducedMotion: () => false }))
+vi.mock('@/hooks/use-is-touch', () => ({ useIsTouch: () => false }))
 
 describe('ContactSection (redesigned)', () => {
   it('renders the Contact heading', () => {

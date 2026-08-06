@@ -3,6 +3,7 @@
 import { cn } from '@/utils/cn'
 import { withBasePath } from '@/lib/base-path'
 import { motion } from 'framer-motion'
+import { useMagnetic } from '@/hooks/use-magnetic'
 
 interface ButtonProps {
   variant?: 'primary' | 'secondary' | 'ghost'
@@ -49,6 +50,8 @@ export function Button({
     className
   )
 
+  const { x, y, onPointerMove, onPointerLeave } = useMagnetic()
+
   if (href) {
     const resolvedHref = href.startsWith('/') ? withBasePath(href) : href
     return (
@@ -58,6 +61,9 @@ export function Button({
         aria-label={ariaLabel}
         whileTap={{ scale: 0.98 }}
         transition={{ type: 'spring' as const, stiffness: 400, damping: 18 }}
+        style={{ x, y }}
+        onPointerMove={onPointerMove}
+        onPointerLeave={onPointerLeave}
         {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
       >
         {children}
@@ -74,6 +80,9 @@ export function Button({
       aria-label={ariaLabel}
       whileTap={{ scale: 0.98 }}
       transition={{ type: 'spring' as const, stiffness: 400, damping: 18 }}
+      style={{ x, y }}
+      onPointerMove={onPointerMove}
+      onPointerLeave={onPointerLeave}
     >
       {children}
     </motion.button>

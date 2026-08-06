@@ -6,6 +6,10 @@ vi.mock('@/hooks/use-reduced-motion', () => ({
   useReducedMotion: () => false,
 }))
 
+vi.mock('@/hooks/use-is-touch', () => ({
+  useIsTouch: () => false,
+}))
+
 vi.mock('framer-motion', () => ({
   motion: {
     div: ({ children, initial, animate, exit, transition, whileHover, whileInView, whileTap, viewport, variants, ...props }: any) => <div {...props}>{children}</div>,
@@ -15,6 +19,8 @@ vi.mock('framer-motion', () => ({
     p: ({ children, initial, animate, exit, transition, whileHover, whileInView, whileTap, viewport, variants, ...props }: any) => <p {...props}>{children}</p>,
   },
   AnimatePresence: ({ children }: any) => <>{children}</>,
+  useMotionValue: (v: number) => ({ get: () => v, set: () => {} }),
+  useSpring: (v: unknown) => v,
 }))
 
 describe('NotFound (404)', () => {

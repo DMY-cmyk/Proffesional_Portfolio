@@ -8,7 +8,12 @@ vi.mock('framer-motion', () => ({
     button: ({ children, ...props }: any) => <button {...props}>{children}</button>,
     a: ({ children, ...props }: any) => <a {...props}>{children}</a>,
   },
+  useMotionValue: (v: number) => ({ get: () => v, set: () => {} }),
+  useSpring: (v: unknown) => v,
 }))
+
+vi.mock('@/hooks/use-reduced-motion', () => ({ useReducedMotion: () => false }))
+vi.mock('@/hooks/use-is-touch', () => ({ useIsTouch: () => false }))
 
 describe('Button', () => {
   it('renders as a button element by default', () => {

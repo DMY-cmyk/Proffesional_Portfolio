@@ -6,6 +6,10 @@ vi.mock('@/hooks/use-reduced-motion', () => ({
   useReducedMotion: () => false,
 }))
 
+vi.mock('@/hooks/use-is-touch', () => ({
+  useIsTouch: () => false,
+}))
+
 vi.mock('framer-motion', () => ({
   motion: {
     div: ({ children, ...props }: any) => <div {...props}>{children}</div>,
@@ -13,6 +17,8 @@ vi.mock('framer-motion', () => ({
     a: ({ children, ...props }: any) => <a {...props}>{children}</a>,
   },
   AnimatePresence: ({ children }: any) => <>{children}</>,
+  useMotionValue: (v: number) => ({ get: () => v, set: () => {} }),
+  useSpring: (v: unknown) => v,
 }))
 
 describe('ErrorPage', () => {
