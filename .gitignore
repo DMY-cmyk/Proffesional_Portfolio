@@ -5,6 +5,9 @@ node_modules/
 .next/
 out/
 
+# Generated OG images
+public/og/
+
 # Build
 *.tsbuildinfo
 next-env.d.ts

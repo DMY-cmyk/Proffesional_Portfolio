@@ -27,6 +27,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title: research.frontmatter.title,
     description: research.frontmatter.abstract,
+    openGraph: {
+      title: research.frontmatter.title,
+      description: research.frontmatter.abstract,
+      images: [{ url: `/og/research-${slug}.png`, width: 1200, height: 630, alt: research.frontmatter.title }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      images: [`/og/research-${slug}.png`],
+    },
   }
 }
 
