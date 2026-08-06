@@ -48,7 +48,7 @@ How to review: read the ID column; edit any wording you want changed directly in
 | formSendAnother | Send another message | Kirim pesan lain |
 | footerBuiltWith | Built with Next.js · GitHub Pages | Dibangun dengan Next.js · GitHub Pages |
 | footerPersonal | personal → | personal → |
-| minRead | min read | menit baca |
+| minRead | min read | menit baca *(reserved — not yet rendered; article pages are English by design)* |
 
 ## profile.json
 
@@ -114,3 +114,5 @@ Notes:
 - Contact info list labels — "Email", "LinkedIn", "GitHub", "Location" in `src/components/sections/contact-section.tsx` — kept as EN labels.
 - `SectionHeading` side labels — "Work", "Academic", "References", etc. — and the "Section N" prefix in `src/components/ui/section-heading.tsx` — kept EN.
 - Credentials sub-headings — "Training & Courses", "Awards" in `src/components/sections/credentials-section.tsx` — kept EN.
+- Known limitation: printing the page while in ID mode produces a mixed-language document — the nav and side-labels listed above stay in English regardless of the toggle.
+- Known limitation: `ContactForm` (`src/components/ui/contact-form.tsx`) is fully localized but is not currently rendered on any route — keep/mount/remove is an open owner decision.
