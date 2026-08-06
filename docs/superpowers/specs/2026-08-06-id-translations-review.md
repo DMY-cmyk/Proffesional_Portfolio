@@ -1,6 +1,6 @@
 # Indonesian Translation Review — Phase 4 Plan 3
 
-**Status: AWAITING DZAKI'S REVIEW — do not deploy before approval.**
+**Status: APPROVED by Dzaki (2026-08-06)** — all translations reviewed; two decision items resolved (Operations Officer kept untranslated; bullet grammar fixed). Cleared for deploy.
 How to review: read the ID column; edit any wording you want changed directly in this file or tell Claude; the JSON files are the source of truth and will be updated to match your edits.
 
 ### ⚠ Items needing your decision
