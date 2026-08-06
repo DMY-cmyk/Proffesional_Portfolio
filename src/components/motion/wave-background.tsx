@@ -38,6 +38,20 @@ export function WaveBackground() {
     // Mouse position in logical pixels; null when outside
     const mouse = { x: null as number | null, y: null as number | null }
 
+    // Scroll velocity → turbulence (0..1), smoothed each frame
+    let lastScrollY = window.scrollY
+    let lastScrollT = performance.now()
+    let velocity = 0 // px per ms, decays
+    let turbulence = 0
+
+    function onScroll() {
+      const now = performance.now()
+      const dt = Math.max(1, now - lastScrollT)
+      velocity = Math.abs(window.scrollY - lastScrollY) / dt
+      lastScrollY = window.scrollY
+      lastScrollT = now
+    }
+
     // rAF handle
     let rafId: number | null = null
     let paused = false
@@ -65,7 +79,7 @@ export function WaveBackground() {
       t: number,
     ): number {
       const drift = (wave.speed * t) / 1000
-      const breathe = 1 + 0.25 * Math.sin(t * 0.0001 + wave.phase)
+      const breathe = (1 + 0.25 * Math.sin(t * 0.0001 + wave.phase)) * (1 + 0.35 * turbulence)
       let y =
         wave.yOffset * h +
         wave.amp * breathe * Math.sin(wave.freq * (x + drift * 20) + wave.phase)
@@ -87,6 +101,11 @@ export function WaveBackground() {
     }
 
     function drawFrame(t: number) {
+      // Ease turbulence toward current velocity, then decay velocity
+      const target = Math.min(1, velocity / 2.5)
+      turbulence += (target - turbulence) * 0.06
+      velocity *= 0.92
+
       ctx.clearRect(0, 0, w, h)
 
       const activeLayers = getActiveLayers()
@@ -150,6 +169,7 @@ export function WaveBackground() {
     window.addEventListener('resize', resize)
     window.addEventListener('mousemove', onMouseMove)
     window.addEventListener('mouseleave', onMouseLeave)
+    window.addEventListener('scroll', onScroll, { passive: true })
     document.addEventListener('visibilitychange', onVisibilityChange)
 
     if (reduced) {
@@ -164,6 +184,7 @@ export function WaveBackground() {
       window.removeEventListener('resize', resize)
       window.removeEventListener('mousemove', onMouseMove)
       window.removeEventListener('mouseleave', onMouseLeave)
+      window.removeEventListener('scroll', onScroll)
       document.removeEventListener('visibilitychange', onVisibilityChange)
     }
   }, [reduced])
