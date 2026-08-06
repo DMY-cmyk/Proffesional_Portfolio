@@ -16,8 +16,10 @@ import type {
   NoteEntry,
   TestimonialEntry,
 } from '@/types/content'
+import type { Lang } from '@/lib/i18n'
 
 import profileData from '@/content/profile.json'
+import uiStringsData from '@/content/ui-strings.json'
 import educationData from '@/content/education.json'
 import experienceData from '@/content/experience.json'
 import certificationsData from '@/content/certifications.json'
@@ -103,4 +105,12 @@ export function getStats(): StatEntry[] {
 
 export function getTestimonials(): TestimonialEntry[] {
   return testimonialsData as TestimonialEntry[]
+}
+
+export type UiStrings = typeof uiStringsData.en
+
+export function getUiStrings(lang: Lang): UiStrings {
+  return lang === 'id'
+    ? { ...uiStringsData.en, ...uiStringsData.id }
+    : uiStringsData.en
 }
