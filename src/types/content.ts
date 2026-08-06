@@ -134,3 +134,9 @@ export interface ResearchEntry {
   venue?: string
   advisor?: string
 }
+
+export interface StatEntry {
+  label: string
+  value: number
+  suffix?: string
+}

@@ -23,6 +23,9 @@ vi.mock('@/components/sections/contact-section', () => ({
 vi.mock('@/components/sections/hero-section', () => ({
   HeroSection: () => <section id="hero" />,
 }))
+vi.mock('@/components/sections/stats-strip', () => ({
+  StatsStrip: () => <section id="stats" />,
+}))
 
 // Make next/dynamic resolve the import synchronously (stubs are already registered)
 vi.mock('next/dynamic', () => ({

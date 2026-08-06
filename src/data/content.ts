@@ -12,6 +12,7 @@ import type {
   Downloads,
   SiteConfig,
   ResearchEntry,
+  StatEntry,
 } from '@/types/content'
 
 import profileData from '@/content/profile.json'
@@ -76,4 +77,18 @@ export function getProfessionalContact(): ProfessionalContact {
 
 export function getPersonalContact(): PersonalContact | undefined {
   return getContact().personal
+}
+
+export function getStats(): StatEntry[] {
+  const experience = getExperience()
+  const earliestYear = Math.min(
+    ...experience.map((e) => new Date(e.startDate).getFullYear())
+  )
+  const years = Math.max(1, new Date().getFullYear() - earliestYear)
+  return [
+    { label: 'Years of experience', value: years, suffix: '+' },
+    { label: 'Positions held', value: experience.length },
+    { label: 'Certifications', value: getCertifications().length },
+    { label: 'Research works', value: getResearchEntries().length },
+  ]
 }

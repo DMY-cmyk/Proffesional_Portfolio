@@ -1,5 +1,6 @@
 import dynamic from 'next/dynamic'
 import { HeroSection } from '@/components/sections/hero-section'
+import { StatsStrip } from '@/components/sections/stats-strip'
 import { Skeleton } from '@/components/ui/skeleton'
 
 function SectionSkeleton() {
@@ -42,6 +43,7 @@ export default function Home() {
   return (
     <>
       <HeroSection />
+      <StatsStrip />
       <ResearchSection />
       <ExperienceSection />
       <EducationSection />
