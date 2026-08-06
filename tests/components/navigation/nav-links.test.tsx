@@ -30,13 +30,13 @@ describe('NavLinks', () => {
   it('highlights the active section link', () => {
     render(<NavLinks items={mockItems} activeSection="about" />)
     const aboutLink = screen.getByText('About')
-    expect(aboutLink.className).toContain('gold')
+    expect(aboutLink.className).toContain('text-accent')
   })
 
   it('does not highlight non-active links', () => {
     render(<NavLinks items={mockItems} activeSection="about" />)
     const skillsLink = screen.getByText('Skills')
-    expect(skillsLink.className).not.toContain('gold')
+    expect(skillsLink.className).not.toContain('text-accent')
   })
 
   it('renders an underline indicator for the active link', () => {
