@@ -15,6 +15,11 @@ A research-journal-inspired professional portfolio built with Next.js 15, Tailwi
 - **Animated Skills Filter** — Filter-by-context pill row above the Skills section; dims non-matching tags and tints matches teal with 350ms smooth transition
 - **Editorial Typography** — Newsreader (display/serif), Inter (body), JetBrains Mono (labels/mono) triple-font system
 - **Research Pages** — MDX-powered research articles at `/research` and `/research/[slug]` with featured-thesis card on the homepage
+- **Journal Reading Experience** — Sticky table of contents, reading progress bar, reading-time estimate, and "Cite this" (APA + BibTeX) on research articles
+- **Per-Article OG Images** — Branded 1200×630 preview images generated at build time for every research article
+- **Command Palette** — Ctrl+K / Cmd+K quick navigation across sections, pages, articles, and actions
+- **Notes** — Plain-language MDX notes at `/notes` with the same content pipeline as research articles
+- **Testimonials (data-driven)** — `testimonials.json`-powered section that appears only when quotes exist
 - **Certification Detail** — Individual certification pages at `/certifications/[slug]` with document viewer
 - **Personal Page** — `/personal` route for personal social links (Instagram, TikTok) kept separate from the professional surface
 - **Persistent CV Button** — "↓ CV" download button always visible in the navbar
@@ -151,6 +156,14 @@ To enable deployment:
 2. Push to `main` branch — deployment triggers automatically
 
 ## 📋 Changelog
+
+### Phase 4 Plan 2 — Substance (2026-08-06)
+
+- Journal-grade reading experience on `/research/[slug]`: sticky TOC with scroll-spy, reading progress bar, reading time, APA/BibTeX "Cite this" block with copy buttons
+- Per-article OG images generated at build time via Sharp (`scripts/generate-og.mjs`, wired as `prebuild`)
+- Hand-rolled Ctrl+K command palette (navigation, research articles, notes, theme/CV/email actions) with full keyboard support
+- New `/notes` surface (MDX, mirrors the research pipeline) with a starter plain-language thesis note
+- Empty-safe testimonials section (renders only when `testimonials.json` has entries)
 
 ### Maintenance (2026-08-06)
 
