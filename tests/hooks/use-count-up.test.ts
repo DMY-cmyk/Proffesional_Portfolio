@@ -50,4 +50,69 @@ describe('useCountUp', () => {
     vi.doUnmock('@/hooks/use-reduced-motion')
     vi.resetModules()
   })
+
+  it('honors a reduced-motion preference that resolves true after the observer was created, not the value at attach time', async () => {
+    // Uses the REAL useReducedMotion (no vi.doMock), so this exercises the
+    // actual async matchMedia -> state -> effect -> ref plumbing, not a
+    // hardcoded stub. This directly targets the race described in review:
+    // useReducedMotion() returns false synchronously on first render and
+    // only resolves the OS preference via an effect; the observer must not
+    // close over that stale `false`.
+    vi.resetModules()
+
+    // Controllable matchMedia stub: starts false, and exposes the
+    // registered change handler so the test can flip it later.
+    let changeHandler: ((e: MediaQueryListEvent) => void) | undefined
+    const mql = {
+      matches: false,
+      media: '(prefers-reduced-motion: reduce)',
+      addEventListener: (_event: string, cb: (e: MediaQueryListEvent) => void) => {
+        changeHandler = cb
+      },
+      removeEventListener: vi.fn(),
+    }
+    window.matchMedia = vi.fn().mockReturnValue(mql) as unknown as typeof window.matchMedia
+
+    // IntersectionObserver stub that captures its callback instead of
+    // firing immediately, so the test controls exactly when "visible"
+    // fires relative to the matchMedia change.
+    let ioCallback: IntersectionObserverCallback | undefined
+    class DeferredIOStub {
+      constructor(cb: IntersectionObserverCallback) {
+        ioCallback = cb
+      }
+      observe = vi.fn()
+      unobserve = vi.fn()
+      disconnect = vi.fn()
+    }
+    ;(global as unknown as { IntersectionObserver: unknown }).IntersectionObserver = DeferredIOStub
+
+    const { useCountUp } = await import('@/hooks/use-count-up')
+    const { result } = renderHook(() => useCountUp(42))
+
+    // Attach while the OS preference is still "no preference" (false) —
+    // this is the moment the buggy code would close over reduced=false.
+    const el = document.createElement('span')
+    act(() => {
+      result.current.ref.current = el
+      result.current.attach(el)
+    })
+
+    // The preference flips to reduced motion AFTER the observer exists.
+    mql.matches = true
+    act(() => {
+      changeHandler?.({ matches: true } as MediaQueryListEvent)
+    })
+
+    // Only now does the (already-created) observer report visibility.
+    act(() => {
+      ioCallback?.(
+        [{ isIntersecting: true } as IntersectionObserverEntry],
+        {} as IntersectionObserver
+      )
+    })
+
+    // Must jump straight to target with no animated intermediate value.
+    expect(result.current.value).toBe(42)
+  })
 })
