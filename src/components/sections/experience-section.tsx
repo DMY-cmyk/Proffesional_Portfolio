@@ -1,5 +1,6 @@
 import { SectionWrapper } from '@/components/layout/section-wrapper'
 import { SectionHeading } from '@/components/ui/section-heading'
+import { TimelineWithSpine } from '@/components/motion/timeline-with-spine'
 import { getExperience } from '@/data/content'
 import { formatDateRange } from '@/utils/format-date'
 
@@ -58,7 +59,7 @@ export function ExperienceSection() {
   return (
     <SectionWrapper id="experience">
       <SectionHeading title="Experience" sectionNumber="02" label="Work" />
-      <div>
+      <TimelineWithSpine>
         {experience.map((exp) => (
           <ExperienceRow
             key={`${exp.company}-${exp.startDate}`}
@@ -70,7 +71,7 @@ export function ExperienceSection() {
             bullets={exp.bullets}
           />
         ))}
-      </div>
+      </TimelineWithSpine>
     </SectionWrapper>
   )
 }
