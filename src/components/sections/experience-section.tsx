@@ -1,7 +1,10 @@
+'use client'
+
 import { SectionWrapper } from '@/components/layout/section-wrapper'
 import { SectionHeading } from '@/components/ui/section-heading'
 import { TimelineWithSpine } from '@/components/motion/timeline-with-spine'
-import { getExperience } from '@/data/content'
+import { getExperience, getUiStrings } from '@/data/content'
+import { useLanguage } from '@/hooks/use-language'
 import { formatDateRange } from '@/utils/format-date'
 
 function ExperienceRow({
@@ -54,11 +57,13 @@ function ExperienceRow({
 }
 
 export function ExperienceSection() {
-  const experience = getExperience()
+  const { lang } = useLanguage()
+  const ui = getUiStrings(lang)
+  const experience = getExperience(lang)
 
   return (
     <SectionWrapper id="experience">
-      <SectionHeading title="Experience" sectionNumber="02" label="Work" />
+      <SectionHeading title={ui.sectionExperience} sectionNumber="02" label="Work" />
       <TimelineWithSpine>
         {experience.map((exp) => (
           <ExperienceRow

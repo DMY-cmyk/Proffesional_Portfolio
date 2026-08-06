@@ -1,15 +1,20 @@
+'use client'
+
 import { SectionWrapper } from '@/components/layout/section-wrapper'
 import { SectionHeading } from '@/components/ui/section-heading'
 import { TimelineWithSpine } from '@/components/motion/timeline-with-spine'
-import { getEducation } from '@/data/content'
+import { getEducation, getUiStrings } from '@/data/content'
+import { useLanguage } from '@/hooks/use-language'
 import { formatDateRange } from '@/utils/format-date'
 
 export function EducationSection() {
-  const education = getEducation()
+  const { lang } = useLanguage()
+  const ui = getUiStrings(lang)
+  const education = getEducation(lang)
 
   return (
     <SectionWrapper id="education" className="bg-surface-alt">
-      <SectionHeading title="Education" sectionNumber="03" label="Academic" />
+      <SectionHeading title={ui.sectionEducation} sectionNumber="03" label="Academic" />
       <TimelineWithSpine>
         {education.map((entry) => (
           <div

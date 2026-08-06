@@ -2,7 +2,9 @@ import type {
   Profile,
   RawProfile,
   EducationEntry,
+  RawEducationEntry,
   ExperienceEntry,
+  RawExperienceEntry,
   CertificationEntry,
   SkillCategory,
   AwardEntry,
@@ -17,7 +19,7 @@ import type {
   NoteEntry,
   TestimonialEntry,
 } from '@/types/content'
-import { pickLang, type Lang } from '@/lib/i18n'
+import { pickLang, pickLangArray, type Lang } from '@/lib/i18n'
 
 import profileData from '@/content/profile.json'
 import uiStringsData from '@/content/ui-strings.json'
@@ -51,12 +53,19 @@ export function getProfile(lang: Lang = 'en'): Profile {
   }
 }
 
-export function getEducation(): EducationEntry[] {
-  return educationData as EducationEntry[]
+export function getEducation(lang: Lang = 'en'): EducationEntry[] {
+  return (educationData as unknown as RawEducationEntry[]).map((e) => ({
+    ...e,
+    details: pickLangArray(e.details, lang),
+  }))
 }
 
-export function getExperience(): ExperienceEntry[] {
-  return experienceData as ExperienceEntry[]
+export function getExperience(lang: Lang = 'en'): ExperienceEntry[] {
+  return (experienceData as unknown as RawExperienceEntry[]).map((e) => ({
+    ...e,
+    role: pickLang(e.role, lang),
+    bullets: pickLangArray(e.bullets, lang),
+  }))
 }
 
 export function getCertifications(): CertificationEntry[] {
@@ -105,7 +114,7 @@ export function getPersonalContact(): PersonalContact | undefined {
 
 export function getStats(lang: Lang = 'en'): StatEntry[] {
   const ui = getUiStrings(lang)
-  const experience = getExperience() // lang param arrives in Task 5; counts are language-independent
+  const experience = getExperience()
   const earliestYear = Math.min(
     ...experience.map((e) => new Date(e.startDate).getFullYear())
   )

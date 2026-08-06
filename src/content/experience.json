@@ -1,39 +1,78 @@
 [
   {
     "company": "PT. Kolosal Kecerdasan Artifisial",
-    "role": "Operations Officer",
+    "role": {
+      "en": "Operations Officer",
+      "id": "Staf Operasional"
+    },
     "startDate": "2026-03",
     "endDate": null,
     "location": "Jakarta, Indonesia",
     "bullets": [
-      "Leading end-to-end operational workflows across finance, administration, and cross-functional teams",
-      "Driving process improvements and operational efficiency initiatives to support company scaling objectives"
+      {
+        "en": "Leading end-to-end operational workflows across finance, administration, and cross-functional teams",
+        "id": "Memimpin alur kerja operasional menyeluruh di bidang keuangan, administrasi, dan tim lintas fungsi"
+      },
+      {
+        "en": "Driving process improvements and operational efficiency initiatives to support company scaling objectives",
+        "id": "Mendorong perbaikan proses dan inisiatif efisiensi operasional untuk mendukung target skalabilitas perusahaan"
+      }
     ]
   },
   {
     "company": "PT. Kolosal Kecerdasan Artifisial",
-    "role": "Finance Operation Staff",
+    "role": {
+      "en": "Finance Operation Staff",
+      "id": "Staf Operasional Keuangan"
+    },
     "startDate": "2025-12",
     "endDate": "2026-03",
     "location": "Jakarta, Indonesia",
     "bullets": [
-      "Oversaw end-to-end daily finance operations including AP/AR management, invoice processing, and payment/collection activities",
-      "Executed account reconciliations and contributed to month-end financial closing including adjusting entries and financial statement preparation",
-      "Ensured integrity and completeness of financial records and documentation, maintaining high standards of accuracy and compliance",
-      "Produced regular financial reports and delivered budget and forecast variance analysis to support management decision-making"
+      {
+        "en": "Oversaw end-to-end daily finance operations including AP/AR management, invoice processing, and payment/collection activities",
+        "id": "Mengawasi operasional keuangan harian secara menyeluruh, termasuk pengelolaan AP/AR, pemrosesan invoice, dan aktivitas pembayaran/penagihan"
+      },
+      {
+        "en": "Executed account reconciliations and contributed to month-end financial closing including adjusting entries and financial statement preparation",
+        "id": "Melaksanakan rekonsiliasi akun dan berkontribusi pada penutupan buku bulanan, termasuk jurnal penyesuaian dan penyusunan laporan keuangan"
+      },
+      {
+        "en": "Ensured integrity and completeness of financial records and documentation, maintaining high standards of accuracy and compliance",
+        "id": "Memastikan integritas dan kelengkapan catatan serta dokumentasi keuangan dengan menjaga standar akurasi dan kepatuhan yang tinggi"
+      },
+      {
+        "en": "Produced regular financial reports and delivered budget and forecast variance analysis to support management decision-making",
+        "id": "Menyusun laporan keuangan berkala dan menyampaikan analisis varians anggaran serta proyeksi untuk mendukung pengambilan keputusan manajemen"
+      }
     ]
   },
   {
     "company": "Direktorat Jenderal Pajak",
-    "role": "Tax Volunteer",
+    "role": {
+      "en": "Tax Volunteer",
+      "id": "Relawan Pajak"
+    },
     "startDate": "2025-01",
     "endDate": "2025-12",
     "location": "Yogyakarta, Indonesia",
     "bullets": [
-      "Assisted 90+ individual taxpayers and entrepreneurs in accurately filing SPT PPh 23 returns, reducing errors and increasing on-time submissions by 30%",
-      "Spearheaded community outreach programs in Bantul Regency, educating 200+ taxpayers on compliance benefits and contributing to the Patuh Pajak initiative",
-      "Designed and promoted tax literacy campaigns on Instagram & TikTok, simplifying complex tax concepts into digestible content to enhance public trust",
-      "Resolved tax challenges through consultation and pioneered Core Tax system adoption"
+      {
+        "en": "Assisted 90+ individual taxpayers and entrepreneurs in accurately filing SPT PPh 23 returns, reducing errors and increasing on-time submissions by 30%",
+        "id": "Membantu 90+ wajib pajak orang pribadi dan pelaku usaha dalam pelaporan SPT PPh 23 secara akurat, mengurangi kesalahan dan meningkatkan pelaporan tepat waktu sebesar 30%"
+      },
+      {
+        "en": "Spearheaded community outreach programs in Bantul Regency, educating 200+ taxpayers on compliance benefits and contributing to the Patuh Pajak initiative",
+        "id": "Memimpin program penyuluhan masyarakat di Kabupaten Bantul, mengedukasi 200+ wajib pajak mengenai manfaat kepatuhan dan berkontribusi pada inisiatif Patuh Pajak"
+      },
+      {
+        "en": "Designed and promoted tax literacy campaigns on Instagram & TikTok, simplifying complex tax concepts into digestible content to enhance public trust",
+        "id": "Merancang dan mempromosikan kampanye literasi pajak di Instagram & TikTok, menyederhanakan konsep pajak yang kompleks menjadi konten yang mudah dipahami untuk meningkatkan kepercayaan publik"
+      },
+      {
+        "en": "Resolved tax challenges through consultation and pioneered Core Tax system adoption",
+        "id": "Menyelesaikan kendala perpajakan melalui konsultasi dan menjadi pelopor adopsi sistem Core Tax"
+      }
     ]
   }
 ]

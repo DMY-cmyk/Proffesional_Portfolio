@@ -54,6 +54,17 @@ export interface EducationEntry {
   logo?: string
 }
 
+/** Raw on-disk shape of education.json: `details` carries both languages. */
+export interface RawEducationEntry {
+  school: string
+  degree: string
+  field: string
+  startDate: string
+  endDate: string | null
+  details: LocalizedString[]
+  logo?: string
+}
+
 export interface ExperienceEntry {
   company: string
   role: string
@@ -61,6 +72,17 @@ export interface ExperienceEntry {
   endDate: string | null
   location: string
   bullets: string[]
+  logo?: string
+}
+
+/** Raw on-disk shape of experience.json: `role` and `bullets` carry both languages. */
+export interface RawExperienceEntry {
+  company: string
+  role: LocalizedString
+  startDate: string
+  endDate: string | null
+  location: string
+  bullets: LocalizedString[]
   logo?: string
 }
 

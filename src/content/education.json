@@ -6,9 +6,18 @@
     "startDate": "2022-09",
     "endDate": "2026-04",
     "details": [
-      "Focus on taxation, auditing, and financial reporting.",
-      "Active in academic research and student organizations.",
-      "Thesis: see the Research section."
+      {
+        "en": "Focus on taxation, auditing, and financial reporting.",
+        "id": "Berfokus pada perpajakan, audit, dan pelaporan keuangan."
+      },
+      {
+        "en": "Active in academic research and student organizations.",
+        "id": "Aktif dalam riset akademik dan organisasi kemahasiswaan."
+      },
+      {
+        "en": "Thesis: see the Research section.",
+        "id": "Skripsi: lihat bagian Riset."
+      }
     ]
   }
 ]
