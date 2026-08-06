@@ -5,12 +5,13 @@ import { getProfile } from '@/data/content'
 import { withBasePath } from '@/lib/base-path'
 import { StatusRibbon } from '@/components/ui/status-ribbon'
 import { Button } from '@/components/ui/button'
+import { WordReveal } from '@/components/motion/word-reveal'
 
 const easeOut: [number, number, number, number] = [0.22, 1, 0.36, 1]
 
 const stagger = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.1 } },
+  visible: { transition: { staggerChildren: 0.09, delayChildren: 0.1 } },
 }
 
 const fadeUp = {
@@ -39,7 +40,14 @@ export function HeroSection() {
           >
             {headline ? (
               <>
-                {headline.plain} <em className="italic text-highlight font-medium">{headline.emphasis}</em>{headline.suffix}
+                <WordReveal text={headline.plain} baseDelay={0.15} />{' '}
+                <em className="italic text-highlight font-medium">
+                  <WordReveal
+                    text={headline.emphasis}
+                    baseDelay={0.15 + headline.plain.split(/\s+/).length * 0.04}
+                  />
+                </em>
+                {headline.suffix}
               </>
             ) : (
               profile.title
@@ -82,7 +90,7 @@ export function HeroSection() {
           className="flex items-center justify-center"
           initial={{ opacity: 0, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6, ease: easeOut }}
+          transition={{ duration: 0.6, delay: 0.45, ease: easeOut }}
         >
           {profile.avatar && (
             <div className="relative w-[min(360px,100%)] aspect-[4/5] overflow-hidden rounded-md border border-border bg-muted shadow-lg shadow-black/5">
