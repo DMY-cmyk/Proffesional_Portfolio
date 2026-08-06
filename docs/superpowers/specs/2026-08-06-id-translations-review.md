@@ -5,8 +5,8 @@ How to review: read the ID column; edit any wording you want changed directly in
 
 ### ⚠ Items needing your decision
 
-1. **"Operations Officer" → "Staf Operasional"** — this may erase the promotion signal from "Finance Operation Staff" (the two roles read as a clear step up in English but collapse into near-duplicate titles in Indonesian). Alternative: keep "Operations Officer" untranslated — the English title is common as-is in Indonesian resumes/LinkedIn profiles.
-2. **Officer bullet grammar tweak** — bullet 1 for the Operations Officer role currently reads "...di bidang keuangan, administrasi, dan tim lintas fungsi", which mixes a list of domains with a list of teams under one "dan". Suggested alternative: "...di bidang keuangan dan administrasi, serta lintas tim fungsional" (separates the functional domains from the cross-team scope for cleaner Indonesian grammar).
+1. ~~**"Operations Officer" → "Staf Operasional"**~~ — **DECIDED by Dzaki (2026-08-06): keep "Operations Officer" untranslated** (common as-is in Indonesian resumes; preserves the promotion signal from "Finance Operation Staff"). Applied to `experience.json`.
+2. ~~**Officer bullet grammar tweak**~~ — **DECIDED by Dzaki (2026-08-06): use the reviewer's alternative** "...di bidang keuangan dan administrasi, serta lintas tim fungsional". Applied to `experience.json`.
 
 ## ui-strings.json
 
@@ -72,8 +72,8 @@ Notes:
 
 | Field | EN | ID |
 |---|---|---|
-| role | Operations Officer | Staf Operasional |
-| bullet 1 | Leading end-to-end operational workflows across finance, administration, and cross-functional teams | Memimpin alur kerja operasional menyeluruh di bidang keuangan, administrasi, dan tim lintas fungsi |
+| role | Operations Officer | Operations Officer *(kept untranslated per Dzaki's decision)* |
+| bullet 1 | Leading end-to-end operational workflows across finance, administration, and cross-functional teams | Memimpin alur kerja operasional menyeluruh di bidang keuangan dan administrasi, serta lintas tim fungsional |
 | bullet 2 | Driving process improvements and operational efficiency initiatives to support company scaling objectives | Mendorong perbaikan proses dan inisiatif efisiensi operasional untuk mendukung target skalabilitas perusahaan |
 
 ### PT. Kolosal Kecerdasan Artifisial — Finance Operation Staff
