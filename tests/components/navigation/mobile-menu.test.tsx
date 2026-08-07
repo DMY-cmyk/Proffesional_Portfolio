@@ -115,4 +115,41 @@ describe('MobileMenu', () => {
     await user.click(screen.getByRole('button', { name: /open menu/i }))
     expect(screen.getByRole('dialog')).toHaveFocus()
   })
+
+  it('returns focus to the hamburger when closed with Escape', async () => {
+    const user = userEvent.setup()
+    render(
+      <LanguageProvider>
+        <MobileMenu items={mockItemsWithPage} />
+      </LanguageProvider>
+    )
+    await user.click(screen.getByRole('button', { name: /open menu/i }))
+    await user.keyboard('{Escape}')
+    expect(screen.getByRole('button', { name: /open menu/i })).toHaveFocus()
+  })
+
+  it('locks body scroll while open and releases it on close', async () => {
+    const user = userEvent.setup()
+    render(
+      <LanguageProvider>
+        <MobileMenu items={mockItemsWithPage} />
+      </LanguageProvider>
+    )
+    await user.click(screen.getByRole('button', { name: /open menu/i }))
+    expect(document.body.style.overflow).toBe('hidden')
+    await user.keyboard('{Escape}')
+    expect(document.body.style.overflow).toBe('')
+  })
+
+  it('renders the drawer in a portal outside the header tree', async () => {
+    const user = userEvent.setup()
+    const { container } = render(
+      <LanguageProvider>
+        <MobileMenu items={mockItemsWithPage} />
+      </LanguageProvider>
+    )
+    await user.click(screen.getByRole('button', { name: /open menu/i }))
+    const dialog = screen.getByRole('dialog')
+    expect(container.contains(dialog)).toBe(false)
+  })
 })

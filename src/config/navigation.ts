@@ -29,7 +29,7 @@ export const allNavItems: NavItem[] = [...sectionLinks, ...pageLinks]
 // and the homepage research section's "View all research →" link.
 export const navbarItems: NavItem[] = [
   ...sectionLinks,
-  { label: 'Notes', href: '/notes', key: 'navNotes' },
+  ...pageLinks.filter((item) => item.href === '/notes'),
 ]
 
 export function resolveNavHref(href: string, pathname: string): string {
@@ -42,4 +42,13 @@ export function resolveNavHref(href: string, pathname: string): string {
 export function isPageLinkActive(href: string, pathname: string): boolean {
   if (href.startsWith('#')) return false
   return pathname === href || pathname.startsWith(`${href}/`)
+}
+
+export function isSectionLinkActive(
+  href: string,
+  pathname: string,
+  activeSection?: string
+): boolean {
+  if (!href.startsWith('#')) return false
+  return pathname === '/' && !!activeSection && href === `#${activeSection}`
 }

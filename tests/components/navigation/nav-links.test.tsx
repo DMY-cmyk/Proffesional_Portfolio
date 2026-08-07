@@ -67,6 +67,13 @@ describe('NavLinks', () => {
     render(<NavLinks items={mockItems} pathname="/research" />)
     const researchLink = screen.getByText('Research')
     expect(researchLink.className).toContain('text-accent')
+    expect(researchLink.getAttribute('aria-current')).toBe('page')
+  })
+
+  it('marks the scroll-spied section link with aria-current location', () => {
+    render(<NavLinks items={mockItems} activeSection="about" pathname="/" />)
+    const aboutLink = screen.getByText('About')
+    expect(aboutLink.getAttribute('aria-current')).toBe('location')
   })
 
   it('does not apply scroll-spy highlight when off the homepage', () => {

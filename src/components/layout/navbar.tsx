@@ -37,7 +37,7 @@ export function Navbar() {
         <Link
           href="/"
           className="flex flex-col justify-center"
-          aria-label="Dzaki Muhammad Yusfian — Home"
+          aria-label="Dzaki Yusfian — Home"
         >
           <span className="text-lg leading-tight font-display font-medium text-foreground">
             Dzaki Yusfian<span className="text-accent">.</span>

@@ -2,7 +2,11 @@
 
 import { cn } from '@/utils/cn'
 import { motion, AnimatePresence } from 'framer-motion'
-import { resolveNavHref, isPageLinkActive } from '@/config/navigation'
+import {
+  resolveNavHref,
+  isPageLinkActive,
+  isSectionLinkActive,
+} from '@/config/navigation'
 import type { NavItem } from '@/config/navigation'
 
 interface NavLinksProps {
@@ -15,14 +19,14 @@ export function NavLinks({ items, activeSection, pathname = '/' }: NavLinksProps
   return (
     <nav className="hidden lg:flex items-center gap-1">
       {items.map((item) => {
-        const isSectionActive =
-          pathname === '/' && !!activeSection && item.href === `#${activeSection}`
-        const isActive = isSectionActive || isPageLinkActive(item.href, pathname)
+        const isSectionActive = isSectionLinkActive(item.href, pathname, activeSection)
+        const isPageActive = isPageLinkActive(item.href, pathname)
+        const isActive = isSectionActive || isPageActive
         return (
           <a
             key={item.href}
             href={resolveNavHref(item.href, pathname)}
-            aria-current={isActive ? 'true' : undefined}
+            aria-current={isPageActive ? 'page' : isSectionActive ? 'location' : undefined}
             className={cn(
               'relative px-3 py-2 text-sm font-medium rounded-md transition-colors link-underline',
               'text-muted hover:text-foreground',

@@ -39,7 +39,7 @@ describe('Navbar', () => {
         </ThemeProvider>
       </LanguageProvider>
     )
-    expect(screen.getByRole('link', { name: /dzaki muhammad yusfian/i })).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: /dzaki yusfian — home/i })).toBeInTheDocument()
   })
 
   it('renders navigation links', () => {

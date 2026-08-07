@@ -132,6 +132,20 @@ Aria-labels remain English (existing site convention).
 - `ui-strings.test.ts` parity test picks up the four new keys automatically.
 - Full suite + `next build` must pass.
 
+## Post-review amendments (2026-08-07)
+
+Code review of the implementation branch amended the spec on four points:
+
+1. **Drawer portals to `document.body`** — the header's `-translate-x-1/2` and
+   `backdrop-blur` create a containing block for `position: fixed` descendants, so
+   the mobile overlay/panel must render via `createPortal` to span the viewport.
+2. **Brand `aria-label` is "Dzaki Yusfian — Home"** (not the full name) — WCAG 2.5.3
+   Label in Name requires the visible text to appear in the accessible name.
+3. **Modal integrity** — `aria-modal="true"` is backed by a Tab focus trap and a body
+   scroll lock while open; Escape restores focus to the hamburger.
+4. **`aria-current` uses `"page"` / `"location"` tokens**; the mobile CV link drops
+   its English `aria-label` in favor of its localized visible text.
+
 ## Out of scope
 
 Footer links, command palette internals, section content, theme system, i18n plumbing.
