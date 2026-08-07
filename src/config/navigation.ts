@@ -1,4 +1,5 @@
 import type { UiStrings } from '@/data/content'
+import { withBasePath } from '@/lib/base-path'
 
 export interface NavItem {
   label: string
@@ -22,3 +23,23 @@ export const pageLinks: NavItem[] = [
 ]
 
 export const allNavItems: NavItem[] = [...sectionLinks, ...pageLinks]
+
+// Header link list: sections + Notes. The /research page link is intentionally
+// omitted (deduped) — it stays reachable via the command palette (allNavItems)
+// and the homepage research section's "View all research →" link.
+export const navbarItems: NavItem[] = [
+  ...sectionLinks,
+  { label: 'Notes', href: '/notes', key: 'navNotes' },
+]
+
+export function resolveNavHref(href: string, pathname: string): string {
+  if (href.startsWith('#')) {
+    return pathname === '/' ? href : withBasePath(`/${href}`)
+  }
+  return withBasePath(href)
+}
+
+export function isPageLinkActive(href: string, pathname: string): boolean {
+  if (href.startsWith('#')) return false
+  return pathname === href || pathname.startsWith(`${href}/`)
+}
