@@ -13,11 +13,25 @@ interface NavLinksProps {
   items: NavItem[]
   activeSection?: string
   pathname?: string
+  condensed?: boolean
 }
 
-export function NavLinks({ items, activeSection, pathname = '/' }: NavLinksProps) {
+export function NavLinks({
+  items,
+  activeSection,
+  pathname = '/',
+  condensed = false,
+}: NavLinksProps) {
   return (
-    <nav className="hidden lg:flex items-center gap-1">
+    <nav
+      aria-label="Primary"
+      className={cn(
+        'flex w-full items-center font-mono uppercase',
+        condensed
+          ? 'gap-4 text-[10.5px] tracking-[0.13em]'
+          : 'gap-6 text-[11px] tracking-[0.14em]'
+      )}
+    >
       {items.map((item) => {
         const isSectionActive = isSectionLinkActive(item.href, pathname, activeSection)
         const isPageActive = isPageLinkActive(item.href, pathname)
@@ -28,18 +42,33 @@ export function NavLinks({ items, activeSection, pathname = '/' }: NavLinksProps
             href={resolveNavHref(item.href, pathname)}
             aria-current={isPageActive ? 'page' : isSectionActive ? 'location' : undefined}
             className={cn(
-              'relative px-3 py-2 text-sm font-medium rounded-md transition-colors link-underline',
+              'group relative inline-flex h-full min-h-[42px] items-center gap-1 transition-colors',
               'text-muted hover:text-foreground',
-              isActive && 'text-accent'
+              isActive && 'text-accent font-medium',
+              item.isSecondary && 'ml-auto'
             )}
           >
             {item.label}
+            {item.isSecondary && (
+              <span aria-hidden="true" className="text-highlight">
+                ↗
+              </span>
+            )}
+            <span
+              data-testid="hover-underline"
+              aria-hidden="true"
+              className={cn(
+                'absolute inset-x-0 bottom-0 h-0.5 origin-left scale-x-0 bg-nav-underline',
+                'transition-transform duration-200 motion-reduce:transition-none',
+                !isActive && 'group-hover:scale-x-100 group-focus-visible:scale-x-100'
+              )}
+            />
             <AnimatePresence>
               {isActive && (
                 <motion.span
                   data-testid="active-indicator"
                   layoutId="nav-underline"
-                  className="absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 w-4 rounded-full bg-accent"
+                  className="absolute inset-x-0 bottom-0 h-0.5 bg-accent"
                   initial={{ opacity: 0, scaleX: 0 }}
                   animate={{ opacity: 1, scaleX: 1 }}
                   exit={{ opacity: 0, scaleX: 0 }}
