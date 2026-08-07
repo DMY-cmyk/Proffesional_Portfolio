@@ -61,3 +61,16 @@ describe('isPageLinkActive', () => {
     expect(isPageLinkActive('/notes', '/notesarchive')).toBe(false)
   })
 })
+
+describe('navbarItems secondary flag', () => {
+  it('marks the Notes item as secondary', () => {
+    const notes = navbarItems.find((item) => item.href === '/notes')
+    expect(notes?.isSecondary).toBe(true)
+  })
+
+  it('does not mark section links as secondary', () => {
+    for (const item of navbarItems.filter((i) => i.href.startsWith('#'))) {
+      expect(item.isSecondary).toBeUndefined()
+    }
+  })
+})

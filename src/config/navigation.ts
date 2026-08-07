@@ -5,6 +5,7 @@ export interface NavItem {
   label: string
   href: string
   isExternal?: boolean
+  isSecondary?: boolean
   key?: keyof UiStrings
 }
 
@@ -29,7 +30,9 @@ export const allNavItems: NavItem[] = [...sectionLinks, ...pageLinks]
 // and the homepage research section's "View all research →" link.
 export const navbarItems: NavItem[] = [
   ...sectionLinks,
-  ...pageLinks.filter((item) => item.href === '/notes'),
+  ...pageLinks
+    .filter((item) => item.href === '/notes')
+    .map((item) => ({ ...item, isSecondary: true })),
 ]
 
 export function resolveNavHref(href: string, pathname: string): string {

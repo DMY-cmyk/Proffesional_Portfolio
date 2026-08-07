@@ -17,6 +17,7 @@
   --color-muted: var(--muted);
   --color-subtle: var(--subtle);
   --color-border: var(--border);
+  --color-nav-underline: var(--nav-underline-hover);
 
   /* Font families */
   --font-display: 'Newsreader', 'Georgia', serif;
@@ -34,6 +35,7 @@
      Was #718096 (3.82:1) — failed on 11-12px labels in the stats strip and footer. */
   --subtle: #657287;
   --border: #e6ddd0;
+  --nav-underline-hover: #c9bda9;
 
   --accent-primary: #0d4f5c;
   --accent-primary-dark: #0a3d47;
@@ -53,6 +55,7 @@
      failed silently in dark mode. */
   --subtle: #878790;
   --border: #2d3748;
+  --nav-underline-hover: #3f4c5e;
 
   --accent-primary: #2dd4bf;
   --accent-primary-dark: #14b8a6;
