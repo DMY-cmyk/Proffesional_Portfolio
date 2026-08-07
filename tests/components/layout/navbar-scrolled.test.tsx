@@ -19,6 +19,10 @@ vi.mock('@/hooks/use-scroll-progress', () => ({
   useScrollProgress: () => 0.2,
 }))
 
+vi.mock('next/navigation', () => ({
+  usePathname: () => '/',
+}))
+
 describe('Navbar (scrolled state)', () => {
   afterEach(() => {
     cleanup()

@@ -1,11 +1,12 @@
 'use client'
 
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { useScrollSpy } from '@/hooks/use-scroll-spy'
 import { useScrollProgress } from '@/hooks/use-scroll-progress'
 import { useLanguage } from '@/hooks/use-language'
 import { getUiStrings } from '@/data/content'
-import { allNavItems, sectionLinks } from '@/config/navigation'
+import { navbarItems, sectionLinks } from '@/config/navigation'
 import { NavLinks } from '@/components/navigation/nav-links'
 import { MobileMenu } from '@/components/navigation/mobile-menu'
 import { LanguageToggle } from '@/components/ui/language-toggle'
@@ -17,10 +18,11 @@ const sectionIds = sectionLinks.map((item) => item.href.replace('#', ''))
 export function Navbar() {
   const activeSection = useScrollSpy(sectionIds)
   const scrollProgress = useScrollProgress()
+  const pathname = usePathname() ?? '/'
   const hasScrolled = scrollProgress > 0.01
   const { lang } = useLanguage()
   const ui = getUiStrings(lang)
-  const localizedItems = allNavItems.map((item) => ({
+  const localizedItems = navbarItems.map((item) => ({
     ...item,
     label: item.key ? ui[item.key] : item.label,
   }))
@@ -34,19 +36,45 @@ export function Navbar() {
       <div className="flex items-center justify-between px-5 h-14">
         <Link
           href="/"
-          className="text-lg font-display font-medium text-foreground"
+          className="flex flex-col justify-center"
           aria-label="Dzaki Muhammad Yusfian — Home"
         >
-          Dzaki<span className="text-accent">.</span>
+          <span className="text-lg leading-tight font-display font-medium text-foreground">
+            Dzaki Yusfian<span className="text-accent">.</span>
+          </span>
+          <span
+            aria-hidden="true"
+            className="hidden sm:block font-mono text-[9px] leading-none uppercase tracking-[0.22em] text-subtle"
+          >
+            {ui.brandTagline}
+          </span>
         </Link>
         <div className="flex items-center gap-3">
-          <NavLinks items={localizedItems} activeSection={activeSection} />
+          <NavLinks
+            items={localizedItems}
+            activeSection={activeSection}
+            pathname={pathname}
+          />
           <button
             onClick={() => window.dispatchEvent(new Event('open-command-palette'))}
-            className="hidden md:inline-flex items-center gap-1 rounded-md border border-border px-2 py-1.5 font-mono text-[10px] uppercase tracking-wider text-subtle hover:text-accent hover:border-accent transition-colors"
-            aria-label="Open command palette"
+            className="hidden lg:inline-flex items-center gap-1.5 rounded-md border border-border px-2.5 py-1.5 text-subtle hover:text-accent hover:border-accent transition-colors"
+            aria-label="Search and navigate (Ctrl+K)"
           >
-            Ctrl K
+            <svg
+              aria-hidden="true"
+              className="h-3.5 w-3.5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M21 21l-4.35-4.35M17 10.5a6.5 6.5 0 11-13 0 6.5 6.5 0 0113 0z"
+              />
+            </svg>
+            <kbd className="font-mono text-[10px] uppercase tracking-wider">Ctrl K</kbd>
           </button>
           <a
             href={withBasePath('/files/cv/dzaki-cv.pdf')}
@@ -66,9 +94,15 @@ export function Navbar() {
             </svg>
             CV
           </a>
-          <LanguageToggle />
+          <div className="hidden md:block">
+            <LanguageToggle />
+          </div>
           <ThemeToggle />
-          <MobileMenu items={localizedItems} activeSection={activeSection} />
+          <MobileMenu
+            items={localizedItems}
+            activeSection={activeSection}
+            pathname={pathname}
+          />
         </div>
       </div>
       <div

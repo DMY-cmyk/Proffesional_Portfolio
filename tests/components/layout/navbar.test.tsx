@@ -21,9 +21,14 @@ vi.mock('@/hooks/use-scroll-progress', () => ({
   useScrollProgress: () => 0,
 }))
 
+vi.mock('next/navigation', () => ({
+  usePathname: () => '/',
+}))
+
 describe('Navbar', () => {
   afterEach(() => {
     cleanup()
+    window.localStorage.clear()
   })
 
   it('renders the site logo/brand', () => {
@@ -106,5 +111,51 @@ describe('Navbar', () => {
     )
     await user.click(screen.getByRole('button', { name: /beralih ke bahasa indonesia/i }))
     expect(screen.getAllByText('Pendidikan').length).toBeGreaterThanOrEqual(1)
+  })
+
+  it('shows exactly one Research link (deduped)', () => {
+    render(
+      <LanguageProvider>
+        <ThemeProvider>
+          <Navbar />
+        </ThemeProvider>
+      </LanguageProvider>
+    )
+    expect(screen.getAllByText('Research')).toHaveLength(1)
+  })
+
+  it('renders the editorial brand tagline', () => {
+    render(
+      <LanguageProvider>
+        <ThemeProvider>
+          <Navbar />
+        </ThemeProvider>
+      </LanguageProvider>
+    )
+    expect(screen.getByText('Accounting · Research')).toBeInTheDocument()
+  })
+
+  it('renders a search button for the command palette', () => {
+    render(
+      <LanguageProvider>
+        <ThemeProvider>
+          <Navbar />
+        </ThemeProvider>
+      </LanguageProvider>
+    )
+    expect(
+      screen.getByRole('button', { name: /search and navigate/i })
+    ).toBeInTheDocument()
+  })
+
+  it('renders the Notes page link', () => {
+    render(
+      <LanguageProvider>
+        <ThemeProvider>
+          <Navbar />
+        </ThemeProvider>
+      </LanguageProvider>
+    )
+    expect(screen.getByText('Notes')).toBeInTheDocument()
   })
 })
