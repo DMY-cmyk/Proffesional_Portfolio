@@ -6,9 +6,7 @@ const CONDENSE_AT = 88
 const EXPAND_AT = 72
 
 export function useCondensedNav(): boolean {
-  const [condensed, setCondensed] = useState(
-    () => typeof window !== 'undefined' && window.scrollY > CONDENSE_AT
-  )
+  const [condensed, setCondensed] = useState(false)
 
   useEffect(() => {
     const onScroll = () => {

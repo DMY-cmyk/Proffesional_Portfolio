@@ -118,7 +118,7 @@ export function Navbar() {
                 href={withBasePath('/files/cv/dzaki-cv.pdf')}
                 download
                 className="hidden md:inline-flex items-center gap-1.5 bg-foreground text-background px-3.5 py-2 rounded-[4px] text-[11px] font-mono uppercase tracking-[0.1em] font-medium hover:bg-accent transition-colors"
-                aria-label="Download CV"
+                aria-label={ui.downloadCv}
               >
                 <DownloadIcon />
                 {condensed ? 'CV' : ui.downloadCv}
