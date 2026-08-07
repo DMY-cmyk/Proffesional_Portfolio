@@ -11,6 +11,11 @@ vi.mock('framer-motion', () => ({
     span: ({ children, layoutId, initial, animate, exit, transition, ...props }: any) => <span {...props}>{children}</span>,
   },
   AnimatePresence: ({ children }: any) => <>{children}</>,
+  LayoutGroup: ({ children }: any) => <>{children}</>,
+}))
+
+vi.mock('@/hooks/use-condensed-nav', () => ({
+  useCondensedNav: () => false,
 }))
 
 vi.mock('@/hooks/use-scroll-spy', () => ({
@@ -76,7 +81,7 @@ describe('Navbar', () => {
     expect(document.querySelector('[data-testid="scroll-progress"]')).toBeInTheDocument()
   })
 
-  it('has floating pill styling with rounded corners', () => {
+  it('is a full-width masthead, not a floating pill', () => {
     const { container } = render(
       <LanguageProvider>
         <ThemeProvider>
@@ -85,7 +90,31 @@ describe('Navbar', () => {
       </LanguageProvider>
     )
     const header = container.querySelector('header')
-    expect(header?.className).toContain('rounded-2xl')
+    expect(header?.className).not.toMatch(/rounded/)
+    expect(header?.className).toContain('inset-x-0')
+  })
+
+  it('does not render a search button in the header', () => {
+    render(
+      <LanguageProvider>
+        <ThemeProvider>
+          <Navbar />
+        </ThemeProvider>
+      </LanguageProvider>
+    )
+    expect(screen.queryByRole('button', { name: /search and navigate/i })).toBeNull()
+  })
+
+  it('renders the ink rule with the scroll progress fill at the bottom edge', () => {
+    const { container } = render(
+      <LanguageProvider>
+        <ThemeProvider>
+          <Navbar />
+        </ThemeProvider>
+      </LanguageProvider>
+    )
+    const progress = container.querySelector('[data-testid="scroll-progress"]')
+    expect(progress?.parentElement?.className).toContain('bg-foreground')
   })
 
   it('renders a persistent Download CV link', () => {
@@ -133,19 +162,6 @@ describe('Navbar', () => {
       </LanguageProvider>
     )
     expect(screen.getByText('Accounting · Research')).toBeInTheDocument()
-  })
-
-  it('renders a search button for the command palette', () => {
-    render(
-      <LanguageProvider>
-        <ThemeProvider>
-          <Navbar />
-        </ThemeProvider>
-      </LanguageProvider>
-    )
-    expect(
-      screen.getByRole('button', { name: /search and navigate/i })
-    ).toBeInTheDocument()
   })
 
   it('renders the Notes page link', () => {

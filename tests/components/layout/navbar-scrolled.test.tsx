@@ -9,6 +9,7 @@ vi.mock('framer-motion', () => ({
     span: ({ children, layoutId, initial, animate, exit, transition, ...props }: any) => <span {...props}>{children}</span>,
   },
   AnimatePresence: ({ children }: any) => <>{children}</>,
+  LayoutGroup: ({ children }: any) => <>{children}</>,
 }))
 
 vi.mock('@/hooks/use-scroll-spy', () => ({
@@ -23,12 +24,16 @@ vi.mock('next/navigation', () => ({
   usePathname: () => '/',
 }))
 
-describe('Navbar (scrolled state)', () => {
+vi.mock('@/hooks/use-condensed-nav', () => ({
+  useCondensedNav: () => true,
+}))
+
+describe('Navbar (condensed state)', () => {
   afterEach(() => {
     cleanup()
   })
 
-  it('applies deeper shadow when scrolled', async () => {
+  it('marks the header as condensed', async () => {
     const { Navbar } = await import('@/components/layout/navbar')
     render(
       <LanguageProvider>
@@ -37,7 +42,31 @@ describe('Navbar (scrolled state)', () => {
         </ThemeProvider>
       </LanguageProvider>
     )
-    const header = document.querySelector('header')
-    expect(header?.className).toMatch(/shadow-\[0_4px_16px/)
+    expect(document.querySelector('header')?.dataset.condensed).toBe('true')
+  })
+
+  it('shortens the CV label to CV', async () => {
+    const { Navbar } = await import('@/components/layout/navbar')
+    render(
+      <LanguageProvider>
+        <ThemeProvider>
+          <Navbar />
+        </ThemeProvider>
+      </LanguageProvider>
+    )
+    const cv = document.querySelector('a[download]')
+    expect(cv?.textContent?.trim()).toBe('CV')
+  })
+
+  it('hides the brand tagline when condensed', async () => {
+    const { Navbar } = await import('@/components/layout/navbar')
+    const { queryByText } = render(
+      <LanguageProvider>
+        <ThemeProvider>
+          <Navbar />
+        </ThemeProvider>
+      </LanguageProvider>
+    )
+    expect(queryByText('Accounting · Research')).toBeNull()
   })
 })
