@@ -20,7 +20,11 @@ export function WordReveal({ text, className, baseDelay = 0 }: WordRevealProps) 
   }
 
   return (
-    <span className={cn('inline', className)} aria-label={text}>
+    <span className={cn('inline', className)}>
+      {/* The animated words are aria-hidden, so the accessible name comes from
+          this visually hidden copy. aria-label is prohibited on a plain span
+          (implicit role="generic") and fails the aria-prohibited-attr audit. */}
+      <span className="sr-only">{text}</span>
       {words.map((word, i) => (
         <Fragment key={`${word}-${i}`}>
           <span
