@@ -13,22 +13,32 @@ export function LanguageToggle() {
   const { lang, setLang } = useLanguage()
 
   return (
-    <div className="inline-flex items-center rounded-md border border-border font-mono text-[11px] uppercase tracking-wider" role="group" aria-label="Language">
-      {OPTIONS.map((opt) => (
-        <button
-          key={opt.value}
-          onClick={() => setLang(opt.value)}
-          aria-pressed={lang === opt.value}
-          aria-label={opt.aria}
-          className={cn(
-            'inline-flex min-h-11 min-w-9 items-center justify-center px-2.5 transition-colors',
-            lang === opt.value
-              ? 'text-accent font-semibold'
-              : 'text-muted hover:text-foreground'
+    <div
+      className="inline-flex items-center gap-1 font-mono text-[11px] uppercase tracking-wider"
+      role="group"
+      aria-label="Language"
+    >
+      {OPTIONS.map((opt, i) => (
+        <span key={opt.value} className="inline-flex items-center gap-1">
+          {i > 0 && (
+            <span aria-hidden="true" className="text-subtle">
+              /
+            </span>
           )}
-        >
-          {opt.label}
-        </button>
+          <button
+            onClick={() => setLang(opt.value)}
+            aria-pressed={lang === opt.value}
+            aria-label={opt.aria}
+            className={cn(
+              'inline-flex min-h-11 min-w-9 items-center justify-center px-1.5 transition-colors',
+              lang === opt.value
+                ? 'text-accent font-semibold underline underline-offset-4'
+                : 'text-subtle hover:text-foreground'
+            )}
+          >
+            {opt.label}
+          </button>
+        </span>
       ))}
     </div>
   )
