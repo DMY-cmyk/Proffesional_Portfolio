@@ -30,7 +30,9 @@
   --surface-alt: #fefcf6;
   --foreground: #0f1419;
   --muted: #4a5568;
-  --subtle: #718096;
+  /* WCAG AA: 4.63:1 on --background, the darkest light-theme surface.
+     Was #718096 (3.82:1) — failed on 11-12px labels in the stats strip and footer. */
+  --subtle: #657287;
   --border: #e6ddd0;
 
   --accent-primary: #0d4f5c;
@@ -46,7 +48,10 @@
   --surface-alt: #141a22;
   --foreground: #f1e9d8;
   --muted: #a1a1aa;
-  --subtle: #71717a;
+  /* WCAG AA: 4.60:1 on --surface, the lightest dark-theme surface.
+     Was #71717a (3.39:1) — Lighthouse only audits the light theme, so this
+     failed silently in dark mode. */
+  --subtle: #878790;
   --border: #2d3748;
 
   --accent-primary: #2dd4bf;

@@ -49,6 +49,20 @@ Accessibility is still 92 (delta -4, within the 5-point no-opportunities-list th
 
 `aria-prohibited-attr` now scores 1 with 0 failing elements, and Accessibility is back to the pre-Phase-4 baseline of 96. The Phase 4 accessibility regression is fully closed.
 
-Still open (both pre-existing, not Phase 4 regressions — confirmed by the fact that the 96 baseline already included them):
-- `color-contrast` (weight 7) — `text-subtle` (#718096) on cream in the stats strip and footer.
-- `label-content-name-mismatch` (weight 0, no score impact) — the navbar "Ctrl K" chip's visible text is not part of its accessible name ("Open command palette").
+## Accessibility follow-up (2026-08-07, second pass) — `color-contrast` fixed → **Accessibility 100**
+
+The `--subtle` token was too light for small text. Lighthouse reported 6 failing elements, all of them `--subtle` at 11–12px: the four stats-strip labels (3.88:1 on the blended `--surface-alt`) and two footer spans (3.81:1 on `--background`). Computing the ratios across every token pair showed the same token also failed in **both** dark-theme surfaces (3.39–3.83:1) — invisible to Lighthouse, which only audits the light theme.
+
+The worst case is the *darkest* light background (`--background` #fbf9f4) and the *lightest* dark background (`--surface` #1a2028), so the token was raised until it clears 4.5:1 there, with a small margin, while staying visually lighter than `--muted` so the three-level type hierarchy survives:
+
+| Theme | Token | Before | After | Worst-case ratio |
+|---|---|---|---|---|
+| Light | `--subtle` | #718096 (3.82:1) | **#657287** | 4.63:1 on `--background` |
+| Dark | `--subtle` | #71717a (3.39:1) | **#878790** | 4.60:1 on `--surface` |
+
+Result: `color-contrast` scores 1 with **0 failing elements**, and **Accessibility reaches 100**. `tests/styles/token-contrast.test.ts` now parses the tokens straight out of `globals.css` and asserts every text token clears 4.5:1 against every background token in both themes, plus the hierarchy ordering — so this cannot silently regress again.
+
+**Performance note — do not read the numbers from this pass as a regression.** Both post-fix runs reported Performance 53, but an A/B measurement on the *pre-fix* build under the same machine load reported 55 (TBT 700 ms, LCP 5.2 s) against 85 earlier the same day on identical JS. A two-hex-value CSS change cannot move TBT by an order of magnitude; the machine was simply loaded. The Performance figure of record remains **85** from the quiet run above. Re-measure on an idle machine before drawing any performance conclusion.
+
+Still open (pre-existing, no score impact):
+- `label-content-name-mismatch` (weight 0) — the navbar "Ctrl K" chip's visible text is not part of its accessible name ("Open command palette").
