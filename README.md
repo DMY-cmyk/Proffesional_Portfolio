@@ -9,8 +9,9 @@ A research-journal-inspired professional portfolio built with Next.js 15, Tailwi
 ## ✨ Features
 
 - **7 Homepage Sections** — Hero → Research → Experience → Education → Credentials → Skills → Contact, in editorial reading order
-- **Editorial Navigation Header** — Two-line brand lockup ("Dzaki Yusfian." + localized Accounting · Research microline), curated link set with no duplicates, path-aware hrefs that work on every page (`/#section` off-homepage), scroll-spy + route active states with `aria-current`, and a search button (Ctrl+K) with icon + kbd hint
-- **Responsive Header Tiers** — Full link row + search at ≥1024px; below that a portal-rendered mobile drawer with Sections/Pages groups, localized CV download, staggered reveal, focus trap, and body-scroll lock
+- **Journal Masthead Header** — Full-width two-tier editorial masthead: identity row (23px Newsreader brand lockup + localized tagline, quiet EN/ID + theme controls, single filled "Download CV" CTA) over a mono small-caps navigation row, closed by a 2px ink rule that doubles as the scroll-progress track; condenses to one 54px row past the hero with a spring (SSR-safe, reduced-motion instant)
+- **One Underline System** — Hover draws a 2px sand underline, the active link holds the same underline in teal (framer `layoutId` spring); Notes sits apart at the row's end with a gold ↗ as ranked side-content; path-aware hrefs (`/#section` off-homepage) and `aria-current` states throughout
+- **Responsive Header Tiers** — Two-tier masthead at ≥1024px; below that a single editorial row with a portal-rendered paper drawer: ink leading edge, numbered "01 — Sections / 02 — Pages" labels, 22px serif links, localized CV download, staggered reveal, focus trap, and body-scroll lock
 - **Visual System** — Cool cream paper background (`#fbf9f4`), deep teal primary (`#0d4f5c`), muted gold highlight (`#b8944a`)
 - **Animated Background** — Canvas-rendered flowing data lines (4 layers, parallax depth, amplitude breathing, cursor attraction, drifting accent ticks)
 - **Custom Cursor** — Teal ring + center dot with a fading particle tail; expands to gold on interactive elements
@@ -25,7 +26,7 @@ A research-journal-inspired professional portfolio built with Next.js 15, Tailwi
 - **Testimonials (data-driven)** — `testimonials.json`-powered section that appears only when quotes exist
 - **Certification Detail** — Individual certification pages at `/certifications/[slug]` with document viewer
 - **Personal Page** — `/personal` route for personal social links (Instagram, TikTok) kept separate from the professional surface
-- **Persistent CV Button** — "↓ CV" download in the navbar (≥768px) and inside the mobile menu below that
+- **Persistent CV Button** — filled "↓ Download CV" CTA in the masthead (≥768px; shortens to "CV" when condensed) and inside the mobile drawer below that, with a locale-matched accessible name (WCAG 2.5.3)
 - **Tag-Cloud Skills** — Skill tags with context labels replacing percentage-based progress bars
 - **Full SEO** — Open Graph image, Twitter Cards, JSON-LD structured data, dynamic sitemap, robots config, apple-touch-icon
 - **Accessibility** — Skip-to-content link, focus ring on teal, reduced-motion support, semantic HTML, ARIA labels
@@ -82,7 +83,7 @@ src/
 ├── styles/           # Tailwind CSS 4 global theme tokens + print stylesheet
 ├── types/            # TypeScript interfaces
 └── utils/            # Format helpers
-tests/                # 322 tests across 71 test files (mirrors src/ structure)
+tests/                # 342 tests across 72 test files (mirrors src/ structure)
 ```
 
 ## 🚀 Getting Started
@@ -144,7 +145,7 @@ The visual system is defined in `src/styles/globals.css` using CSS custom proper
 npm run test:run
 ```
 
-- **322 tests** across **71 test files**
+- **342 tests** across **72 test files**
 - Vitest + React Testing Library + jsdom
 - Components, hooks, utilities, pages, and content loaders are all tested
 
@@ -159,6 +160,19 @@ To enable deployment:
 2. Push to `main` branch — deployment triggers automatically
 
 ## 📋 Changelog
+
+### Journal Masthead Redesign (2026-08-07, second pass)
+
+Full visual overhaul of the header after a six-point audit (identity mismatch, clashing underline systems, crowded controls, cramped brand, flat link hierarchy, mixed typography) — every finding user-confirmed via a visual companion session:
+
+- **Two-tier journal masthead** — floating glass pill replaced by a full-width paper masthead: identity row over a mono small-caps nav row, separated by a hairline, closed by a 2px ink rule that hosts the teal scroll-progress fill
+- **Condense on scroll** — past 88px the tiers merge into one 54px row with a spring (`useCondensedNav` hysteresis 88/72 prevents flutter); tagline collapses, brand shrinks, "Download CV" shortens to "CV"; instant under reduced motion; SSR-safe state init (no hydration mismatch on mid-page loads)
+- **One underline system** — hover = 2px sand underline (`--nav-underline-hover` token, both themes), active = same rule in teal via the shared framer spring; legacy dot + draw-on mix retired
+- **Link hierarchy** — six section links in reading order; Notes demoted to the row's end with a gold ↗ glyph (`isSecondary` flag)
+- **Calmer controls** — search button removed (Ctrl+K and palette unchanged), language toggle restyled as quiet underlined text, theme icon behind a hairline, CV as the sole filled button with locale-matched `aria-label` (WCAG 2.5.3)
+- **Editorial drawer** — paper panel with 2px ink leading edge, "Menu" microlabel + in-panel close button, numbered mono group labels, 22px Newsreader links; focus trap/Escape/scroll-lock preserved
+- **Layout offsets** — `lg:pt-36` main padding and `scroll-mt-20` section anchors clear the taller header in both states
+- **Process** — spec + plan docs, 8 TDD commits by subagents with per-task review, final whole-branch review fixed 2 findings (hydration-safe init, localized CV aria-label); suite 342/342
 
 ### Navigation Header Redesign (2026-08-07)
 
