@@ -1,24 +1,28 @@
 'use client'
 
 import { cn } from '@/utils/cn'
-import { withBasePath } from '@/lib/base-path'
 import { motion, AnimatePresence } from 'framer-motion'
+import { resolveNavHref, isPageLinkActive } from '@/config/navigation'
 import type { NavItem } from '@/config/navigation'
 
 interface NavLinksProps {
   items: NavItem[]
   activeSection?: string
+  pathname?: string
 }
 
-export function NavLinks({ items, activeSection }: NavLinksProps) {
+export function NavLinks({ items, activeSection, pathname = '/' }: NavLinksProps) {
   return (
-    <nav className="hidden md:flex items-center gap-1">
+    <nav className="hidden lg:flex items-center gap-1">
       {items.map((item) => {
-        const isActive = activeSection && item.href === `#${activeSection}`
+        const isSectionActive =
+          pathname === '/' && !!activeSection && item.href === `#${activeSection}`
+        const isActive = isSectionActive || isPageLinkActive(item.href, pathname)
         return (
           <a
             key={item.href}
-            href={item.href.startsWith('#') ? item.href : withBasePath(item.href)}
+            href={resolveNavHref(item.href, pathname)}
+            aria-current={isActive ? 'true' : undefined}
             className={cn(
               'relative px-3 py-2 text-sm font-medium rounded-md transition-colors link-underline',
               'text-muted hover:text-foreground',

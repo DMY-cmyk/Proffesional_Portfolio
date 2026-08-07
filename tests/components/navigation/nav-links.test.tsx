@@ -50,4 +50,28 @@ describe('NavLinks', () => {
     const aboutLink = screen.getByText('About')
     expect(aboutLink.className).toContain('link-underline')
   })
+
+  it('rewrites section anchors through the homepage when off-home', () => {
+    render(<NavLinks items={mockItems} pathname="/notes" />)
+    const aboutLink = screen.getByText('About')
+    expect(aboutLink.getAttribute('href')).toBe('/#about')
+  })
+
+  it('keeps pure hash anchors on the homepage', () => {
+    render(<NavLinks items={mockItems} pathname="/" />)
+    const aboutLink = screen.getByText('About')
+    expect(aboutLink.getAttribute('href')).toBe('#about')
+  })
+
+  it('highlights an active page link by pathname', () => {
+    render(<NavLinks items={mockItems} pathname="/research" />)
+    const researchLink = screen.getByText('Research')
+    expect(researchLink.className).toContain('text-accent')
+  })
+
+  it('does not apply scroll-spy highlight when off the homepage', () => {
+    render(<NavLinks items={mockItems} activeSection="about" pathname="/research" />)
+    const aboutLink = screen.getByText('About')
+    expect(aboutLink.className).not.toContain('text-accent')
+  })
 })
