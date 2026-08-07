@@ -16,6 +16,19 @@ describe('ui strings', () => {
     expect(id.navResearch.length).toBeGreaterThan(0)
   })
 
+  it('has navbar redesign strings in both languages', () => {
+    const en = getUiStrings('en')
+    const id = getUiStrings('id')
+    expect(en.brandTagline).toBe('Accounting · Research')
+    expect(id.brandTagline).toBe('Akuntansi · Riset')
+    expect(en.navGroupSections).toBe('Sections')
+    expect(id.navGroupSections).toBe('Bagian')
+    expect(en.navGroupPages).toBe('Pages')
+    expect(id.navGroupPages).toBe('Halaman')
+    expect(en.viewAllResearch).toBe('View all research →')
+    expect(id.viewAllResearch).toBe('Lihat semua riset →')
+  })
+
   it('no empty values in either language', () => {
     for (const langBlock of [uiStrings.en, uiStrings.id]) {
       for (const [key, value] of Object.entries(langBlock)) {

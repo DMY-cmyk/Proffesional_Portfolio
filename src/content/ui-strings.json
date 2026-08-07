@@ -36,7 +36,11 @@
     "formSendAnother": "Send another message",
     "footerBuiltWith": "Built with Next.js · GitHub Pages",
     "footerPersonal": "personal →",
-    "minRead": "min read"
+    "minRead": "min read",
+    "brandTagline": "Accounting · Research",
+    "navGroupSections": "Sections",
+    "navGroupPages": "Pages",
+    "viewAllResearch": "View all research →"
   },
   "id": {
     "navResearch": "Riset",
@@ -75,6 +79,10 @@
     "formSendAnother": "Kirim pesan lain",
     "footerBuiltWith": "Dibangun dengan Next.js · GitHub Pages",
     "footerPersonal": "personal →",
-    "minRead": "menit baca"
+    "minRead": "menit baca",
+    "brandTagline": "Akuntansi · Riset",
+    "navGroupSections": "Bagian",
+    "navGroupPages": "Halaman",
+    "viewAllResearch": "Lihat semua riset →"
   }
 }
