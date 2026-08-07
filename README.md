@@ -9,6 +9,8 @@ A research-journal-inspired professional portfolio built with Next.js 15, Tailwi
 ## ✨ Features
 
 - **7 Homepage Sections** — Hero → Research → Experience → Education → Credentials → Skills → Contact, in editorial reading order
+- **Editorial Navigation Header** — Two-line brand lockup ("Dzaki Yusfian." + localized Accounting · Research microline), curated link set with no duplicates, path-aware hrefs that work on every page (`/#section` off-homepage), scroll-spy + route active states with `aria-current`, and a search button (Ctrl+K) with icon + kbd hint
+- **Responsive Header Tiers** — Full link row + search at ≥1024px; below that a portal-rendered mobile drawer with Sections/Pages groups, localized CV download, staggered reveal, focus trap, and body-scroll lock
 - **Visual System** — Cool cream paper background (`#fbf9f4`), deep teal primary (`#0d4f5c`), muted gold highlight (`#b8944a`)
 - **Animated Background** — Canvas-rendered flowing data lines (4 layers, parallax depth, amplitude breathing, cursor attraction, drifting accent ticks)
 - **Custom Cursor** — Teal ring + center dot with a fading particle tail; expands to gold on interactive elements
@@ -23,7 +25,7 @@ A research-journal-inspired professional portfolio built with Next.js 15, Tailwi
 - **Testimonials (data-driven)** — `testimonials.json`-powered section that appears only when quotes exist
 - **Certification Detail** — Individual certification pages at `/certifications/[slug]` with document viewer
 - **Personal Page** — `/personal` route for personal social links (Instagram, TikTok) kept separate from the professional surface
-- **Persistent CV Button** — "↓ CV" download button always visible in the navbar
+- **Persistent CV Button** — "↓ CV" download in the navbar (≥768px) and inside the mobile menu below that
 - **Tag-Cloud Skills** — Skill tags with context labels replacing percentage-based progress bars
 - **Full SEO** — Open Graph image, Twitter Cards, JSON-LD structured data, dynamic sitemap, robots config, apple-touch-icon
 - **Accessibility** — Skip-to-content link, focus ring on teal, reduced-motion support, semantic HTML, ARIA labels
@@ -80,7 +82,7 @@ src/
 ├── styles/           # Tailwind CSS 4 global theme tokens + print stylesheet
 ├── types/            # TypeScript interfaces
 └── utils/            # Format helpers
-tests/                # 195+ tests across 48+ test files (mirrors src/ structure)
+tests/                # 322 tests across 71 test files (mirrors src/ structure)
 ```
 
 ## 🚀 Getting Started
@@ -142,7 +144,7 @@ The visual system is defined in `src/styles/globals.css` using CSS custom proper
 npm run test:run
 ```
 
-- **195+ tests** across **48+ test files**
+- **322 tests** across **71 test files**
 - Vitest + React Testing Library + jsdom
 - Components, hooks, utilities, pages, and content loaders are all tested
 
@@ -157,6 +159,15 @@ To enable deployment:
 2. Push to `main` branch — deployment triggers automatically
 
 ## 📋 Changelog
+
+### Navigation Header Redesign (2026-08-07)
+
+- Deduped nav links — single "Research" entry; the `/research` index stays one click away via a new homepage "View all research →" link and the command palette
+- Path-aware navigation — section anchors resolve to `/#section` on subpages instead of dead hashes; page links get `aria-current="page"` highlights (covers `/notes/[slug]`)
+- Responsive tiers — full link row + search button at ≥1024px; tablets/phones get brand + CV + toggles + hamburger, ending the 768–1100px overflow
+- Editorial brand lockup — "Dzaki Yusfian." with a localized "Accounting · Research" / "Akuntansi · Riset" microline; brand `aria-label` matches visible text (WCAG 2.5.3)
+- Search affordance — magnifier icon + `Ctrl K` kbd hint replaces the bare "Ctrl K" chip
+- Mobile drawer rebuilt — portal-rendered to `document.body` (the header's transform + backdrop-filter otherwise trap `position: fixed` descendants), grouped Sections/Pages with `aria-labelledby`, localized CV download CTA, staggered link reveal (reduced-motion safe), Tab focus trap, Escape restores focus to the trigger, body-scroll lock while open
 
 ### Phase 4 Plan 3 — Bilingual EN/ID (2026-08-06)
 
