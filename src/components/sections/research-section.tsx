@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import { SectionWrapper } from '@/components/layout/section-wrapper'
 import { SectionHeading } from '@/components/ui/section-heading'
 import { FeaturedResearchCard } from '@/components/ui/featured-research-card'
@@ -30,6 +31,14 @@ export function ResearchSection() {
           ))}
         </div>
       )}
+      <div className="mt-8">
+        <Link
+          href="/research"
+          className="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-widest text-accent font-medium hover:text-[color:var(--accent-primary-dark)]"
+        >
+          {ui.viewAllResearch}
+        </Link>
+      </div>
     </SectionWrapper>
   )
 }

@@ -27,4 +27,10 @@ describe('ResearchSection', () => {
     render(<ResearchSection />)
     expect(screen.queryByTestId('research-secondary-grid')).not.toBeInTheDocument()
   })
+
+  it('links to the full research index', () => {
+    render(<ResearchSection />)
+    const link = screen.getByRole('link', { name: /view all research/i })
+    expect(link.getAttribute('href')).toBe('/research')
+  })
 })
