@@ -74,6 +74,7 @@ export function MobileMenu({ items, activeSection, pathname = '/' }: MobileMenuP
   }, [isOpen])
 
   const renderGroup = (
+    number: string,
     label: string,
     labelId: string,
     groupItems: NavItem[],
@@ -82,9 +83,9 @@ export function MobileMenu({ items, activeSection, pathname = '/' }: MobileMenuP
     <div>
       <p
         id={labelId}
-        className="font-mono text-[10px] uppercase tracking-[0.2em] text-subtle mb-2"
+        className="mb-2 border-b border-border pb-2 font-mono text-[10px] uppercase tracking-[0.2em] text-subtle"
       >
-        {label}
+        {number} — {label}
       </p>
       <nav aria-labelledby={labelId} className="flex flex-col gap-1">
         {groupItems.map((item, i) => {
@@ -102,12 +103,17 @@ export function MobileMenu({ items, activeSection, pathname = '/' }: MobileMenuP
                 onClick={close}
                 aria-current={isPage ? 'page' : isSection ? 'location' : undefined}
                 className={cn(
-                  'block py-2 text-lg font-medium transition-colors',
+                  'flex min-h-11 items-center gap-2 py-1.5 font-display text-[22px] transition-colors',
                   'text-muted hover:text-foreground',
                   (isSection || isPage) && 'text-accent'
                 )}
               >
                 {item.label}
+                {item.isSecondary && (
+                  <span aria-hidden="true" className="text-highlight text-base">
+                    ↗
+                  </span>
+                )}
               </a>
             </motion.div>
           )
@@ -122,7 +128,7 @@ export function MobileMenu({ items, activeSection, pathname = '/' }: MobileMenuP
         ref={triggerRef}
         onClick={() => setIsOpen(!isOpen)}
         className="p-2.5 text-muted hover:text-foreground transition-colors"
-        aria-label={isOpen ? 'Close menu' : 'Open menu'}
+        aria-label="Open menu"
         aria-expanded={isOpen}
       >
         <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -160,18 +166,32 @@ export function MobileMenu({ items, activeSection, pathname = '/' }: MobileMenuP
                   role="dialog"
                   aria-modal="true"
                   aria-label="Navigation menu"
-                  className="fixed inset-y-0 right-0 w-72 sm:w-80 overflow-y-auto bg-surface border-l border-border z-50 p-6 focus:outline-none"
+                  className="fixed inset-y-0 right-0 w-72 sm:w-80 overflow-y-auto bg-background border-l-2 border-foreground z-50 p-6 focus:outline-none"
                 >
-                  <div className="flex flex-col gap-8 mt-12">
-                    {renderGroup(ui.navGroupSections, 'mobile-nav-sections', sections, 0)}
+                  <div className="flex items-center justify-between">
+                    <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-subtle">
+                      {ui.navMenuLabel}
+                    </p>
+                    <button
+                      onClick={close}
+                      className="p-2.5 -mr-2.5 text-muted hover:text-foreground transition-colors"
+                      aria-label="Close menu"
+                    >
+                      <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                    </button>
+                  </div>
+                  <div className="flex flex-col gap-8 mt-8">
+                    {renderGroup('01', ui.navGroupSections, 'mobile-nav-sections', sections, 0)}
                     {pages.length > 0 &&
-                      renderGroup(ui.navGroupPages, 'mobile-nav-pages', pages, sections.length)}
+                      renderGroup('02', ui.navGroupPages, 'mobile-nav-pages', pages, sections.length)}
                   </div>
                   <a
                     href={withBasePath('/files/cv/dzaki-cv.pdf')}
                     download
                     onClick={close}
-                    className="mt-10 flex w-full items-center justify-center gap-2 bg-foreground text-background px-4 py-3 rounded-md text-xs font-mono uppercase tracking-wider font-medium hover:bg-accent transition-colors"
+                    className="mt-10 flex w-full items-center justify-center gap-2 bg-foreground text-background px-4 py-3 rounded-[4px] text-xs font-mono uppercase tracking-wider font-medium hover:bg-accent transition-colors"
                   >
                     <svg
                       aria-hidden="true"

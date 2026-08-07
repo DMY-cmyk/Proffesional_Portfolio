@@ -60,7 +60,7 @@ describe('MobileMenu', () => {
     expect(screen.getByRole('button', { name: /open menu/i })).toBeInTheDocument()
   })
 
-  it('groups links under Sections and Pages labels', async () => {
+  it('groups links under numbered Sections and Pages labels', async () => {
     const user = userEvent.setup()
     render(
       <LanguageProvider>
@@ -68,9 +68,44 @@ describe('MobileMenu', () => {
       </LanguageProvider>
     )
     await user.click(screen.getByRole('button', { name: /open menu/i }))
-    expect(screen.getByText('Sections')).toBeInTheDocument()
-    expect(screen.getByText('Pages')).toBeInTheDocument()
-    expect(screen.getByText('Notes')).toBeInTheDocument()
+    expect(screen.getByText(/01 — Sections/)).toBeInTheDocument()
+    expect(screen.getByText(/02 — Pages/)).toBeInTheDocument()
+  })
+
+  it('shows the Menu microlabel and a close button inside the panel', async () => {
+    const user = userEvent.setup()
+    render(
+      <LanguageProvider>
+        <MobileMenu items={mockItems} />
+      </LanguageProvider>
+    )
+    await user.click(screen.getByRole('button', { name: /open menu/i }))
+    expect(screen.getByText('Menu')).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: /close menu/i })).toBeInTheDocument()
+  })
+
+  it('renders drawer links in the display serif at editorial size', async () => {
+    const user = userEvent.setup()
+    render(
+      <LanguageProvider>
+        <MobileMenu items={mockItems} />
+      </LanguageProvider>
+    )
+    await user.click(screen.getByRole('button', { name: /open menu/i }))
+    const about = screen.getByText('About')
+    expect(about.className).toContain('font-display')
+  })
+
+  it('marks secondary items with the gold glyph', async () => {
+    const user = userEvent.setup()
+    render(
+      <LanguageProvider>
+        <MobileMenu items={[...mockItems, { label: 'Notes', href: '/notes', isSecondary: true }]} />
+      </LanguageProvider>
+    )
+    await user.click(screen.getByRole('button', { name: /open menu/i }))
+    const notes = screen.getByText('Notes').closest('a')
+    expect(notes?.querySelector('[aria-hidden="true"]')?.textContent).toBe('↗')
   })
 
   it('renders a CV download link inside the menu', async () => {
