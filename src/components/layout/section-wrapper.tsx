@@ -11,7 +11,7 @@ interface SectionWrapperProps {
 
 export function SectionWrapper({ id, children, className }: SectionWrapperProps) {
   return (
-    <section id={id} className={cn('py-20 px-4', className)}>
+    <section id={id} className={cn('py-20 px-4 scroll-mt-20', className)}>
       <div className="mx-auto max-w-6xl">
         <ScrollReveal>
           {children}

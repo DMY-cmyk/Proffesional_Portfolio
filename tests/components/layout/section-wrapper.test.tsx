@@ -41,4 +41,14 @@ describe('SectionWrapper', () => {
     const container = section?.firstElementChild
     expect(container?.className).toContain('max-w')
   })
+
+  it('offsets anchor scroll below the fixed masthead', () => {
+    const { container } = render(
+      <SectionWrapper id="research">
+        <p>content</p>
+      </SectionWrapper>
+    )
+    const section = container.querySelector('section')
+    expect(section?.className).toContain('scroll-mt-20')
+  })
 })

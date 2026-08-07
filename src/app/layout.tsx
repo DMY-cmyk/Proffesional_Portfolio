@@ -58,7 +58,7 @@ export default function RootLayout({
             <CommandPalette />
             <Navbar />
             <PageTransition>
-              <main id="main-content" className="pt-24">{children}</main>
+              <main id="main-content" className="pt-24 lg:pt-36">{children}</main>
             </PageTransition>
             <Footer />
           </LanguageProvider>
