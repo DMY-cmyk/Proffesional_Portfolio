@@ -179,6 +179,175 @@ select:focus-visible {
 
 @import './print.css';
 
+/* ============================================================
+   Article typography — "Hybrid Journal" reading experience.
+   One reusable layer: add .article-body to any long-form wrapper.
+   Every color is a theme token, so dark mode needs no extra rules.
+   Spec: docs/superpowers/specs/2026-08-08-article-typography-design.md
+   ============================================================ */
+.article-body {
+  font-family: var(--font-display);
+  font-size: 1.0625rem;
+  line-height: 1.85;
+  color: var(--muted);
+  max-width: 65ch;
+  overflow-wrap: break-word;
+  counter-reset: article-section;
+}
+
+.article-body p {
+  margin: 0 0 1em;
+}
+
+/* Numbered section headings — counter renders 01, 02, … automatically */
+.article-body h2 {
+  counter-increment: article-section;
+  font-size: 1.375rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+  color: var(--foreground);
+  margin: 2.25em 0 0;
+}
+.article-body h2::before {
+  content: counter(article-section, decimal-leading-zero);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  color: var(--accent-highlight);
+  margin-right: 0.75rem;
+}
+.article-body h2::after {
+  content: '';
+  display: block;
+  width: 36px;
+  height: 2px;
+  background: var(--accent-highlight);
+  margin: 0.6rem 0 1rem;
+}
+
+.article-body h3 {
+  font-size: 1.125rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--foreground);
+  margin: 1.75em 0 0.5em;
+}
+
+/* Bold → gold marker highlight (design decision: replaces plain bold) */
+.article-body strong {
+  background: var(--accent-highlight-soft);
+  color: var(--foreground);
+  font-weight: 600;
+  padding: 1px 5px;
+  border-radius: 2px;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+.article-body a {
+  color: var(--accent-primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  transition: color 150ms ease;
+}
+.article-body a:hover {
+  color: var(--accent-primary-dark);
+}
+
+/* Editorial lists — gold mono numerals / gold dashes, hanging in the gutter */
+.article-body ol {
+  counter-reset: article-item;
+  list-style: none;
+  margin: 0 0 1.25em;
+  padding: 0;
+}
+.article-body ol > li {
+  counter-increment: article-item;
+  position: relative;
+  padding-left: 2.25rem;
+  margin-bottom: 0.5em;
+}
+.article-body ol > li::before {
+  content: counter(article-item, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: 0.3em;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--accent-highlight);
+}
+
+.article-body ul {
+  list-style: none;
+  margin: 0 0 1.25em;
+  padding: 0;
+}
+.article-body ul > li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 0.5em;
+}
+.article-body ul > li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--accent-highlight);
+}
+
+/* Pull-quote blockquotes */
+.article-body blockquote {
+  border-left: 2px solid var(--accent-highlight);
+  padding: 0.25em 0 0.25em 1.125rem;
+  margin: 1.5em 0;
+  font-size: 1.0625em;
+  font-style: italic;
+  color: var(--foreground);
+}
+.article-body blockquote p {
+  margin: 0;
+}
+
+/* Elements not in current content, styled so future MDX never renders broken */
+.article-body hr {
+  border: 0;
+  border-top: 1px solid var(--border);
+  margin: 2.5em 0;
+}
+.article-body code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  padding: 0.1em 0.35em;
+}
+.article-body img {
+  max-width: 100%;
+  border-radius: 2px;
+}
+.article-body table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5em 0;
+  font-size: 0.9375rem;
+}
+.article-body th {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-align: left;
+  color: var(--subtle);
+  border-bottom: 1px solid var(--border);
+  padding: 0.5em 0.75em;
+}
+.article-body td {
+  border-bottom: 1px solid var(--border);
+  padding: 0.5em 0.75em;
+}
+
 /* Custom cursor activation — hides native cursor when CustomCursor is mounted */
 html.custom-cursor-active,
 html.custom-cursor-active * {
