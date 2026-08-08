@@ -83,7 +83,7 @@ src/
 ├── styles/           # Tailwind CSS 4 global theme tokens + print stylesheet
 ├── types/            # TypeScript interfaces
 └── utils/            # Format helpers
-tests/                # 342 tests across 72 test files (mirrors src/ structure)
+tests/                # 357 tests across 75 test files (mirrors src/ structure)
 ```
 
 ## 🚀 Getting Started
@@ -145,7 +145,7 @@ The visual system is defined in `src/styles/globals.css` using CSS custom proper
 npm run test:run
 ```
 
-- **342 tests** across **72 test files**
+- **357 tests** across **75 test files**
 - Vitest + React Testing Library + jsdom
 - Components, hooks, utilities, pages, and content loaders are all tested
 
@@ -160,6 +160,17 @@ To enable deployment:
 2. Push to `main` branch — deployment triggers automatically
 
 ## 📋 Changelog
+
+### Article Typography — Hybrid Journal (2026-08-08)
+
+Reusable `.article-body` layer in `globals.css` applied to the Research and Notes detail pages, giving long-form content the same editorial voice as the masthead:
+
+- Serif reading type (`--font-display`, 1.85 line-height, 65ch measure) replacing the default sans body
+- `h2` sections auto-numbered `01/02/03…` via CSS counters with a gold rule underneath; ids from `headingWithId` untouched so TOC anchors still resolve
+- `strong` renders as a gold highlighter mark instead of plain bold
+- Ordered/unordered lists get gold mono numerals / gold dashes hanging in the gutter; blockquotes become pull-quotes with a gold left rule
+- Listing-card summaries on `/research` and `/notes` set in the same serif voice for consistency before the click-through
+- All theme tokens — no extra dark-mode rules needed; suite 357/357
 
 ### Journal Masthead Redesign (2026-08-07, second pass)
 
