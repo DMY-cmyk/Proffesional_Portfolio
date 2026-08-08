@@ -73,7 +73,9 @@ mode works with zero additional rules.
   vertical margins ~1.5em. No quotation-mark ornaments.
 
 **Explicitly excluded** (user decision): drop caps, italic lede/first-paragraph
-treatment, justified text, text animations.
+treatment, justified text, text animations. Accepted deviation (final review
+2026-08-08): links keep the site-wide `transition: color 150ms ease` hover
+fade — a color fade, not motion; reduced-motion is unaffected.
 
 **Elements we own now** (styled minimally for future-proofing): `hr` (thin
 `var(--border)` rule), `code` (mono, `var(--surface-alt)` chip), `img`

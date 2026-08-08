@@ -74,7 +74,7 @@ describe('.article-body typography layer', () => {
   it('contains no hard-coded hex colors (dark mode rides the tokens)', () => {
     const layerStart = CSS.indexOf('Article typography')
     expect(layerStart).toBeGreaterThan(-1)
-    const layer = CSS.slice(layerStart, CSS.indexOf('view-transition', layerStart))
+    const layer = CSS.slice(layerStart, CSS.indexOf('Custom cursor', layerStart))
     expect(layer).not.toMatch(/#[0-9a-fA-F]{3,8}\b/)
   })
 })

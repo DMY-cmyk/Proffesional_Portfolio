@@ -25,6 +25,11 @@
   .dark {
     color-scheme: light !important;
   }
+  /* Article body text rides --muted, which stays light-toned in dark mode —
+     force black so printed articles read like the rest of the page. */
+  .article-body {
+    color: black !important;
+  }
   .print-hide {
     display: none !important;
   }

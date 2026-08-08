@@ -309,6 +309,11 @@ select:focus-visible {
   margin: 0;
 }
 
+/* Loose MDX lists (<li><p>) — keep item rhythm instead of stacking paragraph margins */
+.article-body li p {
+  margin: 0 0 0.5em;
+}
+
 /* Elements not in current content, styled so future MDX never renders broken */
 .article-body hr {
   border: 0;
