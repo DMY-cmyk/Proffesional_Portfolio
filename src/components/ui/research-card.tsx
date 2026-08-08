@@ -27,7 +27,7 @@ export function ResearchCard({ entry }: Props) {
       <h4 className="font-display text-xl font-medium leading-snug mb-2.5">
         {entry.title}
       </h4>
-      <p className="text-sm text-muted leading-relaxed">{entry.abstract}</p>
+      <p className="font-display text-[0.9375rem] text-muted leading-[1.7]">{entry.abstract}</p>
     </Link>
   )
 }

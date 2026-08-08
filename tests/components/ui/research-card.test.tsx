@@ -26,4 +26,9 @@ describe('ResearchCard', () => {
     const link = screen.getByRole('link')
     expect(link).toHaveAttribute('href', expect.stringContaining('/research/tax-literacy'))
   })
+  it('sets the abstract in the serif reading voice', () => {
+    render(<ResearchCard entry={entry} />)
+    const abstract = screen.getByText(/Analysis of 90\+ taxpayers/)
+    expect(abstract.className).toContain('font-display')
+  })
 })

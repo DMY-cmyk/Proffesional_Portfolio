@@ -27,7 +27,7 @@ export function FeaturedResearchCard({ entry }: Props) {
       <h3 className="font-display text-3xl font-medium leading-tight tracking-tight mb-4 max-w-3xl">
         {entry.title}
       </h3>
-      <p className="text-[color:var(--foreground)] opacity-90 text-base leading-relaxed mb-5 max-w-3xl">
+      <p className="font-display text-[color:var(--foreground)] opacity-90 text-base leading-[1.7] mb-5 max-w-3xl">
         {entry.abstract}
       </p>
       <div className="flex flex-wrap gap-2 mb-5">

@@ -39,7 +39,7 @@ export default function NotesPage() {
             >
               <p className="font-mono text-xs uppercase tracking-widest text-subtle">{formatDate(note.date)}</p>
               <h2 className="mt-2 font-display text-xl font-medium leading-snug text-foreground">{note.title}</h2>
-              <p className="mt-2 text-sm leading-relaxed text-muted">{note.summary}</p>
+              <p className="mt-2 font-display text-[0.9375rem] leading-[1.7] text-muted">{note.summary}</p>
               <div className="mt-3 flex flex-wrap gap-2">
                 {note.tags.map((tag) => (
                   <Badge key={tag}>{tag}</Badge>

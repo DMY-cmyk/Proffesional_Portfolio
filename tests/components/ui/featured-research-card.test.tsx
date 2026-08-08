@@ -46,4 +46,10 @@ describe('FeaturedResearchCard', () => {
     render(<FeaturedResearchCard entry={entry} />)
     expect(screen.queryByRole('link', { name: /download pdf/i })).not.toBeInTheDocument()
   })
+
+  it('sets the abstract in the serif reading voice', () => {
+    render(<FeaturedResearchCard entry={entry} />)
+    const abstract = screen.getByText(new RegExp(entry.abstract.slice(0, 30)))
+    expect(abstract.className).toContain('font-display')
+  })
 })
