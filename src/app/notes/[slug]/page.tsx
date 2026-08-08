@@ -54,7 +54,7 @@ export default async function NoteDetailPage({ params }: PageProps) {
           ))}
         </div>
 
-        <div className="mt-10 border-t border-border pt-10 prose prose-neutral dark:prose-invert max-w-none prose-headings:font-display prose-headings:font-medium prose-a:text-accent prose-strong:text-foreground">
+        <div className="article-body mt-10 border-t border-border pt-10">
           <MDXRemote source={note.content} components={{ a: MdxLink }} />
         </div>
       </div>
