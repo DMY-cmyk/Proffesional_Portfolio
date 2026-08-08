@@ -7,6 +7,7 @@ import { getNoteBySlug, getAllNoteSlugs } from '@/lib/mdx'
 import { readingTimeMinutes } from '@/lib/article-utils'
 import { ReadingProgress } from '@/components/research/reading-progress'
 import { MdxLink } from '@/components/research/mdx-link'
+import { MdxOl, MdxUl } from '@/components/research/mdx-list'
 import { formatDate } from '@/utils/format-date'
 
 interface PageProps {
@@ -55,7 +56,7 @@ export default async function NoteDetailPage({ params }: PageProps) {
         </div>
 
         <div className="article-body mt-10 border-t border-border pt-10">
-          <MDXRemote source={note.content} components={{ a: MdxLink }} />
+          <MDXRemote source={note.content} components={{ a: MdxLink, ol: MdxOl, ul: MdxUl }} />
         </div>
       </div>
     </article>

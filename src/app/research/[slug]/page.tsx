@@ -10,6 +10,7 @@ import { ReadingProgress } from '@/components/research/reading-progress'
 import { TableOfContents } from '@/components/research/table-of-contents'
 import { CiteThis } from '@/components/research/cite-this'
 import { MdxLink } from '@/components/research/mdx-link'
+import { MdxOl, MdxUl } from '@/components/research/mdx-list'
 import { getProfile, getEducation, getResearchEntries } from '@/data/content'
 import { formatDate } from '@/utils/format-date'
 
@@ -63,7 +64,7 @@ function headingWithId(Tag: 'h2' | 'h3') {
   }
 }
 
-const mdxComponents = { h2: headingWithId('h2'), h3: headingWithId('h3'), a: MdxLink }
+const mdxComponents = { h2: headingWithId('h2'), h3: headingWithId('h3'), a: MdxLink, ol: MdxOl, ul: MdxUl }
 
 export default async function ResearchDetailPage({ params }: PageProps) {
   const { slug } = await params
