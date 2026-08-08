@@ -128,7 +128,7 @@ export default async function ResearchDetailPage({ params }: PageProps) {
             </details>
           )}
 
-          <div className="mt-10 border-t border-border pt-10 prose prose-neutral dark:prose-invert max-w-none prose-headings:font-display prose-headings:font-medium prose-a:text-accent prose-strong:text-foreground">
+          <div className="article-body mt-10 border-t border-border pt-10">
             <MDXRemote source={research.content} components={mdxComponents} />
           </div>
 

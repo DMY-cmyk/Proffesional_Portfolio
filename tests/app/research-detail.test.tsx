@@ -25,4 +25,15 @@ describe('ResearchDetailPage', () => {
       screen.getByRole('heading', { name: /keberlanjutan|sustainability/i })
     ).toBeInTheDocument()
   })
+
+  it('wraps the MDX body in the article-body typography layer', async () => {
+    const page = await ResearchDetailPage({
+      params: Promise.resolve({ slug: 'sustainability-reporting-firm-value' }),
+    })
+    const { container } = render(page)
+    const body = container.querySelector('.article-body')
+    expect(body).not.toBeNull()
+    // The old classes were dead (plugin never installed) — they must be gone.
+    expect(body!.className).not.toContain('prose')
+  })
 })
