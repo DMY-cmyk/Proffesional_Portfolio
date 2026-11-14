@@ -7,7 +7,7 @@ Dzaki's own professional portfolio site (accounting, finance, tax, audit; resear
 ## Current state (evidence, verified 2026-11-13)
 
 Repository
-- Git, active branch `main`, remote `origin` = `DMY-cmyk/Proffesional_Portfolio` (public). The working tree was clean before this plan was written (initial snapshot `scratchpad\baseline\11.txt` empty).
+- Git, active branch `main`, remote `origin` = `DMY-cmyk/Proffesional_Portfolio` (public). The working tree was clean before this plan was written (the initial `git status` snapshot was empty).
 - Last commit `b9d2a5a` 2026-08-08 "fix(a11y): explicit list role on article MDX lists". No open PRs (`gh pr list --state open` empty).
 - The last three GitHub Actions runs of "Deploy to GitHub Pages" have status `success` (latest 2026-08-08, `gh run list -L 3`).
 
@@ -77,7 +77,7 @@ Decisions of this plan:
 | AC3 | `lint` | `npm run lint` | not run (reason: same as AC1) |
 | AC4 | `cocok-readme` | compare the AC1 output with `README.md:148-150` | not run (reason: depends on AC1) |
 | AC5 | `ci-dan-situs` | `gh run list -L 1` = `success`; `curl -I` on the site address = 200 | not yet proven: the last run was `success` (2026-08-08); the site was not checked |
-| AC6 | `tanpa-rahasia` | `git ls-files \| grep -E '\.env\|\.pem$\|\.pdf$'` yields only the CV; keyword scan (token, password, secret, key) on the diff | not run (reason: baseline was read-only and no diff existed yet) |
+| AC6 | `tanpa-rahasia` | `git ls-files \| grep -E '\.env\|\.pem$\|\.pdf$'` yields only the CV; keyword scan (token, password, secret, key) on the diff | not run (reason: not recorded in the original plan) |
 | AC7 | `plan-dulu` | every new feature commit has a plan file referenced in the commit message or plan | not yet proven (applies from now on) |
 
 ## Verification
@@ -106,3 +106,4 @@ Decisions of this plan:
 
 - 2026-11-13 baseline written; nothing executed.
 - 2026-11-14 translated into English (this repo is public) and aligned with the v1 section order: the former "Langkah kerja berikutnya" became Execution phases, the former check table became the Test plan, and a Verification section was added; the working-rules summary section was removed and the decision note no longer cites private rules; statuses use the standard vocabulary. Every AC, every `path:line` reference, and every decision is kept. The Indonesian original is in commit `8d9d621`.
+- 2026-11-14 review fixes: a local snapshot path in Current state was replaced by a plain description, and the AC6 status reason now says it was not recorded in the original plan.
