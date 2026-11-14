@@ -4,6 +4,20 @@
 
 Dzaki's own professional portfolio site (accounting, finance, tax, audit; research on sustainability reporting and firm value). The site is public on GitHub Pages and is meant for recruiters, lecturers, and professional peers. This plan records the state of the project as of 13/11/2026, the criteria for a "healthy project", and the working rules for later changes. This plan is **not** an instruction to change code now.
 
+### Problem statement
+
+The public portfolio site has a baseline but its test results have not been re-run on this laptop, and every push to `main` publishes immediately, so unverified changes can reach recruiters and lecturers.
+
+### Measurable targets
+
+- T1. Tests and build are re-run and recorded (AC1–AC3); date: not applicable (no deadline in this plan's sources).
+- T2. The README test count matches reality (AC4), and AC5 and AC6 are checked before any content change is pushed.
+
+### Deliverables
+
+- D1. Recorded test and build results in the Execution log.
+- D2. A README update plan if the test count differs.
+
 ## Current state (evidence, verified 2026-11-13)
 
 Repository
@@ -68,6 +82,37 @@ Decisions of this plan:
 3. Check AC5 and AC6.
 4. New feature work (if any) starts with its own plan.
 
+### Work breakdown & dependencies
+
+| # | Task | Depends on |
+|---|---|---|
+| 1 | Install dependencies and run AC1–AC3 | — |
+| 2 | README update plan if the test count differs (AC4) | 1 |
+| 3 | Check AC5 and AC6 | 1 |
+| 4 | New features start with their own plan | 3 |
+
+### Milestones
+
+Not applicable (this baseline names no delivery date). Milestones with buffers go into each feature plan.
+
+### Roles (RACI)
+
+| Deliverable/phase | R | A | C | I |
+|---|---|---|---|---|
+| Tests, plans, changes | Claude | Dzaki | — | — |
+| Push to `main` (publishes) | Dzaki | Dzaki | — | site visitors (via the live site) |
+
+### Resources & budget
+
+- Technical: Node/npm (`npm ci`), the existing build and test scripts, GitHub Pages CI
+- Budget: not applicable (GitHub Pages hosting; no spending in this plan)
+
+### Stakeholder communication
+
+| Who | When/trigger | Channel | Content |
+|---|---|---|---|
+| Dzaki | after each phase and before any push | chat | AC status and permission requests |
+
 ## Test plan
 
 | AC | Check/test name | Command or method | Status today |
@@ -80,6 +125,12 @@ Decisions of this plan:
 | AC6 | `tanpa-rahasia` | `git ls-files \| grep -E '\.env\|\.pem$\|\.pdf$'` yields only the CV; keyword scan (token, password, secret, key) on the diff | not run (reason: not recorded in the original plan) |
 | AC7 | `plan-dulu` | every new feature commit has a plan file referenced in the commit message or plan | not yet proven (applies from now on) |
 
+### Test types
+
+- UAT: Dzaki reviews every content change on the site before it is pushed.
+- Security: a personal-data check on content changes before push, because the site is public.
+- Performance: not applicable (no performance target is stated in this plan's sources)
+
 ## Verification
 
 - AC1–AC6 are checked with the commands in the Test plan; each result is recorded in the Execution log with the status `pass / fail / not yet proven / not run (reason)`.
@@ -91,6 +142,12 @@ Decisions of this plan:
 - Changed: none by this plan. Phase 2 may later change `README.md` (Testing section) through its own plan.
 
 ## Risk & rollback
+
+| Risk | Type | Prevention | Plan B |
+|---|---|---|---|
+| A push to `main` publishes immediately | technical | work on a separate branch; push only with Dzaki's permission | `git revert` the last commit and push (CI republishes the previous version) |
+| Personal data on the public site | non-technical (privacy) | Dzaki checks every content change before pushing | remove the content and republish |
+| `npm ci` changes `package-lock.json` | technical | check `git status` afterwards | `git checkout -- package-lock.json` |
 
 - **A push to `main` publishes to the public immediately.** Mitigation: work on a separate branch; push only with Dzaki's permission. Rollback: `git revert` the last commit and push (CI republishes the previous version).
 - **Personal data on the public site** (contact, CV). Mitigation: every content change is checked by Dzaki before pushing.
@@ -107,3 +164,16 @@ Decisions of this plan:
 - 2026-11-13 baseline written; nothing executed.
 - 2026-11-14 translated into English (this repo is public) and aligned with the v1 section order: the former "Langkah kerja berikutnya" became Execution phases, the former check table became the Test plan, and a Verification section was added; the working-rules summary section was removed and the decision note no longer cites private rules; statuses use the standard vocabulary. Every AC, every `path:line` reference, and every decision is kept. The Indonesian original is in commit `8d9d621`.
 - 2026-11-14 review fixes: a local snapshot path in Current state was replaced by a plain description, and the AC6 status reason now says it was not recorded in the original plan.
+
+- 2026-11-14 — Extended to the updated plan template: Problem statement, Measurable targets, Deliverables, Test types, Work breakdown & dependencies, Milestones, Roles (RACI), Resources & budget, Stakeholder communication, a risk table with a Plan B column, and Plan revisions were added, derived from this plan's own sections. No existing line and no acceptance criterion was changed.
+
+### Plan revisions
+
+Plan revision: 2 (2026-11-14)
+
+| Revision | Date | What changed | Why | Approved |
+|---|---|---|---|---|
+| 1 | 2026-11-13 | baseline plan written | baseline for every project | Dzaki |
+| 2 | 2026-11-14 | updated plan template elements added; acceptance criteria unchanged | plan template update | Dzaki |
+
+Re-review triggers: direction or scope changes, a new request from the owner, a moved deadline, reviewer findings, or a production incident.
